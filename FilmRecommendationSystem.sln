@@ -1,0 +1,25 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 16
+VisualStudioVersion = 16.0.30804.86
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FilmRecommendationSystem", "FilmRecommendationSystem\FilmRecommendationSystem.csproj", "{CBCF97A3-042D-4DFE-A3B5-2B34FB4E1A97}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{CBCF97A3-042D-4DFE-A3B5-2B34FB4E1A97}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{CBCF97A3-042D-4DFE-A3B5-2B34FB4E1A97}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{CBCF97A3-042D-4DFE-A3B5-2B34FB4E1A97}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{CBCF97A3-042D-4DFE-A3B5-2B34FB4E1A97}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {B7F056ED-7AD8-4BCA-B1A4-88BE9DDEF84F}
+	EndGlobalSection
+EndGlobal
