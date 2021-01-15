@@ -30,6 +30,7 @@ namespace FilmRecommendationSystem.Account
             else 
             {
                 ErrorMessage.Text = result.Errors.FirstOrDefault();
+                
             }
         }
     }
