@@ -11,36 +11,67 @@ using FilmRecommendationSystem.Models;
 namespace FilmRecommendationSystem.Models
 {
     // You can add User data for the user by adding more properties to your User class, please visit https://go.microsoft.com/fwlink/?LinkID=317594 to learn more.
-    public class ApplicationUser : IdentityUser
+    // New derived classes
+public class UserRole : IdentityUserRole<int>
+{
+}
+
+public class UserClaim : IdentityUserClaim<int>
+{
+}
+
+public class UserLogin : IdentityUserLogin<int>
+{
+}
+
+public class Role : IdentityRole<int, UserRole>
+{
+    public Role() { }
+    public Role(string name) { Name = name; }
+}
+
+public class UserStore : UserStore<ApplicationUser, Role, int,
+    UserLogin, UserRole, UserClaim>
+{
+    public UserStore(ApplicationDbContext context): base(context)
     {
-        public string Test1 {get; set;}
+    }
+}
 
-        public ClaimsIdentity GenerateUserIdentity(ApplicationUserManager manager)
-        {
-            // Note the authenticationType must match the one defined in CookieAuthenticationOptions.AuthenticationType
-            var userIdentity = manager.CreateIdentity(this, DefaultAuthenticationTypes.ApplicationCookie);
-            // Add custom user claims here
-            return userIdentity;
-        }
+public class RoleStore : RoleStore<Role, int, UserRole>
+{
+    public RoleStore(ApplicationDbContext context): base(context)
+    {
+    }
+}
 
-        public Task<ClaimsIdentity> GenerateUserIdentityAsync(ApplicationUserManager manager)
-        {
-            return Task.FromResult(GenerateUserIdentity(manager));
-        }
+// You can add profile data for the user by adding more properties to your ApplicationUser class, please visit http://go.microsoft.com/fwlink/?LinkID=317594 to learn more.
+public class ApplicationUser : IdentityUser<int, UserLogin, UserRole, UserClaim>
+{
+    public DateTime? ActiveUntil;
+
+    public async Task<ClaimsIdentity> GenerateUserIdentityAsync(ApplicationUserManager manager)
+    {
+        // Note the authenticationType must match the one defined in CookieAuthenticationOptions.AuthenticationType
+        var userIdentity = await manager.CreateIdentityAsync(this, DefaultAuthenticationTypes.ApplicationCookie);
+        // Add custom user claims here
+        return userIdentity;
+    }
+}
+
+public class ApplicationDbContext : IdentityDbContext<ApplicationUser, Role, int,
+    UserLogin, UserRole, UserClaim>
+{
+    public ApplicationDbContext()
+        : base("newConnection")
+    {
     }
 
-    public class ApplicationDbContext : IdentityDbContext<ApplicationUser>
+    public static ApplicationDbContext Create()
     {
-        public ApplicationDbContext()
-            : base("newConnection", throwIfV1Schema: false)
-        {
-        }
-
-        public static ApplicationDbContext Create()
-        {
-            return new ApplicationDbContext();
-        }
+        return new ApplicationDbContext();
     }
+}
 }
 
 #region Helpers

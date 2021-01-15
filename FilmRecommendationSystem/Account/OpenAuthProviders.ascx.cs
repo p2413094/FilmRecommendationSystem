@@ -25,7 +25,7 @@ namespace FilmRecommendationSystem.Account
                 // Add xsrf verification when linking accounts
                 if (Context.User.Identity.IsAuthenticated)
                 {
-                    properties.Dictionary[IdentityHelper.XsrfKey] = Context.User.Identity.GetUserId();
+                    properties.Dictionary[IdentityHelper.XsrfKey] = Convert.ToString(Context.User.Identity.GetUserId<int>());
                 }
                 Context.GetOwinContext().Authentication.Challenge(properties, provider);
                 Response.StatusCode = 401;

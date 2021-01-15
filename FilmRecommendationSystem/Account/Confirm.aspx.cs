@@ -19,7 +19,7 @@ namespace FilmRecommendationSystem.Account
         protected void Page_Load(object sender, EventArgs e)
         {
             string code = IdentityHelper.GetCodeFromRequest(Request);
-            string userId = IdentityHelper.GetUserIdFromRequest(Request);
+            int userId = Convert.ToInt32(IdentityHelper.GetUserIdFromRequest(Request));
             if (code != null && userId != null)
             {
                 var manager = Context.GetOwinContext().GetUserManager<ApplicationUserManager>();

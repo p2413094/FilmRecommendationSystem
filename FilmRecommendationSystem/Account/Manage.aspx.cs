@@ -22,7 +22,7 @@ namespace FilmRecommendationSystem.Account
 
         private bool HasPassword(ApplicationUserManager manager)
         {
-            return manager.HasPassword(User.Identity.GetUserId());
+            return manager.HasPassword(User.Identity.GetUserId<int>());
         }
 
         public bool HasPhoneNumber { get; private set; }
@@ -37,14 +37,14 @@ namespace FilmRecommendationSystem.Account
         {
             var manager = Context.GetOwinContext().GetUserManager<ApplicationUserManager>();
 
-            HasPhoneNumber = String.IsNullOrEmpty(manager.GetPhoneNumber(User.Identity.GetUserId()));
+            HasPhoneNumber = String.IsNullOrEmpty(manager.GetPhoneNumber(User.Identity.GetUserId<int>()));
 
             // Enable this after setting up two-factor authentientication
-            //PhoneNumber.Text = manager.GetPhoneNumber(User.Identity.GetUserId()) ?? String.Empty;
+            //PhoneNumber.Text = manager.GetPhoneNumber(User.Identity.GetUserId<int>()) ?? String.Empty;
 
-            TwoFactorEnabled = manager.GetTwoFactorEnabled(User.Identity.GetUserId());
+            TwoFactorEnabled = manager.GetTwoFactorEnabled(User.Identity.GetUserId<int>());
 
-            LoginsCount = manager.GetLogins(User.Identity.GetUserId()).Count;
+            LoginsCount = manager.GetLogins(User.Identity.GetUserId<int>()).Count;
 
             var authenticationManager = HttpContext.Current.GetOwinContext().Authentication;
 
@@ -94,12 +94,12 @@ namespace FilmRecommendationSystem.Account
         {
             var manager = Context.GetOwinContext().GetUserManager<ApplicationUserManager>();
             var signInManager = Context.GetOwinContext().Get<ApplicationSignInManager>();
-            var result = manager.SetPhoneNumber(User.Identity.GetUserId(), null);
+            var result = manager.SetPhoneNumber(User.Identity.GetUserId<int>(), null);
             if (!result.Succeeded)
             {
                 return;
             }
-            var user = manager.FindById(User.Identity.GetUserId());
+            var user = manager.FindById(User.Identity.GetUserId<int>());
             if (user != null)
             {
                 signInManager.SignIn(user, isPersistent: false, rememberBrowser: false);
@@ -111,7 +111,7 @@ namespace FilmRecommendationSystem.Account
         protected void TwoFactorDisable_Click(object sender, EventArgs e)
         {
             var manager = Context.GetOwinContext().GetUserManager<ApplicationUserManager>();
-            manager.SetTwoFactorEnabled(User.Identity.GetUserId(), false);
+            manager.SetTwoFactorEnabled(User.Identity.GetUserId<int>(), false);
 
             Response.Redirect("/Account/Manage");
         }
@@ -120,7 +120,7 @@ namespace FilmRecommendationSystem.Account
         protected void TwoFactorEnable_Click(object sender, EventArgs e)
         {
             var manager = Context.GetOwinContext().GetUserManager<ApplicationUserManager>();
-            manager.SetTwoFactorEnabled(User.Identity.GetUserId(), true);
+            manager.SetTwoFactorEnabled(User.Identity.GetUserId<int>(), true);
 
             Response.Redirect("/Account/Manage");
         }

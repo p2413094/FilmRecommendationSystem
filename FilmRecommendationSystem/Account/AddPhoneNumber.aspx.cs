@@ -16,7 +16,7 @@ namespace FilmRecommendationSystem.Account
         protected void PhoneNumber_Click(object sender, EventArgs e)
         {
             var manager = Context.GetOwinContext().GetUserManager<ApplicationUserManager>();
-            var code = manager.GenerateChangePhoneNumberToken(User.Identity.GetUserId(), PhoneNumber.Text);
+            var code = manager.GenerateChangePhoneNumberToken(User.Identity.GetUserId<int>(), PhoneNumber.Text);
             if (manager.SmsService != null)
             {
                 var message = new IdentityMessage
