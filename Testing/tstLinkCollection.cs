@@ -19,7 +19,7 @@ namespace Testing
         public void CountPropertyOk()
         {
             clsLinkCollection AllLinks = new clsLinkCollection();
-            Int32 someCount = 193609;
+            Int32 someCount = 9742;
             AllLinks.Count = someCount;
             Assert.AreEqual(AllLinks.Count, someCount);
         }
