@@ -65,6 +65,8 @@
     <Compile Include="tstFilmCollection.cs" />
     <Compile Include="tstLink.cs" />
     <Compile Include="tstLinkCollection.cs" />
+    <Compile Include="tstMood.cs" />
+    <Compile Include="tstMoodCollection.cs" />
     <Compile Include="tstWatchList.cs" />
     <Compile Include="tstWatchListCollection.cs" />
   </ItemGroup>

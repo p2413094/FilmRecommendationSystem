@@ -19,11 +19,11 @@ namespace FilmRecommendationSystem
             //{
             //    test1.Text = item.ImdbId;
             //}
-            clsFilmCollection films = new clsFilmCollection();
-            DB.Execute("sproc_tblFilm_SelectAll");
-            foreach(clsFilm item in films.AllFilms)
+            clsMoodCollection AllMoods = new clsMoodCollection();
+            DB.Execute("sproc_tblMood_SelectAll");
+            foreach(clsMood mood in AllMoods.AllMoods)
             {
-                test1.Text = item.Title;
+                test1.Text = mood.MoodDesc;
             }
         }
     }
