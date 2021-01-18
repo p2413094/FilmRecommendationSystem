@@ -61,6 +61,8 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="tstLink.cs" />
     <Compile Include="tstLinkCollection.cs" />
+    <Compile Include="tstWatchList.cs" />
+    <Compile Include="tstWatchListCollection.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />
