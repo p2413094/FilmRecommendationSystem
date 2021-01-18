@@ -13,11 +13,11 @@ namespace FilmRecommendationSystem
         protected void Page_Load(object sender, EventArgs e)
         {
             clsDataConnection DB = new clsDataConnection();
-            clsFilmMoodCollection filmMood = new clsFilmMoodCollection();
-            DB.Execute("sproc_tblFilmMood_SelectAll");
-            foreach(clsFilmMood aFilmMood in filmMood.AllFilmMoods)
+            clsGenreCollection Genres = new clsGenreCollection();
+            DB.Execute("sproc_tblGenre_SelectAll");
+            foreach(clsGenre aGenre in Genres.AllGenres)
             {
-                test1.Text = aFilmMood.UserId.ToString();
+                test1.Text = aGenre.GenreDesc.ToString();
             }
         }
     }
