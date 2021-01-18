@@ -12,18 +12,12 @@ namespace FilmRecommendationSystem
     {
         protected void Page_Load(object sender, EventArgs e)
         {
-            //clsLinkCollection links = new clsLinkCollection();
             clsDataConnection DB = new clsDataConnection();
-            //DB.Execute("sproc_tblLinks_SelectAll");
-            //foreach(clsLink item in links.AllLinks)
-            //{
-            //    test1.Text = item.ImdbId;
-            //}
-            clsMoodCollection AllMoods = new clsMoodCollection();
-            DB.Execute("sproc_tblMood_SelectAll");
-            foreach(clsMood mood in AllMoods.AllMoods)
+            clsFilmMoodCollection filmMood = new clsFilmMoodCollection();
+            DB.Execute("sproc_tblFilmMood_SelectAll");
+            foreach(clsFilmMood aFilmMood in filmMood.AllFilmMoods)
             {
-                test1.Text = mood.MoodDesc;
+                test1.Text = aFilmMood.UserId.ToString();
             }
         }
     }
