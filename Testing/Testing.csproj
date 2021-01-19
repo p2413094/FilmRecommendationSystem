@@ -77,6 +77,8 @@
     <Compile Include="tstPreviousStaffMembersCollection.cs" />
     <Compile Include="tstStaffMember.cs" />
     <Compile Include="tstStaffMemberCollection.cs" />
+    <Compile Include="tstUser.cs" />
+    <Compile Include="tstUserCollection.cs" />
     <Compile Include="tstWatchList.cs" />
     <Compile Include="tstWatchListCollection.cs" />
   </ItemGroup>
