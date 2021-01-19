@@ -73,6 +73,8 @@
     <Compile Include="tstLinkCollection.cs" />
     <Compile Include="tstMood.cs" />
     <Compile Include="tstMoodCollection.cs" />
+    <Compile Include="tstStaffMember.cs" />
+    <Compile Include="tstStaffMemberCollection.cs" />
     <Compile Include="tstWatchList.cs" />
     <Compile Include="tstWatchListCollection.cs" />
   </ItemGroup>
