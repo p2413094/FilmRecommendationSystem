@@ -12,12 +12,15 @@ namespace FilmRecommendationSystem
     {
         protected void Page_Load(object sender, EventArgs e)
         {
-            clsDataConnection DB = new clsDataConnection();
-            clsGenreCollection Genres = new clsGenreCollection();
-            DB.Execute("sproc_tblGenre_SelectAll");
-            foreach(clsGenre aGenre in Genres.AllGenres)
+            //clsDataConnection DB = new clsDataConnection();
+            clsFavouriteFilmCollection FavouriteFilms = new clsFavouriteFilmCollection(1);
+            //DB.Execute("sproc_tblFavouriteFilms_FilterByUserId");
+            foreach(clsFavouriteFilm aFavouriteFilm in FavouriteFilms.AllFavouriteFilms)
             {
-                test1.Text = aGenre.GenreDesc.ToString();
+                //test1.Text = aFavouriteFilm.FilmId.ToString();
+                Label lbl1 = new Label();
+                lbl1.Text = aFavouriteFilm.FilmId.ToString();
+                Panel1.Controls.Add(lbl1);
             }
         }
     }
