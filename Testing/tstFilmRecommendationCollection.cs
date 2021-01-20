@@ -11,14 +11,16 @@ namespace Testing
         [TestMethod]
         public void InstanceOk()
         {
-            clsFilmRecommendationCollection AllFilmRecommendations = new clsFilmRecommendationCollection();
+            Int32 userId = 1;
+            clsFilmRecommendationCollection AllFilmRecommendations = new clsFilmRecommendationCollection(userId);
             Assert.IsNotNull(AllFilmRecommendations);
         }
 
         [TestMethod]
         public void CountPropertyOk()
         {
-            clsFilmRecommendationCollection AllFilmRecommendations = new clsFilmRecommendationCollection();
+            Int32 userId = 1;
+            clsFilmRecommendationCollection AllFilmRecommendations = new clsFilmRecommendationCollection(userId);
             Int32 count = 0;
             AllFilmRecommendations.Count = count;
             Assert.AreEqual(AllFilmRecommendations.Count, count);
@@ -27,7 +29,8 @@ namespace Testing
         [TestMethod]
         public void AllFilmRecommendationsOk()
         {
-            clsFilmRecommendationCollection FilmRecommendations = new clsFilmRecommendationCollection();
+            Int32 userId = 1;
+            clsFilmRecommendationCollection FilmRecommendations = new clsFilmRecommendationCollection(userId);
             List<clsFilmRecommendation> TestList = new List<clsFilmRecommendation>();
             clsFilmRecommendation TestItem = new clsFilmRecommendation();
             TestItem.UserId = 1;
@@ -40,7 +43,8 @@ namespace Testing
         [TestMethod]
         public void CountMatchesList()
         {
-            clsFilmRecommendationCollection FilmRecommendations = new clsFilmRecommendationCollection();
+            Int32 userId = 1;
+            clsFilmRecommendationCollection FilmRecommendations = new clsFilmRecommendationCollection(userId);
             List<clsFilmRecommendation> TestList = new List<clsFilmRecommendation>();
             clsFilmRecommendation TestItem = new clsFilmRecommendation();
             TestItem.UserId = 1;
@@ -48,6 +52,35 @@ namespace Testing
             TestList.Add(TestItem);
             FilmRecommendations.AllFilmRecommendations = TestList;
             Assert.AreEqual(FilmRecommendations.Count, TestList.Count);
+        }
+
+        [TestMethod]
+        public void AddMethodOk()
+        {
+            Int32 userId = 1;
+            clsFilmRecommendationCollection AllFilmRecommendations = new clsFilmRecommendationCollection(userId);
+            clsFilmRecommendation TestItem = new clsFilmRecommendation();
+            Int32 testSucceeded = 0;
+            TestItem.UserId = 1;
+            TestItem.FilmId = 888;
+            AllFilmRecommendations.ThisFilmRecommendation = TestItem;
+            testSucceeded = AllFilmRecommendations.Add();
+            Assert.AreEqual(testSucceeded, 1);
+        }
+
+        [TestMethod]
+        public void DeleteMethod()
+        {
+            Int32 userId = 4;
+            clsFilmRecommendationCollection AllFilmRecommendations = new clsFilmRecommendationCollection(userId);
+            clsFilmRecommendation TestItem = new clsFilmRecommendation();
+            Int32 testSucceeded = 0;
+            TestItem.UserId = userId;
+            TestItem.FilmId = 444;
+            AllFilmRecommendations.ThisFilmRecommendation = TestItem;
+            AllFilmRecommendations.Add();
+            testSucceeded = AllFilmRecommendations.Delete();
+            Assert.AreEqual(testSucceeded, 0);
         }
     }
 }
