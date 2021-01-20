@@ -19,7 +19,7 @@ namespace Testing
         public void CountPropertyOk()
         {
             clsUserCollection AllUsers = new clsUserCollection();
-            Int32 count = 4;
+            Int32 count = 5;
             AllUsers.Count = count;
             Assert.AreEqual(AllUsers.Count, count);
         }

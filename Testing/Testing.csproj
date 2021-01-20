@@ -67,6 +67,8 @@
     <Compile Include="tstFilmGenreCollection.cs" />
     <Compile Include="tstFilmMood.cs" />
     <Compile Include="tstFilmMoodCollection.cs" />
+    <Compile Include="tstFilmRating.cs" />
+    <Compile Include="tstFilmRatingCollection.cs" />
     <Compile Include="tstFilmRecommendation.cs" />
     <Compile Include="tstFilmRecommendationCollection.cs" />
     <Compile Include="tstGenre.cs" />
