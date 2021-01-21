@@ -72,6 +72,7 @@ namespace Testing
             TestItem.FilmId = 444;
             AllFilmRecommendations.ThisFilmRecommendation = TestItem;
             AllFilmRecommendations.Add();
+            AllFilmRecommendations.ThisFilmRecommendation.Find(TestItem.UserId, TestItem.FilmId);
             AllFilmRecommendations.Delete();
             Boolean found = AllFilmRecommendations.ThisFilmRecommendation.Find(TestItem.UserId, TestItem.FilmId);
             Assert.IsFalse(found);
