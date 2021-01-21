@@ -25,11 +25,10 @@ namespace Classes
             set {mThisFavouriteFilm = value;}
         }
 
-        public clsFavouriteFilmCollection(int userId)
+        public clsFavouriteFilmCollection()
         {
             clsDataConnection DB = new clsDataConnection();
-            DB.AddParameter("@UserId", userId);
-            DB.Execute("sproc_tblFavouriteFilms_FilterByUserId");
+            DB.Execute("sproc_tblFavouriteFilms_SelectAll");
             Int32 recordCount = DB.Count;
             Int32 index = 0;
             while (index < recordCount)
@@ -42,32 +41,20 @@ namespace Classes
             }
         }
 
-        public int Add()
+        public void Add()
         {
             clsDataConnection DB = new clsDataConnection();
             DB.AddParameter("@UserId", mThisFavouriteFilm.UserId);
             DB.AddParameter("@FilmId", mThisFavouriteFilm.FilmId);
             DB.Execute("sproc_tblFavouriteFilms_Insert");
-            
-            DB = new clsDataConnection();
-            DB.AddParameter("@UserId", mThisFavouriteFilm.UserId);
-            DB.AddParameter("@FilmId", mThisFavouriteFilm.FilmId);
-
-            return DB.Execute("sproc_tblFavouriteFilms_SelectByUserAndFilmId");
         }
 
-        public int Delete()
+        public void Delete()
         {
             clsDataConnection DB = new clsDataConnection();
             DB.AddParameter("@UserId", mThisFavouriteFilm.UserId);
             DB.AddParameter("@FilmId", mThisFavouriteFilm.FilmId);
             DB.Execute("sproc_tblFavouriteFilms_Delete");
-            
-            DB = new clsDataConnection();
-            DB.AddParameter("@UserId", mThisFavouriteFilm.UserId);
-            DB.AddParameter("@FilmId", mThisFavouriteFilm.FilmId);
-
-            return DB.Execute("sproc_tblFavouriteFilms_SelectByUserAndFilmId");
         }
     }
 }
