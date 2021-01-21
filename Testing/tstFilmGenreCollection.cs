@@ -49,5 +49,32 @@ namespace Testing
             FilmGenres.AllFilmGenres = testList;
             Assert.AreEqual(FilmGenres.Count, testList.Count);
         }
+
+        [TestMethod]
+        public void AddMethodOk()
+        {
+            clsFilmGenreCollection AllFilmGenres = new clsFilmGenreCollection();
+            clsFilmGenre TestItem = new clsFilmGenre();
+            Int32 testSucceeded = 0;
+            TestItem.FilmId = 1;
+            TestItem.GenreId = 4;
+            AllFilmGenres.ThisFilmGenre = TestItem;
+            testSucceeded = AllFilmGenres.Add();
+            Assert.AreEqual(testSucceeded, 1);
+        }
+
+        [TestMethod]
+        public void DeleteMethodOk()
+        {
+            clsFilmGenreCollection AllFilmGenres = new clsFilmGenreCollection();
+            clsFilmGenre TestItem = new clsFilmGenre();
+            Int32 testSucceeded = 0;
+            TestItem.FilmId = 1;
+            TestItem.GenreId = 5;
+            AllFilmGenres.ThisFilmGenre = TestItem;
+            AllFilmGenres.Add();
+            testSucceeded = AllFilmGenres.Delete();
+            Assert.AreEqual(testSucceeded, 0);
+        }
     }
 }
