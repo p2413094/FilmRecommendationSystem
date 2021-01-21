@@ -36,10 +36,17 @@ namespace Classes
             {
                 clsMood aMood = new clsMood();
                 aMood.MoodId = Convert.ToInt32(DB.DataTable.Rows[index]["MoodId"]);
-                aMood.MoodDesc = DB.DataTable.Rows[index]["Desc"].ToString();
+                aMood.MoodDesc = DB.DataTable.Rows[index]["Description"].ToString();
                 mAllMoods.Add(aMood);
                 index++;
             }
+        }
+
+        public int Add()
+        {
+            clsDataConnection DB = new clsDataConnection();
+            DB.AddParameter("@Description", mThisMood.MoodDesc);
+            return DB.Execute("sproc_tblMood_Insert");
         }
     }
 }

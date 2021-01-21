@@ -4,8 +4,19 @@ namespace Classes
 {
     public class clsMood
     {
-        public int MoodId { get; set; }
-        public string MoodDesc { get; set; }
+        private Int32 mMoodId;
+        private string mMoodDescription;
+
+        public int MoodId
+        {
+            get { return mMoodId; }
+            set { mMoodId = value; }
+        }
+        public string MoodDesc
+        {
+            get {return mMoodDescription;}
+            set {mMoodDescription = value;}
+        }
 
         public string Valid(string moodDesc)
         {
@@ -33,6 +44,23 @@ namespace Classes
                 }
             }
             return error;
+        }
+
+        public bool Find(int moodId)
+        {
+            clsDataConnection DB = new clsDataConnection();
+            DB.AddParameter("@MoodId", moodId);
+            DB.Execute("sproc_tblMood_FilterByMoodId");
+            if (DB.Count == 1)
+            {
+                mMoodId = Convert.ToInt32(DB.DataTable.Rows[0]["MoodId"]);
+                mMoodDescription = DB.DataTable.Rows[0]["Description"].ToString();
+                return true;
+            }
+            else
+            {
+                return false;
+            }
         }
     }
 }

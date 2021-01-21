@@ -49,5 +49,29 @@ namespace Testing
             moods.AllMoods = testList;
             Assert.AreEqual(moods.Count, testList.Count);
         }
+
+        [TestMethod]
+        public void AddMethodOk()
+        {
+            clsMoodCollection AllMoods = new clsMoodCollection();
+            clsMood TestItem = new clsMood();
+            Int32 primaryKey = 0;
+            TestItem.MoodDesc = "Jaw-dropping";
+            AllMoods.ThisMood = TestItem;
+            primaryKey = AllMoods.Add();
+            TestItem.MoodId = primaryKey;
+            AllMoods.ThisMood.Find(primaryKey);
+            Assert.AreEqual(AllMoods.ThisMood, TestItem);
+        }
+
+        [TestMethod]
+        public void FindMethodOk()
+        {
+            clsMood aMood = new clsMood();
+            Boolean found = false;
+            Int32 moodId = 3648;
+            found = aMood.Find(moodId);
+            Assert.IsTrue(found);
+        }
     }
 }
