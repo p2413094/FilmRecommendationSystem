@@ -55,12 +55,12 @@ namespace Testing
         {
             clsFilmGenreCollection AllFilmGenres = new clsFilmGenreCollection();
             clsFilmGenre TestItem = new clsFilmGenre();
-            Int32 testSucceeded = 0;
             TestItem.FilmId = 1;
             TestItem.GenreId = 4;
             AllFilmGenres.ThisFilmGenre = TestItem;
-            testSucceeded = AllFilmGenres.Add();
-            Assert.AreEqual(testSucceeded, 1);
+            AllFilmGenres.Add();
+            AllFilmGenres.ThisFilmGenre.Find(TestItem.FilmId, TestItem.GenreId);
+            Assert.AreEqual(AllFilmGenres.ThisFilmGenre, TestItem);
         }
 
         [TestMethod]
@@ -68,13 +68,24 @@ namespace Testing
         {
             clsFilmGenreCollection AllFilmGenres = new clsFilmGenreCollection();
             clsFilmGenre TestItem = new clsFilmGenre();
-            Int32 testSucceeded = 0;
             TestItem.FilmId = 1;
             TestItem.GenreId = 5;
             AllFilmGenres.ThisFilmGenre = TestItem;
             AllFilmGenres.Add();
-            testSucceeded = AllFilmGenres.Delete();
-            Assert.AreEqual(testSucceeded, 0);
+            AllFilmGenres.Delete();
+            Boolean found = AllFilmGenres.ThisFilmGenre.Find(TestItem.FilmId, TestItem.GenreId);
+            Assert.IsFalse(found);
+        }
+
+        [TestMethod]
+        public void FindMethodOk()
+        {
+            clsFilmGenre aFilmGenre = new clsFilmGenre();
+            Boolean found = false;
+            Int32 filmId = 1;
+            Int32 genreId = 2;
+            found = aFilmGenre.Find(filmId, genreId);
+            Assert.IsTrue(found);
         }
     }
 }
