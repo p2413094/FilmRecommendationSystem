@@ -126,5 +126,15 @@ namespace Testing
             error = aMood.Valid(moodDesc);
             Assert.AreNotEqual(error, "");
         }
+
+        [TestMethod]
+        public void ValidMoodAlreadyExists()
+        {
+            clsMood aMood = new clsMood();
+            string error = "";
+            string moodDesc = "funny";
+            error = aMood.Valid(moodDesc);
+            Assert.AreNotEqual(error, "");
+        }
     }
 }

@@ -6,6 +6,7 @@ namespace Classes
     public class clsMoodCollection
     {
         private List<clsMood> mAllMoods = new List<clsMood>();
+        private clsMood mThisMood = new clsMood();
 
         public int Count
         {
@@ -17,6 +18,12 @@ namespace Classes
         {
             get{return mAllMoods;}
             set {mAllMoods = value;}
+        }
+
+        public clsMood ThisMood
+        {
+            get {return mThisMood;}
+            set {mThisMood = value;}
         }
 
         public clsMoodCollection()
