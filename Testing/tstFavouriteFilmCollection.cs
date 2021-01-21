@@ -72,6 +72,7 @@ namespace Testing
             testItem.FilmId = 8;
             AllFavouriteFilms.ThisFavouriteFilm = testItem;
             AllFavouriteFilms.Add();
+            AllFavouriteFilms.ThisFavouriteFilm.Find(testItem.UserId, testItem.FilmId);
             AllFavouriteFilms.Delete();
             Boolean found = AllFavouriteFilms.ThisFavouriteFilm.Find(testItem.UserId, testItem.FilmId);
             Assert.IsFalse(found); 
