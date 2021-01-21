@@ -11,14 +11,16 @@ namespace Testing
         [TestMethod]
         public void InstanceOk()
         {
-            clsWatchListCollection allFilmsInWatchList = new clsWatchListCollection();
+            Int32 userId = 1;
+            clsWatchListCollection allFilmsInWatchList = new clsWatchListCollection(userId);
             Assert.IsNotNull(allFilmsInWatchList);
         }
 
         [TestMethod]
         public void CountPropertyOk()
         {
-            clsWatchListCollection allFilmsInWatchList = new clsWatchListCollection();
+            Int32 userId = 1;
+            clsWatchListCollection allFilmsInWatchList = new clsWatchListCollection(userId);
             Int32 count = 1;
             allFilmsInWatchList.Count = count;
             Assert.AreEqual(allFilmsInWatchList.Count, count);
@@ -27,10 +29,11 @@ namespace Testing
         [TestMethod]
         public void AllWatchListFilmsOk()
         {
-            clsWatchListCollection allFilmsInWatchList = new clsWatchListCollection();
+            Int32 userId = 1;
+            clsWatchListCollection allFilmsInWatchList = new clsWatchListCollection(userId);
             List<clsWatchList> testList = new List<clsWatchList>();
             clsWatchList testItem = new clsWatchList();
-            testItem.UserId = 1;
+            testItem.UserId = userId;
             testItem.FilmId = 1;
             testItem.DateAdded = DateTime.Now;
             testList.Add(testItem);
@@ -41,15 +44,45 @@ namespace Testing
         [TestMethod]
         public void CountMatchesList()
         {
-            clsWatchListCollection allFilmsInWatchList = new clsWatchListCollection();
+            Int32 userId = 1;
+            clsWatchListCollection allFilmsInWatchList = new clsWatchListCollection(userId);
             List<clsWatchList> testList = new List<clsWatchList>();
             clsWatchList testItem = new clsWatchList();
-            testItem.UserId = 1;
+            testItem.UserId = userId;
             testItem.FilmId = 1;
             testItem.DateAdded = DateTime.Now;
             testList.Add(testItem);
             allFilmsInWatchList.AllFilmsInWatchList = testList;
             Assert.AreEqual(allFilmsInWatchList.Count, testList.Count);
+        }
+
+        [TestMethod]
+        public void AddMethodOk()
+        {
+            Int32 userId = 1;
+            clsWatchListCollection AllWatchListFilms = new clsWatchListCollection(userId);
+            clsWatchList TestItem = new clsWatchList();
+            Int32 testSucceeded = 0;
+            TestItem.UserId = userId;
+            TestItem.FilmId = 5;
+            AllWatchListFilms.ThisWatchListFilm = TestItem;
+            testSucceeded = AllWatchListFilms.Add();
+            Assert.AreEqual(testSucceeded, 1);
+        }
+
+        [TestMethod]
+        public void DeleteMethodOk()
+        {
+            Int32 userId = 1;
+            clsWatchListCollection AllWatchListFilms = new clsWatchListCollection(userId);
+            clsWatchList TestItem = new clsWatchList();
+            Int32 testSucceeded = 0;
+            TestItem.UserId = userId;
+            TestItem.FilmId = 5;
+            AllWatchListFilms.ThisWatchListFilm = TestItem;
+            AllWatchListFilms.Add();
+            testSucceeded = AllWatchListFilms.Delete();
+            Assert.AreEqual(testSucceeded, 0);
         }
     }
 }

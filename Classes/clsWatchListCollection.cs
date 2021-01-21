@@ -6,6 +6,7 @@ namespace Classes
     public class clsWatchListCollection
     {
         private List<clsWatchList> mAllFilmsInWatchList = new List<clsWatchList>();
+        private clsWatchList mThisWatchListFilm = new clsWatchList();
 
         public int Count
         {
@@ -19,21 +20,54 @@ namespace Classes
             set {mAllFilmsInWatchList = value;}
         }
 
-        public clsWatchListCollection()
+        public clsWatchList ThisWatchListFilm
+        {
+            get {return mThisWatchListFilm;}
+            set {mThisWatchListFilm = value;}
+        }
+
+        public clsWatchListCollection(Int32 userId)
         {
             clsDataConnection DB = new clsDataConnection();
-            DB.Execute("sproc_tblWatchList_SelectAll");
+            DB.AddParameter("@UserId", userId);
+            DB.Execute("sproc_tblWatchList_FilterByUserId");
             Int32 recordCount = DB.Count;
             Int32 index = 0;
             while (index < recordCount)
             {
                 clsWatchList aFilmInWatchList = new clsWatchList();
-                aFilmInWatchList.UserId = Convert.ToInt32(DB.DataTable.Rows[index]["UserId"]);
                 aFilmInWatchList.FilmId = Convert.ToInt32(DB.DataTable.Rows[index]["FilmId"]);
                 aFilmInWatchList.DateAdded = Convert.ToDateTime(DB.DataTable.Rows[index]["DateTimeAdded"]);
                 mAllFilmsInWatchList.Add(aFilmInWatchList);
                 index++;
             }
+        }
+
+        public int Add()
+        {
+            clsDataConnection DB = new clsDataConnection();
+            DB.AddParameter("@UserId", mThisWatchListFilm.UserId);
+            DB.AddParameter("@FilmId", mThisWatchListFilm.FilmId);
+            DB.Execute("sproc_tblWatchList_Insert");
+
+            DB = new clsDataConnection();
+            DB.AddParameter("@UserId", mThisWatchListFilm.UserId);
+            DB.AddParameter("@FilmId", mThisWatchListFilm.FilmId);
+            return DB.Execute("sproc_tblWatchList_SelectByUserAndFilmId");
+        }
+
+        public int Delete()
+        {
+            clsDataConnection DB = new clsDataConnection();
+            DB.AddParameter("@UserId", mThisWatchListFilm.UserId);
+            DB.AddParameter("@FilmId", mThisWatchListFilm.FilmId);
+            DB.Execute("sproc_tblWatchList_Delete");
+
+            DB = new clsDataConnection();
+            DB.AddParameter("@UserId", mThisWatchListFilm.UserId);
+            DB.AddParameter("@FilmId", mThisWatchListFilm.FilmId);
+            return DB.Execute("sproc_tblWatchList_SelectByUserAndFilmId");
+
         }
     }
 }
