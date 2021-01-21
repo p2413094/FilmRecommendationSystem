@@ -26,11 +26,10 @@ namespace Classes
             set {mThisWatchListFilm = value;}
         }
 
-        public clsWatchListCollection(Int32 userId)
+        public clsWatchListCollection()
         {
             clsDataConnection DB = new clsDataConnection();
-            DB.AddParameter("@UserId", userId);
-            DB.Execute("sproc_tblWatchList_FilterByUserId");
+            DB.Execute("sproc_tblWatchList_SelectAll");
             Int32 recordCount = DB.Count;
             Int32 index = 0;
             while (index < recordCount)
