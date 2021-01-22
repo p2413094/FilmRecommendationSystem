@@ -63,5 +63,13 @@ namespace Classes
                 return false;
             }
         }
+
+        public void Update()
+        {
+            clsDataConnection DB = new clsDataConnection();
+            DB.AddParameter("@FilmId", mThisFilm.FilmId);
+            DB.AddParameter("@Title", mThisFilm.Title);
+            DB.Execute("sproc_tblFilm_Update");
+        }
     }
 }

@@ -65,6 +65,24 @@ namespace Testing
         }
 
         [TestMethod]
+        public void UpdateMethodOk()
+        {
+            clsFilmCollection AllFilms = new clsFilmCollection();
+            clsFilm TestItem = new clsFilm();
+            Int32 primaryKey = 0;
+            TestItem.Title = "No Time To Die (2020)";
+            AllFilms.ThisFilm = TestItem;
+            primaryKey = AllFilms.Add();
+            TestItem.FilmId = primaryKey;
+
+            TestItem.Title = "No Time To Die (2021)";
+            AllFilms.ThisFilm = TestItem;
+            AllFilms.Update();
+            AllFilms.ThisFilm.Find(primaryKey);
+            Assert.AreEqual(AllFilms.ThisFilm, TestItem);
+        }
+
+        [TestMethod]
         public void FindMethodOk()
         {
             clsFilm aFilm = new clsFilm();
