@@ -51,5 +51,60 @@ namespace Testing
             FilmRatings.AllFilmRatings = TestList;
             Assert.AreEqual(FilmRatings.Count, TestList.Count);
         }
+
+        [TestMethod]
+        public void ThisFilmRatingPropertyOk()
+        {
+            clsFilmRatingCollection AllFilmRatings = new clsFilmRatingCollection();
+            clsFilmRating TestFilmRating = new clsFilmRating();
+            TestFilmRating.FilmId = 2459;
+            TestFilmRating.UserId = 4;
+            TestFilmRating.Rating = 5;
+            AllFilmRatings.ThisFilmRating = TestFilmRating;
+            Assert.AreEqual(AllFilmRatings.ThisFilmRating, TestFilmRating);
+        }
+
+        [TestMethod]
+        public void AddMethodOk()
+        {
+            clsFilmRatingCollection AllFilmRatings = new clsFilmRatingCollection();
+            clsFilmRating TestItem = new clsFilmRating();
+            TestItem.FilmId = 2459;
+            TestItem.UserId = 1;
+            TestItem.Rating = 5;
+            AllFilmRatings.ThisFilmRating = TestItem;
+            AllFilmRatings.Add();
+            AllFilmRatings.ThisFilmRating.Find(TestItem.FilmId, TestItem.UserId);
+            Assert.AreEqual(AllFilmRatings.ThisFilmRating, TestItem);
+        }
+
+        [TestMethod]
+        public void DeleteMethodOk()
+        {
+            clsFilmRatingCollection AllFilmRatings = new clsFilmRatingCollection();
+            clsFilmRating TestItem = new clsFilmRating();
+            TestItem.FilmId = 2459;
+            TestItem.UserId = 1;
+            TestItem.Rating = 5;
+            AllFilmRatings.ThisFilmRating = TestItem;
+            AllFilmRatings.Add();
+            AllFilmRatings.ThisFilmRating.Find(TestItem.FilmId, TestItem.UserId);
+            AllFilmRatings.Delete();
+            Boolean found = AllFilmRatings.ThisFilmRating.Find(TestItem.FilmId, TestItem.UserId);
+            Assert.IsFalse(found);
+        }
+
+        [TestMethod]
+        public void FindMethodOk()
+        {
+            clsFilmRating aFilmRating = new clsFilmRating();
+            Boolean found = false;
+            Int32 filmId = 1;
+            Int32 userId = 1;
+            found = aFilmRating.Find(filmId, userId);
+            Assert.IsTrue(found);
+        }
+
+
     }
 }

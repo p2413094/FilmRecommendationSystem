@@ -6,6 +6,8 @@ namespace Classes
     public class clsFilmRatingCollection
     {
         private List<clsFilmRating> mAllFilmRatings = new List<clsFilmRating>();
+        private clsFilmRating mThisFilmRating = new clsFilmRating();
+
         public int Count
         {
             get {return mAllFilmRatings.Count;}
@@ -15,6 +17,12 @@ namespace Classes
         {
             get {return mAllFilmRatings;}
             set {mAllFilmRatings = value;}
+        }
+
+        public clsFilmRating ThisFilmRating
+        {
+            get {return mThisFilmRating;}
+            set {mThisFilmRating = value;}
         }
 
         public clsFilmRatingCollection()
@@ -32,6 +40,23 @@ namespace Classes
                 mAllFilmRatings.Add(aFilmRating);
                 index++;
             }
+        }
+
+        public void Add()
+        {
+            clsDataConnection DB = new clsDataConnection();
+            DB.AddParameter("@FilmId", mThisFilmRating.FilmId);
+            DB.AddParameter("@UserId", mThisFilmRating.UserId);
+            DB.AddParameter("@Rating", mThisFilmRating.Rating);
+            DB.Execute("sproc_tblFilmRatings_Insert");
+        }
+
+        public void Delete()
+        {
+            clsDataConnection DB = new clsDataConnection();
+            DB.AddParameter("@FilmId", mThisFilmRating.FilmId);
+            DB.AddParameter("@UserId", mThisFilmRating.UserId);
+            DB.Execute("sproc_tblFilmRatings_Delete");
         }
     }
 }
