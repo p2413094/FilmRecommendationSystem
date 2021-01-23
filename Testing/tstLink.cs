@@ -27,7 +27,7 @@ namespace Testing
         public void ImdbIdPropertyOk()
         {
             clsLink aLink = new clsLink();
-            string imdbId = "0072271";
+            Int32 imdbId = 0072271;
             aLink.ImdbId = imdbId;
             Assert.AreEqual(aLink.ImdbId, imdbId);
         }
