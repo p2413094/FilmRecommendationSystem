@@ -6,6 +6,8 @@ namespace Classes
     public class clsStaffMemberCollection
     {
         private List<clsStaffMember> mAllStaffMembers = new List<clsStaffMember>();
+        private clsStaffMember mThisStaffMember = new clsStaffMember();
+
         public int Count
         {
             get {return mAllStaffMembers.Count;}
@@ -15,6 +17,12 @@ namespace Classes
         {
             get {return mAllStaffMembers;}
             set {mAllStaffMembers = value;}
+        }
+
+        public clsStaffMember ThisStaffMember
+        {
+            get {return mThisStaffMember;}
+            set {mThisStaffMember = value;}
         }
 
         public clsStaffMemberCollection()
@@ -36,6 +44,36 @@ namespace Classes
                 mAllStaffMembers.Add(aStaffMember);
                 index++;
             }
+        }
+
+        public int Add()
+        {
+            clsDataConnection DB = new clsDataConnection();
+            DB.AddParameter("@UserId", mThisStaffMember.UserId);
+            DB.AddParameter("@PrivilegeLevelId", mThisStaffMember.PrivilegeLevelId);
+            DB.AddParameter("@Confirmed", mThisStaffMember.Confirmed);
+            DB.AddParameter("@FirstName", mThisStaffMember.FirstName);
+            DB.AddParameter("@LastName", mThisStaffMember.LastName);
+            DB.AddParameter("@Allowed", mThisStaffMember.Allowed);
+            return DB.Execute("sproc_tblStaffMember_Insert");
+        }
+
+        public void Delete()
+        {
+            clsDataConnection DB = new clsDataConnection();
+            DB.AddParameter("@StaffMemberId", mThisStaffMember.StaffMemberId);
+            DB.Execute("sproc_tblStaffMember_Delete");
+        }
+
+        public void Update()
+        {
+            clsDataConnection DB = new clsDataConnection();
+            DB.AddParameter("@StaffMemberId", mThisStaffMember.StaffMemberId);
+            DB.AddParameter("@PrivilegeLevelId", mThisStaffMember.PrivilegeLevelId);
+            DB.AddParameter("@FirstName", mThisStaffMember.FirstName);
+            DB.AddParameter("@LastName", mThisStaffMember.LastName);
+            DB.AddParameter("@Allowed", mThisStaffMember.Allowed);
+            DB.Execute("sproc_tblStaffMember_Update");
         }
     }
 }

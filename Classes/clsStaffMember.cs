@@ -4,13 +4,50 @@ namespace Classes
 {
     public class clsStaffMember
     {
-        public int StaffMemberId { get; set; }
-        public int UserId { get; set; }
-        public int PrivilegeLevelId { get; set; }
-        public bool Confirmed { get; set; }
-        public string FirstName { get; set; }
-        public string LastName { get; set; }
-        public bool Allowed { get; set; }
+        private Int32 mStaffMemberId;
+        private Int32 mUserId;
+        private Int32 mPrivilegeLevelId;
+        private Boolean mConfirmed;
+        private string mFirstName;
+        private string mLastName;
+        private Boolean mAllowed;
+
+        public int StaffMemberId
+        {
+            get {return mStaffMemberId;}
+            set {mStaffMemberId = value;}
+        }
+        public int UserId
+        {
+            get {return mUserId;}
+            set {mUserId = value;}
+        }
+        public int PrivilegeLevelId
+        {
+            get {return mPrivilegeLevelId;}
+            set {mPrivilegeLevelId = value;}
+        }
+        public bool Confirmed
+        {
+            get {return mConfirmed;}
+            set {mConfirmed = value;}
+        }
+        public string FirstName
+        {
+            get {return mFirstName;}
+            set {mFirstName = value;}
+        }
+        public string LastName
+        {
+            get {return mLastName;}
+            set {mLastName = value;}
+        }
+
+        public bool Allowed
+        {
+            get {return mAllowed;}
+            set {mAllowed = value;}
+        }
 
         public string Valid(string firstName, string lastName)
         {
@@ -33,6 +70,28 @@ namespace Classes
                 error = "The last name must be more than 1 character";
             }
             return error;
+        }
+
+        public Boolean Find(int staffMemberId)
+        {
+            clsDataConnection DB = new clsDataConnection();
+            DB.AddParameter("@StaffMemberId", staffMemberId);
+            DB.Execute("sproc_tblStaffMember_FilterByStaffMemberId");
+            if (DB.Count == 1)
+            {
+                mStaffMemberId = Convert.ToInt32(DB.DataTable.Rows[0]["StaffMemberId"]);
+                mUserId = Convert.ToInt32(DB.DataTable.Rows[0]["UserId"]);
+                mPrivilegeLevelId = Convert.ToInt32(DB.DataTable.Rows[0]["PrivilegeLevelId"]);
+                mConfirmed = Convert.ToBoolean(DB.DataTable.Rows[0]["Confirmed"]);
+                mFirstName = DB.DataTable.Rows[0]["FirstName"].ToString();
+                mLastName = DB.DataTable.Rows[0]["LastName"].ToString();
+                mAllowed = Convert.ToBoolean(DB.DataTable.Rows[0]["Allowed"]);
+                return true;
+            }
+            else
+            {
+                return false;
+            }
         }
     }
 }

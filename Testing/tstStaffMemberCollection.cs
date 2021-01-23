@@ -59,5 +59,82 @@ namespace Testing
             StaffMembers.AllStaffMembers = TestList;
             Assert.AreEqual(StaffMembers.Count, TestList.Count);
         }
+
+        [TestMethod]
+        public void AddMethodOk()
+        {
+            clsStaffMemberCollection AllStaffMembers = new clsStaffMemberCollection();
+            clsStaffMember TestItem = new clsStaffMember();
+            Int32 primaryKey = 0;
+            TestItem.UserId = 2;
+            TestItem.PrivilegeLevelId = 1;
+            TestItem.FirstName = "Peter";
+            TestItem.LastName = "Jackson";
+            TestItem.Confirmed = true;
+            TestItem.Allowed = true;
+            AllStaffMembers.ThisStaffMember = TestItem;
+            primaryKey = AllStaffMembers.Add();
+            AllStaffMembers.ThisStaffMember.Find(primaryKey);
+            Assert.AreEqual(AllStaffMembers.ThisStaffMember, TestItem);
+        }
+
+        [TestMethod]
+        public void UpdateMethodOk()
+        {
+            clsStaffMemberCollection AllStaffMembers = new clsStaffMemberCollection();
+            clsStaffMember TestItem = new clsStaffMember();
+            Int32 primaryKey = 0;
+            TestItem.UserId = 2;
+            TestItem.PrivilegeLevelId = 1;
+            TestItem.FirstName = "Peter";
+            TestItem.LastName = "Jackson";
+            TestItem.Confirmed = true;
+            TestItem.Allowed = true;
+            AllStaffMembers.ThisStaffMember = TestItem;
+            primaryKey = AllStaffMembers.Add();
+            TestItem.StaffMemberId = primaryKey;
+
+            TestItem.UserId = 2;
+            TestItem.PrivilegeLevelId = 1;
+            TestItem.FirstName = "Pete";
+            TestItem.LastName = "Jacson";
+            TestItem.Confirmed = false;
+            TestItem.Allowed = false;
+            AllStaffMembers.ThisStaffMember = TestItem;
+            AllStaffMembers.Update();
+            AllStaffMembers.ThisStaffMember.Find(primaryKey);
+            Assert.AreEqual(AllStaffMembers.ThisStaffMember, TestItem);
+        }
+
+        [TestMethod]
+        public void DeleteMethodOk()
+        {
+            clsStaffMemberCollection AllStaffMembers = new clsStaffMemberCollection();
+            clsStaffMember TestItem = new clsStaffMember();
+            Int32 primaryKey = 0;
+            TestItem.UserId = 3;
+            TestItem.PrivilegeLevelId = 1;
+            TestItem.FirstName = "Martin";
+            TestItem.LastName = "Scorsese";
+            TestItem.Confirmed = true;
+            TestItem.Allowed = true;
+            AllStaffMembers.ThisStaffMember = TestItem;
+            primaryKey = AllStaffMembers.Add();
+            TestItem.StaffMemberId = primaryKey;
+            AllStaffMembers.ThisStaffMember.Find(primaryKey);
+            AllStaffMembers.Delete();
+            Boolean found = AllStaffMembers.ThisStaffMember.Find(primaryKey);
+            Assert.IsFalse(found);
+        }
+
+        [TestMethod]
+        public void FindMethodOk()
+        {
+            clsStaffMember AStaffMember = new clsStaffMember();
+            Boolean found = false;
+            Int32 staffMemberId = 1;
+            found = AStaffMember.Find(staffMemberId);
+            Assert.IsTrue(found);
+        }
     }
 }
