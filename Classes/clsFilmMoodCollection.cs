@@ -6,6 +6,7 @@ namespace Classes
     public class clsFilmMoodCollection
     {
         private List<clsFilmMood> mAllFilmMoods = new List<clsFilmMood>();
+        private clsFilmMood mThisFilmMood = new clsFilmMood();
 
         public int Count
         {
@@ -16,6 +17,12 @@ namespace Classes
         {
             get {return mAllFilmMoods;}
             set {mAllFilmMoods = value;}
+        }
+
+        public clsFilmMood ThisFilmMood
+        {
+            get {return mThisFilmMood;}
+            set {{mThisFilmMood = value;}}
         }
 
         public clsFilmMoodCollection()
@@ -33,6 +40,24 @@ namespace Classes
                 mAllFilmMoods.Add(aFilmMood);
                 index++;
             }
+        }
+
+        public void Add()
+        {
+            clsDataConnection DB = new clsDataConnection();
+            DB.AddParameter("@FilmId", mThisFilmMood.FilmId);
+            DB.AddParameter("@UserId", mThisFilmMood.UserId);
+            DB.AddParameter("@MoodId", mThisFilmMood.MoodId);
+            DB.Execute("sproc_tblFilmMood_Insert");
+        }
+
+        public void Delete()
+        {
+            clsDataConnection DB = new clsDataConnection();
+            DB.AddParameter("@FilmId", mThisFilmMood.FilmId);
+            DB.AddParameter("@UserId", mThisFilmMood.UserId);
+            DB.AddParameter("@MoodId", mThisFilmMood.MoodId);
+            DB.Execute("sproc_tblFilmMood_Delete");
         }
     }
 }
