@@ -186,6 +186,10 @@
     <Content Include="Account\ResetPasswordConfirmation.aspx" />
     <Content Include="Account\TwoFactorAuthenticationSignIn.aspx" />
     <Content Include="Account\VerifyPhoneNumber.aspx" />
+    <Content Include="AllFilms.aspx" />
+    <Content Include="AllStaffMembers.aspx" />
+    <Content Include="AllUsers.aspx" />
+    <Content Include="CloseAccount.aspx" />
     <Content Include="Contact.aspx" />
     <Content Include="Content\bootstrap-grid.css" />
     <Content Include="Content\bootstrap-grid.min.css" />
@@ -196,6 +200,10 @@
     <Content Include="Content\Site.css" />
     <Content Include="Default.aspx" />
     <Content Include="favicon.ico" />
+    <Content Include="FavouriteFilms.aspx" />
+    <Content Include="FilmInformation.aspx" />
+    <Content Include="FilmInformation2.aspx" />
+    <Content Include="ForgottenResetPassword.aspx" />
     <Content Include="Global.asax" />
     <Content Include="Account\Web.config" />
     <Content Include="Content\bootstrap.min.css.map" />
@@ -204,6 +212,61 @@
     <Content Include="Content\bootstrap-reboot.css.map" />
     <Content Include="Content\bootstrap-grid.min.css.map" />
     <Content Include="Content\bootstrap-grid.css.map" />
+    <Content Include="Homepage.aspx" />
+    <Content Include="Images\15.png" />
+    <Content Include="Images\18.png" />
+    <Content Include="Images\Add_plus icon.png" />
+    <Content Include="Images\Alien.jpg" />
+    <Content Include="Images\Aliens.jpg" />
+    <Content Include="Images\BladeRunner2049.jpg" />
+    <Content Include="Images\Bridesmaids.jpg" />
+    <Content Include="Images\Casablanca.jpg" />
+    <Content Include="Images\District 9.jpg" />
+    <Content Include="Images\Dune.jpg" />
+    <Content Include="Images\Dunkirk.jpg" />
+    <Content Include="Images\Edit icon.png" />
+    <Content Include="Images\Endgame.jpg" />
+    <Content Include="Images\Favourite.png" />
+    <Content Include="Images\FavouriteInList.png" />
+    <Content Include="Images\Ghostbusters.jpg" />
+    <Content Include="Images\Green tick_save.png" />
+    <Content Include="Images\Help.png" />
+    <Content Include="Images\King Kong.jpg" />
+    <Content Include="Images\LittleWomen.jpg" />
+    <Content Include="Images\Log out.png" />
+    <Content Include="Images\NoIcon.png" />
+    <Content Include="Images\Nosferatu.jpg" />
+    <Content Include="Images\Parasite.jpg" />
+    <Content Include="Images\Raiders of the Lost Ark.jpg" />
+    <Content Include="Images\RecommendedFilms.png" />
+    <Content Include="Images\Remove.png" />
+    <Content Include="Images\TCM.jpg" />
+    <Content Include="Images\Terminator 2.jpg" />
+    <Content Include="Images\Terminator.jpg" />
+    <Content Include="Images\The Bridge on the River Kwai.jpg" />
+    <Content Include="Images\The Shawshank Redemption.jpg" />
+    <Content Include="Images\The Wolf of Wall Street.jpg" />
+    <Content Include="Images\The World%27s End.jpg" />
+    <Content Include="Images\TheMartian.jpg" />
+    <Content Include="Images\ThePursuitOfHappyness.jpg" />
+    <Content Include="Images\Titanic.jpg" />
+    <Content Include="Images\TrashCan.png" />
+    <Content Include="Images\TrashCanRed.png" />
+    <Content Include="Images\Tron Legacy.jpg" />
+    <Content Include="Images\WatchLater.png" />
+    <Content Include="Images\WatchLaterAdded.png" />
+    <Content Include="Login.aspx" />
+    <Content Include="MyAccount.aspx" />
+    <Content Include="MyAccountAdministrator.aspx" />
+    <Content Include="MyAccountStaffMember.aspx" />
+    <Content Include="PreviousStaffMembers.aspx" />
+    <Content Include="RecommendedFilms.aspx" />
+    <Content Include="Register.aspx" />
+    <Content Include="Register_ConfirmEmail.aspx" />
+    <Content Include="ResetPassword.aspx" />
+    <Content Include="StyleSheet.css" />
+    <Content Include="TheTerminator.aspx" />
+    <Content Include="WatchList.aspx" />
     <Content Include="WebForm1.aspx" />
     <None Include="Properties\PublishProfiles\filmRecommender - Web Deploy.pubxml" />
     <None Include="Properties\Settings.settings">
@@ -437,6 +500,18 @@
     <Compile Include="Account\VerifyPhoneNumber.aspx.designer.cs">
       <DependentUpon>VerifyPhoneNumber.aspx</DependentUpon>
     </Compile>
+    <Compile Include="AllFilms.aspx.cs">
+      <DependentUpon>AllFilms.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="AllStaffMembers.aspx.cs">
+      <DependentUpon>AllStaffMembers.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="AllUsers.aspx.cs">
+      <DependentUpon>AllUsers.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
     <Compile Include="App_Start\BundleConfig.cs" />
     <Compile Include="About.aspx.cs">
       <DependentUpon>About.aspx</DependentUpon>
@@ -448,6 +523,10 @@
     <Compile Include="App_Start\IdentityConfig.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="App_Start\Startup.Auth.cs" />
+    <Compile Include="CloseAccount.aspx.cs">
+      <DependentUpon>CloseAccount.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
     <Compile Include="Contact.aspx.cs">
       <DependentUpon>Contact.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
@@ -462,8 +541,32 @@
     <Compile Include="Default.aspx.designer.cs">
       <DependentUpon>Default.aspx</DependentUpon>
     </Compile>
+    <Compile Include="FavouriteFilms.aspx.cs">
+      <DependentUpon>FavouriteFilms.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="FilmInformation.aspx.cs">
+      <DependentUpon>FilmInformation.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="FilmInformation2.aspx.cs">
+      <DependentUpon>FilmInformation2.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="ForgottenResetPassword.aspx.cs">
+      <DependentUpon>ForgottenResetPassword.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
+    </Compile>
+    <Compile Include="Homepage.aspx.cs">
+      <DependentUpon>Homepage.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Login.aspx.cs">
+      <DependentUpon>Login.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
     </Compile>
     <Compile Include="Migrations\202101111850293_InitialCreate.cs" />
     <Compile Include="Migrations\202101111850293_InitialCreate.designer.cs">
@@ -475,11 +578,43 @@
     </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\IdentityModels.cs" />
+    <Compile Include="MyAccount.aspx.cs">
+      <DependentUpon>MyAccount.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="MyAccountAdministrator.aspx.cs">
+      <DependentUpon>MyAccountAdministrator.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="MyAccountStaffMember.aspx.cs">
+      <DependentUpon>MyAccountStaffMember.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="PreviousStaffMembers.aspx.cs">
+      <DependentUpon>PreviousStaffMembers.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Properties\Settings.Designer.cs">
       <AutoGen>True</AutoGen>
       <DesignTimeSharedInput>True</DesignTimeSharedInput>
       <DependentUpon>Settings.settings</DependentUpon>
+    </Compile>
+    <Compile Include="RecommendedFilms.aspx.cs">
+      <DependentUpon>RecommendedFilms.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Register.aspx.cs">
+      <DependentUpon>Register.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Register_ConfirmEmail.aspx.cs">
+      <DependentUpon>Register_ConfirmEmail.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="ResetPassword.aspx.cs">
+      <DependentUpon>ResetPassword.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
     </Compile>
     <Compile Include="Site.Master.cs">
       <DependentUpon>Site.Master</DependentUpon>
@@ -496,12 +631,20 @@
       <DependentUpon>Site.Mobile.Master</DependentUpon>
     </Compile>
     <Compile Include="Startup.cs" />
+    <Compile Include="TheTerminator.aspx.cs">
+      <DependentUpon>TheTerminator.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
     <Compile Include="ViewSwitcher.ascx.cs">
       <DependentUpon>ViewSwitcher.ascx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
     <Compile Include="ViewSwitcher.ascx.designer.cs">
       <DependentUpon>ViewSwitcher.ascx</DependentUpon>
+    </Compile>
+    <Compile Include="WatchList.aspx.cs">
+      <DependentUpon>WatchList.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
     </Compile>
     <Compile Include="WebForm1.aspx.cs">
       <DependentUpon>WebForm1.aspx</DependentUpon>

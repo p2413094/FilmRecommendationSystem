@@ -12,13 +12,13 @@ namespace FilmRecommendationSystem
     {
         protected void Page_Load(object sender, EventArgs e)
         {         
-            clsWatchListCollection WatchList = new clsWatchListCollection(1);
-            foreach (clsWatchList aWatchListFilm in WatchList.AllFilmsInWatchList)
-            {
-                Label lbl1 = new Label();
-                lbl1.Text = aWatchListFilm.DateAdded.ToString();
-                Panel1.Controls.Add(lbl1);
-            }
+            //clsWatchListCollection WatchList = new clsWatchListCollection(1);
+            //foreach (clsWatchList aWatchListFilm in WatchList.AllFilmsInWatchList)
+            //{
+            //    Label lbl1 = new Label();
+            //    lbl1.Text = aWatchListFilm.DateAdded.ToString();
+            //    Panel1.Controls.Add(lbl1);
+            //}
         }
     }
 }
