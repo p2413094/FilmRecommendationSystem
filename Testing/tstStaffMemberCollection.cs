@@ -124,7 +124,7 @@ namespace Testing
             AllStaffMembers.ThisStaffMember.Find(primaryKey);
             AllStaffMembers.Delete();
             Boolean found = AllStaffMembers.ThisStaffMember.Find(primaryKey);
-            Assert.IsFalse(found);
+            Assert.IsFalse(found);       
         }
 
         [TestMethod]

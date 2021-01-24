@@ -63,6 +63,12 @@ namespace Classes
             clsDataConnection DB = new clsDataConnection();
             DB.AddParameter("@StaffMemberId", mThisStaffMember.StaffMemberId);
             DB.Execute("sproc_tblStaffMember_Delete");
+
+            DB = new clsDataConnection();
+            DB.AddParameter("@FirstName", mThisStaffMember.FirstName);
+            DB.AddParameter("@LastName", mThisStaffMember.LastName);
+            DB.AddParameter("@PrivilegeLevelId", mThisStaffMember.PrivilegeLevelId);
+            DB.Execute("sproc_tblPreviousStaffMembers_Insert");
         }
 
         public void Update()
