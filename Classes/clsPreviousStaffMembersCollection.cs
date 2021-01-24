@@ -6,6 +6,7 @@ namespace Classes
     public class clsPreviousStaffMembersCollection
     {
         private List<clsPreviousStaffMembers> mAllPreviousStaffMembers = new List<clsPreviousStaffMembers>();
+        private clsPreviousStaffMembers mThisPreviousStaffMember = new clsPreviousStaffMembers();
 
         public int Count
         {
@@ -16,6 +17,12 @@ namespace Classes
         {
             get {return mAllPreviousStaffMembers;}
             set {mAllPreviousStaffMembers = value;}
+        }
+
+        public clsPreviousStaffMembers ThisPreviousStaffMember
+        {
+            get {return mThisPreviousStaffMember;}
+            set {mThisPreviousStaffMember = value;}
         }
 
         public clsPreviousStaffMembersCollection()
@@ -35,6 +42,15 @@ namespace Classes
                 mAllPreviousStaffMembers.Add(aPreviousStaffMember);
                 index++;
             }
+        }
+
+        public int Add()
+        {
+            clsDataConnection DB = new clsDataConnection();
+            DB.AddParameter("@FirstName", mThisPreviousStaffMember.FirstName);
+            DB.AddParameter("@LastName", mThisPreviousStaffMember.LastName);
+            DB.AddParameter("@PrivilegeLevelId", mThisPreviousStaffMember.PrivilegeLevelId);
+            return DB.Execute("sproc_tblPreviousStaffMembers_Insert");
         }
     }
 }

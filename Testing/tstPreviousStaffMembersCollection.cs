@@ -55,5 +55,31 @@ namespace Testing
             PreviousStaffMembers.AllPreviousStaffMembers = TestList;
             Assert.AreEqual(PreviousStaffMembers.Count, TestList.Count);
         }
+
+        [TestMethod]
+        public void AddMethodOk()
+        {
+            clsPreviousStaffMembersCollection AllPreviousStaffMembers = new clsPreviousStaffMembersCollection();
+            clsPreviousStaffMembers TestItem = new clsPreviousStaffMembers();
+            Int32 primaryKey = 0;
+            TestItem.FirstName = "Ridley";
+            TestItem.LastName = "Scott";
+            TestItem.PrivilegeLevelId = 1;
+            AllPreviousStaffMembers.ThisPreviousStaffMember = TestItem;
+            primaryKey = AllPreviousStaffMembers.Add();
+            TestItem.PreviousStaffMemberId = primaryKey;
+            AllPreviousStaffMembers.ThisPreviousStaffMember.Find(primaryKey);
+            Assert.AreEqual(AllPreviousStaffMembers.ThisPreviousStaffMember, TestItem);
+        }
+
+        [TestMethod]
+        public void FindMethodOk()
+        {
+            clsPreviousStaffMembers APreviousStaffMember = new clsPreviousStaffMembers();
+            Boolean found = false;
+            Int32 previousStaffMemberId = 1;
+            found = APreviousStaffMember.Find(previousStaffMemberId);
+            Assert.IsTrue(found);
+        }
     }
 }
