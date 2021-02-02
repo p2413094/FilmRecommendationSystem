@@ -4,27 +4,27 @@ namespace Classes
 {
     public class clsFilmRating
     {
-        private Int32 mFilmId;
-        private Int32 mUserId;
-        private double mRating;
+        private Single mFilmId;
+        private Single mUserId;
+        private Single mRating;
 
-        public int FilmId
+        public Single FilmId
         {
             get {return mFilmId;}
             set {mFilmId = value;}
         }
-        public int UserId
+        public Single UserId
         {
             get {return mUserId;}
             set {mUserId = value;}
         }
-        public double Rating
+        public Single Rating
         {
             get {return mRating;}
             set {mRating = value;}
         }
 
-        public Boolean Find(int filmId, int userId)
+        public Boolean Find(Single filmId, Single userId)
         {
             clsDataConnection DB = new clsDataConnection();
             DB.AddParameter("@FilmId", filmId);
@@ -32,9 +32,9 @@ namespace Classes
             DB.Execute("sproc_tblFilmRatings_FilterByFilmIdAndUserId");
             if (DB.Count == 1)
             {
-                mFilmId = Convert.ToInt32(DB.DataTable.Rows[0]["FilmId"]);
-                mUserId = Convert.ToInt32(DB.DataTable.Rows[0]["UserId"]);
-                mRating = Convert.ToDouble(DB.DataTable.Rows[0]["Rating"]);
+                mFilmId = Convert.ToSingle(DB.DataTable.Rows[0]["FilmId"]);
+                mUserId = Convert.ToSingle(DB.DataTable.Rows[0]["UserId"]);
+                mRating = Convert.ToSingle(DB.DataTable.Rows[0]["Rating"]);
                 return true;
             }
             else

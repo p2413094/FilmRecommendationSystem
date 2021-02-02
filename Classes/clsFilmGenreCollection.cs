@@ -7,6 +7,8 @@ namespace Classes
     {
         private List<clsFilmGenre> mAllFilmGenres = new List<clsFilmGenre>();
         private clsFilmGenre mThisFilmGenre = new clsFilmGenre();
+        
+        private List<clsFilmGenre> mAllFilmsByGenre = new List<clsFilmGenre>();
 
         public int Count
         {
@@ -25,6 +27,12 @@ namespace Classes
             set {mThisFilmGenre = value;}
         }
 
+        public List<clsFilmGenre> AllFilmsByGenre
+        {
+            get {return mAllFilmsByGenre;}
+            set {mAllFilmsByGenre = value;}
+        }
+
         public clsFilmGenreCollection()
         {
             clsDataConnection DB = new clsDataConnection();
@@ -40,34 +48,36 @@ namespace Classes
                 index++;
             }
         }
-        public int Add()
+        public void Add()
         {
             clsDataConnection DB = new clsDataConnection();
             DB.AddParameter("@FilmId", mThisFilmGenre.FilmId);
             DB.AddParameter("@GenreId", mThisFilmGenre.GenreId);
             DB.Execute("sproc_tblFilmGenre_Insert");
-
-            //1
-            DB = new clsDataConnection();
-            DB.AddParameter("@FilmId", mThisFilmGenre.FilmId);
-            DB.AddParameter("@GenreId", mThisFilmGenre.GenreId);
-            DB.Execute("sproc_tblFilmGenre_SelectByFilmIdAndGenreId");
-            return DB.Count;
         }
 
-        public int Delete()
+        public void Delete()
         {
             clsDataConnection DB = new clsDataConnection();
             DB.AddParameter("@FilmId", mThisFilmGenre.FilmId);
             DB.AddParameter("@GenreId", mThisFilmGenre.GenreId);
             DB.Execute("sproc_tblFilmGenre_DeleteAllByFilmIdAndGenreId");
+        }
 
-            //this part is inefficient - needs to be in a function as it is exactly the same as //1
-            DB = new clsDataConnection();
-            DB.AddParameter("@FilmId", mThisFilmGenre.FilmId);
-            DB.AddParameter("@GenreId", mThisFilmGenre.GenreId);
-            DB.Execute("sproc_tblFilmGenre_SelectByFilmIdAndGenreId");
-            return DB.Count;
+        public void GetAllFilmsByGenre(int genreId)
+        {
+            clsDataConnection DB = new clsDataConnection();
+            DB.AddParameter("@GenreId", genreId);
+            DB.Execute("sproc_tblFilmGenre_FilterByGenreId");
+            Int32 recordCount = DB.Count;
+            Int32 index = 0;
+            while (index < recordCount)
+            {
+                clsFilmGenre aFilm = new clsFilmGenre();
+                aFilm.FilmId = Convert.ToInt32(DB.DataTable.Rows[index]["FilmId"]);
+                mAllFilmsByGenre.Add(aFilm);
+                index++;
+            }
         }
     }
 }

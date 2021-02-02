@@ -69,9 +69,9 @@ namespace Testing
         {
             clsFilmRatingCollection AllFilmRatings = new clsFilmRatingCollection();
             clsFilmRating TestItem = new clsFilmRating();
-            TestItem.FilmId = 2459;
+            TestItem.FilmId = 5;
             TestItem.UserId = 1;
-            TestItem.Rating = 5;
+            TestItem.Rating = 4.5F;
             AllFilmRatings.ThisFilmRating = TestItem;
             AllFilmRatings.Add();
             AllFilmRatings.ThisFilmRating.Find(TestItem.FilmId, TestItem.UserId);

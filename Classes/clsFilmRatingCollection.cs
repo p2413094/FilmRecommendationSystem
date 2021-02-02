@@ -36,7 +36,8 @@ namespace Classes
                 clsFilmRating aFilmRating = new clsFilmRating();
                 aFilmRating.UserId = Convert.ToInt32(DB.DataTable.Rows[index]["UserId"]);
                 aFilmRating.FilmId = Convert.ToInt32(DB.DataTable.Rows[index]["FilmId"]);
-                aFilmRating.Rating = Convert.ToDouble(DB.DataTable.Rows[index]["Rating"]);
+                aFilmRating.Rating = Convert.ToSingle(DB.DataTable.Rows[index]["Rating"]);
+
                 mAllFilmRatings.Add(aFilmRating);
                 index++;
             }

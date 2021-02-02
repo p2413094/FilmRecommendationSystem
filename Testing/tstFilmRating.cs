@@ -36,7 +36,7 @@ namespace Testing
         public void RatingPropertyOk()
         {
             clsFilmRating aFilmRating = new clsFilmRating();
-            double rating = 4.5;
+            Single rating = 4.5F;
             aFilmRating.Rating = rating;
             Assert.AreEqual(aFilmRating.Rating, rating);
         }
