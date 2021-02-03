@@ -187,23 +187,23 @@ a {
 
 .search {
     float: left;
-    width: 70%;
-    margin-left: -30px;
+    width: 30%;
+    margin-left: 5%;
 }
 
-    .search .textentry-label {
+    .search .label {
         font-size: 15px;
-        letter-spacing: 6px;
+        letter-spacing: 3px;
         color: white;
         padding: 12px;
-        margin-left: 6%;
         float: left;
         text-align: right;
+        font-style: italic;
     }
 
     .search .textentry-container {
-        width: 70%;
-        margin-left: 5%;
+        width: 60%;
+        margin-left: 4%;
         float: left;
         padding: 4px;
         height: 35px;
@@ -211,12 +211,13 @@ a {
     }
 
     .search .textentry-field {
-        width: 99%;
-        height: 100%;
+        width: 80%;
+        height: 80%;
         text-align: left;
         border-style: solid;
         border-radius: 6px;
         font-size: large;
+        margin-top: 0.5%;
     }
 
 .film .header {
@@ -293,6 +294,7 @@ a {
 .film .information-header {
     font-size: 18px;
     font-weight: bold;
+    padding-bottom: 10px;
 }
 
 .filminformation {
@@ -365,7 +367,7 @@ a {
     height: 300px;
     width: 200px;
     margin-left: 3%;
-    margin-top: 1%;
+    margin-top: 3%;
 }
 
 .stafffunctions {
@@ -738,8 +740,8 @@ td {
 
 .film {
     text-align: center;
+    margin-top: 5%;
 }
-
 
 
 .film .recommendoption {
@@ -836,10 +838,4 @@ td {
     width: 150px;
     padding: 8px;
     border-radius: 4px;
-}
-
-.slctGenreMood-options {
-    background-color: black;
-    color: white;
-    padding: 8px;
 }

@@ -1,4 +1,4 @@
-﻿<%@ Page Language="C#" AutoEventWireup="true" CodeFile="FilmInformation.aspx.cs" Inherits="FilmInformation" %>
+﻿<%@ Page Language="C#" AutoEventWireup="true" CodeBehind="FilmInformation.aspx.cs" Inherits="FilmRecommendationSystem.FilmInformation" %>
 
 <!DOCTYPE html>
 
@@ -50,15 +50,18 @@
         <br />
         <br />
 
-        <section class="film">
-            <div class="header">The Terminator (1984)</div>
+        <div class="film">
+            <div class="header">
+                <asp:Label ID="lblTitle" runat="server"></asp:Label>
+            </div>
             <br />
             <br />
             <br />
 
             <div class="container">
                 <div class="container-image">
-                    <img src="Images/Terminator.jpg" alt="Avatar" class="image" />
+                    <asp:Image ID="imgFilmPoster" runat="server" CssClass="image" />
+
                     <div class="overlay-left">
                         <img id="imgWatchLater" onclick="imgWatchLaterClick()" class="watchlaterfavouriteicon" src="Images/WatchLater.png" />
                     </div>
@@ -103,32 +106,36 @@
             
             <div class="filminformation">
                 <div class="information-header">Description</div>
-                <br />
-                A human soldier is sent from 2029 to 1984 to stop an almost indestructible cyborg killing machine, 
-                sent from the same year, which has been programmed to execute a young woman whose unborn son is the key to 
-                humanity's future salvation.
-                <br />
-
-                <p class="information-header">Genre</p>
-                Action, Sci-Fi
+                <asp:Label ID="lblPlot" runat="server"></asp:Label>
                 <br />
                 <br />
 
-                <p class="information-header">Age rating</p>
-                <img src="Images/15.png" class="image-agerating" alt="15" />
+                <div class="information-header">Genre</div>
+                <asp:Label ID="lblGenre" runat="server"></asp:Label>
                 <br />
                 <br />
-                
-                <p class="information-header">Director</p>
-                James Cameron
+
+                <div class="information-header">Age rating</div>
+                <asp:Label ID="lblAgeRating" runat="server"></asp:Label>
                 <br />
                 <br />
-                
-                <p class="information-header">Runtime</p>
-                107 mins
+               
+                <div class="information-header">Director</div>
+                <asp:Label ID="lblDirector" runat="server"></asp:Label>
+                <br />
+                <br />
+
+                <div class="information-header">Released</div>
+                <asp:Label ID="lblReleased" runat="server"></asp:Label>
+                <br />
+                <br />
+
+                <div class="information-header">Runtime</div>
+                <asp:Label ID="lblRuntime" runat="server"></asp:Label>
                 <br />   
+                <asp:Panel ID="Panel1" runat="server"></asp:Panel>
             </div>
-        </section>
+        </div>
         <br />
         <br />
 

@@ -1,4 +1,4 @@
-﻿<%@ Page Language="C#" AutoEventWireup="true" CodeFile="Homepage.aspx.cs" Inherits="Homepage" %>
+﻿<%@ Page Language="C#" AutoEventWireup="true" CodeBehind="Homepage.aspx.cs" Inherits="FilmRecommendationSystem.Homepage" %>
 
 <!DOCTYPE html>
 <html xmlns="http://www.w3.org/1999/xhtml">
@@ -23,22 +23,18 @@
         <br />
         <br />
 
-        <section class="search">
-            <div class="textentry-label">
+        <div class="search">
+            <div class="label">
                 SEARCH
             </div>
             <div class="textentry-container">
                 <input autocomplete="off" class="textentry-field" type="text" id="myInput" onkeyup="filterSearchFunction()" />
-                <div>
                     <div id="mySearchDropdown" class="searchdropdown-content">
                         <a href="FilmInformation2.aspx">Terminator 2: Judgment Day (1991)</a>
                         <a>Little Women (2019)</a>
                     </div>
-                </div>
-                <br />
-                <br />
             </div>
-        </section>
+        </div>
 
         <br />
         <br />
@@ -56,11 +52,6 @@
             </p>
         </div>
 
-        <br />
-        <br />
-        <br />
-        <br />
-
         <div class="film">
             <p class="homepage-subHeader">
                What genre/ mood of movie do you want?
@@ -75,45 +66,29 @@
             <br />
 
             <div>
-                <select id="slctGenre" class="slctGenreMood">
-                    <option class="slctGenreMood-options">action</option>
-                    <option class="slctGenreMood-options">romance</option>
-                    <option class="slctGenreMood-options">sci-fi</option>
-                </select>
+                <asp:DropDownList ID="ddlGenres" runat="server" CssClass="slctGenreMood"></asp:DropDownList>
             </div>
-            
-            <div>
-                <select id="slctMood" class="slctGenreMood">
-                    <option class="slctGenreMood-options">incredible</option>
-                    <option class="slctGenreMood-options">oscar-worthy</option>
-                    <option class="slctGenreMood-options">heart-warming</option>
-                </select>
-            </div>
+
 
             <br />
             <br />
             <br />
-            <button id="btnGetRecommendations" onclick="GetRecommendations()" class="getrecommendations-button" 
-                type="button">GET RECOMMENDATIONS</button>
+            <br />
+            <asp:Button ID="btnGetRecommendations" runat="server" Text="GET RECOMMENDATIONS" class="getrecommendations-button" OnClick="btnGetRecommendations_Click" />
+            
+            
+            <asp:Panel ID="Panel1" CssClass="watchlist" runat="server"></asp:Panel>
+
         </div>
 
         <br />
         <br />
         <br />
-        <section id="secYourRecommendations" class="watchlist">
-            <div class="homepage-subHeader">
-                Your recommendations
-            </div>
-            <a href="FilmInformation.aspx">
-                <img src="Images/Terminator.jpg" class="image" />
-            </a>
-            <img id="recommendImg1" src="Images/Alien.jpg" class="image" />
-            <img id="recommendImg2" src="Images/District 9.jpg" class="image" />
-            <img id="recommendImg3" src="Images/Ghostbusters.jpg" class="image" />
+        <asp:Panel ID="pnlRecommendations" runat="server" CssClass="watchlist">
+            <div class="homepage-subHeader">Your recommendations</div>
             <br />
             <br />
-            <br />
-        </section>
+        </asp:Panel>
 
         <br />
         <div class="homepage-mostRecommendedFilms">
@@ -124,7 +99,7 @@
             <a href="FilmInformation.aspx">
                 <img src="Images/Terminator.jpg" class="image" />
             </a>
-            <img src="Images/King Kong.jpg" class="image" />
+            <asp:ImageButton ID="ImageButton1" runat="server" ImageUrl="Images/King Kong.jpg" CssClass="image" OnClick="ImageButton1_Click" />
             <img src="Images/TCM.jpg" class="image" />
             <img src="Images/Dunkirk.jpg" class="image" />
             <img src="Images/District 9.jpg" class="image" />
@@ -150,17 +125,20 @@
         </section>
 
         <script>
-            
+
             function onLoad() {
-                document.getElementById("btnGetRecommendations").style.display = "none";
+                //document.getElementById("btnGetRecommendations").style.display = "none";
                 document.getElementById("secYourRecommendations").style.display = "none";
                 document.getElementById("slctGenre").style.display = "none";
                 document.getElementById("slctMood").style.display = "none";
+                document.getElementById("ddlGenres").style.display = "none";
             }
 
             function btnGenre_Clicked() {
                 document.getElementById("slctGenre").style.display = "inline";
                 document.getElementById("btnGetRecommendations").style.display = "inline";
+
+                document.getElementById("lstGenres").style.display = "inline";
             }
 
             function btnMood_Clicked() {
@@ -176,40 +154,6 @@
 
             function GetRecommendations() {
                 document.getElementById("secYourRecommendations").style.display = "block";
-                var ddlGenre = document.getElementById("slctGenre"),
-                    ddlMood = document.getElementById("slctMood"),
-                    selectedGenre = ddlGenre.value,
-                    selectedMood = ddlMood.value;
-
-                if (selectedGenre == "romance") {
-                    document.getElementById("recommendImg1").src = "Images/Bridesmaids.jpg";
-                    document.getElementById("recommendImg2").src = "Images/Titanic.jpg";
-                    document.getElementById("recommendImg3").src = "Images/LittleWomen.jpg";
-                }
-
-                if (selectedGenre == "sci-fi") {
-                    document.getElementById("recommendImg1").src = "Images/Dune.jpg";
-                    document.getElementById("recommendImg2").src = "Images/BladeRunner2049.jpg";
-                    document.getElementById("recommendImg3").src = "Images/Tron%20Legacy.jpg";
-                }
-
-                if (selectedMood == "oscar-worthy") {
-                    document.getElementById("recommendImg1").src = "Images/King Kong.jpg";
-                    document.getElementById("recommendImg2").src = "Images/Parasite.jpg";
-                    document.getElementById("recommendImg3").src = "Images/The%20Shawshank%20Redemption.jpg";
-                }
-                
-                if (selectedMood == "heart-warming") {
-                    document.getElementById("recommendImg1").src = "Images/WhenHarryMetSally.jpg";
-                    document.getElementById("recommendImg2").src = "Images/TheMartian.jpg";
-                    document.getElementById("recommendImg3").src = "Images/ThePursuitOfHappyness.jpg";
-                }
-
-                if (selectedGenre == "sci-fi" && selectedMood == "oscar-worthy") {
-                    document.getElementById("recommendImg1").src = "Images/King Kong.jpg";
-                    document.getElementById("recommendImg2").src = "Images/BladeRunner2049.jpg";
-                    document.getElementById("recommendImg3").src = "Images/Aliens.jpg";
-                }
             }
 
             function AddGhostbustersToLabel() {
@@ -230,13 +174,13 @@
                 for (i = 0; i < a.length; i++) {
                     txtValue = a[i].textContent || a[i].innerText;
                     if (txtValue.toUpperCase().indexOf(filter) > -1) {
-                    a[i].style.display = "";
+                        a[i].style.display = "";
                     } else {
-                    a[i].style.display = "none";
+                        a[i].style.display = "none";
                     }
                 }
             }
-           
+
             //Search bar at top of screen
             function filterSearchFunction() {
                 document.getElementById("mySearchDropdown").classList.toggle("show");
@@ -248,9 +192,9 @@
                 for (i = 0; i < a.length; i++) {
                     txtValue = a[i].textContent || a[i].innerText;
                     if (txtValue.toUpperCase().indexOf(filter) > -1) {
-                    a[i].style.display = "";
+                        a[i].style.display = "";
                     } else {
-                    a[i].style.display = "none";
+                        a[i].style.display = "none";
                     }
                 }
             }
