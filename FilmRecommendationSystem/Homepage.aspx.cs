@@ -63,6 +63,10 @@ namespace FilmRecommendationSystem
             while (imdbIdOk == false)
             {
                 newImdbId = newImdbId + numberOfZeroes.PadRight(count, '0') + imdbId;
+
+                //may need the below if the search fails 
+                //newImdbId = "tt" + numberOfZeroes.PadRight(count, '0') + imdbId;
+
                 newImdbId = newImdbId.Replace(" ", string.Empty);
                 client = new RestClient("https://movie-database-imdb-alternative.p.rapidapi.com/?i=" + newImdbId);
                 request = new RestRequest(Method.GET);

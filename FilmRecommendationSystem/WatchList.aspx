@@ -1,4 +1,6 @@
-﻿<%@ Page Language="C#" AutoEventWireup="true" CodeFile="WatchList.aspx.cs" Inherits="WatchList" %>
+﻿<%@ Page Language="C#" AutoEventWireup="true" CodeBehind="WatchList.aspx.cs" Inherits="FilmRecommendationSystem.WatchList" %>
+
+<!DOCTYPE html>
 
 <!DOCTYPE html>
 
@@ -97,24 +99,17 @@
         <br />
         <br />
 
-        <div id="filmToBeRemoved" class="newwatchlist">
-            <img src="Images/The World's End.jpg" class="image" />
-            <div class="overlay">
-                <img id="imgRemove" onclick="imgRemoveClick()" class="watchlatericon" src="Images/Remove.png" />
-            </div>
+        <div>
+            <asp:Panel ID="pnlWatchList" runat="server" CssClass="watchlist">
+                <div id="filmToBeRemoved" class="newwatchlist">
+                    <img src="Images/The World's End.jpg" class="image" />
+                    <div class="overlay">
+                        <img id="imgRemove" onclick="imgRemoveClick()" class="watchlatericon" src="Images/Remove.png" />
+                    </div>
+                </div>
+            </asp:Panel>
         </div>
         
-        <section class="watchlist">
-            <a href="FilmInformation2.aspx">
-                <img src="Images/Terminator 2.jpg" class="image" />
-            </a>
-            <img src="Images/Endgame.jpg" class="image" />
-            <img src="Images/Nosferatu.jpg" class="image" />
-            <img src="Images/The Wolf of Wall Street.jpg" class="image" />
-            <img src="Images/Bridesmaids.jpg" class="image" />
-            <img src="Images/King Kong.jpg" class="image" />
-            <img src="Images/Casablanca.jpg" class="image" />
-        </section>
 
         <div class="footer">
             <div class="links">
