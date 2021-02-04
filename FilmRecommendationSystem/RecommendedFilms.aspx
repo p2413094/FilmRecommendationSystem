@@ -1,4 +1,4 @@
-﻿<%@ Page Language="C#" AutoEventWireup="true" CodeFile="RecommendedFilms.aspx.cs" Inherits="RecommendedFilms" %>
+﻿<%@ Page Language="C#" AutoEventWireup="true" CodeBehind="RecommendedFilms.aspx.cs" Inherits="FilmRecommendationSystem.RecommendedFilms" %>
 
 <!DOCTYPE html>
 
@@ -92,21 +92,22 @@
         <div class="page-header">
             My recommended films  
         </div>  
-        <br />
-        <br />
-        <br />
-        <br />
         
-        <section class="watchlist">
-            <a href="FilmInformation.aspx">
-                <img src="Images/Terminator.jpg" class="image" />
-            </a>
-            <img src="Images/Alien.jpg" class="image" />
-            <img src="Images/Raiders of the Lost Ark.jpg" class="image" />
-            <img src="Images/The Shawshank Redemption.jpg" class="image" />
-            <img src="Images/Parasite.jpg" class="image" />
-            <img src="Images/The Bridge on the River Kwai.jpg" class="image" />
-        </section>
+        <br />
+        <br />
+        <br />
+        <br />
+
+        <div>
+            <asp:Panel ID="pnlRecommendations" runat="server" CssClass="watchlist">
+                <div id="filmToBeRemoved" class="newwatchlist">
+                    <img src="Images/The World's End.jpg" class="image" />
+                    <div class="overlay">
+                        <img id="imgRemove" onclick="imgRemoveClick()" class="watchlatericon" src="Images/Remove.png" />
+                    </div>
+                </div>
+            </asp:Panel>
+        </div>
 
         <div class="footer">
             <div class="links">

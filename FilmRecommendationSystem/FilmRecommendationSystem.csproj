@@ -609,6 +609,9 @@
       <DependentUpon>FavouriteFilms.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
+    <Compile Include="FavouriteFilms.aspx.designer.cs">
+      <DependentUpon>FavouriteFilms.aspx</DependentUpon>
+    </Compile>
     <Compile Include="FilmInformation.aspx.cs">
       <DependentUpon>FilmInformation.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
@@ -674,6 +677,9 @@
     <Compile Include="RecommendedFilms.aspx.cs">
       <DependentUpon>RecommendedFilms.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="RecommendedFilms.aspx.designer.cs">
+      <DependentUpon>RecommendedFilms.aspx</DependentUpon>
     </Compile>
     <Compile Include="Register.aspx.cs">
       <DependentUpon>Register.aspx</DependentUpon>

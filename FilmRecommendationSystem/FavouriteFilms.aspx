@@ -1,4 +1,4 @@
-﻿<%@ Page Language="C#" AutoEventWireup="true" CodeFile="FavouriteFilms.aspx.cs" Inherits="FavouriteFilms" %>
+﻿<%@ Page Language="C#" AutoEventWireup="true" CodeBehind="FavouriteFilms.aspx.cs" Inherits="FilmRecommendationSystem.FavouriteFilms" %>
 
 <!DOCTYPE html>
 
@@ -84,29 +84,22 @@
         <div class="page-header">
             My favourite films  
         </div>  
+        
         <br />
         <br />
         <br />
         <br />
 
-        <div id="filmToBeRemoved" class="newwatchlist">
-            <img src="Images/Dune.jpg" class="image" />
-            <div class="overlay">
-                <img id="imgRemove" onclick="imgRemoveClick()" class="watchlatericon" src="Images/Remove.png" />
-            </div>
+        <div>
+            <asp:Panel ID="pnlFavouriteFilms" runat="server" CssClass="watchlist">
+                <div id="filmToBeRemoved" class="newwatchlist">
+                    <img src="Images/Dune.jpg" class="image" />
+                    <div class="overlay">
+                        <img id="imgRemove" onclick="imgRemoveClick()" class="watchlatericon" src="Images/Remove.png" />
+                    </div>
+                </div>
+            </asp:Panel>
         </div>
-        
-        <section class="watchlist">
-            <a href="FilmInformation.aspx">
-                <img src="Images/Terminator.jpg" class="image" />
-            </a>
-            <img src="Images/Aliens.jpg" class="image" />
-            <img src="Images/TCM.jpg" class="image" />
-            <img src="Images/Dunkirk.jpg" class="image" />
-            <img src="Images/District 9.jpg" class="image" />
-            <img src="Images/Tron Legacy.jpg" class="image" />
-            <img src="Images/Ghostbusters.jpg" class="image" />
-        </section>     
 
         <script>
             /* When the user clicks on the button,

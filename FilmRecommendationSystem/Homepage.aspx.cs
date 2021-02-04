@@ -28,7 +28,6 @@ namespace FilmRecommendationSystem
         {
             Int32 genreId = Convert.ToInt32(ddlGenres.SelectedValue);
             GenerateRecommendations(genreId);
-            //GenerateTemporaryRecommendations();
         }
         void LoadGenres()
         {
@@ -65,9 +64,9 @@ namespace FilmRecommendationSystem
                 newImdbId = newImdbId + numberOfZeroes.PadRight(count, '0') + imdbId;
 
                 //may need the below if the search fails 
-                //newImdbId = "tt" + numberOfZeroes.PadRight(count, '0') + imdbId;
+                newImdbId = "tt" + numberOfZeroes.PadRight(count, '0') + imdbId;
 
-                newImdbId = newImdbId.Replace(" ", string.Empty);
+                //newImdbId = newImdbId.Replace(" ", string.Empty);
                 client = new RestClient("https://movie-database-imdb-alternative.p.rapidapi.com/?i=" + newImdbId);
                 request = new RestRequest(Method.GET);
                 request.AddHeader("x-rapidapi-key", "2951edd025mshf1b0f9ca8a52c6ap1e71e9jsn67c827bdd770");
@@ -124,8 +123,6 @@ namespace FilmRecommendationSystem
 
             //var movieRatingPrediction = predictionEngine.Predict(testInput);
 
-            Label lbl1 = new Label();
-
             Int32 dummyUserId = 1;
 
             clsFilmGenreCollection AllFilms = new clsFilmGenreCollection();
@@ -151,23 +148,17 @@ namespace FilmRecommendationSystem
             AllPredictions.Sort();
 
             var topTenPredictions = AllPredictions.Take(10);
-            Label lblFilmRecommendationText = new Label();
 
             clsFilmRecommendationCollection FilmRecommendations = new clsFilmRecommendationCollection();
             clsFilmRecommendation aRecommendationToAdd = new clsFilmRecommendation();
 
             foreach (clsFilmPrediction aTopTenPrediction in topTenPredictions)
             {
-                lblFilmRecommendationText = new Label();
-                lblFilmRecommendationText.Text = "FilmId is " + aTopTenPrediction.FilmId + " and the score is: " + aTopTenPrediction.Score;
-                //pnlRecommendations.Controls.Add(lblFilmRecommendationText);
-                //pnlRecommendations.Controls.Add(new LiteralControl("<br />"));
-
-                //aRecommendationToAdd = new clsFilmRecommendation();
-                //aRecommendationToAdd.FilmId = aTopTenPrediction.FilmId;
-                //aRecommendationToAdd.UserId = dummyUserId;
-                //FilmRecommendations.ThisFilmRecommendation = aRecommendationToAdd;
-                //FilmRecommendations.Add();
+                aRecommendationToAdd = new clsFilmRecommendation();
+                aRecommendationToAdd.FilmId = aTopTenPrediction.FilmId;
+                aRecommendationToAdd.UserId = dummyUserId;
+                FilmRecommendations.ThisFilmRecommendation = aRecommendationToAdd;
+                FilmRecommendations.Add();
                 
                 GetImdbInformation(aTopTenPrediction.FilmId);
             }
