@@ -23,6 +23,13 @@
         <br />
         <br />
 
+        <asp:TextBox ID="txtSearch" runat="server" AutoPostBack="true" OnTextChanged="txtSearch_TextChanged"></asp:TextBox>
+        <br />
+        <br />
+
+        <asp:GridView ID="GridView1" runat="server"></asp:GridView>
+
+
         <div class="search">
             <div class="label">
                 SEARCH

@@ -1,4 +1,4 @@
-﻿<%@ Page Language="C#" AutoEventWireup="true" CodeFile="Login.aspx.cs" Inherits="Login" %>
+﻿<%@ Page Language="C#" AutoEventWireup="true" CodeBehind="Login.aspx.cs" Inherits="FilmRecommendationSystem.Login" %>
 
 <!DOCTYPE html>
 
@@ -7,8 +7,8 @@
     <title>Film recommender | Login</title>
     <link rel="stylesheet" href="StyleSheet.css" />
 </head>
-
 <body class="body">
+    <form runat="server">
         <p class="logo textlink">
             <a href="Homepage.aspx">FILM RECOMMENDER</a>
             <ul>
@@ -58,36 +58,51 @@
             <br />
             <br />
             <br />
-            <br />
-            <br />
-            <br />
+
+            <div class="register-section">
+                <asp:Label runat="server" AssociatedControlID="txtUsername" CssClass="textentry-label">Username</asp:Label>
+                <div class="textentry-field">
+                    <asp:TextBox runat="server" ID="txtUsername"  CssClass="textentry-fieldsize"></asp:TextBox>
+                    <asp:RequiredFieldValidator runat="server" ControlToValidate="txtUsername" ID="RequiredFieldValidator2"  ErrorMessage="Username is required"></asp:RequiredFieldValidator>
+                </div>
+            </div>
+
+            <div class="register-section">
+                <asp:Label ID="lblPassword" runat="server" AssociatedControlID="txtPassword" Text="Password" CssClass="textentry-label"></asp:Label>
+                <div class="textentry-field">
+                    <asp:TextBox ID="txtPassword" TextMode="Password" runat="server" CssClass="textentry-fieldsize"></asp:TextBox>
+                    <br />
+                    <asp:RequiredFieldValidator ControlToValidate="txtPassword" ID="rqValPassword" runat="server" ErrorMessage="Password is required."></asp:RequiredFieldValidator>
+                </div>
+            </div>
+
+            <div class="register-section">
+                <asp:Label runat="server" CssClass="textentry-label" AssociatedControlID="RememberMe">Remember me?</asp:Label>
+                <div class="textentry-field">
+                    <asp:CheckBox runat="server" ID="RememberMe" />
+                </div>
+            </div>
+
+            <div class="register-section">
+                <asp:Label ID="Label1" runat="server" CssClass="textentry-label"></asp:Label>
+                <div class="textentry-field">
+                    <asp:Button ID="btnLogin" runat="server" OnClick="btnLogin_Click" Text="Log in" CssClass="okbutton" />
+                    <br />
+                    <asp:Label ID="lblError" runat="server"></asp:Label>
+                </div>
+            </div>
 
             <div>
-                <div class="textentry-label">
-                    Email address
-                </div>
                 <div class="textentry-field">
-                    <input id="txtEmailAddress" type="text" class="textentry-fieldsize" />
-                </div>
-                <br />
-                <br />
-                <br />
-                <div class="textentry-label">
-                    Password
-                </div>
-                <div class="textentry-field">
-                    <input id="txtPassword" type="password" class="textentry-fieldsize" />
                     <br />
                     <br />
                     <br />
-                    <button type="button" class="okbutton" onclick="btnLogin_Click()" id="btnLogin">Log in</button>
                     <br />
                     <button type="button" class="okbutton" onclick="btnLoginStaffMember_Click()" id="btnLoginStaffMember">Staff member login</button>
                     <br />
                     <button type="button" class="okbutton" onclick="btnLoginAdmin_Click()">Administrator log in</button>
                     <br />
                     <a href="ForgottenResetPassword.aspx">Forgot/ need to reset password?</a>
-
                 </div>
             </div>
             <br />
@@ -106,8 +121,8 @@
             </div>
         </div>
 
+    </form>
         <script type="text/javascript">     
-            
             function btnLogin_Click() {
                 location.href = "MyAccount.aspx";
             }

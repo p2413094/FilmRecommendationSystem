@@ -264,7 +264,6 @@
     <Content Include="favicon.ico" />
     <Content Include="FavouriteFilms.aspx" />
     <Content Include="FilmInformation.aspx" />
-    <Content Include="FilmInformation2.aspx" />
     <Content Include="ForgottenResetPassword.aspx" />
     <Content Include="Global.asax" />
     <Content Include="Account\Web.config" />
@@ -327,11 +326,7 @@
     <Content Include="Register_ConfirmEmail.aspx" />
     <Content Include="ResetPassword.aspx" />
     <Content Include="StyleSheet.css" />
-    <Content Include="TheTerminator.aspx" />
     <Content Include="WatchList.aspx" />
-    <Content Include="WebForm1.aspx" />
-    <Content Include="WebForm2.aspx" />
-    <Content Include="WebForm3.aspx" />
     <None Include="Properties\PublishProfiles\filmRecommender - Web Deploy.pubxml" />
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>
@@ -619,10 +614,6 @@
     <Compile Include="FilmInformation.aspx.designer.cs">
       <DependentUpon>FilmInformation.aspx</DependentUpon>
     </Compile>
-    <Compile Include="FilmInformation2.aspx.cs">
-      <DependentUpon>FilmInformation2.aspx</DependentUpon>
-      <SubType>ASPXCodeBehind</SubType>
-    </Compile>
     <Compile Include="ForgottenResetPassword.aspx.cs">
       <DependentUpon>ForgottenResetPassword.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
@@ -640,6 +631,9 @@
     <Compile Include="Login.aspx.cs">
       <DependentUpon>Login.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Login.aspx.designer.cs">
+      <DependentUpon>Login.aspx</DependentUpon>
     </Compile>
     <Compile Include="Migrations\202101111850293_InitialCreate.cs" />
     <Compile Include="Migrations\202101111850293_InitialCreate.designer.cs">
@@ -685,6 +679,9 @@
       <DependentUpon>Register.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
+    <Compile Include="Register.aspx.designer.cs">
+      <DependentUpon>Register.aspx</DependentUpon>
+    </Compile>
     <Compile Include="Register_ConfirmEmail.aspx.cs">
       <DependentUpon>Register_ConfirmEmail.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
@@ -708,10 +705,6 @@
       <DependentUpon>Site.Mobile.Master</DependentUpon>
     </Compile>
     <Compile Include="Startup.cs" />
-    <Compile Include="TheTerminator.aspx.cs">
-      <DependentUpon>TheTerminator.aspx</DependentUpon>
-      <SubType>ASPXCodeBehind</SubType>
-    </Compile>
     <Compile Include="ViewSwitcher.ascx.cs">
       <DependentUpon>ViewSwitcher.ascx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
@@ -725,27 +718,6 @@
     </Compile>
     <Compile Include="WatchList.aspx.designer.cs">
       <DependentUpon>WatchList.aspx</DependentUpon>
-    </Compile>
-    <Compile Include="WebForm1.aspx.cs">
-      <DependentUpon>WebForm1.aspx</DependentUpon>
-      <SubType>ASPXCodeBehind</SubType>
-    </Compile>
-    <Compile Include="WebForm1.aspx.designer.cs">
-      <DependentUpon>WebForm1.aspx</DependentUpon>
-    </Compile>
-    <Compile Include="WebForm2.aspx.cs">
-      <DependentUpon>WebForm2.aspx</DependentUpon>
-      <SubType>ASPXCodeBehind</SubType>
-    </Compile>
-    <Compile Include="WebForm2.aspx.designer.cs">
-      <DependentUpon>WebForm2.aspx</DependentUpon>
-    </Compile>
-    <Compile Include="WebForm3.aspx.cs">
-      <DependentUpon>WebForm3.aspx</DependentUpon>
-      <SubType>ASPXCodeBehind</SubType>
-    </Compile>
-    <Compile Include="WebForm3.aspx.designer.cs">
-      <DependentUpon>WebForm3.aspx</DependentUpon>
     </Compile>
   </ItemGroup>
   <ItemGroup>

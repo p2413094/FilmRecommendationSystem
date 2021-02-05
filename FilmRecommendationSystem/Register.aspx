@@ -1,4 +1,4 @@
-﻿<%@ Page Language="C#" AutoEventWireup="true" CodeFile="Register.aspx.cs" Inherits="Register" %>
+﻿<%@ Page Language="C#" AutoEventWireup="true" CodeBehind="Register.aspx.cs" Inherits="FilmRecommendationSystem.Register" %>
 
 <!DOCTYPE html>
 
@@ -29,7 +29,7 @@
                 SEARCH
             </div>
             <div class="textentry-container">
-                <input autocomplete="off" class="textentry-field" type="text" oninput="myFunction()" id="myInput" onkeyup="filterFunction()">
+                <input autocomplete="off" class="textentry-field" type="text" oninput="myFunction()" id="myInput" onkeyup="filterFunction()" />
                 <div>
                     <div id="myDropdown" class="dropdown-content">
                         <a href="FilmInformation2.aspx">The Terminator (1984)</a>
@@ -82,59 +82,59 @@
             <br />
             <br />
 
-            <div class="textentry-label">
-                Email address
-            </div>
-            <div class="textentry-field">
-                <input type="text" class="textentry-fieldsize" placeholder="e.g. ellenripley@sulaco.com">
+            <div class="register-section">
+                <asp:Label runat="server" AssociatedControlID="txtEmailAddress" CssClass="textentry-label">Email address</asp:Label>
+                <div class="textentry-field">
+                    <asp:TextBox runat="server" placeholder="ellenripley86@sulaco.com" ID="txtEmailAddress" TextMode="Email"  CssClass="textentry-fieldsize"></asp:TextBox>
+                    <asp:RequiredFieldValidator runat="server" ControlToValidate="txtEmailAddress" ID="RequiredFieldValidator2"  ErrorMessage="RequiredFieldValidator"></asp:RequiredFieldValidator>
+                </div>
             </div>
             
-            <div id="lblEmailErrorMessage" class="emailerrormessage">
+            <div class="register-section">
+                <asp:Label ID="lblUsername" runat="server" AssociatedControlID="txtUsername" Text="Username" CssClass="textentry-label"></asp:Label>
+                <div class="textentry-field">
+                    <asp:TextBox runat="server" placeholder="EllenRipley57" ID="txtUsername" CssClass="textentry-fieldsize"></asp:TextBox>
+                    <asp:RequiredFieldValidator ControlToValidate="txtUsername" ID="rqValUsername" runat="server" ErrorMessage="Username must not be blank"></asp:RequiredFieldValidator>
+                </div>
             </div>
-
-            <br />
-            <br />
-            <br />
-
-            <div class="textentry-label">
-                Username
+            
+            <div class="register-section-password">
+                <asp:Label ID="lblPassword" runat="server" AssociatedControlID="txtPassword" Text="Password" CssClass="textentry-label"></asp:Label>
+                <div class="textentry-field">
+                    <asp:TextBox ID="txtPassword" TextMode="Password" runat="server" CssClass="textentry-fieldsize"></asp:TextBox>
+                    <br />
+                    <div class="italiscised">
+                        Password must:
+                        <br />
+                        &#8226; be a minimum of 8 characters
+                        <br />
+                        &#8226; have uppercase letters
+                        <br />
+                        &#8226; have lowercase letters
+                        <br />
+                        &#8226; contain numbers
+                        <br />
+                        <br />
+                    </div>
+                    <asp:RequiredFieldValidator ControlToValidate="txtPassword" ID="rqValPassword" runat="server" ErrorMessage="Password does not comply with above."></asp:RequiredFieldValidator>
+                </div>
             </div>
-            <div class="textentry-field">
-                <input type="text" class="textentry-fieldsize" placeholder="EllenRipley57">
+            
+            <div class="register-section">
+                <asp:Label ID="lblConfirmPassword" runat="server" AssociatedControlID="txtPasswordConfirmation" Text="Confirm password" CssClass="textentry-label"></asp:Label>
+                <div class="textentry-field">
+                    <asp:TextBox ID="txtPasswordConfirmation" TextMode="Password" runat="server" CssClass="textentry-fieldsize"></asp:TextBox>
+                    <asp:RequiredFieldValidator ControlToValidate="txtPasswordConfirmation" ID="RequiredFieldValidator1" runat="server" ErrorMessage="Password must match the previous"></asp:RequiredFieldValidator>
+                </div>
             </div>
-            <br />
-            <br />
-            <br />
-
-            <div class="textentry-label">
-                Password
+            
+            <div class="register-section">
+                <div class="textentry-label"></div>
+                <div class="textentry-field">
+                    <p style="font-style: italic;">By creating an account, you acknowledge our privacy statement.</p>
+                    <asp:Button ID="btnRegister" OnClick="btnRegister_Click" runat="server" Text="CREATE ACCOUNT" CssClass="registerbutton" />
+                </div>
             </div>
-            <div class="textentry-field">
-                <input type="password" class="textentry-fieldsize">
-            </div>
-            <br />
-            <br />
-            <br />
-
-            <div class="textentry-label">
-                Confirm password
-            </div>
-            <div class="textentry-field">
-                <input type="password" class="textentry-fieldsize" />
-                <br />
-                <br />
-                <p style="font-style: italic;">By creating an account, you acknowledge our privacy statement.</p>
-                <button type="button" onclick="btnRegister_Click()" id="btnRegister" class="registerbutton">CREATE ACCOUNT</button>
-
-            </div>
-            <br />
-            <br />
-            <br />  
-            <br />
-            <br />
-            <br />
-            <br />
-            <br />
 
             <br />
         </div>
@@ -159,10 +159,6 @@
         
     </form>
     <script type="text/javascript">
-        function btnRegister_Click() {
-                location.href = "Register_ConfirmEmail.aspx";
-        }
-
         /* When the user clicks on the button,
             toggle between hiding and showing the dropdown content */
             function myFunction() {
@@ -183,7 +179,7 @@
                 a[i].style.display = "none";
                 }
             }
-        }
+            }
     </script>
 </body>
 </html>

@@ -118,6 +118,7 @@ a {
         width: 35%;
         margin-left: 5%;
         float: left;
+        /*margin-bottom: 4%;*/
     }
 
     .account .smallmessage {
@@ -844,4 +845,22 @@ td {
     width: 150px;
     padding: 8px;
     border-radius: 4px;
+}
+
+.register-section {
+    border-style: solid;
+    border-color: red;
+    padding-top: 2%;
+    padding-bottom: 12%;
+}
+
+    .register-section-password {
+        border-style: solid;
+        border-color: blue;
+        padding-top: 2%;
+        padding-bottom: 25%;
+    }
+
+.italiscised {
+    font-style: italic;
 }

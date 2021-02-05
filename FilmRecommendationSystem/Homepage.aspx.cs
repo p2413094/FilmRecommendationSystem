@@ -170,5 +170,26 @@ namespace FilmRecommendationSystem
         {
             Response.Redirect("FilmInformation.aspx?imdbId=tt0360717");
         }
+
+        
+        List<string> newList = new List<string>();
+
+        protected void txtSearch_TextChanged(object sender, EventArgs e)
+        {
+            clsDataConnection DB = new clsDataConnection();
+            DB.AddParameter("@Title", txtSearch.Text);
+            DB.Execute("sproc_tblFilm_FilterByTitle");
+            Int32 recordCount = DB.Count;
+            Int32 index = 0;
+            string filmTitle;
+            while (index < recordCount)
+            {
+                filmTitle = Convert.ToString(DB.DataTable.Rows[index]["Title"]);
+                newList.Add(filmTitle);
+                index++;
+            }
+            GridView1.DataSource = newList;
+            GridView1.DataBind();
+        }
     }
 }

@@ -125,7 +125,8 @@ namespace FilmRecommendationSystem
             }
             else
             {
-                response.Redirect("~/");
+                response.Redirect("Register_ConfirmEmail.aspx");
+                //response.Redirect("~/");
             }
         }
     }
