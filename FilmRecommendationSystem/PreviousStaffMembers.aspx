@@ -1,4 +1,4 @@
-﻿<%@ Page Language="C#" AutoEventWireup="true" CodeFile="PreviousStaffMembers.aspx.cs" Inherits="PreviousStaffMembers" %>
+﻿<%@ Page Language="C#" AutoEventWireup="true" CodeBehind="PreviousStaffMembers.aspx.cs" Inherits="FilmRecommendationSystem.PreviousStaffMembers" %>
 
 <!DOCTYPE html>
 
@@ -96,37 +96,10 @@
         <br />
         <br />
         <br />
-
-            <div>
-                <table>
-                    <tr>
-                        <th id="UserId">UserId</th>
-                        <th id="firstName">First name</th>
-                        <th id="lastName">Last name</th>
-                        <th id="PrivilegeLevel">Privilege level</th>
-                        <th id="Confirmed">Confirmed?</th>                 
-                        <th id="Suspended">Suspended?</th>
-                    </tr>
-
-                    <tr id="rowHouse">
-                        <td>#1</td>
-                        <td>Meredith</td>
-                        <td>Grey</td>
-                        <td>Standard</td>
-                        <td>Y</td>
-                        <td>Y</td>
-                    </tr>
-
-                    <tr>
-                        <td>#2</td>
-                        <td>Cristina</td>
-                        <td>Yang</td>
-                        <td>Administrator</td>
-                        <td>Y</td>
-                        <td>Y</td>
-                    </tr>               
-                </table>
-            </div>
+            
+         <div>
+             <asp:GridView ID="grdPreviousStaffMembers" runat="server"></asp:GridView>
+         </div>
          
             <br />
             <br />
