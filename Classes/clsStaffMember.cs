@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 
 namespace Classes
 {
@@ -49,27 +50,28 @@ namespace Classes
             set {mAllowed = value;}
         }
 
-        public string Valid(string firstName, string lastName)
+        public List<string> Valid(string firstName, string lastName)
         {
-            string error = "";
+            List<string> errorList = new List<string>();
+
             if (firstName.Length > 50)
             {
-                error = "The first name must not be more than 50 characters";
+                errorList.Add("The first name must not be more than 50 characters");
             }
             if (firstName.Length == 0)
             {
-                error = "The first name must be more than 1 character";
+                errorList.Add("The first name must be more than 1 character");
             }
 
             if (lastName.Length > 50)
             {
-                error = "The last name must not be more than 50 characters";
+                errorList.Add("The last name must not be more than 50 characters");
             }
             if (lastName.Length == 0)
             {
-                error = "The last name must be more than 1 character";
+                errorList.Add("The last name must be more than 1 character");
             }
-            return error;
+            return errorList;
         }
 
         public Boolean Find(int staffMemberId)

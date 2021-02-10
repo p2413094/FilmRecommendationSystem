@@ -43,16 +43,30 @@ namespace FilmRecommendationSystem
             Boolean allowed = ((CheckBox)grdAllStaffMembers.Rows[e.RowIndex].FindControl("chkAllowed")).Checked;
 
             clsStaffMemberCollection AllStaffMembers = new clsStaffMemberCollection();
-            AllStaffMembers.ThisStaffMember.StaffMemberId = staffMemberId;
-            AllStaffMembers.ThisStaffMember.PrivilegeLevelId = privilegeLevelId;
-            AllStaffMembers.ThisStaffMember.FirstName = firstName;
-            AllStaffMembers.ThisStaffMember.LastName = lastName;
-            AllStaffMembers.ThisStaffMember.Allowed = allowed;
+           
+            var staffMemberCheck = AllStaffMembers.ThisStaffMember.Valid(firstName, lastName);
+            if (staffMemberCheck.Count != 0)
+            {
+                foreach (string error in staffMemberCheck)
+                {
+                    Label lbl1 = new Label();
+                    lbl1.Text = error;
+                    Panel1.Controls.Add(lbl1);
+                }
+            }    
+            else
+            {
+                AllStaffMembers.ThisStaffMember.StaffMemberId = staffMemberId;
+                AllStaffMembers.ThisStaffMember.PrivilegeLevelId = privilegeLevelId;
+                AllStaffMembers.ThisStaffMember.FirstName = firstName;
+                AllStaffMembers.ThisStaffMember.LastName = lastName;
+                AllStaffMembers.ThisStaffMember.Allowed = allowed;
 
-            AllStaffMembers.Update();
+                AllStaffMembers.Update();
 
-            grdAllStaffMembers.EditIndex = -1;
-            LoadData();
+                grdAllStaffMembers.EditIndex = -1;
+                LoadData();
+            }
         }
 
         protected void grdAllStaffMembers_RowDeleting(object sender, GridViewDeleteEventArgs e)
@@ -77,8 +91,20 @@ namespace FilmRecommendationSystem
             string firstName = txtNewFirstName.Text;
             string lastName = txtNewLastName.Text;
             Int32 privilegeLevelId = Convert.ToInt32(txtNewPrivilegeLevel.Text);
-            
+
             clsStaffMemberCollection AllStaffMembers = new clsStaffMemberCollection();
+            
+            var staffMemberCheck = AllStaffMembers.ThisStaffMember.Valid(firstName, lastName);
+            if (staffMemberCheck.Count != 0)
+            {
+                foreach (string error in staffMemberCheck)
+                {
+                    Label lbl1 = new Label();
+                    lbl1.Text = error;
+                    Panel1.Controls.Add(lbl1);
+                }
+            }    
+            
             AllStaffMembers.ThisStaffMember.UserId = userId;
             AllStaffMembers.ThisStaffMember.FirstName = firstName;
             AllStaffMembers.ThisStaffMember.LastName = lastName;
