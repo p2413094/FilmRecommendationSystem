@@ -154,11 +154,11 @@ namespace FilmRecommendationSystem
 
             foreach (clsFilmPrediction aTopTenPrediction in topTenPredictions)
             {
-                aRecommendationToAdd = new clsFilmRecommendation();
-                aRecommendationToAdd.FilmId = aTopTenPrediction.FilmId;
-                aRecommendationToAdd.UserId = dummyUserId;
-                FilmRecommendations.ThisFilmRecommendation = aRecommendationToAdd;
-                FilmRecommendations.Add();
+                //aRecommendationToAdd = new clsFilmRecommendation();
+                //aRecommendationToAdd.FilmId = aTopTenPrediction.FilmId;
+                //aRecommendationToAdd.UserId = dummyUserId;
+                //FilmRecommendations.ThisFilmRecommendation = aRecommendationToAdd;
+                //FilmRecommendations.Add();
                 
                 GetImdbInformation(aTopTenPrediction.FilmId);
             }

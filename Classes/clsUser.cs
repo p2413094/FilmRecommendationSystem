@@ -10,6 +10,8 @@ namespace Classes
         public string EmailConfirmed { get; set; }
         public string UserName { get; set; }
         //public DateTime DateTimeCreated { get; set; }
+        public string PhoneNumber {get; set;}
+        public bool PhoneConfirmed {get; set;}
         public bool Suspended { get; set; }
     }
 }

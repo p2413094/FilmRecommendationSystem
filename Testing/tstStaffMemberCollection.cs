@@ -70,8 +70,6 @@ namespace Testing
             TestItem.PrivilegeLevelId = 1;
             TestItem.FirstName = "Peter";
             TestItem.LastName = "Jackson";
-            TestItem.Confirmed = true;
-            TestItem.Allowed = true;
             AllStaffMembers.ThisStaffMember = TestItem;
             primaryKey = AllStaffMembers.Add();
             AllStaffMembers.ThisStaffMember.Find(primaryKey);

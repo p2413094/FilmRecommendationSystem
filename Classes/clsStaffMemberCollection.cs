@@ -51,10 +51,8 @@ namespace Classes
             clsDataConnection DB = new clsDataConnection();
             DB.AddParameter("@UserId", mThisStaffMember.UserId);
             DB.AddParameter("@PrivilegeLevelId", mThisStaffMember.PrivilegeLevelId);
-            DB.AddParameter("@Confirmed", mThisStaffMember.Confirmed);
             DB.AddParameter("@FirstName", mThisStaffMember.FirstName);
             DB.AddParameter("@LastName", mThisStaffMember.LastName);
-            DB.AddParameter("@Allowed", mThisStaffMember.Allowed);
             return DB.Execute("sproc_tblStaffMember_Insert");
         }
 

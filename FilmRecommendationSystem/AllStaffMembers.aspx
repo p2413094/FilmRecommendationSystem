@@ -1,4 +1,4 @@
-﻿<%@ Page Language="C#" AutoEventWireup="true" CodeFile="AllUsers.aspx.cs" Inherits="AllUsers" %>
+﻿<%@ Page Language="C#" AutoEventWireup="true" CodeBehind="AllStaffMembers.aspx.cs" Inherits="FilmRecommendationSystem.AllStaffMembers" %>
 
 <!DOCTYPE html>
 
@@ -91,6 +91,94 @@
             <br />
             <br />
             <img src="Images/Add_plus icon.png" class="allstaffmembers-add" onclick="imgAdd_Clicked()" />
+        <br />
+        <br />
+        <br />
+        <br />
+        <br />
+        <br />
+
+        <div>
+            <asp:GridView ID="grdAllStaffMembers" runat="server" AutoGenerateColumns="false" OnRowEditing="grdAllStaffMembers_RowEditing" OnRowUpdating="grdAllStaffMembers_RowUpdating" OnRowDeleting="grdAllStaffMembers_RowDeleting">
+                <Columns>
+                    <asp:TemplateField HeaderText="StaffMemberId">
+                        <ItemTemplate>
+                            <asp:Label ID="lblStaffMemberId" Text='<%#Eval("StaffMemberId")%>' runat="server"></asp:Label>
+                        </ItemTemplate>
+                    </asp:TemplateField>
+                    <asp:TemplateField HeaderText="UserId">
+                        <ItemTemplate>
+                            <asp:Label ID="lblUserId" runat="server" Text='<%# Eval("UserId") %>'></asp:Label>
+                        </ItemTemplate>
+                    </asp:TemplateField>
+                    <asp:TemplateField HeaderText="Confirmed">
+                        <ItemTemplate>
+                            <asp:Label ID="lblConfirmed" Text='<%# Eval("Confirmed") %>' runat="server"></asp:Label>
+                        </ItemTemplate>
+                    </asp:TemplateField>
+                    <asp:TemplateField HeaderText="PrivilegeLevelId">
+                        <ItemTemplate>
+                            <asp:Label ID="lblPrivilegeLevelId" Text='<%# Eval("PrivilegeLevelId") %>' runat="server"></asp:Label>
+                        </ItemTemplate>
+                        <EditItemTemplate>
+                            <asp:TextBox ID="txtPrivilegeLevelId" Text='<%# Eval("PrivilegeLevelId") %>' runat="server"></asp:TextBox>
+                        </EditItemTemplate>
+                    </asp:TemplateField>
+                    <asp:TemplateField HeaderText="FirstName">
+                        <ItemTemplate>
+                            <asp:Label ID="lblFirstName" Text='<%# Eval("FirstName") %>' runat="server"></asp:Label>
+                        </ItemTemplate>
+                        <EditItemTemplate>
+                            <asp:TextBox ID="txtFirstName" Text='<%# Eval("FirstName") %>' runat="server"></asp:TextBox>
+                        </EditItemTemplate>
+                    </asp:TemplateField>
+                    <asp:TemplateField HeaderText="LastName">
+                        <ItemTemplate>
+                            <asp:Label ID="lblLastName" Text='<%# Eval("LastName") %>' runat="server"></asp:Label>
+                        </ItemTemplate>
+                        <EditItemTemplate>
+                            <asp:TextBox ID="txtLastName" Text='<%# Eval("LastName") %>' runat="server"></asp:TextBox>
+                        </EditItemTemplate>
+                    </asp:TemplateField>
+                    <asp:TemplateField HeaderText="Suspended">
+                        <ItemTemplate>
+                            <asp:Label ID="lblAllowed" Text='<%# Eval("Allowed") %>' runat="server"></asp:Label>
+                        </ItemTemplate>
+                        <EditItemTemplate>
+                            <asp:CheckBox ID="chkAllowed" Text='<%# Eval("Allowed") %>' runat="server" />
+                        </EditItemTemplate>
+                    </asp:TemplateField>
+                    <asp:CommandField ShowEditButton="true"/>
+                    <asp:CommandField ShowDeleteButton="true" />
+                </Columns>
+            </asp:GridView>
+        </div>
+        <br />
+        <br />
+        <br />
+        <br />
+
+        <div>
+            <asp:Panel ID="Panel1" runat="server">
+                <asp:Label ID="Label4" runat="server" Text="UserId"></asp:Label>
+                <asp:TextBox ID="txtNewUserId" runat="server"></asp:TextBox>
+                <br />
+                <br />
+                <asp:Label ID="Label1" runat="server" Text="FirstName"></asp:Label>
+                <asp:TextBox ID="txtNewFirstName" runat="server"></asp:TextBox>
+                <br />
+                <br />
+                <asp:Label ID="Label2" runat="server" Text="LastName"></asp:Label>
+                <asp:TextBox ID="txtNewLastName" runat="server"></asp:TextBox>
+                <br />
+                <br />
+                <asp:Label ID="Label3" runat="server" Text="PrivilegeLevel"></asp:Label>
+                <asp:TextBox ID="txtNewPrivilegeLevel" runat="server"></asp:TextBox>
+                <br />
+                <br />
+                <asp:Button ID="btnAdd" runat="server" Text="Add" OnClick="btnAdd_Click" />
+            </asp:Panel>
+        </div>
 
         <br />
         <br />

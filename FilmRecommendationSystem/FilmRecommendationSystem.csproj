@@ -567,9 +567,15 @@
       <DependentUpon>AllStaffMembers.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
+    <Compile Include="AllStaffMembers.aspx.designer.cs">
+      <DependentUpon>AllStaffMembers.aspx</DependentUpon>
+    </Compile>
     <Compile Include="AllUsers.aspx.cs">
       <DependentUpon>AllUsers.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="AllUsers.aspx.designer.cs">
+      <DependentUpon>AllUsers.aspx</DependentUpon>
     </Compile>
     <Compile Include="App_Start\BundleConfig.cs" />
     <Compile Include="About.aspx.cs">
