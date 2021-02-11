@@ -33,6 +33,7 @@ namespace Classes
                 aUser.LockoutEnabled = DB.DataTable.Rows[index]["LockoutEnabled"].ToString();
                 aUser.LockoutEndDateUtc = DB.DataTable.Rows[index]["LockoutEndDateUtc"].ToString();
                 aUser.UserName = DB.DataTable.Rows[index]["UserName"].ToString();
+                aUser.LastLogin = Convert.ToDateTime(DB.DataTable.Rows[index]["LastLogin"]);
                 mAllUsers.Add(aUser);
                 index++;
             }

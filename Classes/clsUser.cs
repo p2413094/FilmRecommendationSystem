@@ -13,5 +13,6 @@ namespace Classes
         public bool PhoneConfirmed {get; set;}
         public string LockoutEnabled { get; set; }
         public string LockoutEndDateUtc {get; set;}
+        public DateTime LastLogin {get; set;}
     }
 }

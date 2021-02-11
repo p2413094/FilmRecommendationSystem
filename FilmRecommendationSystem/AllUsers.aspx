@@ -120,7 +120,7 @@
                     </asp:TemplateField>
                     <asp:TemplateField HeaderText="Last login">
                         <ItemTemplate>
-                            <asp:Label ID="lblLastLogin" runat="server"></asp:Label>
+                            <asp:Label ID="lblLastLogin" Text='<%#Eval("LastLogin")%>' runat="server"></asp:Label>
                         </ItemTemplate>
                     </asp:TemplateField>
                     <asp:TemplateField HeaderText="Suspended?">
