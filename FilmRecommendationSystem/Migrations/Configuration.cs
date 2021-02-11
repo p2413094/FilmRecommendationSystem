@@ -10,7 +10,6 @@
         public Configuration()
         {
             AutomaticMigrationsEnabled = false;
-            ContextKey = "FilmRecommendationSystem.Models.ApplicationDbContext";
         }
 
         protected override void Seed(FilmRecommendationSystem.Models.ApplicationDbContext context)

@@ -99,7 +99,8 @@
         <br />
 
         <div>
-            <asp:GridView ID="grdAllStaffMembers" runat="server" AutoGenerateColumns="false" OnRowEditing="grdAllStaffMembers_RowEditing" OnRowUpdating="grdAllStaffMembers_RowUpdating" OnRowDeleting="grdAllStaffMembers_RowDeleting">
+            <asp:GridView CssClass="table-management" ID="grdAllStaffMembers" runat="server" AutoGenerateColumns="false" OnRowEditing="grdAllStaffMembers_RowEditing" OnRowUpdating="grdAllStaffMembers_RowUpdating" 
+                OnRowDeleting="grdAllStaffMembers_RowDeleting">
                 <Columns>
                     <asp:TemplateField HeaderText="StaffMemberId">
                         <ItemTemplate>
@@ -148,8 +149,7 @@
                             <asp:CheckBox ID="chkAllowed" Text='<%# Eval("Allowed") %>' runat="server" />
                         </EditItemTemplate>
                     </asp:TemplateField>
-                    <asp:CommandField ShowEditButton="true"/>
-                    <asp:CommandField ShowDeleteButton="true" />
+                    <asp:CommandField ShowEditButton="true" ShowDeleteButton="true" />
                 </Columns>
             </asp:GridView>
         </div>

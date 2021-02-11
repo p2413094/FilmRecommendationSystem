@@ -30,7 +30,8 @@ namespace Classes
                 aUser.UserId = Convert.ToInt32(DB.DataTable.Rows[index]["Id"]);
                 aUser.Email = DB.DataTable.Rows[index]["Email"].ToString();
                 aUser.EmailConfirmed = DB.DataTable.Rows[index]["EmailConfirmed"].ToString();
-                aUser.Suspended = Convert.ToBoolean(DB.DataTable.Rows[index]["LockoutEnabled"]);
+                aUser.LockoutEnabled = DB.DataTable.Rows[index]["LockoutEnabled"].ToString();
+                aUser.LockoutEndDateUtc = DB.DataTable.Rows[index]["LockoutEndDateUtc"].ToString();
                 aUser.UserName = DB.DataTable.Rows[index]["UserName"].ToString();
                 mAllUsers.Add(aUser);
                 index++;

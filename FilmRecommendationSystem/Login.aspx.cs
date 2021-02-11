@@ -5,6 +5,7 @@ using System.Web;
 using System.Web.UI;
 using System.Web.UI.WebControls;
 using FilmRecommendationSystem;
+using Microsoft.AspNet.Identity;
 using Microsoft.AspNet.Identity.Owin;
 
 namespace FilmRecommendationSystem
@@ -33,10 +34,17 @@ namespace FilmRecommendationSystem
                 {
                     case SignInStatus.Success:
                         //IdentityHelper.RedirectToReturnUrl(Request.QueryString["ReturnUrl"], Response);
+
+                        var user = manager.FindByName(username);
+                        //user.LockoutEnabled = suspended;
+                        user.LockoutEndDateUtc = DateTime.Now.AddDays(3);
+                        user.LastLogin = DateTime.Now;
+                        manager.Update(user);
                         Response.Redirect("Homepage.aspx");
                         break;
                     case SignInStatus.LockedOut:
-                        Response.Redirect("/Account/Lockout");
+                        Response.Redirect("https://www.google.co.uk");
+                        //Response.Redirect("/Account/Lockout");
                         break;
                     case SignInStatus.RequiresVerification:
                         Response.Redirect(String.Format("/Account/TwoFactorAuthenticationSignIn?ReturnUrl={0}&RememberMe={1}",

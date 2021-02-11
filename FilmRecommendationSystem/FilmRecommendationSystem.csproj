@@ -649,6 +649,10 @@
     <Compile Include="Migrations\202101111857214_AddProperty.designer.cs">
       <DependentUpon>202101111857214_AddProperty.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\202102111425097_LastLogin.cs" />
+    <Compile Include="Migrations\202102111425097_LastLogin.designer.cs">
+      <DependentUpon>202102111425097_LastLogin.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\IdentityModels.cs" />
     <Compile Include="MovieRatingPrediction.cs" />
@@ -759,6 +763,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\202101111857214_AddProperty.resx">
       <DependentUpon>202101111857214_AddProperty.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202102111425097_LastLogin.resx">
+      <DependentUpon>202102111425097_LastLogin.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <ItemGroup>

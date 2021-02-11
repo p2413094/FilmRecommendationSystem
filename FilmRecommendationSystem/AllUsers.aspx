@@ -1,4 +1,4 @@
-﻿<%@ Page Language="C#" AutoEventWireup="true" CodeFile="AllUsers.aspx.cs" Inherits="AllUsers" %>
+﻿<%@ Page Language="C#" AutoEventWireup="true" CodeBehind="AllUsers.aspx.cs" Inherits="FilmRecommendationSystem.AllUsers" %>
 
 <!DOCTYPE html>
 
@@ -78,6 +78,69 @@
                 <br />
             </div>
         </section>
+
+        <br />
+        <br />
+        <br />
+        <br />
+        <br />
+
+        <div>
+            <asp:GridView ID="grdAllUsers" OnRowEditing="grdAllUsers_RowEditing" OnRowUpdating="grdAllUsers_RowUpdating" AutoGenerateColumns="false" runat="server">
+                <Columns>
+                    <asp:TemplateField HeaderText="UserId">
+                        <ItemTemplate>
+                            <asp:Label ID="lblUserId" Text='<%#Eval("UserId")%>' runat="server"></asp:Label>
+                        </ItemTemplate>
+                    </asp:TemplateField>
+                    <asp:TemplateField HeaderText="Username">
+                        <ItemTemplate>
+                            <asp:Label ID="lblUsername" Text='<%#Eval("UserName")%>' runat="server"></asp:Label>
+                        </ItemTemplate>
+                    </asp:TemplateField>
+                    <asp:TemplateField HeaderText="Email address">
+                        <ItemTemplate>
+                            <asp:Label ID="lblEmail" Text='<%#Eval("Email")%>' runat="server"></asp:Label>
+                        </ItemTemplate>
+                    </asp:TemplateField>
+                    <asp:TemplateField HeaderText="Email confirmed?">
+                        <ItemTemplate>
+                            <asp:Label ID="lblEmailConfirmed" Text='<%#Eval("EmailConfirmed")%>' runat="server"></asp:Label>
+                        </ItemTemplate>
+                    </asp:TemplateField>
+                    <asp:TemplateField HeaderText="Phone number">
+                        <ItemTemplate>
+                            <asp:Label ID="lblPhoneNumber" Text='<%#Eval("PhoneNumber")%>' runat="server"></asp:Label>
+                        </ItemTemplate>
+                    </asp:TemplateField>
+                    <asp:TemplateField HeaderText="Phone confirmed?">
+                        <ItemTemplate>
+                            <asp:Label ID="lblPhoneConfirmed" Text='<%#Eval("PhoneConfirmed")%>' runat="server"></asp:Label>
+                        </ItemTemplate>
+                    </asp:TemplateField>
+                    <asp:TemplateField HeaderText="Last login">
+                        <ItemTemplate>
+                            <asp:Label ID="lblLastLogin" runat="server"></asp:Label>
+                        </ItemTemplate>
+                    </asp:TemplateField>
+                    <asp:TemplateField HeaderText="Suspended?">
+                        <ItemTemplate>
+                            <asp:Label ID="lblSuspended" runat="server" Text='<%#Eval("LockoutEnabled")%>'></asp:Label>
+                        </ItemTemplate>
+                        <EditItemTemplate>
+                            <asp:CheckBox ID="chkSuspended" runat="server" Text='<%#Eval("LockoutEnabled")%>' />
+                        </EditItemTemplate>
+                    </asp:TemplateField>
+                    <asp:TemplateField HeaderText="Suspended end date">
+                        <ItemTemplate>
+                            <asp:Label ID="lblSuspendedEndDate" Text='<%#Eval("LockoutEndDateUtc")%>' runat="server"></asp:Label>
+                        </ItemTemplate>
+                    </asp:TemplateField>
+                    <asp:CommandField ShowEditButton="true" />
+                </Columns>
+            </asp:GridView>
+        </div>
+
 
         <br />
         <br />
