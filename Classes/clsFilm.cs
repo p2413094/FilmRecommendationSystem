@@ -1,4 +1,6 @@
 ﻿using System;
+using System.Collections.Generic;
+using Classes;
 
 namespace Classes
 {
@@ -18,18 +20,25 @@ namespace Classes
             set {mTitle = value;}
         }
 
-        public string Valid(string newFilmTitle)
+        public List<string> Valid(string title)
         {
-            string error = "";
-            if (newFilmTitle.Length > 180)
+            List<string> errorList = new List<string>();
+            clsFilmCollection AllFilms = new clsFilmCollection();
+            Boolean exists = AllFilms.FilmAlreadyExistsCheck(title);
+
+            if (title.Length > 180)
             {
-                error = "The film title must not be more than 180 characters";
+                errorList.Add("The film title must not be more than 180 characters");
             }
-            if (newFilmTitle.Length == 0)
+            if (title.Length == 0)
             {
-                error = "The film title must be more than 1 character";
+                errorList.Add("The film title must be more than 1 character");
             }
-            return error;
+            if (exists == true)
+            {
+                errorList.Add("Film already exists");
+            }
+            return errorList;
         }
 
         public bool Find(int filmId)

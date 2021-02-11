@@ -1,4 +1,4 @@
-﻿<%@ Page Language="C#" AutoEventWireup="true" CodeFile="AllFilms.aspx.cs" Inherits="AllFilms" %>
+﻿<%@ Page Language="C#" AutoEventWireup="true" CodeBehind="AllFilms.aspx.cs" Inherits="FilmRecommendationSystem.AllFilms" %>
 
 <!DOCTYPE html>
 
@@ -84,10 +84,64 @@
             <br />
             <br />
             <img src="Images/Add_plus icon.png" class="allstaffmembers-add" onclick="imgAdd_Clicked()" />
+            <br />
+            <br />
+            <br />
+            <br />
+            <br />
+            <asp:Panel ID="Panel1" runat="server"></asp:Panel>
+            <br />
+            <br />
+            <br />
+            <br />
+
+            <asp:GridView ID="grdAllFilms" AllowPaging="true" OnRowEditing="grdAllFilms_RowEditing" OnRowUpdating="grdAllFilms_RowUpdating" AutoGenerateColumns="false" runat="server">
+                <Columns>
+                    <asp:TemplateField HeaderText="FilmId">
+                        <ItemTemplate>
+                            <asp:Label ID="lblFilmId" Text='<%#Eval("FilmId")%>' runat="server"></asp:Label>
+                        </ItemTemplate>
+                    </asp:TemplateField>
+                    <asp:TemplateField HeaderText="Title">
+                        <ItemTemplate>
+                            <asp:Label ID="lblTitle" Text='<%#Eval("Title")%>' runat="server"></asp:Label>
+                        </ItemTemplate>
+                        <EditItemTemplate>
+                            <asp:TextBox ID="txtTitle" Text='<%#Eval("Title")%>' runat="server"></asp:TextBox>
+                        </EditItemTemplate>
+                    </asp:TemplateField>
+                    <asp:CommandField ShowEditButton="true" />
+                </Columns>
+            </asp:GridView>
+
+            <br />
+            <br />
+            <br />
+            <br />
+            <br />
+            <br />
+
+        <div>
+            <asp:Panel ID="Panel2" runat="server">
+                <asp:Label ID="Label3" runat="server" Text="Title"></asp:Label>
+                <asp:TextBox ID="txtNewTitle" runat="server"></asp:TextBox>
+                <br />
+                <br />
+                <asp:Button ID="btnAdd" runat="server" Text="Add" OnClick="btnAdd_Click" />
+            </asp:Panel>
+        </div>
             
             <br />
             <br />
             <br />
+            <br />
+            <br />
+            <br />
+            <br />
+            <br />
+
+
+
 
             <div>
                 <table>

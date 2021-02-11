@@ -563,6 +563,9 @@
       <DependentUpon>AllFilms.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
+    <Compile Include="AllFilms.aspx.designer.cs">
+      <DependentUpon>AllFilms.aspx</DependentUpon>
+    </Compile>
     <Compile Include="AllStaffMembers.aspx.cs">
       <DependentUpon>AllStaffMembers.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
