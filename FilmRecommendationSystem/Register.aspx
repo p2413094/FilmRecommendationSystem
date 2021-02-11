@@ -125,6 +125,10 @@
                 <div class="textentry-field">
                     <asp:TextBox ID="txtPasswordConfirmation" TextMode="Password" runat="server" CssClass="textentry-fieldsize"></asp:TextBox>
                     <asp:RequiredFieldValidator ControlToValidate="txtPasswordConfirmation" ID="RequiredFieldValidator1" runat="server" ErrorMessage="Password must match the previous"></asp:RequiredFieldValidator>
+                    <br />
+                    <br />
+                    <asp:CompareValidator runat="server" ControlToCompare="txtPassword" ControlToValidate="txtPasswordConfirmation" Display="Dynamic" 
+                        ErrorMessage="The two passwords do not match!"></asp:CompareValidator>
                 </div>
             </div>
             

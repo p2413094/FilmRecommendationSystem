@@ -1,4 +1,4 @@
-﻿<%@ Page Language="C#" AutoEventWireup="true" CodeFile="ResetPassword.aspx.cs" Inherits="ResetPassword" %>
+﻿<%@ Page Language="C#" AutoEventWireup="true" CodeBehind="ResetPassword.aspx.cs" Inherits="FilmRecommendationSystem.ResetPassword" %>
 
 <!DOCTYPE html>
 
@@ -51,9 +51,8 @@
         <br />
         <br />
         <div class="account">
-            <p class="page-header">
-                Reset password
-            </p>
+            <p class="page-header">Reset password</p>
+
             <br />
             <br />
             <br />
@@ -61,41 +60,64 @@
             <br />
             <br />
             <br />
+            <asp:Label ID="lblError" runat="server"></asp:Label>
             <br />
-            <div>
-                Enter in a new password and then confirm it. 
-            </div>
+            <br />
             <br />
             <br />
 
-            <div>
-                <div class="textentry-label">
-                New password
-                </div>
+            
+            <div class="register-section">
+                <asp:Label runat="server" AssociatedControlID="txtEmailAddress" CssClass="textentry-label">Email address</asp:Label>
                 <div class="textentry-field">
-                    <input type="password" class="textentry-fieldsize">
-                </div>
-                <br />
-                <br />
-                <br />
-
-                <div class="textentry-label">
-                    Confirm password
-                </div>
-                <div class="textentry-field">
-                    <input type="password" class="textentry-fieldsize" />
-                    <br />
-                    <br />
-                    <br />
-                    <button type="button" onclick="SavePassword()" class="okbutton" id="btnLogin">Save new password</button>
-                    <br />
-                    <br />
-                    
+                    <asp:TextBox runat="server" placeholder="ellenripley86@sulaco.com" ID="txtEmailAddress" TextMode="Email"  CssClass="textentry-fieldsize"></asp:TextBox>
+                    <asp:RequiredFieldValidator runat="server" ControlToValidate="txtEmailAddress" ID="RequiredFieldValidator2"  ErrorMessage="RequiredFieldValidator"></asp:RequiredFieldValidator>
                 </div>
             </div>
-            <br />
-        </div>
+            
+            <div class="register-section-password">
+                <asp:Label ID="lblPassword" runat="server" AssociatedControlID="txtPassword" Text="Password" CssClass="textentry-label"></asp:Label>
+                <div class="textentry-field">
+                    <asp:TextBox ID="txtPassword" TextMode="Password" runat="server" CssClass="textentry-fieldsize"></asp:TextBox>
+                    <br />
+                    <div class="italiscised">
+                        Password must:
+                        <br />
+                        &#8226; be a minimum of 8 characters
+                        <br />
+                        &#8226; have uppercase letters
+                        <br />
+                        &#8226; have lowercase letters
+                        <br />
+                        &#8226; contain numbers
+                        <br />
+                        <br />
+                    </div>
+                    <asp:RequiredFieldValidator ControlToValidate="txtPassword" ID="rqValPassword" runat="server" ErrorMessage="Password does not comply with above."></asp:RequiredFieldValidator>
+                </div>
+            </div>
+            
+            <div class="register-section">
+                <asp:Label ID="lblConfirmPassword" runat="server" AssociatedControlID="txtPasswordConfirmation" Text="Confirm password" CssClass="textentry-label"></asp:Label>
+                <div class="textentry-field">
+                    <asp:TextBox ID="txtPasswordConfirmation" TextMode="Password" runat="server" CssClass="textentry-fieldsize"></asp:TextBox>
+                    <asp:RequiredFieldValidator ControlToValidate="txtPasswordConfirmation" ID="RequiredFieldValidator1" runat="server" ErrorMessage="Password must match the previous"></asp:RequiredFieldValidator>
+                    <br />
+                    <br />
+                    <asp:CompareValidator runat="server" ControlToCompare="txtPassword" ControlToValidate="txtPasswordConfirmation" Display="Dynamic" 
+                        ErrorMessage="The two passwords do not match!"></asp:CompareValidator>
+                </div>
+            </div>
+            
+            <div class="register-section">
+                <div class="textentry-label"></div>
+                <div class="textentry-field">
+                    <p style="font-style: italic;">By creating an account, you acknowledge our privacy statement.</p>
+                    <asp:Button ID="btnResetPassword" OnClick="btnResetPassword_Click" runat="server" Text="Reset password" CssClass="registerbutton" />
+                </div>
+            </div>
 
+        </div>      
         <div class="footer">
             <div class="links">
                 Help

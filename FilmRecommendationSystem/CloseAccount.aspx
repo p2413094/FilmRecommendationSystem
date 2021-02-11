@@ -122,7 +122,7 @@
             </div>
             <br />
             <br />
-            <button type="button" onclick="QuestionDeleteAccount()" class="deleteaccountbutton" id="btnLogin">DELETE MY ACCOUNT</button>
+            <asp:Button ID="btnDeleteAccount" OnClick="btnDeleteAccount_Click" class="deleteaccountbutton" runat="server" Text="DELETE MY ACCOUNT" />
             
             <button type="button" onclick="KeepMyAccount()" class="keepmyaccountbutton">KEEP MY ACCOUNT</button>
         </div>

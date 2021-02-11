@@ -102,7 +102,7 @@
                     <br />
                     <button type="button" class="okbutton" onclick="btnLoginAdmin_Click()">Administrator log in</button>
                     <br />
-                    <a href="ForgottenResetPassword.aspx">Forgot/ need to reset password?</a>
+                    <a href="ResetPassword.aspx">Forgot/ need to reset password?</a>
                 </div>
             </div>
             <br />
