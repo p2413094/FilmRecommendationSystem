@@ -49,7 +49,19 @@
         <br />
         <br />
         <br />
+        <asp:Panel ID="pnlError" runat="server">
+                <label class="page-subheader">Error</label>
+                <br />
+                <br />
+                There was an error fulfilling your request; please try again later.
+                <br />
+                <br />
+                <br />
+                <button type="button" id="btnReturnToHomepage" onclick="btnReturnToHomepage_Click()" class="registerbutton">Ok</button>
+        </asp:Panel>
 
+
+        <asp:Panel ID="pnlFilmInformation" runat="server">
         <div class="film">
             <div class="header">
                 <asp:Label ID="lblTitle" runat="server"></asp:Label>
@@ -136,6 +148,9 @@
                 <asp:Panel ID="Panel1" runat="server"></asp:Panel>
             </div>
         </div>
+
+        </asp:Panel>
+
         <br />
         <br />
 
@@ -153,6 +168,9 @@
         </div>
 
         <script type="text/javascript">
+            function btnReturnToHomepage_Click() {
+                location.href = "Homepage.aspx";
+            }
             function imgWatchLaterClick() {
                     document.getElementById("imgWatchLater").src = "Images/WatchLaterAdded.png";
             }

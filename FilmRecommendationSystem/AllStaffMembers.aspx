@@ -99,6 +99,19 @@
         <br />
 
         <div>
+            <asp:Panel ID="pnlError" runat="server">
+                <label class="page-subheader">Error</label>
+                <br />
+                <br />
+                There was an error fulfilling your request; please try again later.
+                <br />
+                <br />
+                <br />
+                <button type="button" id="btnReturnToHomepage" onclick="btnReturnToHomepage_Click()" class="registerbutton">Ok</button>
+            </asp:Panel>
+        </div>
+
+        <asp:Panel ID="pnlAllStaffMembers" runat="server">
             <asp:GridView CssClass="table-management" ID="grdAllStaffMembers" runat="server" AutoGenerateColumns="false" OnRowEditing="grdAllStaffMembers_RowEditing" OnRowUpdating="grdAllStaffMembers_RowUpdating" 
                 OnRowDeleting="grdAllStaffMembers_RowDeleting">
                 <Columns>
@@ -130,7 +143,7 @@
                             <asp:Label ID="lblFirstName" Text='<%# Eval("FirstName") %>' runat="server"></asp:Label>
                         </ItemTemplate>
                         <EditItemTemplate>
-                            <asp:TextBox ID="txtFirstName" Text='<%# Eval("FirstName") %>' runat="server"></asp:TextBox>
+                            <asp:TextBox ID="TextBox1" Text='<%# Eval("FirstName") %>' runat="server"></asp:TextBox>
                         </EditItemTemplate>
                     </asp:TemplateField>
                     <asp:TemplateField HeaderText="LastName">
@@ -138,7 +151,7 @@
                             <asp:Label ID="lblLastName" Text='<%# Eval("LastName") %>' runat="server"></asp:Label>
                         </ItemTemplate>
                         <EditItemTemplate>
-                            <asp:TextBox ID="txtLastName" Text='<%# Eval("LastName") %>' runat="server"></asp:TextBox>
+                            <asp:TextBox ID="TextBox2" Text='<%# Eval("LastName") %>' runat="server"></asp:TextBox>
                         </EditItemTemplate>
                     </asp:TemplateField>
                     <asp:TemplateField HeaderText="Suspended">
@@ -152,7 +165,7 @@
                     <asp:CommandField ShowEditButton="true" ShowDeleteButton="true" />
                 </Columns>
             </asp:GridView>
-        </div>
+        </asp:Panel>
         <br />
         <br />
         <br />
@@ -288,6 +301,10 @@
 
             function onLoad() {
                 document.getElementById("rowAdd").style.visibility = "hidden";
+            }
+
+            function btnReturnToHomepage_Click() {
+                location.href = "Homepage.aspx";
             }
 
             function imgAdd_Clicked() {

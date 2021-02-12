@@ -1,14 +1,11 @@
-﻿<%@ Page Language="C#" AutoEventWireup="true" CodeFile="MyAccount.aspx.cs" Inherits="MyAccount" %>
+﻿<%@ Page Language="C#" AutoEventWireup="true" CodeBehind="MyAccount.aspx.cs" Inherits="FilmRecommendationSystem.MyAccount" %>
 
 <!DOCTYPE html>
-
 <html xmlns="http://www.w3.org/1999/xhtml">
-
 <head runat="server">
     <title>Film recommender | My account</title>
     <link rel="stylesheet" href="StyleSheet.css" />
 </head>
-
 
 <body class="body">
     <form runat="server">
@@ -104,14 +101,25 @@
         <br />
         <br />
 
+        <asp:Panel ID="pnlError" runat="server">
+            <label class="page-subheader">Error</label>
+                <br />
+                <br />
+                There was an error fulfilling your request; please try again later.
+                <br />
+                <br />
+                <br />
+                <button type="button" id="btnReturnToHomepage" onclick="btnReturnToHomepage_Click()" class="registerbutton">Ok</button>
+        </asp:Panel>
 
-        <div class="myaccount">
+
+        <asp:Panel ID="pnlMyAccount" CssClass="myaccount" runat="server">
             <section>
                 <p class="header">Account details</p>
 
                 <div>
                     <div class="section-container">
-                        Email address: EllenRipley57
+                        Email address:<asp:Label ID="lblEmailAddress" runat="server"></asp:Label>
                     </div>
                 </div>
                 <br />
@@ -137,16 +145,17 @@
 
                 <div>
                     <div class="section-container">
-                        Last login: 11:38, 20/09/20
+                        Last login: <asp:Label ID="lblLastLogin" runat="server"></asp:Label>
                     </div>
                 </div>
             </section>
-        </div>
-        
-        <br />
-        <br />
-        <button type="button" id="btnCloseAccount" onclick="btnCloseAccount_Click()"  class="closeaccountbutton">CLOSE ACCOUNT</button>
-        <br />
+            <br />
+            <br />
+            <button type="button" id="btnCloseAccount" onclick="btnCloseAccount_Click()"  class="closeaccountbutton">CLOSE ACCOUNT</button>
+            <br />
+        </asp:Panel>
+
+
 
         <div class="footer">
             <div class="links">
@@ -162,8 +171,12 @@
         </div>
 
         <script>
+            function btnReturnToHomepage_Click() {
+                location.href = "Homepage.aspx";
+            }
+
             function imgChangePassword_Click() {
-                    location.href = "ForgottenResetPassword.aspx";
+                    location.href = "ResetPassword.aspx";
             }
 
             function btnCloseAccount_Click() {

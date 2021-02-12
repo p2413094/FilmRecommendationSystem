@@ -97,9 +97,21 @@
         <br />
         <br />
             
-         <div>
+            <asp:Panel ID="pnlError" runat="server">
+                <label class="page-subheader">Error</label>
+                <br />
+                <br />
+                There was an error fulfilling your request; please try again later.
+                <br />
+                <br />
+                <br />
+                <button type="button" id="btnReturnToHomepage" onclick="btnReturnToHomepage_Click()" class="registerbutton">Ok</button>
+        </asp:Panel>
+
+
+         <asp:Panel ID="pnlAllPreviousStaffMembers" runat="server">
              <asp:GridView ID="grdPreviousStaffMembers" runat="server"></asp:GridView>
-         </div>
+        </asp:Panel>
          
             <br />
             <br />
@@ -118,7 +130,11 @@
             </div>
         </div>
 
-        <script>                 
+        <script>        
+            function btnReturnToHomepage_Click() {
+                location.href = "Homepage.aspx";
+            }
+
             /* When the user clicks on the button,
             toggle between hiding and showing the dropdown content */
             function myFunction() {

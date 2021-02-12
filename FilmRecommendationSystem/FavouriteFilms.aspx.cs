@@ -13,6 +13,7 @@ namespace FilmRecommendationSystem
     {
         protected void Page_Load(object sender, EventArgs e)
         {
+            pnlError.Visible = false;
             pnlFavouriteFilms.Visible = false;
             Int32 userId = 1; //Request.QueryString["UserId"];
             DisplayFavouriteFilms(userId);
@@ -20,17 +21,25 @@ namespace FilmRecommendationSystem
         
         void DisplayFavouriteFilms(Int32 userId)
         {
-            clsDataConnection DB = new clsDataConnection();
-            DB.AddParameter("@UserId", userId);
-            DB.Execute("sproc_tblFavouriteFilms_FilterByUserId");
-            Int32 recordCount = DB.Count;
-            Int32 index = 0;
-            Int32 filmId = 0;
-            while (index < recordCount)
+            try
             {
-                filmId = Convert.ToInt32(DB.DataTable.Rows[index]["FilmId"]);
-                GetImdbInformation(filmId);
-                index++;
+                clsDataConnection DB = new clsDataConnection();
+                DB.AddParameter("@UserId", userId);
+                DB.Execute("sproc_tblFavouriteFilms_FilterByUserId");
+                Int32 recordCount = DB.Count;
+                Int32 index = 0;
+                Int32 filmId = 0;
+                while (index < recordCount)
+                {
+                    filmId = Convert.ToInt32(DB.DataTable.Rows[index]["FilmId"]);
+                    GetImdbInformation(filmId);
+                    index++;
+                }
+                pnlFavouriteFilms.Visible = true;
+            }
+            catch
+            {
+                pnlError.Visible = true;
             }
         }
 
@@ -72,11 +81,10 @@ namespace FilmRecommendationSystem
             ImageButton newClickableImage = new ImageButton();
             newClickableImage.ImageUrl = filmInfoReturned.Poster;
             newClickableImage.PostBackUrl = "FilmInformation.aspx?ImdbId=" + newImdbId;
-
             newClickableImage.CssClass = "image";
+
             pnlFavouriteFilms.Controls.Add(newClickableImage);
             pnlFavouriteFilms.Visible = true;
         }
-
     }
 }

@@ -79,13 +79,32 @@
             </div>
         </section>
 
+        <div class="account">
+            <p class="page-header">
+                All users 
+            </p>
+            <br />
+            <br />
+            
+            <asp:Panel ID="pnlError" runat="server">
+                <label class="page-subheader">Error</label>
+                <br />
+                <br />
+                There was an error fulfilling your request; please try again later.
+                <br />
+                <br />
+                <br />
+                <button type="button" id="btnReturnToHomepage" onclick="btnReturnToHomepage_Click()" class="registerbutton">Ok</button>
+            </asp:Panel>
+        </div>
+
         <br />
         <br />
         <br />
         <br />
         <br />
 
-        <div>
+        <asp:Panel ID="pnlAllUsers" runat="server">
             <asp:GridView ID="grdAllUsers" OnRowEditing="grdAllUsers_RowEditing" OnRowUpdating="grdAllUsers_RowUpdating" AutoGenerateColumns="false" runat="server">
                 <Columns>
                     <asp:TemplateField HeaderText="UserId">
@@ -139,21 +158,16 @@
                     <asp:CommandField ShowEditButton="true" />
                 </Columns>
             </asp:GridView>
-        </div>
+        </asp:Panel>
+        
 
+        <br />
+        <br />
+        <br />
+        <br />
+        <br />
 
-        <br />
-        <br />
-        <br />
-        <br />
-        <br />
-        <div class="account">
-            <p class="page-header">
-                All users 
-            </p>
-
-            <div>
-                <table>
+                        <table>
                     <tr>
                         <th id="Username">Username</th>
                         <th id="Email">Email</th>
@@ -190,11 +204,7 @@
                     </tr>
                 
                 </table>
-            </div>
-         
-            <br />
-            <br />
-        </div>
+
 
         <div class="footer">
             <div class="links">
@@ -210,6 +220,9 @@
         </div>
 
         <script>
+            function btnReturnToHomepage_Click() {
+                location.href = "Homepage.aspx";
+            }
          function SuspendUserAccount() {
                 var confirmMessage = confirm("Suspend user account?");
                 if (confirmMessage == true) {

@@ -13,6 +13,7 @@ namespace FilmRecommendationSystem
     {
         protected void Page_Load(object sender, EventArgs e)
         {
+            pnlError.Visible = false;
             pnlRecommendations.Visible = false;
             Int32 userId = 1;
             DisplayRecommendedFilms(userId);
@@ -20,17 +21,26 @@ namespace FilmRecommendationSystem
         
         void DisplayRecommendedFilms(Int32 userId)
         {
-            clsDataConnection DB = new clsDataConnection();
-            DB.AddParameter("@UserId", userId);
-            DB.Execute("sproc_tblFilmRecommendation_FilterByUserId");
-            Int32 recordCount = DB.Count;
-            Int32 index = 0;
-            Int32 filmId = 0;
-            while (index < recordCount)
+            try
             {
-                filmId = Convert.ToInt32(DB.DataTable.Rows[index]["FilmId"]);
-                GetImdbInformation(filmId);
-                index++;
+                clsDataConnection DB = new clsDataConnection();
+                DB.AddParameter("@UserId", userId);
+                DB.Execute("sproc_tblFilmRecommendation_FilterByUserId");
+                Int32 recordCount = DB.Count;
+                Int32 index = 0;
+                Int32 filmId = 0;
+                while (index < recordCount)
+                {
+                    filmId = Convert.ToInt32(DB.DataTable.Rows[index]["FilmId"]);
+                    GetImdbInformation(filmId);
+                    index++;
+                }
+
+                pnlRecommendations.Visible = true;
+            }
+            catch
+            {
+                pnlError.Visible = true;
             }
         }
         

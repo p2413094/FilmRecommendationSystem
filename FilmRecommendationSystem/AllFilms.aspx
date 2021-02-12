@@ -95,24 +95,46 @@
             <br />
             <br />
 
-            <asp:GridView ID="grdAllFilms" AllowPaging="true" OnRowEditing="grdAllFilms_RowEditing" OnRowUpdating="grdAllFilms_RowUpdating" AutoGenerateColumns="false" runat="server">
-                <Columns>
-                    <asp:TemplateField HeaderText="FilmId">
-                        <ItemTemplate>
-                            <asp:Label ID="lblFilmId" Text='<%#Eval("FilmId")%>' runat="server"></asp:Label>
-                        </ItemTemplate>
-                    </asp:TemplateField>
-                    <asp:TemplateField HeaderText="Title">
-                        <ItemTemplate>
-                            <asp:Label ID="lblTitle" Text='<%#Eval("Title")%>' runat="server"></asp:Label>
-                        </ItemTemplate>
-                        <EditItemTemplate>
-                            <asp:TextBox ID="txtTitle" Text='<%#Eval("Title")%>' runat="server"></asp:TextBox>
-                        </EditItemTemplate>
-                    </asp:TemplateField>
-                    <asp:CommandField ShowEditButton="true" />
-                </Columns>
-            </asp:GridView>
+        <div>
+            <asp:Panel ID="pnlError" runat="server">
+                <label class="page-subheader">Error</label>
+                <br />
+                <br />
+                There was an error fulfilling your request; please try again later.
+                <br />
+                <br />
+                <br />
+                <button type="button" id="btnReturnToHomepage" onclick="btnReturnToHomepage_Click()" class="registerbutton">Ok</button>
+            </asp:Panel>
+        </div>
+
+
+            <br />
+            <br />
+            <br />
+            <br />
+
+
+            <asp:Panel ID="pnlAllFilms" runat="server">
+                <asp:GridView ID="grdAllFilms" AllowPaging="true" OnRowEditing="grdAllFilms_RowEditing" OnRowUpdating="grdAllFilms_RowUpdating" AutoGenerateColumns="false" runat="server">
+                    <Columns>
+                        <asp:TemplateField HeaderText="FilmId">
+                            <ItemTemplate>
+                                <asp:Label ID="lblFilmId" Text='<%#Eval("FilmId")%>' runat="server"></asp:Label>
+                            </ItemTemplate>
+                        </asp:TemplateField>
+                        <asp:TemplateField HeaderText="Title">
+                            <ItemTemplate>
+                                <asp:Label ID="lblTitle" Text='<%#Eval("Title")%>' runat="server"></asp:Label>
+                            </ItemTemplate>
+                            <EditItemTemplate>
+                                <asp:TextBox ID="txtTitle" Text='<%#Eval("Title")%>' runat="server"></asp:TextBox>
+                            </EditItemTemplate>
+                        </asp:TemplateField>
+                        <asp:CommandField ShowEditButton="true" />
+                    </Columns>
+                </asp:GridView>
+            </asp:Panel>
 
             <br />
             <br />
@@ -139,9 +161,6 @@
             <br />
             <br />
             <br />
-
-
-
 
             <div>
                 <table>
@@ -232,6 +251,10 @@
 
             function onLoad() {
                 document.getElementById("rowAdd").style.visibility = "hidden";
+            }
+
+            function btnReturnToHomepage_Click() {
+                location.href = "Homepage.aspx";
             }
                           
             function imgAdd_Clicked() {

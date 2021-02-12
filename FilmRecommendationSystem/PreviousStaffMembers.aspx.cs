@@ -12,9 +12,21 @@ namespace FilmRecommendationSystem
     {
         protected void Page_Load(object sender, EventArgs e)
         {
-            clsPreviousStaffMembersCollection AllPreviousStaffMembers = new clsPreviousStaffMembersCollection();
-            grdPreviousStaffMembers.DataSource = AllPreviousStaffMembers.AllPreviousStaffMembers;
-            grdPreviousStaffMembers.DataBind();
+            pnlError.Visible = false;
+            pnlAllPreviousStaffMembers.Visible = false;
+
+            try
+            {
+                clsPreviousStaffMembersCollection AllPreviousStaffMembers = new clsPreviousStaffMembersCollection();
+                grdPreviousStaffMembers.DataSource = AllPreviousStaffMembers.AllPreviousStaffMembers;
+                grdPreviousStaffMembers.DataBind();
+
+                pnlAllPreviousStaffMembers.Visible = true;
+            }
+            catch
+            {
+                pnlError.Visible = true;
+            }
         }
     }
 }

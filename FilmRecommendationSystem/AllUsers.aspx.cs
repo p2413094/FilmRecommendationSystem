@@ -14,6 +14,7 @@ namespace FilmRecommendationSystem
     {
         protected void Page_Load(object sender, EventArgs e)
         {
+            pnlError.Visible = false;
             if (!IsPostBack)
             {
                 LoadData();
@@ -22,9 +23,16 @@ namespace FilmRecommendationSystem
 
         protected void LoadData()
         {
-            clsUserCollection AllUsers = new clsUserCollection();
-            grdAllUsers.DataSource = AllUsers.AllUsers;
-            grdAllUsers.DataBind();
+            try
+            {
+                clsUserCollection AllUsers = new clsUserCollection();
+                grdAllUsers.DataSource = AllUsers.AllUsers;
+                grdAllUsers.DataBind();
+            }
+            catch
+            {
+                pnlError.Visible = true;
+            }
         }
 
         protected void grdAllUsers_RowEditing(object sender, GridViewEditEventArgs e)

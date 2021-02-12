@@ -11,7 +11,7 @@ namespace FilmRecommendationSystem
 {
 
 
-    public partial class AllUsers
+    public partial class MyAccount
     {
 
         /// <summary>
@@ -24,21 +24,30 @@ namespace FilmRecommendationSystem
         protected global::System.Web.UI.WebControls.Panel pnlError;
 
         /// <summary>
-        /// pnlAllUsers control.
+        /// pnlMyAccount control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Panel pnlAllUsers;
+        protected global::System.Web.UI.WebControls.Panel pnlMyAccount;
 
         /// <summary>
-        /// grdAllUsers control.
+        /// lblEmailAddress control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.GridView grdAllUsers;
+        protected global::System.Web.UI.WebControls.Label lblEmailAddress;
+
+        /// <summary>
+        /// lblLastLogin control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Label lblLastLogin;
     }
 }

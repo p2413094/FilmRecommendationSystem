@@ -14,6 +14,8 @@ namespace FilmRecommendationSystem
     {
         protected void Page_Load(object sender, EventArgs e)
         {
+            pnlError.Visible = false;
+            pnlFilmInformation.Visible = false;
             string imdbId; //= Request.QueryString["imdbId"];
             imdbId = "tt0360717";
 
@@ -27,17 +29,26 @@ namespace FilmRecommendationSystem
             request.AddHeader("x-rapidapi-key", "2951edd025mshf1b0f9ca8a52c6ap1e71e9jsn67c827bdd770");
             request.AddHeader("x-rapidapi-host", "movie-database-imdb-alternative.p.rapidapi.com");
             IRestResponse response = client.Execute(request);
-            clsIMDBApi filmInfoReturned = new clsIMDBApi();
-            filmInfoReturned = Newtonsoft.Json.JsonConvert.DeserializeObject<clsIMDBApi>(response.Content);
 
-            imgFilmPoster.ImageUrl = filmInfoReturned.Poster;
-            lblTitle.Text = filmInfoReturned.Title + " (" + filmInfoReturned.Year + ")";
-            lblPlot.Text = filmInfoReturned.Plot;
-            lblGenre.Text = filmInfoReturned.Genre;
-            lblAgeRating.Text = filmInfoReturned.Rated;
-            lblDirector.Text = filmInfoReturned.Director;
-            lblRuntime.Text = filmInfoReturned.Runtime;
-            lblReleased.Text = filmInfoReturned.Released;
+            if (response.Content.Contains("False"))
+            {
+                pnlError.Visible = true;
+            }
+            else
+            {
+                clsIMDBApi filmInfoReturned = new clsIMDBApi();
+                filmInfoReturned = Newtonsoft.Json.JsonConvert.DeserializeObject<clsIMDBApi>(response.Content);
+                imgFilmPoster.ImageUrl = filmInfoReturned.Poster;
+                lblTitle.Text = filmInfoReturned.Title + " (" + filmInfoReturned.Year + ")";
+                lblPlot.Text = filmInfoReturned.Plot;   
+                lblGenre.Text = filmInfoReturned.Genre;
+                lblAgeRating.Text = filmInfoReturned.Rated;
+                lblDirector.Text = filmInfoReturned.Director;
+                lblRuntime.Text = filmInfoReturned.Runtime;
+                lblReleased.Text = filmInfoReturned.Released;
+
+                pnlFilmInformation.Visible = true;
+            }
         }
     }
 }

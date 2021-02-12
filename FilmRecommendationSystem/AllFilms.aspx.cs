@@ -10,18 +10,25 @@ namespace FilmRecommendationSystem
 {
     public partial class AllFilms : System.Web.UI.Page
     {
-        clsFilmCollection AllFilmsInDatabase = new clsFilmCollection();
-
         protected void Page_Load(object sender, EventArgs e)
         {
+            pnlError.Visible = false;
             LoadData();
         }
 
         void LoadData()
         {
-            AllFilmsInDatabase = new clsFilmCollection();
-            grdAllFilms.DataSource = AllFilmsInDatabase.AllFilms;
-            grdAllFilms.DataBind();
+            try
+            {
+                clsFilmCollection AllFilmsInDatabase = new clsFilmCollection();
+                AllFilmsInDatabase = new clsFilmCollection();
+                grdAllFilms.DataSource = AllFilmsInDatabase.AllFilms;
+                grdAllFilms.DataBind();
+            }
+            catch
+            {
+                pnlError.Visible = true;
+            }
         }
 
         protected void grdAllFilms_RowEditing(object sender, GridViewEditEventArgs e)
@@ -32,6 +39,7 @@ namespace FilmRecommendationSystem
 
         protected void grdAllFilms_RowUpdating(object sender, GridViewUpdateEventArgs e)
         {
+            clsFilmCollection AllFilmsInDatabase = new clsFilmCollection();
             string title = ((TextBox)grdAllFilms.Rows[e.RowIndex].FindControl("txtTitle")).Text;
 
             AllFilmsInDatabase = new clsFilmCollection();
@@ -46,6 +54,7 @@ namespace FilmRecommendationSystem
 
         protected void btnAdd_Click(object sender, EventArgs e)
         {
+            clsFilmCollection AllFilmsInDatabase = new clsFilmCollection();
             string title = txtNewTitle.Text;
             AllFilmsInDatabase = new clsFilmCollection();
             

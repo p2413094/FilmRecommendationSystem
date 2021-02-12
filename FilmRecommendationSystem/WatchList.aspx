@@ -99,7 +99,18 @@
         <br />
         <br />
 
-        <div>
+        <asp:Panel ID="pnlError" runat="server">
+            <label class="page-subheader">Error</label>
+                <br />
+                <br />
+                There was an error fulfilling your request; please try again later.
+                <br />
+                <br />
+                <br />
+                <button type="button" id="btnReturnToHomepage" onclick="btnReturnToHomepage_Click()" class="registerbutton">Ok</button>
+        </asp:Panel>
+
+
             <asp:Panel ID="pnlWatchList" runat="server" CssClass="watchlist">
                 <div id="filmToBeRemoved" class="newwatchlist">
                     <img src="Images/The World's End.jpg" class="image" />
@@ -107,9 +118,7 @@
                         <img id="imgRemove" onclick="imgRemoveClick()" class="watchlatericon" src="Images/Remove.png" />
                     </div>
                 </div>
-            </asp:Panel>
-        </div>
-        
+            </asp:Panel>        
 
         <div class="footer">
             <div class="links">
@@ -125,6 +134,10 @@
         </div>
 
         <script>
+            function btnReturnToHomepage_Click() {
+                location.href = "Homepage.aspx";
+            }
+
             /* When the user clicks on the button,
             toggle between hiding and showing the dropdown content */
             function myFunction() {
