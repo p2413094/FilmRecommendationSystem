@@ -13,6 +13,8 @@ namespace FilmRecommendationSystem
 {
     public partial class Homepage : System.Web.UI.Page
     {
+        clsFilmCollection AllFilms = new clsFilmCollection();
+
         protected void Page_Load(object sender, EventArgs e)
         {
             if (IsPostBack == false)
@@ -21,9 +23,64 @@ namespace FilmRecommendationSystem
                 //GenerateRecommendations(4);
                 //GenerateTemporaryRecommendations();
                 pnlRecommendations.Visible = false;
+
+                //AllFilms = new clsFilmCollection();
             }
         }
 
+        public static List<string> SearchFilms(string prefixTest, int count)
+        {
+            clsFilmCollection AllFilms = new clsFilmCollection();
+            List<string> filmTitles = new List<string>();
+            foreach (clsFilm aFilm in AllFilms.AllFilms)
+            {
+                if (aFilm.Title.Contains(prefixTest))
+                {
+                    filmTitles.Add(aFilm.Title);
+                }
+            }
+            return filmTitles;
+        }
+        
+        protected void btnSearch_Click(object sender, EventArgs e)
+        {
+            //AllFilms = new clsFilmCollection();
+            //string title = txtSearch.Text.ToLower();
+            //string originalTitle;
+            //foreach (clsFilm aFilm in AllFilms.AllFilms)
+            //{
+            //    originalTitle = aFilm.Title.ToLower();
+            //    if (originalTitle.Contains(title))
+            //    {
+            //        Label lbl1 = new Label();
+            //        lbl1.Text = aFilm.Title;
+                    
+            //        Panel2.Controls.Add(lbl1);
+            //        ListBox1.Items.Add(aFilm.Title);
+            //    }
+            //}
+            
+        }
+
+        protected void txtSearch_TextChanged(object sender, EventArgs e)
+        {
+            clsDataConnection DB = new clsDataConnection();
+            DB.AddParameter("@Title", txtSearch.Text);
+            DB.Execute("sproc_tblFilm_FilterByTitle");
+            Int32 recordCount = DB.Count;
+            Int32 index = 0;
+            string filmTitle;
+            while (index < recordCount)
+            {
+                filmTitle = Convert.ToString(DB.DataTable.Rows[index]["Title"]);
+                newList.Add(filmTitle);
+                index++;
+            }
+            GridView1.DataSource = newList;
+            GridView1.DataBind();
+        }
+
+       
         protected void btnGetRecommendations_Click(object sender, EventArgs e)
         {
             Int32 genreId = Convert.ToInt32(ddlGenres.SelectedValue);
@@ -173,23 +230,5 @@ namespace FilmRecommendationSystem
 
         
         List<string> newList = new List<string>();
-
-        protected void txtSearch_TextChanged(object sender, EventArgs e)
-        {
-            clsDataConnection DB = new clsDataConnection();
-            DB.AddParameter("@Title", txtSearch.Text);
-            DB.Execute("sproc_tblFilm_FilterByTitle");
-            Int32 recordCount = DB.Count;
-            Int32 index = 0;
-            string filmTitle;
-            while (index < recordCount)
-            {
-                filmTitle = Convert.ToString(DB.DataTable.Rows[index]["Title"]);
-                newList.Add(filmTitle);
-                index++;
-            }
-            GridView1.DataSource = newList;
-            GridView1.DataBind();
-        }
     }
 }

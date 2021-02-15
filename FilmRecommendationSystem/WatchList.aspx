@@ -2,8 +2,6 @@
 
 <!DOCTYPE html>
 
-<!DOCTYPE html>
-
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head runat="server">
     <title>Film recommender | My WatchList</title>
@@ -112,13 +110,8 @@
 
 
             <asp:Panel ID="pnlWatchList" runat="server" CssClass="watchlist">
-                <div id="filmToBeRemoved" class="newwatchlist">
-                    <img src="Images/The World's End.jpg" class="image" />
-                    <div class="overlay">
-                        <img id="imgRemove" onclick="imgRemoveClick()" class="watchlatericon" src="Images/Remove.png" />
-                    </div>
-                </div>
             </asp:Panel>        
+
 
         <div class="footer">
             <div class="links">
@@ -136,32 +129,6 @@
         <script>
             function btnReturnToHomepage_Click() {
                 location.href = "Homepage.aspx";
-            }
-
-            /* When the user clicks on the button,
-            toggle between hiding and showing the dropdown content */
-            function myFunction() {
-                document.getElementById("myDropdown").classList.toggle("show");
-            }
-
-            function filterFunction() {
-                var input, filter, ul, li, a, i;
-                input = document.getElementById("myInput");
-                filter = input.value.toUpperCase();
-                div = document.getElementById("myDropdown");
-                a = div.getElementsByTagName("a");
-                for (i = 0; i < a.length; i++) {
-                    txtValue = a[i].textContent || a[i].innerText;
-                    if (txtValue.toUpperCase().indexOf(filter) > -1) {
-                    a[i].style.display = "";
-                    } else {
-                    a[i].style.display = "none";
-                    }
-                }
-            }
-
-            function imgRemoveClick() {
-                document.getElementById("filmToBeRemoved").style.display = "none";
             }
         </script>
     </form>

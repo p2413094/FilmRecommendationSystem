@@ -16,8 +16,8 @@ namespace FilmRecommendationSystem
         {
             pnlError.Visible = false;
             pnlFilmInformation.Visible = false;
-            string imdbId; //= Request.QueryString["imdbId"];
-            imdbId = "tt0360717";
+            string imdbId = Request.QueryString["imdbId"];
+            //imdbId = "tt0360717";
 
             GetAndDisplayFilm(imdbId);
         }

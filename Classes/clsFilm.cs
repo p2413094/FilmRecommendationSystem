@@ -4,8 +4,19 @@ using Classes;
 
 namespace Classes
 {
-    public class clsFilm
+    public class clsFilm : IComparable<clsFilm>
     {
+        public int CompareTo (clsFilm other)
+        {
+            if (this.Title == other.Title)
+            {
+                return this.Title.CompareTo(other.Title);
+            }
+
+            return this.Title.CompareTo(other.Title);
+        }
+
+
         private Int32 mFilmId;
         private string mTitle;
 

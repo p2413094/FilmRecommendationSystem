@@ -101,15 +101,7 @@
                 <button type="button" id="btnReturnToHomepage" onclick="btnReturnToHomepage_Click()" class="registerbutton">Ok</button>
         </asp:Panel>
 
-
-            <asp:Panel ID="pnlFavouriteFilms" runat="server" CssClass="watchlist">
-                <div id="filmToBeRemoved" class="newwatchlist">
-                    <img src="Images/Dune.jpg" class="image" />
-                    <div class="overlay">
-                        <img id="imgRemove" onclick="imgRemoveClick()" class="watchlatericon" src="Images/Remove.png" />
-                    </div>
-                </div>
-            </asp:Panel>
+        <asp:Panel ID="pnlFavouriteFilms" runat="server" CssClass="watchlist"></asp:Panel>
 
         <script>
             function btnReturnToHomepage_Click() {
