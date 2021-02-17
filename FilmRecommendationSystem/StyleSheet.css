@@ -381,10 +381,10 @@ td {
     min-width: 180px;
 }
 
-.tablecell-actions:hover {
-    opacity: 1;
-    transition: 0.3s;
-}
+    .tablecell-actions:hover {
+        opacity: 1;
+        transition: 0.3s;
+    }
 
 .container-tableaction:hover {
     opacity: 0.1;
@@ -599,21 +599,21 @@ td {
     margin-left: 20px;
 }
 
-.imagewithtext .image {
-    float: left;
-    height: 85%;
-    width: 98%;
-    margin-bottom: 13px;
-    opacity: 1;
-}
+    .imagewithtext .image {
+        float: left;
+        height: 85%;
+        width: 98%;
+        margin-bottom: 13px;
+        opacity: 1;
+    }
 
-.imagewithtext .textcontainer {
-    color: lawngreen;
-    text-align: center;
-    height: 20%;
-    width: 80%;
-    margin: auto;
-}
+    .imagewithtext .textcontainer {
+        color: lawngreen;
+        text-align: center;
+        height: 20%;
+        width: 80%;
+        margin: auto;
+    }
 
 
     .imagewithtext .overlay {
@@ -627,8 +627,7 @@ td {
         transition: .35s ease;
     }
 
-    .imagewithtext .overlay-itemLeft
-    {
+    .imagewithtext .overlay-itemLeft {
         margin-left: 2%;
         margin-top: 3%;
         width: 45px;
@@ -643,19 +642,19 @@ td {
         height: 45px;
     }
 
-.imagewithtext:hover .image {
-    opacity: 0.5;
-}
+    .imagewithtext:hover .image {
+        opacity: 0.5;
+    }
 
-.imagewithtext:hover .overlay {
-    opacity: 1;
-}
+    .imagewithtext:hover .overlay {
+        opacity: 1;
+    }
 
 .newwatchlist {
     position: relative;
     height: 300px;
     width: 200px;
-    float: left; 
+    float: left;
 }
 
     .newwatchlist .image {
@@ -704,7 +703,6 @@ td {
     padding: 4px;
     border-radius: 4px;
     display: block;
-
     border-style: solid;
 }
 
@@ -715,7 +713,7 @@ td {
     width: 50%;
     text-align: center;
     height: 20px;
-    border-radius: 4px;   
+    border-radius: 4px;
 }
 
 /* Dropdown Content (Hidden by Default) */
@@ -751,11 +749,11 @@ td {
 }
 
 
-    .filmInformation .headerContainer {
-        border-style: solid;
-        border-color: lawngreen;
-        height: 120px;
-    }
+.filmInformation .headerContainer {
+    border-style: solid;
+    border-color: lawngreen;
+    height: 120px;
+}
 
     .filmInformation .headerContainer .headerText {
         font-size: 38px;
@@ -768,7 +766,7 @@ td {
 .filmInformation .imageContainer {
     position: relative;
     width: 330px;
-    height: 600px; 
+    height: 600px;
     float: left;
     margin-right: 5%;
     border-style: solid;
@@ -782,32 +780,31 @@ td {
         transition: .5s ease;
     }
 
-    .filmInformation .ratingContainer {
-        width: 100%;
-        height: 10%;
-        border-style: solid;
-        border-color: deepskyblue;
+.filmInformation .ratingContainer {
+    width: 100%;
+    height: 10%;
+    border-style: solid;
+    border-color: deepskyblue;
+}
+
+    .filmInformation .ratingContainer .image {
+        width: 40px;
+        height: 40px;
     }
 
-        .filmInformation .ratingContainer .image
-        {
-            width: 40px;
-            height: 40px;
-        }
-
-    .filmInformation .overlayContainer {
-        border-style: solid;
-        border-color: brown;
-        position: absolute;
-        top: 0;
-        bottom: 0;
-        left: 0;
-        right: 0;
-        height: 496px;
-        width: 97%;
-        opacity: 0;
-        transition: .5s ease;
-    }
+.filmInformation .overlayContainer {
+    border-style: solid;
+    border-color: brown;
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    height: 496px;
+    width: 97%;
+    opacity: 0;
+    transition: .5s ease;
+}
 
 
 .imageContainer:hover .image {
@@ -823,95 +820,94 @@ td {
 
 
 
-        .filmInformation .overlayContainer .leftItem {
-            position: absolute;
-            float: left;
-            top: 0;
-            bottom: 0;
-            left: 0;
-            right: 0;
-            height: 10%;
-            width: 14%;
+.filmInformation .overlayContainer .leftItem {
+    position: absolute;
+    float: left;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    height: 10%;
+    width: 14%;
+    border-style: solid;
+    border-color: lawngreen;
+}
 
-            border-style: solid;
-            border-color: lawngreen;
-        }
+.filmInformation .overlayContainer .rightItem {
+    float: right;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    height: 10%;
+    width: 14%;
+    border-style: solid;
+    border-color: deepskyblue;
+}
 
-        .filmInformation .overlayContainer .rightItem {
-            float: right;
-            top: 0;
-            bottom: 0;
-            left: 0;
-            right: 0;
-            height: 10%;
-            width: 14%;
-            border-style: solid;
-            border-color: deepskyblue;
-        }
+.filmInformation .overlayContainer .image {
+    width: 45px;
+    height: 45px;
+}
 
-            .filmInformation .overlayContainer .image {
-                width: 45px;
-                height: 45px;
-            }
+.filmInformation .contentContainer {
+    border-style: solid;
+    border-color: lawngreen;
+    width: 50%;
+    float: left;
+    height: 700px;
+}
 
-    .filmInformation .contentContainer {
+    .filmInformation .contentContainer .headerText {
+        font-size: 18px;
+        font-weight: bold;
+        padding-bottom: 10px;
         border-style: solid;
-        border-color: lawngreen;
-        width: 50%;
-        float: left;
-        height: 700px;
+        border-color: deeppink;
     }
 
-        .filmInformation .contentContainer .headerText {
-            font-size: 18px;
-            font-weight: bold;
-            padding-bottom: 10px;
-            border-style: solid;
-            border-color: deeppink;
-        }
+.filmInformation .tagWholeContainer {
+    width: 25%;
+    height: 27px;
+    border-width: 2px;
+    border-radius: 5px;
+    border-color: lightgrey;
+    border-style: solid;
+    float: left;
+    margin-top: 15px;
+    margin-left: 15px;
+    margin-right: 17px;
+}
 
-    .filmInformation .tagWholeContainer {
-        width: 25%;
-        height: 27px;
-        border-width: 2px;
-        border-radius: 5px;
-        border-color: lightgrey;
-        border-style: solid;
+    .filmInformation .tagWholeContainer .textcontainer {
         float: left;
-        margin-top: 15px;
-        margin-left: 15px;
-        margin-right: 17px;
+        width: 70%;
+        height: 82%;
+        padding-top: 4px;
+        padding-left: 14px;
     }
 
-        .filmInformation .tagWholeContainer .textcontainer {
-            float: left;
-            width: 70%;
-            height: 82%;
-            padding-top: 4px;
-            padding-left: 14px;
-        }
+    .filmInformation .tagWholeContainer .removeContainer {
+        float: right;
+        width: 13%;
+        height: 98%;
+        opacity: 0;
+        transition: .25s ease;
+    }
 
-        .filmInformation .tagWholeContainer .removeContainer {
-            float: right;
-            width: 13%;
-            height: 98%;
-            opacity: 0;
-            transition: .25s ease;
-        }
+.tagWholeContainer .removeContainer:hover {
+    opacity: 1;
+}
 
-        .tagWholeContainer .removeContainer:hover {
-            opacity: 1;
-        }
 
-        
-            .filmInformation .tagWholeContainer .removeContainer .image {
-                float: right;
-                padding-top: 1px;
-                padding-right: 1px;
-                height: 100%;
-                width: 100%;
-            }
-    
+.filmInformation .tagWholeContainer .removeContainer .image {
+    float: right;
+    padding-top: 1px;
+    padding-right: 1px;
+    height: 100%;
+    width: 100%;
+}
+
 
 
 
@@ -928,14 +924,14 @@ td {
 }
 
 
-.film .recommendoption {
-    background-color: transparent;
-    color: white;
-    border-radius: 6px;
-    margin-right: 6px;
-    width: 100px;
-    line-height: 30px;
-}
+    .film .recommendoption {
+        background-color: transparent;
+        color: white;
+        border-radius: 6px;
+        margin-right: 6px;
+        width: 100px;
+        line-height: 30px;
+    }
 
 
 
@@ -1031,12 +1027,12 @@ td {
     padding-bottom: 12%;
 }
 
-    .register-section-password {
-        border-style: solid;
-        border-color: blue;
-        padding-top: 2%;
-        padding-bottom: 25%;
-    }
+.register-section-password {
+    border-style: solid;
+    border-color: blue;
+    padding-top: 2%;
+    padding-bottom: 25%;
+}
 
 .italiscised {
     font-style: italic;

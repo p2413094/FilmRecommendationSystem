@@ -200,19 +200,19 @@
                 location.href = "Homepage.aspx";
             }
             function imgWatchLaterClick() {
-                    document.getElementById("imgWatchLater").src = "Images/WatchLaterAdded.png";
+                document.getElementById("imgWatchLater").src = "Images/WatchLaterAdded.png";
             }
 
             function imgFavouriteClick() {
-                    document.getElementById("imgFavourite").src = "Images/FavouriteInList.png";
+                document.getElementById("imgFavourite").src = "Images/FavouriteInList.png";
             }
 
             function imgRatingClick() {
-                    document.getElementById("star1").src = "Images/FavouriteInList.png";
-                    document.getElementById("star2").src = "Images/FavouriteInList.png";
-                    document.getElementById("star3").src = "Images/FavouriteInList.png";
-                    document.getElementById("star4").src = "Images/FavouriteInList.png";
-                    document.getElementById("star5").src = "Images/FavouriteInList.png";
+                document.getElementById("star1").src = "Images/FavouriteInList.png";
+                document.getElementById("star2").src = "Images/FavouriteInList.png";
+                document.getElementById("star3").src = "Images/FavouriteInList.png";
+                document.getElementById("star4").src = "Images/FavouriteInList.png";
+                document.getElementById("star5").src = "Images/FavouriteInList.png";
             }
 
             //Search bar at top of screen
@@ -226,9 +226,9 @@
                 for (i = 0; i < a.length; i++) {
                     txtValue = a[i].textContent || a[i].innerText;
                     if (txtValue.toUpperCase().indexOf(filter) > -1) {
-                    a[i].style.display = "";
+                        a[i].style.display = "";
                     } else {
-                    a[i].style.display = "none";
+                        a[i].style.display = "none";
                     }
                 }
             }
