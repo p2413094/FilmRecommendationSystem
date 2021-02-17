@@ -221,12 +221,7 @@ a {
         margin-top: 0.5%;
     }
 
-.film .header {
-    font-size: 38px;
-    font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
-    font-weight: lighter;
-    text-align: left;
-}
+
 
 .film .image {
     height: 500px;
@@ -253,44 +248,6 @@ a {
     opacity: 1;
 }
 
-.film .container .tag-container {
-    width: 325px;
-}
-
-    .film .container .tag-container .tag-heading {
-        font-size: 18px;
-        font-weight: bold;
-        float: left;
-    }
-
-    .film .container .tag-container .tags {
-        float: right;
-        text-align: right;
-        overflow: hidden;
-        width: 70%;
-        height: 30px;
-    }
-
-    .film .container .tag-container .tagentrycontainer {
-        float: left;
-    }
-
-        .film .container .tag-container .tagentrycontainer .tagentryfield {
-            background-color: transparent;
-            color: white;
-        }
-
-    .film .container .tag-container .button-addtag {
-        float: right;
-        background-color: transparent;
-        color: white;
-        width: 40%;
-    }
-
-.film .image-agerating {
-    height: 60px;
-    width: 60px;
-}
 
 .film .information-header {
     font-size: 18px;
@@ -304,13 +261,7 @@ a {
     text-align: left;
 }
 
-.container {
-    position: relative;
-    width: 330px;
-    height: 700px;/*650px;*/ /*565px;*/ /*500px;*/
-    float: left;
-    margin-right: 5%;
-}
+
 
 .overlay-left {
     position: absolute;
@@ -337,19 +288,6 @@ a {
     transition: .25s ease;
     text-align: center;
 }
-
-.container:hover .image {
-    opacity: 0.2;
-}
-
-.container:hover .overlay-left {
-    opacity: 1;
-}
-
-.container:hover .overlay-right {
-    opacity: 1;
-}
-
 
 .watchlist {
     border-style: solid;
@@ -812,9 +750,181 @@ td {
     display: block;
 }
 
+
+    .filmInformation .headerContainer {
+        border-style: solid;
+        border-color: lawngreen;
+        height: 120px;
+    }
+
+    .filmInformation .headerContainer .headerText {
+        font-size: 38px;
+        font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
+        font-weight: lighter;
+        text-align: left;
+        font-style: italic;
+    }
+
+.filmInformation .imageContainer {
+    position: relative;
+    width: 330px;
+    height: 600px; 
+    float: left;
+    margin-right: 5%;
+    border-style: solid;
+    border-color: greenyellow;
+}
+
+    .filmInformation .imageContainer .image {
+        height: 500px;
+        width: 100%;
+        opacity: 1;
+        transition: .5s ease;
+    }
+
+    .filmInformation .ratingContainer {
+        width: 100%;
+        height: 10%;
+        border-style: solid;
+        border-color: deepskyblue;
+    }
+
+        .filmInformation .ratingContainer .image
+        {
+            width: 40px;
+            height: 40px;
+        }
+
+    .filmInformation .overlayContainer {
+        border-style: solid;
+        border-color: brown;
+        position: absolute;
+        top: 0;
+        bottom: 0;
+        left: 0;
+        right: 0;
+        height: 496px;
+        width: 97%;
+        opacity: 0;
+        transition: .5s ease;
+    }
+
+
+.imageContainer:hover .image {
+    opacity: 0.2;
+}
+
+
+.overlayContainer:hover {
+    opacity: 1;
+}
+
+
+
+
+
+        .filmInformation .overlayContainer .leftItem {
+            position: absolute;
+            float: left;
+            top: 0;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            height: 10%;
+            width: 14%;
+
+            border-style: solid;
+            border-color: lawngreen;
+        }
+
+        .filmInformation .overlayContainer .rightItem {
+            float: right;
+            top: 0;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            height: 10%;
+            width: 14%;
+            border-style: solid;
+            border-color: deepskyblue;
+        }
+
+            .filmInformation .overlayContainer .image {
+                width: 45px;
+                height: 45px;
+            }
+
+    .filmInformation .contentContainer {
+        border-style: solid;
+        border-color: lawngreen;
+        width: 50%;
+        float: left;
+        height: 700px;
+    }
+
+        .filmInformation .contentContainer .headerText {
+            font-size: 18px;
+            font-weight: bold;
+            padding-bottom: 10px;
+            border-style: solid;
+            border-color: deeppink;
+        }
+
+    .filmInformation .tagWholeContainer {
+        width: 25%;
+        height: 27px;
+        border-width: 2px;
+        border-radius: 5px;
+        border-color: lightgrey;
+        border-style: solid;
+        float: left;
+        margin-top: 15px;
+        margin-left: 15px;
+        margin-right: 17px;
+    }
+
+        .filmInformation .tagWholeContainer .textcontainer {
+            float: left;
+            width: 70%;
+            height: 82%;
+            padding-top: 4px;
+            padding-left: 14px;
+        }
+
+        .filmInformation .tagWholeContainer .removeContainer {
+            float: right;
+            width: 13%;
+            height: 98%;
+            opacity: 0;
+            transition: .25s ease;
+        }
+
+        .tagWholeContainer .removeContainer:hover {
+            opacity: 1;
+        }
+
+        
+            .filmInformation .tagWholeContainer .removeContainer .image {
+                float: right;
+                padding-top: 1px;
+                padding-right: 1px;
+                height: 100%;
+                width: 100%;
+            }
+    
+
+
+
+
+
+
+
+
+
 .film {
-    text-align: center;
     margin-top: 5%;
+    border-style: solid;
+    border-color: red;
 }
 
 

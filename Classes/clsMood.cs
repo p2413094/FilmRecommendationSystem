@@ -2,7 +2,7 @@
 
 namespace Classes
 {
-    public class clsMood
+    public class clsMood : IComparable<clsMood>
     {
         private Int32 mMoodId;
         private string mMoodDescription;
@@ -16,6 +16,16 @@ namespace Classes
         {
             get {return mMoodDescription;}
             set {mMoodDescription = value;}
+        }
+
+        public int CompareTo (clsMood other)
+        {
+            if (this.MoodDesc == other.MoodDesc)
+            {
+                return this.MoodDesc.CompareTo(other.MoodDesc);
+            }
+
+            return this.MoodDesc.CompareTo(other.MoodDesc);
         }
 
         public string Valid(string moodDesc)

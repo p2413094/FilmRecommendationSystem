@@ -8,7 +8,6 @@
     <link rel="stylesheet" href="StyleSheet.css" />
 </head>
 
-
 <body class="body">
     <form runat="server">
         <p class="logo textlink">
@@ -49,6 +48,102 @@
         <br />
         <br />
         <br />
+        
+        <br />
+            <br />
+            <br />
+
+        <asp:Panel ID="pnlFilmInformation" CssClass="filmInformation" runat="server">
+            <div class="headerContainer">
+                <asp:Label ID="lblTitle" CssClass="headerText" runat="server"></asp:Label>
+            </div>
+            <div class="imageContainer">
+                <asp:Image ID="imgFilmPoster" ImageUrl="~/Images/King Kong.jpg" runat="server" CssClass="image" />
+                <div class="overlayContainer">
+                    <div class="leftItem">
+                        <asp:ImageButton ID="imgbtnFavourite" ImageUrl="~/Images/Favourite.png" CssClass="image" OnClick="imgbtnFavourite_Click" runat="server" />
+                    </div>
+                    <div class="rightItem">
+                        <asp:ImageButton ID="imgbtnWatchLater" ImageUrl="~/Images/WatchLater.png" CssClass="image" OnClick="imgbtnWatchLater_Click" runat="server" />
+                    </div>
+                </div>
+                <asp:Panel ID="Panel11" CssClass="ratingContainer" runat="server">
+                    <asp:Image ID="Image3" CssClass="image" runat="server" />
+                    <asp:Image ID="Image4" runat="server" />
+                    <asp:Image ID="Image5" runat="server" /><asp:Image ID="Image6" runat="server" />
+                    <asp:Image ID="Image7" runat="server" />
+                </asp:Panel>
+
+
+            </div>
+            <asp:Panel ID="pnlContentContainer" CssClass="contentContainer" runat="server">
+                <label class="headerText">Description</label>
+                <br />
+                <br />
+                <asp:Label ID="lblPlot" runat="server"></asp:Label>
+                <br />
+                <br />
+                <label class="headerText">Genre</label>
+                <br />
+                <br />
+                <asp:Label ID="lblGenre" runat="server"></asp:Label>
+                <br />
+                <br />
+                <label class="headerText">Age rating</label>
+                <br />
+                <br />
+                <asp:Label ID="lblAgeRating" runat="server"></asp:Label>
+                <br />
+                <br />
+                <label class="headerText">Director</label>
+                <br />
+                <br />
+                <asp:Label ID="lblDirector" runat="server"></asp:Label>
+                <br />
+                <br />
+                <label class="headerText">Released</label>
+                <br />
+                <br />
+                <asp:Label ID="lblReleased" runat="server"></asp:Label>
+                <br />
+                <br />
+                <label class="headerText">Runtime</label>
+                <br />
+                <br />
+                <asp:Label ID="lblRuntime" runat="server"></asp:Label>
+                <br />
+                <br />
+                <asp:Panel ID="pnlMyTags" runat="server">
+                    <label class="headerText">My tags</label>
+                    <br />
+                </asp:Panel>
+                <br />
+                <br />
+            </asp:Panel>
+
+        </asp:Panel>
+            <div class="film">
+                <div class="container">
+                    <div class="container-image">
+                        <div class="overlay-left">
+                            <img id="imgWatchLater" onclick="imgWatchLaterClick()" class="watchlaterfavouriteicon" src="Images/WatchLater.png" />
+                        </div>
+                        <div class="overlay-right">
+                            <img id="imgFavourite" onclick="imgFavouriteClick()" class="watchlaterfavouriteicon" src="Images/Favourite.png" />
+                        </div>    
+                    </div>
+                    <br />
+                </div>
+            </div>
+
+        <br />
+        <br />
+
+        <asp:Panel ID="Panel3" runat="server">
+            <asp:DropDownList ID="ddlFilmMoods" runat="server"></asp:DropDownList>
+            <asp:Button ID="btnAssignTag" OnClientClick="return btnAssignTag_Clicked()" OnClick="btnAssignTag_Click" runat="server" Text="Add tag to film" />
+        </asp:Panel>
+
         <asp:Panel ID="pnlError" runat="server">
                 <label class="page-subheader">Error</label>
                 <br />
@@ -60,99 +155,6 @@
                 <button type="button" id="btnReturnToHomepage" onclick="btnReturnToHomepage_Click()" class="registerbutton">Ok</button>
         </asp:Panel>
 
-
-        <asp:Panel ID="pnlFilmInformation" runat="server">
-        <div class="film">
-            <div class="header">
-                <asp:Label ID="lblTitle" runat="server"></asp:Label>
-            </div>
-            <br />
-            <br />
-            <br />
-
-            <div class="container">
-                <div class="container-image">
-                    <asp:Image ID="imgFilmPoster" runat="server" CssClass="image" />
-
-                    <div class="overlay-left">
-                        <img id="imgWatchLater" onclick="imgWatchLaterClick()" class="watchlaterfavouriteicon" src="Images/WatchLater.png" />
-                    </div>
-                    <div class="overlay-right">
-                        <img id="imgFavourite" onclick="imgFavouriteClick()" class="watchlaterfavouriteicon" src="Images/Favourite.png" />
-                    </div>    
-                </div>
-                <br />
-
-                <div class="tag-container">
-                    <div class="tag-heading">My tags: </div>
-                    <br />
-                    <div id="divTags" class="tags" >
-                        <label id="lblTag" onclick="lblTag_Clicked()">action1</label>
-                        sci-fi, 
-                    </div>
-                    <br />
-                    <button onclick="btnAddTagClick()" id="btnAddTag" class="button-addtag" type="button">ADD TAG</button>
-                    <div class="tagentrycontainer">
-                        <input id="txtTag" class="tagentryfield" type="text" placeholder="Enter new tag here..." />
-                    </div>
-                </div>
-                <br />
-                <br />
-                <br />
-
-                <div class="tag-container">
-                    <div class="tag-heading">Assigned mood: </div>
-                    <div id="divMoods" class="tags">
-                        <label id="lblMood" onclick="lblMood_Clicked()">heart-warming</label>
-                        oscar-worthy, 
-                    </div>
-                    <br />
-                    <br />
-                    <br />
-                    <button onclick="btnAddMoodClick()" class="button-addtag" type="button">ADD MOOD</button>
-                    <div class="tagentrycontainer">
-                        <input id="txtMood" class="tagentryfield" type="text" placeholder="Enter new mood here..." />
-                    </div>
-                </div>
-            </div>
-            
-            <div class="filminformation">
-                <div class="information-header">Description</div>
-                <asp:Label ID="lblPlot" runat="server"></asp:Label>
-                <br />
-                <br />
-
-                <div class="information-header">Genre</div>
-                <asp:Label ID="lblGenre" runat="server"></asp:Label>
-                <br />
-                <br />
-
-                <div class="information-header">Age rating</div>
-                <asp:Label ID="lblAgeRating" runat="server"></asp:Label>
-                <br />
-                <br />
-               
-                <div class="information-header">Director</div>
-                <asp:Label ID="lblDirector" runat="server"></asp:Label>
-                <br />
-                <br />
-
-                <div class="information-header">Released</div>
-                <asp:Label ID="lblReleased" runat="server"></asp:Label>
-                <br />
-                <br />
-
-                <div class="information-header">Runtime</div>
-                <asp:Label ID="lblRuntime" runat="server"></asp:Label>
-                <br />   
-                <asp:Panel ID="Panel1" runat="server"></asp:Panel>
-            </div>
-        </div>
-
-        </asp:Panel>
-
-        <br />
-        <br />
 
         <div class="footer">
             <div class="links">
@@ -168,6 +170,32 @@
         </div>
 
         <script type="text/javascript">
+
+            function btnAssignTag_Clicked() {
+                var confirmMessage = confirm("Add tag to film?");
+                if (confirmMessage == true) {
+                    alert("Tag added!");
+                    return true;
+                }
+                else {
+                    alert("Tag not added")
+                    return false;
+                }
+            }
+
+            function btnRemoveTag_Clicked() {
+                var confirmMessage = confirm("Remove tag from film?");
+                if (confirmMessage == true) {
+                    alert("Tag removed!");
+                    return true;
+                }
+                else {
+                    alert("No changes made")
+                    return false;
+                }
+            }
+
+
             function btnReturnToHomepage_Click() {
                 location.href = "Homepage.aspx";
             }
@@ -186,42 +214,6 @@
                     document.getElementById("star4").src = "Images/FavouriteInList.png";
                     document.getElementById("star5").src = "Images/FavouriteInList.png";
             }
-
-            function btnAddTagClick() {
-                var newTag = document.getElementById("txtTag").value,
-                    tags = document.getElementById("divTags");
-                tags.innerHTML += newTag;
-            }
-
-            function btnAddMoodClick() {
-                var newMood = document.getElementById("txtMood").value,
-                    mood = document.getElementById("divMoods");
-                mood.innerHTML += newMood;
-            }
-
-            function lblTag_Clicked() {
-                var confirmMessage = confirm("Delete tag?");
-                if (confirmMessage == true) {
-                    alert("Tag deleted");
-                    document.getElementById("lblTag").style.display = "none";
-                }
-                else {
-                    alert("Tag not deleted")
-                }
-            }
-
-            function lblMood_Clicked() {
-                var confirmMessage = confirm("Delete mood?");
-                if (confirmMessage == true) {
-                    alert("Mood deleted");
-                    document.getElementById("lblMood").style.display = "none";
-                }
-                else {
-                    alert("Mood not deleted")
-                }
-            }
-            
-
 
             //Search bar at top of screen
             function filterSearchFunction() {
