@@ -344,6 +344,7 @@
     <Content Include="Register.aspx" />
     <Content Include="Register_ConfirmEmail.aspx" />
     <Content Include="ResetPassword.aspx" />
+    <Content Include="SearchResults.aspx" />
     <Content Include="StyleSheet.css" />
     <Content Include="WatchList.aspx" />
     <None Include="Properties\PublishProfiles\filmRecommender - Web Deploy.pubxml" />
@@ -716,6 +717,13 @@
     </Compile>
     <Compile Include="ResetPassword.aspx.designer.cs">
       <DependentUpon>ResetPassword.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="SearchResults.aspx.cs">
+      <DependentUpon>SearchResults.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="SearchResults.aspx.designer.cs">
+      <DependentUpon>SearchResults.aspx</DependentUpon>
     </Compile>
     <Compile Include="Site.Master.cs">
       <DependentUpon>Site.Master</DependentUpon>

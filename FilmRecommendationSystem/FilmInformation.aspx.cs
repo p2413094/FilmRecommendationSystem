@@ -23,11 +23,10 @@ namespace FilmRecommendationSystem
             {
                 pnlError.Visible = false;
                 //pnlFilmInformation.Visible = false;
-                //string imdbId = Request.QueryString["imdbId"];
-                string imdbId;
+                string imdbId = Request.QueryString["imdbId"];
                 //userId = 1;
                 //filmId = 1; //Session object required here 
-                imdbId = "tt0114709";
+                //imdbId = "tt0114709";
 
                 DisplayFilm(imdbId);
                 //DisplayUserAssignedMoods();
@@ -46,55 +45,68 @@ namespace FilmRecommendationSystem
             request.AddHeader("x-rapidapi-host", "movie-database-imdb-alternative.p.rapidapi.com");
             IRestResponse response = client.Execute(request);
             clsIMDBApi filmInfoReturned = new clsIMDBApi();
+            filmInfoReturned = new clsIMDBApi();
+            filmInfoReturned = Newtonsoft.Json.JsonConvert.DeserializeObject<clsIMDBApi>(response.Content);
+            var imdbIdOk = filmInfoReturned.Response;
+            Int32 count = 0;
+            string numberOfZeroes = "0";
+            string newImdbId = "tt";
 
-            if (response.Content.Contains("False"))
+            while (imdbIdOk == false)
             {
-                pnlError.Visible = true;
+                newImdbId = "tt" + numberOfZeroes.PadRight(count, '0') + imdbId;
+                newImdbId = newImdbId.Replace(" ", string.Empty);
+                client = new RestClient("https://movie-database-imdb-alternative.p.rapidapi.com/?i=" + newImdbId);
+                request = new RestRequest(Method.GET);
+                request.AddHeader("x-rapidapi-key", "2951edd025mshf1b0f9ca8a52c6ap1e71e9jsn67c827bdd770");
+                request.AddHeader("x-rapidapi-host", "movie-database-imdb-alternative.p.rapidapi.com");
+                response = client.Execute(request);
+                filmInfoReturned = new clsIMDBApi();
+                filmInfoReturned = Newtonsoft.Json.JsonConvert.DeserializeObject<clsIMDBApi>(response.Content);
+                imdbIdOk = filmInfoReturned.Response;
+                count++;
+            }
+            
+            imgFilmPoster.ImageUrl = filmInfoReturned.Poster;
+            lblTitle.Text = filmInfoReturned.Title + " (" + filmInfoReturned.Year + ")";
+            lblPlot.Text = filmInfoReturned.Plot;   
+            lblGenre.Text = filmInfoReturned.Genre;
+            lblAgeRating.Text = filmInfoReturned.Rated;
+            lblDirector.Text = filmInfoReturned.Director;
+            lblRuntime.Text = filmInfoReturned.Runtime;
+            lblReleased.Text = filmInfoReturned.Released;
+
+            clsFavouriteFilm aFavouriteFilm = new clsFavouriteFilm();
+            if (aFavouriteFilm.Find(userId, filmId) == true)
+            {
+                filmInFavourites = true;
+                imgbtnFavourite.ImageUrl = "Images/FavouriteInList.png";
+            }
+
+            clsWatchList aWatchListFilm = new clsWatchList();
+            if (aWatchListFilm.Find(userId, filmId) == true)
+            {
+                filmInWatchList = true;
+                imgbtnWatchLater.ImageUrl = "Images/WatchLaterAdded.png";
+            }
+
+            clsFilmRatingCollection AllRatings = new clsFilmRatingCollection();
+            bool found = AllRatings.ThisFilmRating.Find(filmId, userId);
+            if (found == true)
+            {
+                ddlRating.SelectedValue = Convert.ToString(AllRatings.ThisFilmRating.Rating);
+                btnAddEditRating.Text = "UPDATE RATING";
+                ratingExists = true;
             }
             else
             {
-                filmInfoReturned = new clsIMDBApi();
-                filmInfoReturned = Newtonsoft.Json.JsonConvert.DeserializeObject<clsIMDBApi>(response.Content);
-                imgFilmPoster.ImageUrl = filmInfoReturned.Poster;
-                lblTitle.Text = filmInfoReturned.Title + " (" + filmInfoReturned.Year + ")";
-                lblPlot.Text = filmInfoReturned.Plot;   
-                lblGenre.Text = filmInfoReturned.Genre;
-                lblAgeRating.Text = filmInfoReturned.Rated;
-                lblDirector.Text = filmInfoReturned.Director;
-                lblRuntime.Text = filmInfoReturned.Runtime;
-                lblReleased.Text = filmInfoReturned.Released;
-
-                clsFavouriteFilm aFavouriteFilm = new clsFavouriteFilm();
-                if (aFavouriteFilm.Find(userId, filmId) == true)
-                {
-                    filmInFavourites = true;
-                    imgbtnFavourite.ImageUrl = "Images/FavouriteInList.png";
-                }
-
-                clsWatchList aWatchListFilm = new clsWatchList();
-                if (aWatchListFilm.Find(userId, filmId) == true)
-                {
-                    filmInWatchList = true;
-                    imgbtnWatchLater.ImageUrl = "Images/WatchLaterAdded.png";
-                }
-
-                clsFilmRatingCollection AllRatings = new clsFilmRatingCollection();
-                bool found = AllRatings.ThisFilmRating.Find(filmId, userId);
-                if (found == true)
-                {
-                    ddlRating.SelectedValue = Convert.ToString(AllRatings.ThisFilmRating.Rating);
-                    btnAddEditRating.Text = "UPDATE RATING";
-                    ratingExists = true;
-                }
-                else
-                {
-                    btnAddEditRating.Text = "ADD RATING";
-                    ratingExists = false;
-                }
-                
-                
-                pnlFilmInformation.Visible = true;
+                btnAddEditRating.Text = "ADD RATING";
+                ratingExists = false;
             }
+                
+                
+            pnlFilmInformation.Visible = true;
+            
         }
         void DisplayUserAssignedMoods()
         {

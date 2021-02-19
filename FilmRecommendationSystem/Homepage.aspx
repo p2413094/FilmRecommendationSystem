@@ -35,9 +35,7 @@
 
 
         <div class="search">
-            <div class="label">
-                SEARCH
-            </div>
+                <a onclick="hyplnkSearch_Clicked()" class="label">SEARCH</a>
             <div class="textentry-container">
                 <input autocomplete="off" class="textentry-field" type="text" id="myInput" onkeyup="filterSearchFunction()" />
                     <div id="mySearchDropdown" class="searchdropdown-content">
@@ -136,7 +134,6 @@
         </section>
 
         <script>
-
             function onLoad() {
                 //document.getElementById("btnGetRecommendations").style.display = "none";
                 document.getElementById("secYourRecommendations").style.display = "none";
@@ -144,6 +141,28 @@
                 document.getElementById("slctMood").style.display = "none";
                 document.getElementById("ddlGenres").style.display = "none";
             }
+
+            function hyplnkSearch_Clicked() {
+                var searchText = document.getElementById("myInput").value;
+
+                if (searchText.length == 0) {
+                    alert("Search text cannot be blank");
+                }
+                else {
+                    location.href = "SearchResults.aspx?searchText=" + searchText;
+                }
+            }
+
+            myInput.addEventListener("keyup", function (event) {
+                // Number 13 is the "Enter" key on the keyboard
+                if (event.keyCode === 13) {
+                    // Cancel the default action, if needed
+                    event.preventDefault();
+                    // Trigger the button element with a click
+                    hyplnkSearch_Clicked();
+                }
+            });
+
 
             function btnGenre_Clicked() {
                 document.getElementById("slctGenre").style.display = "inline";

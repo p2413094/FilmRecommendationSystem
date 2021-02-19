@@ -1042,3 +1042,12 @@ td {
 .italiscised {
     font-style: italic;
 }
+
+
+.searchResultsContainer {
+    height: 50px;
+    width: 100%;
+    font-size: 20px;
+    font-style: italic;
+    margin-left: 14px;
+}

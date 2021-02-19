@@ -48,6 +48,13 @@ namespace Classes
             return DB.Execute("sproc_tblFilm_Insert");
         }
 
+        public void Update()
+        {
+            clsDataConnection DB = new clsDataConnection();
+            DB.AddParameter("@FilmId", mThisFilm.FilmId);
+            DB.AddParameter("@Title", mThisFilm.Title);
+            DB.Execute("sproc_tblFilm_Update");
+        }
         public Boolean FilmAlreadyExistsCheck(string title)
         {
             title = title.ToLower();
@@ -64,12 +71,25 @@ namespace Classes
             }
         }
 
-        public void Update()
+        public List<clsFilm> SearchForFilm(string searchText)
         {
+            List<clsFilm> searchResults = new List<clsFilm>();
+            clsFilm aFilm = new clsFilm();
             clsDataConnection DB = new clsDataConnection();
-            DB.AddParameter("@FilmId", mThisFilm.FilmId);
-            DB.AddParameter("@Title", mThisFilm.Title);
-            DB.Execute("sproc_tblFilm_Update");
+            DB.AddParameter("@Title", searchText);
+            DB.Execute("sproc_tblFilm_FilterByTitle");
+            Int32 recordCount = DB.Count;
+            Int32 index = 0;
+            while (index < recordCount)
+            {
+                aFilm = new clsFilm();
+                aFilm.FilmId = Convert.ToInt32(DB.DataTable.Rows[index]["FilmId"]);
+                aFilm.Title = DB.DataTable.Rows[index]["Title"].ToString();
+                searchResults.Add(aFilm);
+                index++;
+            }
+            return searchResults;
         }
+
     }
 }
