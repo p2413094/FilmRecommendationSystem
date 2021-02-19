@@ -12,24 +12,29 @@ namespace FilmRecommendationSystem
 {
     public partial class FilmInformation : System.Web.UI.Page
     {
-        Int32 filmId;
-        Int32 userId;
+        Int32 filmId = 1;
+        Int32 userId = 1;
         bool filmInFavourites = false;
         bool filmInWatchList = false;
+        bool ratingExists = false;
         protected void Page_Load(object sender, EventArgs e)
         {
-            pnlError.Visible = false;
-            pnlFilmInformation.Visible = true;
-            //string imdbId = Request.QueryString["imdbId"];
-            string imdbId;
-            filmId = 1; //Session object required here 
-            userId = 1;
-            imdbId = "tt0114709";
+            if (!IsPostBack)
+            {
+                pnlError.Visible = false;
+                //pnlFilmInformation.Visible = false;
+                //string imdbId = Request.QueryString["imdbId"];
+                string imdbId;
+                //userId = 1;
+                //filmId = 1; //Session object required here 
+                imdbId = "tt0114709";
 
-            DisplayFilm(imdbId);
-            DisplayUserAssignedMoods();
+                DisplayFilm(imdbId);
+                //DisplayUserAssignedMoods();
 
-            //DisplayAllMoods();
+                //DisplayAllMoods();
+
+            }
 
         }
 
@@ -73,6 +78,21 @@ namespace FilmRecommendationSystem
                     imgbtnWatchLater.ImageUrl = "Images/WatchLaterAdded.png";
                 }
 
+                clsFilmRatingCollection AllRatings = new clsFilmRatingCollection();
+                bool found = AllRatings.ThisFilmRating.Find(filmId, userId);
+                if (found == true)
+                {
+                    ddlRating.SelectedValue = Convert.ToString(AllRatings.ThisFilmRating.Rating);
+                    btnAddEditRating.Text = "UPDATE RATING";
+                    ratingExists = true;
+                }
+                else
+                {
+                    btnAddEditRating.Text = "ADD RATING";
+                    ratingExists = false;
+                }
+                
+                
                 pnlFilmInformation.Visible = true;
             }
         }
@@ -184,6 +204,23 @@ namespace FilmRecommendationSystem
             {
                 AllFilmsInWatchList.Delete();
                 imgbtnWatchLater.ImageUrl ="Images/WatchLater.png";
+            }
+        }
+
+        protected void btnAddEditRating_Click(object sender, EventArgs e)
+        {
+            clsFilmRatingCollection AllRatings = new clsFilmRatingCollection();
+            AllRatings.ThisFilmRating.UserId = userId;
+            AllRatings.ThisFilmRating.FilmId = filmId;
+            AllRatings.ThisFilmRating.Rating = float.Parse(ddlRating.SelectedValue);
+
+            if (ratingExists == true)
+            {
+                AllRatings.Update();
+            }
+            else
+            {
+                AllRatings.Add();
             }
         }
     }

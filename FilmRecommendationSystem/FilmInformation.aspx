@@ -6,6 +6,8 @@
 <head runat="server">
     <title>Film recommender</title>
     <link rel="stylesheet" href="StyleSheet.css" />
+    <script src="Scripts/jquery-3.5.1.js"></script>
+
 </head>
 
 <body class="body">
@@ -53,6 +55,22 @@
             <br />
             <br />
 
+        <asp:Panel ID="pnlError" runat="server">
+                <label class="page-subheader">Error</label>
+                <br />
+                <br />
+                There was an error fulfilling your request; please try again later.
+                <br />
+                <br />
+                <br />
+                <button type="button" id="btnReturnToHomepage" onclick="btnReturnToHomepage_Click()" class="registerbutton">Ok</button>
+                            <br />
+                <br />
+                <br />
+
+        </asp:Panel>
+
+
         <asp:Panel ID="pnlFilmInformation" CssClass="filmInformation" runat="server">
             <div class="headerContainer">
                 <asp:Label ID="lblTitle" CssClass="headerText" runat="server"></asp:Label>
@@ -64,15 +82,27 @@
                         <asp:ImageButton ID="imgbtnFavourite" ImageUrl="~/Images/Favourite.png" CssClass="image" OnClick="imgbtnFavourite_Click" runat="server" />
                     </div>
                     <div class="rightItem">
-                        <asp:ImageButton ID="imgbtnWatchLater" ImageUrl="~/Images/WatchLater.png" CssClass="image" OnClick="imgbtnWatchLater_Click" runat="server" />
+                        <asp:ImageButton ID="imgbtnWatchLater" ImageUrl="~/Images/WatchLater.png" CssClass="image" OnClick="imgbtnWatchLater_Click" runat="server" style="margin-bottom: 0px" />
                     </div>
                 </div>
-                <asp:Panel ID="Panel11" CssClass="ratingContainer" runat="server">
-                    <asp:Image ID="Image3" CssClass="image" runat="server" />
-                    <asp:Image ID="Image4" runat="server" />
-                    <asp:Image ID="Image5" runat="server" /><asp:Image ID="Image6" runat="server" />
-                    <asp:Image ID="Image7" runat="server" />
-                </asp:Panel>
+                <div class="myRatingContainer">
+                    <div class="textContainer">
+                        <label class="headerText">My rating</label>
+                        <asp:DropDownList ID="ddlRating" runat="server">
+                            <asp:ListItem Value="0.5">0.5</asp:ListItem>
+                            <asp:ListItem Text="1" Value="1"></asp:ListItem>
+                            <asp:ListItem Text="1.5" Value="1.5"></asp:ListItem>
+                            <asp:ListItem Text="2" Value="2"></asp:ListItem>
+                            <asp:ListItem Text="2.5" Value="2.5"></asp:ListItem>
+                            <asp:ListItem Text="3" Value="3"></asp:ListItem>
+                            <asp:ListItem Text="3.5" Value="3.5"></asp:ListItem>
+                            <asp:ListItem Text="4" Value="4"></asp:ListItem>
+                            <asp:ListItem Text="4.5" Value="4.5"></asp:ListItem>
+                            <asp:ListItem Text="5" Value="5"></asp:ListItem>
+                        </asp:DropDownList>
+                        <asp:Button ID="btnAddEditRating" OnClick="btnAddEditRating_Click" runat="server"/>
+                    </div>
+                </div>
 
 
             </div>
@@ -114,8 +144,9 @@
                 <br />
                 <br />
                 <asp:Panel ID="pnlMyTags" runat="server">
-                    <label class="headerText">My tags</label>
                     <br />
+                    <br />
+                    <label class="headerText">My tags</label>
                 </asp:Panel>
                 <br />
                 <br />
@@ -144,16 +175,6 @@
             <asp:Button ID="btnAssignTag" OnClientClick="return btnAssignTag_Clicked()" OnClick="btnAssignTag_Click" runat="server" Text="Add tag to film" />
         </asp:Panel>
 
-        <asp:Panel ID="pnlError" runat="server">
-                <label class="page-subheader">Error</label>
-                <br />
-                <br />
-                There was an error fulfilling your request; please try again later.
-                <br />
-                <br />
-                <br />
-                <button type="button" id="btnReturnToHomepage" onclick="btnReturnToHomepage_Click()" class="registerbutton">Ok</button>
-        </asp:Panel>
 
 
         <div class="footer">

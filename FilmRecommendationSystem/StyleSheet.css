@@ -780,14 +780,14 @@ td {
         transition: .5s ease;
     }
 
-.filmInformation .ratingContainer {
+.filmInformation .watchLaterContainer {
     width: 100%;
     height: 10%;
     border-style: solid;
     border-color: deepskyblue;
 }
 
-    .filmInformation .ratingContainer .image {
+    .filmInformation .watchLaterContainer .image {
         width: 40px;
         height: 40px;
     }
@@ -815,9 +815,6 @@ td {
 .overlayContainer:hover {
     opacity: 1;
 }
-
-
-
 
 
 .filmInformation .overlayContainer .leftItem {
@@ -910,12 +907,20 @@ td {
 
 
 
+.filmInformation .myRatingContainer {
+    border-style: solid;
+    border-color: deepskyblue;
+    height: 150px;
+}
 
+.filmInformation .myRatingContainer .textContainer {
+    padding-top: 13px;
 
-
-
-
-
+}
+.filmInformation .myRatingContainer .textContainer .headerText {
+    font-size: 18px;
+    font-weight: bold;
+}
 
 .film {
     margin-top: 5%;

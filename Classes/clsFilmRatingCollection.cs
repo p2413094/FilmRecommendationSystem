@@ -52,6 +52,15 @@ namespace Classes
             DB.Execute("sproc_tblFilmRatings_Insert");
         }
 
+        public void Update()
+        {
+            clsDataConnection DB = new clsDataConnection();
+            DB.AddParameter("@FilmId", mThisFilmRating.FilmId);
+            DB.AddParameter("@UserId", mThisFilmRating.UserId);
+            DB.AddParameter("@Rating", mThisFilmRating.Rating);
+            DB.Execute("sproc_tblFilmRatings_Update");
+        }
+
         public void Delete()
         {
             clsDataConnection DB = new clsDataConnection();
