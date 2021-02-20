@@ -24,15 +24,9 @@
         <br />
         <br />
 
-        <asp:TextBox ID="txtSearch" runat="server" OnTextChanged="txtSearch_TextChanged" AutoPostBack="true"></asp:TextBox>
-        <asp:Button ID="btnSearch" runat="server" Text="Search" OnClick="btnSearch_Click" />
-        <br />
-        <br />
         <asp:ListBox ID="ListBox1" runat="server"></asp:ListBox>
 
         <asp:Panel ID="Panel2" runat="server"></asp:Panel>
-        <asp:GridView ID="GridView1" runat="server"></asp:GridView>
-
 
         <div class="search">
                 <a onclick="hyplnkSearch_Clicked()" class="label">SEARCH</a>
@@ -100,22 +94,10 @@
         </asp:Panel>
 
         <br />
-        <div class="homepage-mostRecommendedFilms">
-            Most recommended films
-        </div>
-        <br />
-        <section class="watchlist">
-            <a href="FilmInformation.aspx">
-                <img src="Images/Terminator.jpg" class="image" />
-            </a>
-            <asp:ImageButton ID="ImageButton1" runat="server" ImageUrl="Images/King Kong.jpg" CssClass="image" OnClick="ImageButton1_Click" />
-            <img src="Images/TCM.jpg" class="image" />
-            <img src="Images/Dunkirk.jpg" class="image" />
-            <img src="Images/District 9.jpg" class="image" />
-            <img src="Images/Tron Legacy.jpg" class="image" />
-            <img src="Images/Ghostbusters.jpg" class="image" />
-        </section>
+        <asp:Panel ID="pnlMostRecommendedFilms" CssClass="watchlist" runat="server">
+            <div class="homepage-subHeader">Most recommended films</div>
 
+        </asp:Panel>
         <br />
         <br />
         <br />

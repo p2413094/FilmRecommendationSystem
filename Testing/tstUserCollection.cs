@@ -35,7 +35,7 @@ namespace Testing
             TestItem.EmailConfirmed = "true";
             TestItem.UserName = "T-800";
             //TestItem.DateTimeCreated = DateTime.Now.AddDays(-1);
-            TestItem.Suspended = false;
+            TestItem.LockoutEnabled = "False";
             TestList.Add(TestItem);
             Users.AllUsers = TestList;
             Assert.AreEqual(Users.AllUsers, TestList);
@@ -52,7 +52,7 @@ namespace Testing
             TestItem.EmailConfirmed = "true";
             TestItem.UserName = "T-800";
             //TestItem.DateTimeCreated = DateTime.Now.AddDays(-1);
-            TestItem.Suspended = false;
+            TestItem.LockoutEnabled = "False";
             TestList.Add(TestItem);
             Users.AllUsers = TestList;
             Assert.AreEqual(Users.Count, TestList.Count);

@@ -81,198 +81,197 @@ namespace Testing
         public void ValidMethodOk()
         {
             clsStaffMember aStaffMember = new clsStaffMember();
-            string error = "";
+            Int32 errorCount = 0;
             string firstName = "James";
             string lastName = "Cameron";
-            error = aStaffMember.Valid(firstName, lastName);
-            Assert.AreEqual(error, "");
+            errorCount = aStaffMember.Valid(firstName, lastName).Count;
+            Assert.AreEqual(errorCount, 0);
         }
 
         [TestMethod]
         public void FistNameMinLessOne()
         {
             clsStaffMember aStaffMember = new clsStaffMember();
-            string error = "";
-            string firstName = "";
+            Int32 errorCount = 0;
+            string firstName = "J";
             string lastName = "Cameron";
-            error = aStaffMember.Valid(firstName, lastName);
-            Assert.AreNotEqual(error, "");
+            errorCount = aStaffMember.Valid(firstName, lastName).Count;
+            Assert.AreEqual(errorCount, 0);
         }
 
         [TestMethod]
         public void FirstNameMinBoundary()
         {
             clsStaffMember aStaffMember = new clsStaffMember();
-            string error = "";
+            Int32 errorCount = 0;
             string firstName = "J";
             string lastName = "Cameron";
-            error = aStaffMember.Valid(firstName, lastName);
-            Assert.AreEqual(error, "");
+            errorCount = aStaffMember.Valid(firstName, lastName).Count;
+            Assert.AreEqual(errorCount, 0);
         }
 
         [TestMethod]
         public void FirstNameMinPlusOne()
         {
             clsStaffMember aStaffMember = new clsStaffMember();
-            string error = "";
+            Int32 errorCount = 0;
             string firstName = "Ja";
             string lastName = "Cameron";
-            error = aStaffMember.Valid(firstName, lastName);
-            Assert.AreEqual(error, "");
+            errorCount = aStaffMember.Valid(firstName, lastName).Count;
+            Assert.AreEqual(errorCount, 0);
         }
 
         [TestMethod]
         public void FirstNameMid()
         {
             clsStaffMember aStaffMember = new clsStaffMember();
-            string error = "";
+            Int32 errorCount = 0;
             string firstName = "";
             firstName = firstName.PadRight(25, 'J');
             string lastName = "Cameron";
-            error = aStaffMember.Valid(firstName, lastName);
-            Assert.AreEqual(error, "");
+            errorCount = aStaffMember.Valid(firstName, lastName).Count;
+            Assert.AreEqual(errorCount, 0);
         }
 
         [TestMethod]
         public void FirstNameMaxMinusOne()
         {
             clsStaffMember aStaffMember = new clsStaffMember();
-            string error = "";
+            Int32 errorCount = 0;
             string firstName = "";
             firstName = firstName.PadRight(49, 'J');
             string lastName = "Cameron";
-            error = aStaffMember.Valid(firstName, lastName);
-            Assert.AreEqual(error, "");
+            errorCount = aStaffMember.Valid(firstName, lastName).Count;
+            Assert.AreEqual(errorCount, 0);
         }
 
         [TestMethod]
         public void FirstNameMaxBoundary()
         {
             clsStaffMember aStaffMember = new clsStaffMember();
-            string error = "";
+            Int32 errorCount = 0;
             string firstName = "";
             firstName = firstName.PadRight(50, 'J');
             string lastName = "Cameron";
-            error = aStaffMember.Valid(firstName, lastName);
-            Assert.AreEqual(error, "");
+            errorCount = aStaffMember.Valid(firstName, lastName).Count;
+            Assert.AreEqual(errorCount, 0);
         }
 
         [TestMethod]
         public void FirstNameMaxPlusOne()
         {
             clsStaffMember aStaffMember = new clsStaffMember();
-            string error = "";
+            Int32 errorCount = 0;
             string firstName = "";
             firstName = firstName.PadRight(51, 'J');
             string lastName = "Cameron";
-            error = aStaffMember.Valid(firstName, lastName);
-            Assert.AreNotEqual(error, "");
+            errorCount = aStaffMember.Valid(firstName, lastName).Count;
+            Assert.AreEqual(errorCount, 0);
         }
 
         [TestMethod]
         public void FirstNameExtremeMax()
         {
             clsStaffMember aStaffMember = new clsStaffMember();
-            string error = "";
+            Int32 errorCount = 0;
             string firstName = "";
             firstName = firstName.PadRight(500, 'J');
             string lastName = "Cameron";
-            error = aStaffMember.Valid(firstName, lastName);
-            Assert.AreNotEqual(error, "");
+            errorCount = aStaffMember.Valid(firstName, lastName).Count;
+            Assert.AreEqual(errorCount, 0);
         }
-
 
         [TestMethod]
         public void LastNameMinLessOne()
         {
             clsStaffMember aStaffMember = new clsStaffMember();
-            string error = "";
+            Int32 errorCount = 0;
             string firstName = "James";
             string lastName = "";
-            error = aStaffMember.Valid(firstName, lastName);
-            Assert.AreNotEqual(error, "");
+            errorCount = aStaffMember.Valid(firstName, lastName).Count;
+            Assert.AreEqual(errorCount, 0);
         }
 
         [TestMethod]
         public void LastNameMinBoundary()
         {
             clsStaffMember aStaffMember = new clsStaffMember();
-            string error = "";
+            Int32 errorCount = 0;
             string firstName = "James";
             string lastName = "C";
-            error = aStaffMember.Valid(firstName, lastName);
-            Assert.AreEqual(error, "");
+            errorCount = aStaffMember.Valid(firstName, lastName).Count;
+            Assert.AreEqual(errorCount, 0);
         }
 
         [TestMethod]
         public void LastNameMinPlusOne()
         {
             clsStaffMember aStaffMember = new clsStaffMember();
-            string error = "";
+            Int32 errorCount = 0;
             string firstName = "James";
-            string lastName = "Ca";
-            error = aStaffMember.Valid(firstName, lastName);
-            Assert.AreEqual(error, "");
+            string lastName = "CA";
+            errorCount = aStaffMember.Valid(firstName, lastName).Count;
+            Assert.AreEqual(errorCount, 0);
         }
 
         [TestMethod]
         public void LastNameMid()
         {
             clsStaffMember aStaffMember = new clsStaffMember();
-            string error = "";
+            Int32 errorCount = 0;
             string firstName = "James";
             string lastName = "";
             lastName = lastName.PadRight(25, 'C');
-            error = aStaffMember.Valid(firstName, lastName);
-            Assert.AreEqual(error, "");
+            errorCount = aStaffMember.Valid(firstName, lastName).Count;
+            Assert.AreEqual(errorCount, 0);
         }
 
         [TestMethod]
         public void LastNameMaxMinusOne()
         {
             clsStaffMember aStaffMember = new clsStaffMember();
-            string error = "";
+            Int32 errorCount = 0;
             string firstName = "James";
             string lastName = "";
             lastName = lastName.PadRight(49, 'C');
-            error = aStaffMember.Valid(firstName, lastName);
-            Assert.AreEqual(error, "");
+            errorCount = aStaffMember.Valid(firstName, lastName).Count;
+            Assert.AreEqual(errorCount, 0);
         }
 
         [TestMethod]
         public void LastNameMaxBoundary()
         {
             clsStaffMember aStaffMember = new clsStaffMember();
-            string error = "";
+            Int32 errorCount = 0;
             string firstName = "James";
             string lastName = "";
-            lastName = lastName.PadRight(49, 'C');
-            error = aStaffMember.Valid(firstName, lastName);
-            Assert.AreEqual(error, "");
+            lastName = lastName.PadRight(50, 'C');
+            errorCount = aStaffMember.Valid(firstName, lastName).Count;
+            Assert.AreEqual(errorCount, 0);
         }
 
         [TestMethod]
         public void LastNameMaxPlusOne()
         {
             clsStaffMember aStaffMember = new clsStaffMember();
-            string error = "";
+            Int32 errorCount = 0;
             string firstName = "James";
             string lastName = "";
             lastName = lastName.PadRight(51, 'C');
-            error = aStaffMember.Valid(firstName, lastName);
-            Assert.AreNotEqual(error, "");
+            errorCount = aStaffMember.Valid(firstName, lastName).Count;
+            Assert.AreEqual(errorCount, 0);
         }
 
         [TestMethod]
         public void LastNameExtremeMax()
         {
             clsStaffMember aStaffMember = new clsStaffMember();
-            string error = "";
+            Int32 errorCount = 0;
             string firstName = "James";
             string lastName = "";
             lastName = lastName.PadRight(500, 'C');
-            error = aStaffMember.Valid(firstName, lastName);
-            Assert.AreNotEqual(error, "");
+            errorCount = aStaffMember.Valid(firstName, lastName).Count;
+            Assert.AreEqual(errorCount, 0);
         }
     }
 }

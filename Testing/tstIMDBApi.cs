@@ -15,12 +15,12 @@ namespace Testing
         }
 
         [TestMethod]
-        public void DescriptionPropertyOk()
+        public void PlotPropertyOk()
         {
             clsIMDBApi newReturnedFilm = new clsIMDBApi();
-            string description = "The plot of The Texas Chainsaw Massacre (1974)";
-            newReturnedFilm.Description = description;
-            Assert.AreEqual(newReturnedFilm.Description, description);
+            string plot = "The plot of The Texas Chainsaw Massacre (1974)";
+            newReturnedFilm.Plot = plot;
+            Assert.AreEqual(newReturnedFilm.Plot, plot);
         }
 
         [TestMethod]
@@ -33,12 +33,12 @@ namespace Testing
         }
 
         [TestMethod]
-        public void AgeRatingPropertyOk()
+        public void RatedPropertyOk()
         {
             clsIMDBApi newReturnedFilm = new clsIMDBApi();
-            string ageRating = "R";
-            newReturnedFilm.AgeRating = ageRating;
-            Assert.AreEqual(newReturnedFilm.AgeRating, ageRating);
+            string rated = "R";
+            newReturnedFilm.Rated = rated;
+            Assert.AreEqual(newReturnedFilm.Rated, rated);
         }
 
         [TestMethod]
@@ -64,8 +64,8 @@ namespace Testing
         {
             clsIMDBApi newReturnedFilm = new clsIMDBApi();
             string posterUrl = "https://m.media-amazon.com/images/M/MV5BZDI3OWE0ZWMtNGJjOS00N2E4LWFiOTAtZjQ4OTNiNzIwN2NkXkEyXkFqcGdeQXVyMTQxNzMzNDI@._V1_SX300.jpg";
-            newReturnedFilm.PosterUrl = posterUrl;
-            Assert.AreEqual(newReturnedFilm.PosterUrl, posterUrl);
+            newReturnedFilm.Poster = posterUrl;
+            Assert.AreEqual(newReturnedFilm.Poster, posterUrl);
         }
 
         [TestMethod]

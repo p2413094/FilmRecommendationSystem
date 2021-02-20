@@ -23,6 +23,7 @@ namespace FilmRecommendationSystem
                 //GenerateRecommendations(4);
                 //GenerateTemporaryRecommendations();
                 pnlRecommendations.Visible = false;
+                GetMostRecommendedFilms();
 
                 //AllFilms = new clsFilmCollection();
             }
@@ -41,46 +42,7 @@ namespace FilmRecommendationSystem
             }
             return filmTitles;
         }
-        
-        protected void btnSearch_Click(object sender, EventArgs e)
-        {
-            //AllFilms = new clsFilmCollection();
-            //string title = txtSearch.Text.ToLower();
-            //string originalTitle;
-            //foreach (clsFilm aFilm in AllFilms.AllFilms)
-            //{
-            //    originalTitle = aFilm.Title.ToLower();
-            //    if (originalTitle.Contains(title))
-            //    {
-            //        Label lbl1 = new Label();
-            //        lbl1.Text = aFilm.Title;
-                    
-            //        Panel2.Controls.Add(lbl1);
-            //        ListBox1.Items.Add(aFilm.Title);
-            //    }
-            //}
-            
-        }
-
-        protected void txtSearch_TextChanged(object sender, EventArgs e)
-        {
-            clsDataConnection DB = new clsDataConnection();
-            DB.AddParameter("@Title", txtSearch.Text);
-            DB.Execute("sproc_tblFilm_FilterByTitle");
-            Int32 recordCount = DB.Count;
-            Int32 index = 0;
-            string filmTitle;
-            while (index < recordCount)
-            {
-                filmTitle = Convert.ToString(DB.DataTable.Rows[index]["Title"]);
-                newList.Add(filmTitle);
-                index++;
-            }
-            GridView1.DataSource = newList;
-            GridView1.DataBind();
-        }
-
-       
+               
         protected void btnGetRecommendations_Click(object sender, EventArgs e)
         {
             Int32 genreId = Convert.ToInt32(ddlGenres.SelectedValue);
@@ -93,6 +55,64 @@ namespace FilmRecommendationSystem
             ddlGenres.DataValueField = "GenreId";
             ddlGenres.DataTextField = "GenreDesc";
             ddlGenres.DataBind();
+        }
+
+        void GetMostRecommendedFilms()
+        {
+            clsMostRecommendedFilmsCollection AllMostRecommendedFilms = new clsMostRecommendedFilmsCollection();
+            foreach (clsMostRecommendedFilms aMostRecommendedFilm in AllMostRecommendedFilms.AllMostRecommendedFilms)
+            {
+                GetImdbInformationForMostRecommendedFilms(aMostRecommendedFilm.FilmId);
+            }
+        }
+
+        void GetImdbInformationForMostRecommendedFilms(Int32 filmId)
+        {
+            clsDataConnection DB = new clsDataConnection();
+            DB.AddParameter("@FilmId", filmId);
+            DB.Execute("sproc_tblLinksFilterByFilmId");
+
+            string imdbId = DB.DataTable.Rows[0]["ImdbId"].ToString();
+
+            var client = new RestClient("https://movie-database-imdb-alternative.p.rapidapi.com/?i=" + imdbId);
+            var request = new RestRequest(Method.GET);
+            request.AddHeader("x-rapidapi-key", "2951edd025mshf1b0f9ca8a52c6ap1e71e9jsn67c827bdd770");
+            request.AddHeader("x-rapidapi-host", "movie-database-imdb-alternative.p.rapidapi.com");
+            IRestResponse response = client.Execute(request);
+            clsIMDBApi filmInfoReturned = new clsIMDBApi();
+            filmInfoReturned = Newtonsoft.Json.JsonConvert.DeserializeObject<clsIMDBApi>(response.Content);
+            var imdbIdOk = filmInfoReturned.Response;
+            Int32 count = 0;
+            string numberOfZeroes = "0";
+            string newImdbId = "tt";
+
+            //this part is inefficient - needs looking at 
+            while (imdbIdOk == false)
+            {
+                newImdbId = newImdbId + numberOfZeroes.PadRight(count, '0') + imdbId;
+
+                //may need the below if the search fails 
+                newImdbId = "tt" + numberOfZeroes.PadRight(count, '0') + imdbId;
+
+                //newImdbId = newImdbId.Replace(" ", string.Empty);
+                client = new RestClient("https://movie-database-imdb-alternative.p.rapidapi.com/?i=" + newImdbId);
+                request = new RestRequest(Method.GET);
+                request.AddHeader("x-rapidapi-key", "2951edd025mshf1b0f9ca8a52c6ap1e71e9jsn67c827bdd770");
+                request.AddHeader("x-rapidapi-host", "movie-database-imdb-alternative.p.rapidapi.com");
+                response = client.Execute(request);
+                filmInfoReturned = new clsIMDBApi();
+                filmInfoReturned = Newtonsoft.Json.JsonConvert.DeserializeObject<clsIMDBApi>(response.Content);
+                imdbIdOk = filmInfoReturned.Response;
+                count++;
+            }
+
+            ImageButton newClickableImage = new ImageButton();
+            newClickableImage.ImageUrl = filmInfoReturned.Poster;
+            newClickableImage.PostBackUrl = "FilmInformation.aspx?ImdbId=" + newImdbId;
+
+            newClickableImage.CssClass = "image";
+            pnlMostRecommendedFilms.Controls.Add(newClickableImage);
+            pnlMostRecommendedFilms.Visible = true;
         }
 
         void GetImdbInformation(Int32 filmId)
@@ -209,6 +229,9 @@ namespace FilmRecommendationSystem
             clsFilmRecommendationCollection FilmRecommendations = new clsFilmRecommendationCollection();
             clsFilmRecommendation aRecommendationToAdd = new clsFilmRecommendation();
 
+            clsMostRecommendedFilmsCollection AllMostRecommendedFilms = new clsMostRecommendedFilmsCollection();
+            clsMostRecommendedFilms aMostRecommendedFilm = new clsMostRecommendedFilms();
+
             foreach (clsFilmPrediction aTopTenPrediction in topTenPredictions)
             {
                 //aRecommendationToAdd = new clsFilmRecommendation();
@@ -216,6 +239,18 @@ namespace FilmRecommendationSystem
                 //aRecommendationToAdd.UserId = dummyUserId;
                 //FilmRecommendations.ThisFilmRecommendation = aRecommendationToAdd;
                 //FilmRecommendations.Add();
+
+                //aMostRecommendedFilm = new clsMostRecommendedFilms();
+                //AllMostRecommendedFilms.ThisMostRecommendedFilm.FilmId = aTopTenPrediction.FilmId;
+
+                //if (AllMostRecommendedFilms.ThisMostRecommendedFilm.Find(aTopTenPrediction.FilmId) == true)
+                //{
+                //    AllMostRecommendedFilms.IncreaseTimesRecommended();
+                //}
+                //else
+                //{
+                //    AllMostRecommendedFilms.Add();
+                //}
                 
                 GetImdbInformation(aTopTenPrediction.FilmId);
             }
@@ -226,9 +261,6 @@ namespace FilmRecommendationSystem
         protected void ImageButton1_Click(object sender, ImageClickEventArgs e)
         {
             Response.Redirect("FilmInformation.aspx?imdbId=tt0360717");
-        }
-
-        
-        List<string> newList = new List<string>();
+        }        
     }
 }

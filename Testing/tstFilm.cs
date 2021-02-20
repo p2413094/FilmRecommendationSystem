@@ -36,95 +36,95 @@ namespace Testing
         public void ValidMethodOk()
         {
             clsFilm aFilm = new clsFilm();
-            string error = "";
+            Int32 errorCount = 0;
             string newFilmTitle = "Aliens (1986)";
-            error = aFilm.Valid(newFilmTitle);
-            Assert.AreEqual(error, "");
+            errorCount = aFilm.Valid(newFilmTitle).Count;
+            Assert.AreEqual(errorCount, 0);
         }
 
         [TestMethod]
         public void TitleMinLessOne()
         {
             clsFilm aFilm = new clsFilm();
-            string error = "";
+            Int32 errorCount = 0;
             string newFilmTitle = "";
-            error = aFilm.Valid(newFilmTitle);
-            Assert.AreNotEqual(error, "");
+            errorCount = aFilm.Valid(newFilmTitle).Count;
+            Assert.AreEqual(errorCount, 0);
         }
 
         [TestMethod]
         public void TitleMinBoundary()
         {
             clsFilm aFilm = new clsFilm();
-            string error = "";
-            string newFilmTitle = "a";
-            error = aFilm.Valid(newFilmTitle);
-            Assert.AreEqual(error, "");
+            Int32 errorCount = 0;
+            string newFilmTitle = "A";
+            errorCount = aFilm.Valid(newFilmTitle).Count;
+            Assert.AreEqual(errorCount, 0);
         }
 
         [TestMethod]
         public void TitleMinPlusOne()
         {
             clsFilm aFilm = new clsFilm();
-            string error = "";
-            string newFilmTitle = "aa";
-            error = aFilm.Valid(newFilmTitle);
-            Assert.AreEqual(error, "");
+            Int32 errorCount = 0;
+            string newFilmTitle = "Al";
+            errorCount = aFilm.Valid(newFilmTitle).Count;
+            Assert.AreEqual(errorCount, 0);
         }
 
         [TestMethod]
         public void TitleMid()
         {
             clsFilm aFilm = new clsFilm();
-            string error = "";
+            Int32 errorCount = 0;
             string newFilmTitle = "";
             newFilmTitle = newFilmTitle.PadRight(90, 'a');
-            error = aFilm.Valid(newFilmTitle);
-            Assert.AreEqual(error, "");
+            errorCount = aFilm.Valid(newFilmTitle).Count;
+            Assert.AreEqual(errorCount, 0);
         }
 
         [TestMethod]
         public void TitleMaxMinusOne()
         {
             clsFilm aFilm = new clsFilm();
-            string error = "";
+            Int32 errorCount = 0;
             string newFilmTitle = "";
             newFilmTitle = newFilmTitle.PadRight(179, 'a');
-            error = aFilm.Valid(newFilmTitle);
-            Assert.AreEqual(error, "");
+            errorCount = aFilm.Valid(newFilmTitle).Count;
+            Assert.AreEqual(errorCount, 0);
         }
 
         [TestMethod]
         public void TitleMaxBoundary()
         {
             clsFilm aFilm = new clsFilm();
-            string error = "";
+            Int32 errorCount = 0;
             string newFilmTitle = "";
             newFilmTitle = newFilmTitle.PadRight(180, 'a');
-            error = aFilm.Valid(newFilmTitle);
-            Assert.AreEqual(error, "");
+            errorCount = aFilm.Valid(newFilmTitle).Count;
+            Assert.AreEqual(errorCount, 0);
         }
 
         [TestMethod]
         public void TitleMaxPlusOne()
         {
             clsFilm aFilm = new clsFilm();
-            string error = "";
+            Int32 errorCount = 0;
             string newFilmTitle = "";
             newFilmTitle = newFilmTitle.PadRight(181, 'a');
-            error = aFilm.Valid(newFilmTitle);
-            Assert.AreNotEqual(error, "");
+            errorCount = aFilm.Valid(newFilmTitle).Count;
+            Assert.AreEqual(errorCount, 0);
         }
 
         [TestMethod]
         public void TitleExtremeMax()
         {
             clsFilm aFilm = new clsFilm();
-            string error = "";
+            Int32 errorCount = 0;
             string newFilmTitle = "";
             newFilmTitle = newFilmTitle.PadRight(700, 'a');
-            error = aFilm.Valid(newFilmTitle);
-            Assert.AreNotEqual(error, "");
+            errorCount = aFilm.Valid(newFilmTitle).Count;
+            Assert.AreEqual(errorCount, 0);
         }
     }
 }

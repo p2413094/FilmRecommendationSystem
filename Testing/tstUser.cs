@@ -55,9 +55,9 @@ namespace Testing
         public void SuspendedPropertyOk()
         {
             clsUser aUser = new clsUser();
-            bool suspended = false;
-            aUser.Suspended = suspended;
-            Assert.AreEqual(aUser.Suspended, suspended);
+            string lockoutEnabled = "False";
+            aUser.LockoutEnabled = lockoutEnabled;
+            Assert.AreEqual(aUser.LockoutEnabled, lockoutEnabled);
         }
     }
 }
