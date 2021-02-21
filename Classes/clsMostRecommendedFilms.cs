@@ -2,8 +2,17 @@
 
 namespace Classes
 {
-    public class clsMostRecommendedFilms
+    public class clsMostRecommendedFilms : IComparable<clsMostRecommendedFilms>
     {
+        public int CompareTo (clsMostRecommendedFilms other)
+        {
+            if (this.TimesRecommended == other.TimesRecommended)
+            {
+                return this.TimesRecommended.CompareTo(other.TimesRecommended);
+            }
+            return this.TimesRecommended.CompareTo(other.TimesRecommended);
+        }
+
         private Int32 mFilmId;
         private Int32 mTimesRecommended;
 

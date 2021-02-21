@@ -101,19 +101,12 @@
         <br />
         <br />
         <br />
-        <div class="homepage-mostRecommendedFilms">
-            User favourite films
-        </div>
+        <asp:Panel ID="pnlUserFavouriteFilms" runat="server" CssClass="watchlist">
+            <div class="homepage-subHeader">User favourite films</div>
+        </asp:Panel>
 
-        <section class="watchlist">
-            <img src="Images/Endgame.jpg" class="image" />
-            <img src="Images/Nosferatu.jpg" class="image" />
-            <img src="Images/Bridesmaids.jpg" class="image" />
-            <img src="Images/The World's End.jpg" class="image" />
-            <img src="Images/Dunkirk.jpg" class="image" />
-            <img src="Images/Tron Legacy.jpg" class="image" />
-            <img src="Images/Ghostbusters.jpg" class="image" />
-        </section>
+
+
 
         <script>
             function onLoad() {

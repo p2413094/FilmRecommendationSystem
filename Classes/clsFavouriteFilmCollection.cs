@@ -56,5 +56,6 @@ namespace Classes
             DB.AddParameter("@FilmId", mThisFavouriteFilm.FilmId);
             DB.Execute("sproc_tblFavouriteFilms_Delete");
         }
+
     }
 }
