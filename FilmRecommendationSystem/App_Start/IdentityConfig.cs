@@ -7,6 +7,11 @@ using Microsoft.AspNet.Identity.Owin;
 using Microsoft.Owin;
 using Microsoft.Owin.Security;
 using FilmRecommendationSystem.Models;
+using System.Net;
+using System.Net.Mail;
+using System.Web;
+using SendGrid;
+using SendGrid.Helpers.Mail;
 
 namespace FilmRecommendationSystem
 {
@@ -15,7 +20,23 @@ namespace FilmRecommendationSystem
         public Task SendAsync(IdentityMessage message)
         {
             // Plug in your email service here to send an email.
-            return Task.FromResult(0);
+            var sendGridKey = "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";
+            return Execute(sendGridKey, message);
+        }
+
+        public Task Execute(string apiKey, IdentityMessage message)
+        {
+            var client = new SendGridClient(apiKey);
+            var msg = new SendGridMessage()
+            {
+                From = new EmailAddress("management@filmrecommender.co.uk"),
+                Subject = message.Subject,
+                PlainTextContent = message.Body,
+                HtmlContent = message.Body
+            };
+            msg.AddTo(new EmailAddress(message.Destination));
+            msg.SetClickTracking(false, false);
+            return client.SendEmailAsync(msg);
         }
     }
 

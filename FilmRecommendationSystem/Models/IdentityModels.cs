@@ -7,6 +7,7 @@ using Microsoft.AspNet.Identity.EntityFramework;
 using Microsoft.AspNet.Identity.Owin;
 using Microsoft.Owin.Security;
 using FilmRecommendationSystem.Models;
+using System.Collections.Specialized;
 
 namespace FilmRecommendationSystem.Models
 {
@@ -110,7 +111,7 @@ namespace FilmRecommendationSystem
 
         public static string GetUserConfirmationRedirectUrl(string code, string userId, HttpRequest request)
         {
-            var absoluteUri = "/Account/Confirm?" + CodeKey + "=" + HttpUtility.UrlEncode(code) + "&" + UserIdKey + "=" + HttpUtility.UrlEncode(userId);
+            var absoluteUri = "Register_EmailConfirmed?" + CodeKey + "=" + HttpUtility.UrlEncode(code) + "&" + UserIdKey + "=" + HttpUtility.UrlEncode(userId);
             return new Uri(request.Url, absoluteUri).AbsoluteUri.ToString();
         }
 
@@ -128,7 +129,6 @@ namespace FilmRecommendationSystem
             else
             {
                 response.Redirect("Register_ConfirmEmail.aspx");
-                //response.Redirect("~/");
             }
         }
     }
