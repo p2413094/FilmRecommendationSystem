@@ -6,6 +6,7 @@ using System.Linq;
 using System.Web;
 using System.Web.UI;
 using System.Web.UI.WebControls;
+using Classes;
 
 namespace FilmRecommendationSystem
 {
@@ -18,28 +19,34 @@ namespace FilmRecommendationSystem
 
         protected void btnResetPassword_Click(object sender, EventArgs e)
         {
-            var manager = Context.GetOwinContext().GetUserManager<ApplicationUserManager>();
-            var user = manager.FindByEmail(txtEmailAddress.Text);
-            if (user == null)
+            string code = IdentityHelper.GetCodeFromRequest(Request);
+            string email;
+            if (code != null)
             {
-                lblError.Text = "No user found";
-                return;
-            }
-            else
-            {
-                string resetToken = manager.GeneratePasswordResetToken(user.Id);
-            
-                var result = manager.ResetPassword(user.Id, resetToken, txtPasswordConfirmation.Text);
+                var manager = Context.GetOwinContext().GetUserManager<ApplicationUserManager>();
+
+                var user = manager.FindByEmail(txtEmailAddress.Text);
+                if (user == null)
+                {
+                    lblError.Text = "No user found";
+                    return;
+                }
+                var result = manager.ResetPassword(user.Id, code, txtPassword.Text);
                 if (result.Succeeded)
                 {
-                    Response.Redirect("Homepage.aspx");
-                    return;
+                    email = txtEmailAddress.Text;
+                    DateTime dateTimeReset = DateTime.Now;
 
-                    //remember that an email needs to be sent when the email is successfully changed 
+                    clsEmail AnEmail = new clsEmail(user.Email);
+                    AnEmail.SendNewPasswordConfirmationEmail(dateTimeReset);
+                    Response.Redirect("MyAccount.aspx");
+                    return;
                 }
                 lblError.Text = result.Errors.FirstOrDefault();
                 return;
             }
+
+            lblError.Text = "An error has occurred";
         }
     }
 }

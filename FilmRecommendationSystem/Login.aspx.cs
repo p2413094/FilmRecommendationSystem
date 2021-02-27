@@ -26,8 +26,6 @@ namespace FilmRecommendationSystem
 
                 //This doen't count login failures towards account lockout
                 //To enable password failures to trigger lockout, change to shouldLockout: true
-                string username = txtUsername.Text;
-                string password1 = txtPassword.Text;
                 var result = signinManager.PasswordSignIn(txtUsername.Text, txtPassword.Text, RememberMe.Checked, shouldLockout: false);
 
                 switch (result)
@@ -35,7 +33,7 @@ namespace FilmRecommendationSystem
                     case SignInStatus.Success:
                         //IdentityHelper.RedirectToReturnUrl(Request.QueryString["ReturnUrl"], Response);
 
-                        var user = manager.FindByName(username);
+                        var user = manager.FindByName(txtUsername.Text);
                         //user.LockoutEnabled = suspended;
                         user.LockoutEndDateUtc = DateTime.Now.AddDays(3);
                         user.LastLogin = DateTime.Now;

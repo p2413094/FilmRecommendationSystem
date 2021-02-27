@@ -105,7 +105,7 @@ namespace FilmRecommendationSystem
 
         public static string GetResetPasswordRedirectUrl(string code, HttpRequest request)
         {
-            var absoluteUri = "/Account/ResetPassword?" + CodeKey + "=" + HttpUtility.UrlEncode(code);
+            var absoluteUri = "ResetPassword.aspx?" + CodeKey + "=" + HttpUtility.UrlEncode(code);
             return new Uri(request.Url, absoluteUri).AbsoluteUri.ToString();
         }
 

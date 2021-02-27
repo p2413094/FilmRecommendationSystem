@@ -1,4 +1,4 @@
-﻿<%@ Page Language="C#" AutoEventWireup="true" CodeFile="CloseAccount.aspx.cs" Inherits="CloseAccount" %>
+﻿<%@ Page Language="C#" AutoEventWireup="true" CodeBehind="CloseAccount.aspx.cs" Inherits="FilmRecommendationSystem.CloseAccount" %>
 
 <!DOCTYPE html>
 
@@ -151,12 +151,10 @@
                 var confirmMessage = confirm("Are you sure you want to delete your account?");
                 if (confirmMessage == true) {
                     alert("Your account has been successfully deleted")
-                    location.href="Homepage.aspx";
                 }
                 else {
                     alert("Your account was not deleted");
                     location.href = "MyAccount.aspx";
-
                 }
             }
 

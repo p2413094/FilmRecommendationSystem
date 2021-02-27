@@ -6,6 +6,7 @@ using System.Linq;
 using System.Web;
 using System.Web.UI;
 using System.Web.UI.WebControls;
+using Classes;
 
 namespace FilmRecommendationSystem
 {
@@ -21,6 +22,12 @@ namespace FilmRecommendationSystem
                 var result = manager.ConfirmEmail(userId, code);
                 if (result.Succeeded)
                 {
+                    var user = manager.FindById(userId);
+                    clsEmail AnEmail = new clsEmail(user.Email);
+                    user.LockoutEnabled = false;
+                    user.LockoutEndDateUtc = null;
+                    manager.Update(user);
+                    AnEmail.SendAccountVerifiedEmail();
                     //successPanel.Visible = true;
                     return;
                 }

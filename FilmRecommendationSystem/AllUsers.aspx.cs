@@ -51,10 +51,14 @@ namespace FilmRecommendationSystem
             user.LockoutEnabled = suspended;
             user.LockoutEndDateUtc = DateTime.Now.AddDays(3);
 
+            clsEmail AnEmail = new clsEmail(user.Email);
+            DateTime lockoutEnd = Convert.ToDateTime(user.LockoutEndDateUtc);
             manager.Update(user);
 
+            AnEmail.SendUserSuspensionEmail(lockoutEnd);
+
+
             LoadData();
-            //remember that an email needs to be sent to the suspended user 
         }
     }
 }

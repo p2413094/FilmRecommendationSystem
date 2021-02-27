@@ -29,7 +29,7 @@ namespace FilmRecommendationSystem
             var client = new SendGridClient(apiKey);
             var msg = new SendGridMessage()
             {
-                From = new EmailAddress("management@filmrecommender.co.uk"),
+                From = new EmailAddress("no-reply@filmrecommender.co.uk"),
                 Subject = message.Subject,
                 PlainTextContent = message.Body,
                 HtmlContent = message.Body

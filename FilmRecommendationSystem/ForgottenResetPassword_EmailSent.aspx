@@ -1,10 +1,10 @@
-﻿<%@ Page Language="C#" AutoEventWireup="true" CodeBehind="ForgottenResetPassword.aspx.cs" Inherits="FilmRecommendationSystem.ForgottenResetPassword" %>
+﻿<%@ Page Language="C#" AutoEventWireup="true" CodeBehind="ForgottenResetPassword_EmailSent.aspx.cs" Inherits="FilmRecommendationSystem.ForgottenResetPassword_EmailSent" %>
 
 <!DOCTYPE html>
 
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head runat="server">
-    <title>Film recommender | Forgotten password</title>
+    <title>Film recommender | Confirm email address</title>
     <link rel="stylesheet" href="StyleSheet.css" />
 </head>
 
@@ -40,7 +40,7 @@
                 <br />
             </div>
         </section>
-       
+
         <br />
         <br />
         <br />
@@ -51,7 +51,7 @@
         <br />
         <div class="account">
             <p class="page-header">
-                Reset password  
+                Check your email address
             </p>
             <br />
             <br />
@@ -60,45 +60,21 @@
             <br />
             <br />
             <br />
-            
-            <p>
-                If you've forgotten your password or need to reset it, enter your account email
-                and we'll send you a link to change it.     
-            </p>
             <br />
+                An email with a link to reset your password has been sent to your email address. 
+                
             <br />
             <br />
             <div>
-                <div class="textentry-label">
-                Email address
-                </div>
-                <div class="textentry-field">
-                    <asp:TextBox ID="txtEmailAddress" TextMode="Email" runat="server"></asp:TextBox>
-                    <br />
-                    <asp:RequiredFieldValidator runat="server" ControlToValidate="txtEmailAddress" 
-                        ErrorMessage="Email field is required"></asp:RequiredFieldValidator>
-                    <br />
-                    <br />
-                    <asp:Label ID="lblError" runat="server"></asp:Label>
-                    <br />
-                    <br />
-                    <asp:Button ID="btnResetPassword" OnClick="btnResetPassword_Click" runat="server" Text="Reset password" CssClass="okbutton" />
-                    <br />
-                    <br />
-                </div>
-                <br />  
-                <br />
-                <br />
-               
-                
+                <button type="button" onclick="btnOk_Click()" id="btnOk" class="okbutton">Ok</button>
             </div>
             <br />
-        </div>
+            <br />
+            </div>
+
         <br />
         <br />
-        <br />
-        <br />
-        
+
         <div class="footer">
             <div class="links">
                 Help
@@ -111,14 +87,13 @@
                 Site NOT for rollout
             </div>
         </div>
-        
-    </form>
-    <script type="text/javascript">
-        function btnResetPassword_Click() {
-            location.href = "ResetPassword.aspx";
-        }
 
-        /* When the user clicks on the button,
+        <script>
+            function btnOk_Click() {
+                location.href = "Homepage.aspx";
+            }
+
+            /* When the user clicks on the button,
             toggle between hiding and showing the dropdown content */
             function myFunction() {
             document.getElementById("myDropdown").classList.toggle("show");
@@ -137,7 +112,9 @@
                 } else {
                 a[i].style.display = "none";
                 }
-            }}
-    </script>
+            }
+        }
+        </script>
+    </form>
 </body>
 </html>

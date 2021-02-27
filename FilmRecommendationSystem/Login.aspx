@@ -60,7 +60,7 @@
             <br />
 
             <div class="register-section">
-                <asp:Label runat="server" AssociatedControlID="txtUsername" CssClass="textentry-label">Username</asp:Label>
+                <asp:Label runat="server" AssociatedControlID="txtUsername" CssClass="textentry-label">Email</asp:Label>
                 <div class="textentry-field">
                     <asp:TextBox runat="server" ID="txtUsername"  CssClass="textentry-fieldsize"></asp:TextBox>
                     <asp:RequiredFieldValidator runat="server" ControlToValidate="txtUsername" ID="RequiredFieldValidator2"  ErrorMessage="Username is required"></asp:RequiredFieldValidator>
@@ -102,7 +102,7 @@
                     <br />
                     <button type="button" class="okbutton" onclick="btnLoginAdmin_Click()">Administrator log in</button>
                     <br />
-                    <a href="ResetPassword.aspx">Forgot/ need to reset password?</a>
+                    <a href="ForgottenResetPassword.aspx">Forgot/ need to reset password?</a>
                 </div>
             </div>
             <br />
