@@ -68,17 +68,6 @@ namespace FilmRecommendationSystem
             FilmList.Add(aFilm);
         }
 
-        private void ButtonSort_Click(object sender, EventArgs e)
-        {
-            FilmList.Sort();
-            pnlWatchList.Controls.Clear();
-
-            foreach (clsFilm aFilm in FilmList)
-            {
-                GetImdbInformation(aFilm.FilmId, aFilm.Title);
-            }
-        }
-
         void DisplayWatchLaterFilms(Int32 userId)
         {
             pnlWatchList.Controls.Clear();
@@ -188,6 +177,18 @@ namespace FilmRecommendationSystem
             DB.Execute("sproc_tblWatchList_Delete");
 
             DisplayWatchLaterFilms(userId);
+        }
+
+        protected void btnSort_Click(object sender, EventArgs e)
+        {
+            FilmList.Sort();
+            pnlWatchList.Controls.Clear();
+
+            foreach (clsFilm aFilm in FilmList)
+            {
+                GetImdbInformation(aFilm.FilmId, aFilm.Title);
+            }
+
         }
     }
 }

@@ -22,17 +22,16 @@ namespace FilmRecommendationSystem
             var manager = Context.GetOwinContext().GetUserManager<ApplicationUserManager>();
             var signinManager = Context.GetOwinContext().GetUserManager<ApplicationSignInManager>();
 
-
             Int32 userId = 50; //note that this UserId is hard-coded and temporary - the real one will be the one that you retrieve when you sign in 
             var user = manager.FindById(userId);
             manager.Delete(user);
             clsEmail AnEmail = new clsEmail(user.Email);
             AnEmail.SendAccountClosedEmail();
 
+            clsUserCollection AllUsers = new clsUserCollection();
+            AllUsers.RemoveUserFromSystem(userId);
+
             Response.Redirect("Homepage.aspx");
-
-            //remember that here you need to delete all data associated with the user, e.g. watch list, favourite films.
-
         }
     }
 }

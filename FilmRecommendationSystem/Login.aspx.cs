@@ -23,32 +23,27 @@ namespace FilmRecommendationSystem
             {
                 var manager = Context.GetOwinContext().GetUserManager<ApplicationUserManager>();
                 var signinManager = Context.GetOwinContext().GetUserManager<ApplicationSignInManager>();
-
-                //This doen't count login failures towards account lockout
-                //To enable password failures to trigger lockout, change to shouldLockout: true
-                var result = signinManager.PasswordSignIn(txtUsername.Text, txtPassword.Text, RememberMe.Checked, shouldLockout: false);
+                var result = signinManager.PasswordSignIn(txtUsername.Text, txtPassword.Text, RememberMe.Checked, shouldLockout: true);
+                
+                var user = manager.FindByName(txtUsername.Text);
 
                 switch (result)
                 {
                     case SignInStatus.Success:
-                        //IdentityHelper.RedirectToReturnUrl(Request.QueryString["ReturnUrl"], Response);
-
-                        var user = manager.FindByName(txtUsername.Text);
-                        //user.LockoutEnabled = suspended;
-                        user.LockoutEndDateUtc = DateTime.Now.AddDays(3);
+                        user.LockoutEnabled = false;
+                        user.LockoutEndDateUtc = null;
                         user.LastLogin = DateTime.Now;
+                        signinManager.UserManager.ResetAccessFailedCount(user.Id); 
                         manager.Update(user);
                         Response.Redirect("Homepage.aspx");
                         break;
                     case SignInStatus.LockedOut:
-                        Response.Redirect("https://www.google.co.uk");
-                        //Response.Redirect("/Account/Lockout");
+                        Response.Redirect("AccountLockout.aspx");
                         break;
                     case SignInStatus.RequiresVerification:
                         Response.Redirect(String.Format("/Account/TwoFactorAuthenticationSignIn?ReturnUrl={0}&RememberMe={1}",
                                                         Request.QueryString["ReturnUrl"],
-                                                        RememberMe.Checked),
-                                          true);
+                                                        RememberMe.Checked), true);
                         break;
                     case SignInStatus.Failure:
                     default:

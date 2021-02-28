@@ -6,6 +6,7 @@ using System.Web;
 using System.Web.UI;
 using System.Web.UI.WebControls;
 using Classes;
+using System.Configuration;
 
 namespace FilmRecommendationSystem
 {
@@ -70,6 +71,8 @@ namespace FilmRecommendationSystem
             }
         }
 
+
+        //the vast majority of this could be added to clsIMDB as a function and have it return a clsIMDB with the returned film information 
         void GetImdbInformation(Int32 filmId, string title)
         {
             clsDataConnection DB = new clsDataConnection();
@@ -80,7 +83,7 @@ namespace FilmRecommendationSystem
 
             var client = new RestClient("https://movie-database-imdb-alternative.p.rapidapi.com/?i=" + imdbId);
             var request = new RestRequest(Method.GET);
-            request.AddHeader("x-rapidapi-key", "2951edd025mshf1b0f9ca8a52c6ap1e71e9jsn67c827bdd770");
+            request.AddHeader("x-rapidapi-key", ConfigurationManager.AppSettings["RapidApiKey"]);
             request.AddHeader("x-rapidapi-host", "movie-database-imdb-alternative.p.rapidapi.com");
             IRestResponse response = client.Execute(request);
             clsIMDBApi filmInfoReturned = new clsIMDBApi();
@@ -95,9 +98,9 @@ namespace FilmRecommendationSystem
                 newImdbId = "tt" + numberOfZeroes.PadRight(count, '0') + imdbId;
                 newImdbId = newImdbId.Replace(" ", string.Empty);
                 client = new RestClient("https://movie-database-imdb-alternative.p.rapidapi.com/?i=" + newImdbId);
-                request = new RestRequest(Method.GET);
-                request.AddHeader("x-rapidapi-key", "2951edd025mshf1b0f9ca8a52c6ap1e71e9jsn67c827bdd770");
-                request.AddHeader("x-rapidapi-host", "movie-database-imdb-alternative.p.rapidapi.com");
+                //request = new RestRequest(Method.GET);
+                //request.AddHeader("x-rapidapi-key", ConfigurationManager.AppSettings["RapidApiKey"]);
+                //request.AddHeader("x-rapidapi-host", "movie-database-imdb-alternative.p.rapidapi.com");
                 response = client.Execute(request);
                 filmInfoReturned = new clsIMDBApi();
                 filmInfoReturned = Newtonsoft.Json.JsonConvert.DeserializeObject<clsIMDBApi>(response.Content);
@@ -162,12 +165,19 @@ namespace FilmRecommendationSystem
 
         private void ImgbtnRemove_Command(object sender, CommandEventArgs e)
         {
+            //could pass in multiple values here, i.e. the filmId and the container for 
+            //later deletion 
+                //see https://stackoverflow.com/questions/2389258/passing-multiple-argument-through-commandargument-of-button-in-asp-net
+
             string filmId = e.CommandArgument.ToString();
             clsDataConnection DB = new clsDataConnection();
             DB.AddParameter("@UserId", userId);
             DB.AddParameter("@FilmId", filmId);
             DB.Execute("sproc_tblFavouriteFilms_Delete");
 
+
+            //you could just try and get the sender's image container and then remove it from view
+            //rather than re-querying the IMDB api 
             DisplayFavouriteFilms();
         }
 

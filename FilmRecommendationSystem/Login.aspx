@@ -60,7 +60,7 @@
             <br />
 
             <div class="register-section">
-                <asp:Label runat="server" AssociatedControlID="txtUsername" CssClass="textentry-label">Email</asp:Label>
+                <asp:Label runat="server" AssociatedControlID="txtUsername" CssClass="textentry-label">Username</asp:Label>
                 <div class="textentry-field">
                     <asp:TextBox runat="server" ID="txtUsername"  CssClass="textentry-fieldsize"></asp:TextBox>
                     <asp:RequiredFieldValidator runat="server" ControlToValidate="txtUsername" ID="RequiredFieldValidator2"  ErrorMessage="Username is required"></asp:RequiredFieldValidator>

@@ -90,7 +90,8 @@
         <div class="page-header">
             My WatchList  
         </div>  
-       
+        
+        <asp:Button ID="btnSort" OnClick="btnSort_Click" runat="server" Text="Sort" />
         
         <br />
         <br />

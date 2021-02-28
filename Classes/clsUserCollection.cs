@@ -38,5 +38,30 @@ namespace Classes
                 index++;
             }
         }
+
+        //this needs to include favourite films, ratings, moods, recommendations, watch later and ASP.NET User table 
+        public void RemoveUserFromSystem(Int32 userId)
+        {
+            clsDataConnection DB = new clsDataConnection();
+            DB.AddParameter("@UserId", userId);
+            DB.Execute("sproc_tblFavouriteFilms_DeleteByUserId");
+
+            DB = new clsDataConnection();
+            DB.AddParameter("@UserId", userId);
+            DB.Execute("sproc_tblFilmMood_DeleteAllByUserId");
+
+            DB = new clsDataConnection();
+            DB.AddParameter("@UserId", userId);
+            DB.Execute("sproc_tblFilmRatings_DeleteAllByUserId");
+
+            DB = new clsDataConnection();
+            DB.AddParameter("@UserId", userId);
+            DB.Execute("sproc_tblFilmRecommendation_DeleteAllByUserId");
+
+            DB = new clsDataConnection();
+            DB.AddParameter("@UserId", userId);
+            DB.Execute("sproc_tblWatchList_DeleteAllByUserId");
+        }
+
     }
 }
