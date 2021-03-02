@@ -11,8 +11,17 @@ namespace FilmRecommendationSystem
 {
 
 
-    public partial class AllStaffMembers
+    public partial class AllUsersAndStaffMembers
     {
+
+        /// <summary>
+        /// lblAllPerson control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Label lblAllPerson;
 
         /// <summary>
         /// pnlError control.
@@ -33,6 +42,15 @@ namespace FilmRecommendationSystem
         protected global::System.Web.UI.WebControls.Panel pnlAllStaffMembers;
 
         /// <summary>
+        /// imgbtnAddNewStaffMember control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.ImageButton imgbtnAddNewStaffMember;
+
+        /// <summary>
         /// grdAllStaffMembers control.
         /// </summary>
         /// <remarks>
@@ -42,93 +60,102 @@ namespace FilmRecommendationSystem
         protected global::System.Web.UI.WebControls.GridView grdAllStaffMembers;
 
         /// <summary>
-        /// Panel1 control.
+        /// pnlNewStaffMember control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Panel Panel1;
+        protected global::System.Web.UI.WebControls.Panel pnlNewStaffMember;
 
         /// <summary>
-        /// Label4 control.
+        /// lblActionStaffMember control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Label Label4;
+        protected global::System.Web.UI.WebControls.Label lblActionStaffMember;
 
         /// <summary>
-        /// txtNewUserId control.
+        /// pnlNewStaffMemberUserId control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.TextBox txtNewUserId;
+        protected global::System.Web.UI.WebControls.Panel pnlNewStaffMemberUserId;
 
         /// <summary>
-        /// Label1 control.
+        /// ddlUserId control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Label Label1;
+        protected global::System.Web.UI.WebControls.DropDownList ddlUserId;
 
         /// <summary>
-        /// txtNewFirstName control.
+        /// txtNewStaffMemberFirstName control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.TextBox txtNewFirstName;
+        protected global::System.Web.UI.WebControls.TextBox txtNewStaffMemberFirstName;
 
         /// <summary>
-        /// Label2 control.
+        /// txtNewStaffMemberLastName control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Label Label2;
+        protected global::System.Web.UI.WebControls.TextBox txtNewStaffMemberLastName;
 
         /// <summary>
-        /// txtNewLastName control.
+        /// ddlPrivilegelevel control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.TextBox txtNewLastName;
+        protected global::System.Web.UI.WebControls.DropDownList ddlPrivilegelevel;
 
         /// <summary>
-        /// Label3 control.
+        /// chkStaffMemberSuspended control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Label Label3;
+        protected global::System.Web.UI.WebControls.CheckBox chkStaffMemberSuspended;
 
         /// <summary>
-        /// txtNewPrivilegeLevel control.
+        /// btnRegisterStaffMember control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.TextBox txtNewPrivilegeLevel;
+        protected global::System.Web.UI.WebControls.Button btnRegisterStaffMember;
 
         /// <summary>
-        /// btnAdd control.
+        /// pnlAllUsers control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Button btnAdd;
+        protected global::System.Web.UI.WebControls.Panel pnlAllUsers;
+
+        /// <summary>
+        /// grdAllUsers control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.GridView grdAllUsers;
     }
 }

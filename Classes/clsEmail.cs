@@ -82,6 +82,25 @@ namespace Classes
             return client.SendEmailAsync(msg);
         }
 
+        public Task SendNewStaffMemberNoticeEmail()
+        {
+            var client = new SendGridClient(sendGridKey);
+            var msg = new SendGridMessage()
+            {
+                From = new EmailAddress("no-reply@filmrecommender.co.uk"),
+                Subject = "Welcome!",
+                PlainTextContent = "You have successfully added as a new staff member " +
+                "for the FILM RECOMMENDER system. You now have staff member privileges" +
+                "in addition to being able to still access your user account.",
+                HtmlContent = "You have successfully added as a new staff member " +
+                "for the FILM RECOMMENDER system. You now have staff member privileges" +
+                "in addition to being able to still access your user account."
+            };
+
+            msg.AddTo(new EmailAddress(destination));
+            msg.SetClickTracking(false, false);
+            return client.SendEmailAsync(msg);
+        }
 
     }
 }

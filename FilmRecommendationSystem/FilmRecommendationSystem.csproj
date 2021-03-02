@@ -277,8 +277,7 @@
     <Content Include="Account\TwoFactorAuthenticationSignIn.aspx" />
     <Content Include="Account\VerifyPhoneNumber.aspx" />
     <Content Include="AllFilms.aspx" />
-    <Content Include="AllStaffMembers.aspx" />
-    <Content Include="AllUsers.aspx" />
+    <Content Include="AllUsersAndStaffMembers.aspx" />
     <Content Include="CloseAccount.aspx" />
     <Content Include="Content\bootstrap-grid.css" />
     <Content Include="Content\bootstrap-grid.min.css" />
@@ -603,19 +602,12 @@
     <Compile Include="AllFilms.aspx.designer.cs">
       <DependentUpon>AllFilms.aspx</DependentUpon>
     </Compile>
-    <Compile Include="AllStaffMembers.aspx.cs">
-      <DependentUpon>AllStaffMembers.aspx</DependentUpon>
+    <Compile Include="AllUsersAndStaffMembers.aspx.cs">
+      <DependentUpon>AllUsersAndStaffMembers.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
-    <Compile Include="AllStaffMembers.aspx.designer.cs">
-      <DependentUpon>AllStaffMembers.aspx</DependentUpon>
-    </Compile>
-    <Compile Include="AllUsers.aspx.cs">
-      <DependentUpon>AllUsers.aspx</DependentUpon>
-      <SubType>ASPXCodeBehind</SubType>
-    </Compile>
-    <Compile Include="AllUsers.aspx.designer.cs">
-      <DependentUpon>AllUsers.aspx</DependentUpon>
+    <Compile Include="AllUsersAndStaffMembers.aspx.designer.cs">
+      <DependentUpon>AllUsersAndStaffMembers.aspx</DependentUpon>
     </Compile>
     <Compile Include="App_Start\BundleConfig.cs" />
     <Compile Include="About.aspx.cs">
