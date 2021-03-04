@@ -36,91 +36,91 @@ namespace Testing
         public void ValidMethodOk()
         {
             clsLink aLink = new clsLink();
-            string error = "";
+            Int32 error = 0;
             string imdbId = "0072271";
-            error = aLink.Valid(imdbId);
-            Assert.AreEqual(error, "");
+            error = aLink.Valid(imdbId).Count;
+            Assert.AreEqual(error, 0);
         }
 
         [TestMethod]
         public void ImdbIdLessOne()
         {
             clsLink aLink = new clsLink();
-            string error = "";
+            Int32 error = 0;
             string imdbId = "";
-            error = aLink.Valid(imdbId);
-            Assert.AreNotEqual(error, "");
+            error = aLink.Valid(imdbId).Count;
+            Assert.AreNotEqual(error, 0);
         }
 
         [TestMethod]
         public void ImdbIdMinBoundary()
         {
             clsLink aLink = new clsLink();
-            string error = "";
+            Int32 error = 0;
             string imdbId = "0";
-            error = aLink.Valid(imdbId);
-            Assert.AreEqual(error, "");
+            error = aLink.Valid(imdbId).Count;
+            Assert.AreEqual(error, 0);
         }
 
         [TestMethod]
         public void ImdbIdMinPlusOne()
         {
             clsLink aLink = new clsLink();
-            string error = "";
+            Int32 error = 0;
             string imdbId = "00";
-            error = aLink.Valid(imdbId);
-            Assert.AreEqual(error, "");
+            error = aLink.Valid(imdbId).Count;
+            Assert.AreEqual(error, 0);
         }
 
         [TestMethod]
         public void ImdbIdMid()
         {
             clsLink aLink = new clsLink();
-            string error = "";
+            Int32 error = 0;
             string imdbId = "0000";
-            error = aLink.Valid(imdbId);
-            Assert.AreEqual(error, "");
+            error = aLink.Valid(imdbId).Count;
+            Assert.AreEqual(error, 0);
         }
 
         [TestMethod]
         public void ImdbIdMaxMinusOne()
         {
             clsLink aLink = new clsLink();
-            string error = "";
+            Int32 error = 0;
             string imdbId = "0000000";
-            error = aLink.Valid(imdbId);
-            Assert.AreEqual(error, "");
+            error = aLink.Valid(imdbId).Count;
+            Assert.AreEqual(error, 0);
         }
 
         [TestMethod]
         public void ImdbIdMaxBoundary()
         {
             clsLink aLink = new clsLink();
-            string error = "";
+            Int32 error = 0;
             string imdbId = "00000000";
-            error = aLink.Valid(imdbId);
-            Assert.AreEqual(error, "");
+            error = aLink.Valid(imdbId).Count;
+            Assert.AreEqual(error, 0);
         }
 
         [TestMethod]
         public void ImdbIdMaxPlusOne()
         {
             clsLink aLink = new clsLink();
-            string error = "";
+            Int32 error = 0;
             string imdbId = "000000000";
-            error = aLink.Valid(imdbId);
-            Assert.AreNotEqual(error, "");
+            error = aLink.Valid(imdbId).Count;
+            Assert.AreNotEqual(error, 0);
         }
 
         [TestMethod]
         public void ImdbIdExtremeMax()
         {
             clsLink aLink = new clsLink();
-            string error = "";
+            Int32 error = 0;
             string imdbId = "";
             imdbId = imdbId.PadRight(80, '0');
-            error = aLink.Valid(imdbId);
-            Assert.AreNotEqual(error, "");
+            error = aLink.Valid(imdbId).Count;
+            Assert.AreNotEqual(error, 0);
         }
     }
 }

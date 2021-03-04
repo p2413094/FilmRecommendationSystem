@@ -168,6 +168,15 @@ namespace FilmRecommendationSystem
         protected global::System.Web.UI.WebControls.Panel Panel3;
 
         /// <summary>
+        /// txtNew control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.TextBox txtNew;
+
+        /// <summary>
         /// ddlFilmMoods control.
         /// </summary>
         /// <remarks>

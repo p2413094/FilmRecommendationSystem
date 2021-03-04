@@ -6,7 +6,7 @@
 <head runat="server">
     <title>Film recommender</title>
     <link rel="stylesheet" href="StyleSheet.css" />
-    <script src="Scripts/jquery-3.5.1.js"></script>
+    <script src="Scripts/jquery-3.5.1.js" type="text/javascript"></script>
 
 </head>
 
@@ -171,6 +171,7 @@
         <br />
 
         <asp:Panel ID="Panel3" runat="server">
+            <asp:TextBox ID="txtNew" ToolTip="Enter Text Here" runat="server"></asp:TextBox>
             <asp:DropDownList ID="ddlFilmMoods" runat="server"></asp:DropDownList>
             <asp:Button ID="btnAssignTag" OnClientClick="return btnAssignTag_Clicked()" OnClick="btnAssignTag_Click" runat="server" Text="Add tag to film" />
         </asp:Panel>
@@ -191,6 +192,46 @@
         </div>
 
         <script type="text/javascript">
+            $(function () {
+                var $txt = $('input[id$=txtNew]');
+                var $ddl = $('select[id$=ddlFilmMoods]');
+                var $items = $('select[id$=ddlFilmMoods] option');
+
+                $txt.keyup(function () {
+                    searchDdl($txt.val());
+                });
+
+                function searchDdl(item) {
+                    $ddl.empty();
+                    var exp = new RegExp(item, "i");
+                    var arr = $.grep($items,
+                        function (n) {
+                            return exp.test($(n).text());
+                        });
+
+                    if (arr.length > 0) {
+                        countItemsFound(arr.length);
+                        $.each(arr, function () {
+                            $ddl.append(this);
+                            $ddl.get(0).selectedIndex = 0;
+                        }
+                        );
+                    }
+                    else {
+                        countItemsFound(arr.length);
+                        $ddl.append("<option>No Items Found</option>");
+                    }
+                }
+
+                function countItemsFound(num) {
+                    $("#para").empty();
+                    if ($txt.val().length) {
+                        $("#para").html(num + " items found");
+                    }
+
+                }
+            });
+
 
             function btnAssignTag_Clicked() {
                 var confirmMessage = confirm("Add tag to film?");
