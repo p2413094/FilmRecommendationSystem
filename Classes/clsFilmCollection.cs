@@ -48,6 +48,27 @@ namespace Classes
             return DB.Execute("sproc_tblFilm_Insert");
         }
 
+        public List<clsFilm> SearchForFilm(string searchText)
+        {
+            List<clsFilm> SearchResults = new List<clsFilm>();
+            clsFilm aFilm = new clsFilm();
+            clsDataConnection DB = new clsDataConnection();
+            DB.AddParameter("@Title", searchText);
+            DB.Execute("sproc_tblFilm_FilterBySimilarTitle");
+            Int32 recordCount = DB.Count;
+            Int32 index = 0;
+            while (index < recordCount)
+            {
+                aFilm = new clsFilm();
+                aFilm.FilmId = Convert.ToInt32(DB.DataTable.Rows[index]["FilmId"]);
+                aFilm.Title = DB.DataTable.Rows[index]["Title"].ToString();
+                SearchResults.Add(aFilm);
+                index++;
+            }
+
+            return SearchResults;
+        }
+
         public void Update()
         {
             clsDataConnection DB = new clsDataConnection();
@@ -70,26 +91,5 @@ namespace Classes
                 return false;
             }
         }
-
-        public List<clsFilm> SearchForFilm(string searchText)
-        {
-            List<clsFilm> searchResults = new List<clsFilm>();
-            clsFilm aFilm = new clsFilm();
-            clsDataConnection DB = new clsDataConnection();
-            DB.AddParameter("@Title", searchText);
-            DB.Execute("sproc_tblFilm_FilterByTitle");
-            Int32 recordCount = DB.Count;
-            Int32 index = 0;
-            while (index < recordCount)
-            {
-                aFilm = new clsFilm();
-                aFilm.FilmId = Convert.ToInt32(DB.DataTable.Rows[index]["FilmId"]);
-                aFilm.Title = DB.DataTable.Rows[index]["Title"].ToString();
-                searchResults.Add(aFilm);
-                index++;
-            }
-            return searchResults;
-        }
-
     }
 }

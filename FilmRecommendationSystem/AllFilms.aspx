@@ -75,7 +75,7 @@
         <br />
         <br />
         <br />
-        <br />
+        §<br />
         <br />
         <div class="account">
             <p class="page-header">
@@ -83,7 +83,9 @@
             </p>
             <br />
             <br />
-            <img src="Images/Add_plus icon.png" class="allstaffmembers-add" onclick="imgAdd_Clicked()" />
+            <asp:ImageButton ID="imgbtnAdd" OnClick="imgbtnAdd_Click" ImageUrl="~/Images/Add_plus icon.png" CausesValidation="false"
+                class="allstaffmembers-add"
+                runat="server" />
             <br />
             <br />
             <br />
@@ -116,7 +118,9 @@
 
 
             <asp:Panel ID="pnlAllFilms" runat="server">
-                <asp:GridView ID="grdAllFilms" AllowPaging="true" OnRowEditing="grdAllFilms_RowEditing" OnRowUpdating="grdAllFilms_RowUpdating" AutoGenerateColumns="false" runat="server">
+                <asp:TextBox ID="txtFilmSearch" OnTextChanged="txtFilmSearch_TextChanged" AutoPostBack="true" runat="server"></asp:TextBox>
+                <asp:GridView ID="grdAllFilms" AllowPaging="true" PageSize="20" OnRowEditing="grdAllFilms_RowEditing" OnRowUpdating="grdAllFilms_RowUpdating"
+                    AutoGenerateColumns="false" runat="server">
                     <Columns>
                         <asp:TemplateField HeaderText="FilmId">
                             <ItemTemplate>
@@ -127,15 +131,11 @@
                             <ItemTemplate>
                                 <asp:Label ID="lblTitle" Text='<%#Eval("Title")%>' runat="server"></asp:Label>
                             </ItemTemplate>
-                            <EditItemTemplate>
-                                <asp:TextBox ID="txtTitle" Text='<%#Eval("Title")%>' runat="server"></asp:TextBox>
-                            </EditItemTemplate>
                         </asp:TemplateField>
-                        <asp:CommandField ShowEditButton="true" />
+                        <asp:CommandField ShowEditButton="true"/>
                     </Columns>
                 </asp:GridView>
             </asp:Panel>
-
             <br />
             <br />
             <br />
@@ -143,15 +143,98 @@
             <br />
             <br />
 
-        <div>
-            <asp:Panel ID="Panel2" runat="server">
-                <asp:Label ID="Label3" runat="server" Text="Title"></asp:Label>
-                <asp:TextBox ID="txtNewTitle" runat="server"></asp:TextBox>
-                <br />
-                <br />
-                <asp:Button ID="btnAdd" runat="server" Text="Add" OnClick="btnAdd_Click" />
+
+
+        <asp:Panel ID="pnlActionFilm" CssClass="account" runat="server">
+
+                <asp:Label ID="lblActionFilm" class="page-subheader" runat="server">Add new film</asp:Label>
+            
+                <div class="register-section">
+                    <asp:Label runat="server" AssociatedControlID="txtFilmTitle" CssClass="textentry-label">Title</asp:Label>
+                    <div class="textentry-field">
+                        <asp:TextBox runat="server" placeholder="Ghostbusters (1984)" ID="txtFilmTitle" CssClass="textentry-fieldsize"></asp:TextBox>
+                        <asp:RequiredFieldValidator ControlToValidate="txtFilmTitle" runat="server" ErrorMessage="Field must not be blank"></asp:RequiredFieldValidator>
+                    </div>
+                </div>
+
+                <div class="register-section">
+                    <asp:Label runat="server" AssociatedControlID="ddlYear" CssClass="textentry-label">Year released: </asp:Label>
+                    <div class="textentry-field">
+                        <asp:DropDownList ID="ddlYear" runat="server"></asp:DropDownList>
+                        <asp:RequiredFieldValidator ControlToValidate="ddlYear" runat="server" ErrorMessage="Field must not be blank"></asp:RequiredFieldValidator>
+                    </div>
+                </div>
+
+
+            <div class="register-section">
+                <asp:Panel ID="pnlGenres" runat="server">
+                        <asp:Label runat="server" CssClass="textentry-label">Genre(s): </asp:Label>
+                        <div class="textentry-field">
+                            <asp:CheckBoxList ID="chkbxlstGenres" RepeatDirection="Vertical" RepeatColumns="3" runat="server">
+                                <asp:ListItem Value="1">Action</asp:ListItem>
+                                <asp:ListItem Value="2">Adventure</asp:ListItem>
+                                <asp:ListItem Value="3">Animation</asp:ListItem>
+                                <asp:ListItem Value="4">Children</asp:ListItem>
+                                <asp:ListItem Value="5">Comedy</asp:ListItem>
+                                <asp:ListItem Value="12">Crime</asp:ListItem>
+                                <asp:ListItem Value="18">Documentary</asp:ListItem>
+                                <asp:ListItem Value="13">Drama</asp:ListItem>
+                                <asp:ListItem Value="6">Fantasy</asp:ListItem>
+                                <asp:ListItem Value="16">Film-Noir</asp:ListItem>
+                                <asp:ListItem Value="14">Horror</asp:ListItem>
+                                <asp:ListItem Value="7">IMAX</asp:ListItem>
+                                <asp:ListItem Value="19">Musical</asp:ListItem>
+                                <asp:ListItem Value="11">Mystery</asp:ListItem>
+                                <asp:ListItem Value="8">Romance</asp:ListItem>
+                                <asp:ListItem Value="9">Sci-Fi</asp:ListItem>
+                                <asp:ListItem Value="15">Thriller</asp:ListItem>
+                                <asp:ListItem Value="17">War</asp:ListItem>
+                                <asp:ListItem Value="10">Western</asp:ListItem>
+                            </asp:CheckBoxList>
+                            <asp:RequiredFieldValidator ControlToValidate="ddlYear" runat="server" ErrorMessage="Field must not be blank"></asp:RequiredFieldValidator>
+                        </div>
+                </asp:Panel>
+            </div>
+
+            <div class="register-section">
+                <asp:Label runat="server" AssociatedControlID="txtImdbId" CssClass="textentry-label">IMDBId:</asp:Label>
+                <div class="textentry-field">
+                    <asp:TextBox runat="server" placeholder="087332" ID="txtImdbId" CssClass="textentry-fieldsize"></asp:TextBox>
+                    <asp:RequiredFieldValidator ControlToValidate="txtImdbId" runat="server" ErrorMessage="Field must not be blank"></asp:RequiredFieldValidator>
+                    <asp:CustomValidator runat="server"
+                        ValidationGroup="vldgrpFilm"
+                        EnableClientScript="true"
+                        ErrorMessage="IMDBId must be between 0-50 characters."
+                        ClientValidationFunction="ValidateNewStaffMemberLastName" 
+                        ControlToValidate="txtImdbId">
+                    </asp:CustomValidator>
+                </div>
+            </div>
+
+            <div class="register-section">
+                <div class="textentry-label"></div>
+                <div class="textentry-field">
+                    <asp:Button ID="btnActionFilm" OnClick="btnActionFilm_Click" 
+                        Text="ADD NEW FILM"
+                        ValidationGroup="vldgrpNewStaffMember" 
+                        runat="server" CssClass="registerbutton" />
+                    <asp:Button ID="btnActionFilmCancel" OnClick="btnActionFilmCancel_Click"
+                        CssClass="registerbutton"
+                        Text="CANCEL CHANGES" CausesValidation="false"
+                        runat="server" />
+                </div>
+            </div>
+            <asp:Panel ID="pnlActionFilmError" runat="server">
+                <div class="register-section">
+                </div>
             </asp:Panel>
-        </div>
+
+        </asp:Panel>
+            <asp:Panel ID="Panel2" runat="server">
+
+            </asp:Panel>
+
+    </div>
             
             <br />
             <br />
@@ -244,13 +327,9 @@
             <br />
             <br />
 
-        </div>
-
         <script>
-            var count = 0;
-
             function onLoad() {
-                document.getElementById("rowAdd").style.visibility = "hidden";
+
             }
 
             function btnReturnToHomepage_Click() {
@@ -261,125 +340,42 @@
                 document.getElementById("rowAdd").style.visibility = "visible";
             }
 
-            function btnEdit_Clicked() {
-                if (count == 0) {
-                    document.getElementById("txtTitle").className = "textbox-semitransparent";
-                    document.getElementById("txtTitle").readOnly = false;
-
-                    document.getElementById("txtYearReleased").className = "textbox-semitransparent";
-                    document.getElementById("txtYearReleased").readOnly = false;
-
-                    document.getElementById("txtGenre").className = "textbox-semitransparent";
-                    document.getElementById("txtGenre").readOnly = false;
-
-                    document.getElementById("txtIMDB").className = "textbox-semitransparent";
-                    document.getElementById("txtIMDB").readOnly = false;
-
-                    document.getElementById("txtTmIMDB").className = "textbox-semitransparent";
-                    document.getElementById("txtTmIMDB").readOnly = false;
-
-                    document.getElementById("icnEdit").src = "Images/Green%20tick_save.png";
-
-                    count++;
+            function btnActionFilm_Click() {
+                var confirmMessage = confirm("Are you sure you want to add a new new film?");
+                if (confirmMessage == true) {
+                    alert("Film added!");
+                    return true;
                 }
                 else {
+                    alert("Film was not added");
+                    return false;
+                }
+            }
+
+            function btnEdit_Clicked() {
                     var confirmMessage = confirm("Are you sure you want to update the record?");
                     if (confirmMessage == true) {
                         alert("Record updated");                     
                     }
                     else {
                         alert("Record was not updated");
-                        
-                    }
-                    document.getElementById("icnEdit").src = "Images/Edit%20icon.png";
-                    document.getElementById("txtTitle").className = "textbox-transparent";
-                    document.getElementById("txtTitle").readOnly = true;
-
-                    document.getElementById("txtYearReleased").className = "textbox-transparent";
-                    document.getElementById("txtYearReleased").readOnly = true;
-
-                    document.getElementById("txtGenre").className = "textbox-transparent";
-                    document.getElementById("txtGenre").readOnly = true;
-
-                    document.getElementById("txtIMDB").className = "textbox-transparent";
-                    document.getElementById("txtIMDB").readOnly = true;
-
-                    document.getElementById("txtTmIMDB").className = "textbox-transparent";
-                    document.getElementById("txtTmIMDB").readOnly = true;
-
-                    count = 0;
-                }              
+                    }              
             }
-          
-            function btnSave_Clicked() {
-                var confirmMessage = confirm("Are you sure you want to add a new new film?");
-                if (confirmMessage == true) {
-                    alert("Film added!");                   
-                    document.getElementById("txtAddTitle").className = "textbox-transparent";
-                    document.getElementById("txtAddTitle").readOnly = true;
-
-                    document.getElementById("txtAddYearReleased").className = "textbox-transparent";
-                    document.getElementById("txtAddYearReleased").readOnly = true;
-
-                    document.getElementById("txtAddGenre").className = "textbox-transparent";
-                    document.getElementById("txtAddGenre").readOnly = true;
-
-                    document.getElementById("txtAddImdbId").className = "textbox-transparent";
-                    document.getElementById("txtAddImdbId").readOnly = true;
-
-                    document.getElementById("txtAddTmImdbId").className = "textbox-transparent";
-                    document.getElementById("txtAddTmImdbId").readOnly = true;                
-                }
-                else {
-                    alert("Film was not added");
-                }
-            }
-
-
+         
 
             function DeleteFilm() {
                 var confirmMessage = confirm("Delete film?");
                 if (confirmMessage == true) {
                     alert("Film has been successfully deleted");
-                    document.getElementById("rowToyStory").style.display = "none";
+                    return true;
                 }
                 else {
-                    alert("Film not deleted")
+                    alert("Film not deleted");
+                    return false;
                 }
             }
 
-            function UnsuspendUserAccount() {
-                var confirmMessage = confirm("Unsuspend user account?");
-                if (confirmMessage == true) {
-                    alert("User unsuspended");
-                    document.getElementById("btnUnsuspend").innerText = "Suspend user";
-                }
-                else {
-                    alert("User still suspended")
-                }
-            }
 
-            /* When the user clicks on the button,
-            toggle between hiding and showing the dropdown content */
-            function myFunction() {
-            document.getElementById("myDropdown").classList.toggle("show");
-            }
-
-            function filterFunction() {
-            var input, filter, ul, li, a, i;
-            input = document.getElementById("myInput");
-            filter = input.value.toUpperCase();
-            div = document.getElementById("myDropdown");
-            a = div.getElementsByTagName("a");
-            for (i = 0; i < a.length; i++) {
-                txtValue = a[i].textContent || a[i].innerText;
-                if (txtValue.toUpperCase().indexOf(filter) > -1) {
-                a[i].style.display = "";
-                } else {
-                a[i].style.display = "none";
-                }
-            }
-            }
         </script>
         
         <br />

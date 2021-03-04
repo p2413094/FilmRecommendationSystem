@@ -64,6 +64,13 @@ namespace Classes
             DB.Execute("sproc_tblFilmGenre_DeleteAllByFilmIdAndGenreId");
         }
 
+        public void DeleteByFilmId()
+        {
+            clsDataConnection DB = new clsDataConnection();
+            DB.AddParameter("@FilmId", mThisFilmGenre.FilmId);
+            DB.Execute("sproc_tblFilmGenre_DeleteAllByFilmId");
+        }
+
         public void GetAllFilmsByGenre(int genreId)
         {
             clsDataConnection DB = new clsDataConnection();

@@ -1,4 +1,8 @@
 ﻿using System;
+using System.Collections.Generic;
+using Classes;
+using System.Text.RegularExpressions;
+using System.Linq;
 
 namespace Classes
 {
@@ -19,18 +23,26 @@ namespace Classes
         }
 
 
-        public string Valid(string imdbId)
+        public List<string> Valid(string imdbId)
         {
-            string error = "";
+            List<string> ErrorList = new List<string>();
+            Regex illicitCharacters = new Regex ("[a-zA-Z()!@±!£$%^&*?><{}+_=-]");
+            bool containsIllicitCharacter = illicitCharacters.IsMatch(imdbId);
+
             if (imdbId.Length > 8)
             {
-                error = "The ImdbId must not be more than 8 characters";
+                ErrorList.Add("The ImdbId must not be more than 8 characters");
             }
             if (imdbId.Length == 0)
             {
-                error = "The ImdbId must be more than 1 character";
+                ErrorList.Add("The ImdbId must be more than 1 character");
+            }            
+            if(containsIllicitCharacter)
+            {
+                ErrorList.Add("Illicit characters are not allowed");
             }
-            return error;
+
+            return ErrorList;
         }
 
         public Boolean Find(int filmId)
@@ -40,7 +52,6 @@ namespace Classes
             DB.Execute("sproc_tblLinksFilterByFilmId");
             if (DB.Count == 1)
             {
-                mFilmId = Convert.ToInt32(DB.DataTable.Rows[0]["FilmId"]);
                 mImdbId = Convert.ToInt32(DB.DataTable.Rows[0]["ImdbId"]);
                 return true;
             }

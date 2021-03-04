@@ -1,6 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
 using Classes;
+using System.Text.RegularExpressions;
+using System.Linq;
 
 namespace Classes
 {
@@ -34,21 +36,15 @@ namespace Classes
         public List<string> Valid(string title)
         {
             List<string> errorList = new List<string>();
-            clsFilmCollection AllFilms = new clsFilmCollection();
-            Boolean exists = AllFilms.FilmAlreadyExistsCheck(title);
-
-            if (title.Length > 180)
-            {
-                errorList.Add("The film title must not be more than 180 characters");
-            }
             if (title.Length == 0)
             {
                 errorList.Add("The film title must be more than 1 character");
             }
-            if (exists == true)
+            if (title.Length > 180)
             {
-                errorList.Add("Film already exists");
+                errorList.Add("The film title must not be more than 180 characters");
             }
+
             return errorList;
         }
 

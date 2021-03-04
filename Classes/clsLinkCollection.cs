@@ -65,5 +65,17 @@ namespace Classes
             DB.AddParameter("@ImdbId", mThisLink.ImdbId);
             DB.Execute("sproc_tblLinks_Update");
         }
+
+        public bool ImdbIdAlreadyExistsCheck(int imdbId)
+        {
+            clsDataConnection DB = new clsDataConnection();
+            DB.AddParameter("@ImdbId", imdbId);
+            DB.Execute("sproc_tblLinks_FilterByImdbId");
+            if (DB.Count != 0)
+            {
+                return true;
+            }
+            return false;
+        }
     }
 }
