@@ -33,6 +33,33 @@ namespace FilmRecommendationSystem
         protected global::System.Web.UI.WebControls.Panel Panel2;
 
         /// <summary>
+        /// btnGenre control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Button btnGenre;
+
+        /// <summary>
+        /// btnMood control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Button btnMood;
+
+        /// <summary>
+        /// pnlSearchBy control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Panel pnlSearchBy;
+
+        /// <summary>
         /// ddlGenres control.
         /// </summary>
         /// <remarks>
@@ -40,6 +67,15 @@ namespace FilmRecommendationSystem
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.DropDownList ddlGenres;
+
+        /// <summary>
+        /// ddlMoods control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.DropDownList ddlMoods;
 
         /// <summary>
         /// btnGetRecommendations control.

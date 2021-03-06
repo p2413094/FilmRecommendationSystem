@@ -19,7 +19,12 @@ namespace FilmRecommendationSystem
         {
             if (IsPostBack == false)
             {
+
+
+
+
                 LoadGenres();
+                LoadMoods();
                 //GenerateRecommendations(4);
                 //GenerateTemporaryRecommendations();
                 pnlRecommendations.Visible = false;
@@ -58,6 +63,20 @@ namespace FilmRecommendationSystem
             ddlGenres.DataValueField = "GenreId";
             ddlGenres.DataTextField = "GenreDesc";
             ddlGenres.DataBind();
+            
+            ddlGenres.Visible = false;
+        }
+
+        void LoadMoods()
+        {
+            clsMoodCollection AllMoods = new clsMoodCollection();
+            ddlMoods.CssClass = "slctGenreMood";
+            ddlMoods.DataSource = AllMoods.AllMoods;
+            ddlMoods.DataValueField = "MoodId";
+            ddlMoods.DataTextField = "MoodDesc";
+            ddlMoods.DataBind();
+
+            ddlMoods.Visible = false;
         }
 
         void GetMostRecommendedFilms()
@@ -356,6 +375,16 @@ namespace FilmRecommendationSystem
         protected void ImageButton1_Click(object sender, ImageClickEventArgs e)
         {
             Response.Redirect("FilmInformation.aspx?imdbId=tt0360717");
-        }        
+        }
+
+        protected void btnGenre_Click(object sender, EventArgs e)
+        {
+            ddlGenres.Visible = true;
+        }
+
+        protected void btnMood_Click(object sender, EventArgs e)
+        {
+            ddlMoods.Visible = true;
+        }
     }
 }

@@ -61,16 +61,21 @@
             </p>
 
             <div>
-                <button type="button" id="btnGenre" onclick="btnGenre_Clicked()" class="recommendoption">genre</button>
-                <button type="button" id="btnMood" onclick="btnMood_Clicked()" class="recommendoption">mood</button>
-                <button type="button" id="btnBoth" onclick="btnBoth_Clicked()" class="recommendoption">both</button>
+                <asp:Button ID="btnGenre" ToolTip="Gets you recommendations based on genre" OnClick="btnGenre_Click"
+                    CssClass="recommendoption" runat="server" Text="genre" />
+                <asp:Button ID="btnMood" ToolTip="Gets you recommendations based on mood" OnClick="btnMood_Click"
+                    CssClass="recommendoption" runat="server" Text="mood" />
             </div>
             <br />
             <br />
 
-            <div>
-                <asp:DropDownList ID="ddlGenres" runat="server" CssClass="slctGenreMood"></asp:DropDownList>
-            </div>
+
+
+            <asp:Panel ID="pnlSearchBy" runat="server">
+                <asp:DropDownList ID="ddlGenres" CssClass="slctGenreMood" runat="server"></asp:DropDownList>
+                <asp:DropDownList AutoPostBack="true" ID="ddlMoods" CssClass="slctGenreMood" runat="server"></asp:DropDownList>
+            </asp:Panel>
+
 
 
             <br />
@@ -110,11 +115,7 @@
 
         <script>
             function onLoad() {
-                //document.getElementById("btnGetRecommendations").style.display = "none";
-                document.getElementById("secYourRecommendations").style.display = "none";
-                document.getElementById("slctGenre").style.display = "none";
-                document.getElementById("slctMood").style.display = "none";
-                document.getElementById("ddlGenres").style.display = "none";
+                //document.getElementById("secYourRecommendations").style.display = "none";
             }
 
             function hyplnkSearch_Clicked() {
@@ -138,24 +139,15 @@
                 }
             });
 
-
             function btnGenre_Clicked() {
-                document.getElementById("slctGenre").style.display = "inline";
-                document.getElementById("btnGetRecommendations").style.display = "inline";
-
-                document.getElementById("lstGenres").style.display = "inline";
+                document.getElementById("ddlGenres").style.display = "inline";
             }
 
             function btnMood_Clicked() {
-                document.getElementById("slctMood").style.display = "inline";
-                document.getElementById("btnGetRecommendations").style.display = "inline"
+                document.getElementById("ddlMoods").style.display = "inline-block";
             }
 
-            function btnBoth_Clicked() {
-                document.getElementById("slctGenre").style.display = "inline";
-                document.getElementById("slctMood").style.display = "inline";
-                document.getElementById("btnGetRecommendations").style.display = "inline";
-            }
+
 
             function GetRecommendations() {
                 document.getElementById("secYourRecommendations").style.display = "block";
