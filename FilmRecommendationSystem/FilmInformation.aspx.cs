@@ -20,8 +20,8 @@ namespace FilmRecommendationSystem
         bool ratingExists = false;
         protected void Page_Load(object sender, EventArgs e)
         {
-            if (!IsPostBack)
-            {
+            //if (!IsPostBack)
+            //{
                 pnlError.Visible = false;
                 //pnlFilmInformation.Visible = false;
                 string imdbId; //= Request.QueryString["imdbId"];
@@ -30,11 +30,12 @@ namespace FilmRecommendationSystem
                 imdbId = "tt0114709";
 
                 //DisplayFilm(imdbId);
-                //DisplayUserAssignedMoods();
-
                 DisplayAllMoods();
 
-            }
+                DisplayUserAssignedMoods();
+
+
+            //}
 
         }
 
@@ -135,13 +136,14 @@ namespace FilmRecommendationSystem
 
                     Panel pnlRemoveContainer = new Panel();
                     pnlRemoveContainer.CssClass = "removeContainer";
-                    ImageButton imgbtnRemove = new ImageButton();
-                    imgbtnRemove.CssClass = "image";
-                    imgbtnRemove.ImageUrl = "Images/Remove.png";
-                    imgbtnRemove.CommandArgument = DB.DataTable.Rows[index]["MoodId"].ToString();
-                    imgbtnRemove.OnClientClick = "return btnRemoveTag_Clicked()";
-                    imgbtnRemove.Command += ImgbtnRemove_Command;
-                    pnlRemoveContainer.Controls.Add(imgbtnRemove);
+                    ImageButton imgbtnRemoveTag = new ImageButton();
+                    imgbtnRemoveTag.CssClass = "image";
+                    imgbtnRemoveTag.ImageUrl = "Images/Remove.png";
+                    imgbtnRemoveTag.OnClientClick = "return btnRemoveTag_Clicked()";
+                    imgbtnRemoveTag.CommandArgument = DB.DataTable.Rows[index]["MoodId"].ToString();
+                    imgbtnRemoveTag.Command += ImgbtnRemoveTag_Command;
+
+                    pnlRemoveContainer.Controls.Add(imgbtnRemoveTag);
                     pnlTag.Controls.Add(pnlRemoveContainer);
 
                     pnlMyTags.Controls.Add(pnlTag);
@@ -155,17 +157,7 @@ namespace FilmRecommendationSystem
             }
         }
 
-        void DisplayAllMoods()
-        {
-            clsMoodCollection AllMoods = new clsMoodCollection();
-            //AllMoods.AllMoods.Sort();
-            ddlFilmMoods.DataSource = AllMoods.AllMoods;
-            ddlFilmMoods.DataValueField = "MoodId";
-            ddlFilmMoods.DataTextField = "MoodDesc";
-            ddlFilmMoods.DataBind();
-        }
-
-        private void ImgbtnRemove_Command(object sender, CommandEventArgs e)
+        protected void ImgbtnRemoveTag_Command(object sender, CommandEventArgs e)
         {
             clsFilmMoodCollection AllFilmMoods = new clsFilmMoodCollection();
             AllFilmMoods.ThisFilmMood.UserId = userId;
@@ -174,15 +166,27 @@ namespace FilmRecommendationSystem
             AllFilmMoods.Delete();
 
             DisplayUserAssignedMoods();
+
+        }
+
+        void DisplayAllMoods()
+        {
+            clsMoodCollection AllMoods = new clsMoodCollection();
+            ddlFilmMoods.DataSource = AllMoods.AllMoods;
+            ddlFilmMoods.DataValueField = "MoodId";
+            ddlFilmMoods.DataTextField = "MoodDesc";
+            ddlFilmMoods.DataBind();
         }
 
         protected void btnAssignTag_Click(object sender, EventArgs e)
         {
-            //string test = ddlFilmMoods.SelectedItem.Text;
             clsFilmMoodCollection aFilmMood = new clsFilmMoodCollection();
             aFilmMood.ThisFilmMood.UserId = userId;
+            aFilmMood.ThisFilmMood.FilmId = filmId;
             aFilmMood.ThisFilmMood.MoodId = Convert.ToInt32(ddlFilmMoods.SelectedItem.Value);
             aFilmMood.Add();
+
+            DisplayUserAssignedMoods();
         }
         
         protected void imgbtnFavourite_Click(object sender, ImageClickEventArgs e)

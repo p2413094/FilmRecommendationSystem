@@ -82,18 +82,18 @@ namespace Classes
             return client.SendEmailAsync(msg);
         }
 
-        public Task SendNewStaffMemberNoticeEmail()
+        public Task SendNewStaffMemberStandardNoticeEmail(string privilegeLevel)
         {
             var client = new SendGridClient(sendGridKey);
             var msg = new SendGridMessage()
             {
                 From = new EmailAddress("no-reply@filmrecommender.co.uk"),
                 Subject = "Welcome!",
-                PlainTextContent = "You have successfully added as a new staff member " +
-                "for the FILM RECOMMENDER system. You now have staff member privileges" +
+                PlainTextContent = "You have been successfully added as a new staff member with" + privilegeLevel
+                + "privileges for the FILM RECOMMENDER system. You now have extended privileges" +
                 "in addition to being able to still access your user account.",
-                HtmlContent = "You have successfully added as a new staff member " +
-                "for the FILM RECOMMENDER system. You now have staff member privileges" +
+                HtmlContent = "You have been successfully added as a new staff member with" + privilegeLevel
+                + "privileges for the FILM RECOMMENDER system. You now have extended privileges" +
                 "in addition to being able to still access your user account."
             };
 
@@ -101,6 +101,5 @@ namespace Classes
             msg.SetClickTracking(false, false);
             return client.SendEmailAsync(msg);
         }
-
     }
 }

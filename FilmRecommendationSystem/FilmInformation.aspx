@@ -76,7 +76,7 @@
                 <asp:Label ID="lblTitle" CssClass="headerText" runat="server"></asp:Label>
             </div>
             <div class="imageContainer">
-                <asp:Image ID="imgFilmPoster" ImageUrl="~/Images/King Kong.jpg" runat="server" CssClass="image" />
+                <asp:Image ID="imgFilmPoster" ImageUrl="~/Images/ToyStory.jpg" runat="server" CssClass="image" />
                 <div class="overlayContainer">
                     <div class="leftItem">
                         <asp:ImageButton ID="imgbtnFavourite" ImageUrl="~/Images/Favourite.png" CssClass="image" OnClick="imgbtnFavourite_Click" runat="server" />
@@ -102,8 +102,13 @@
                         </asp:DropDownList>
                         <asp:Button ID="btnAddEditRating" OnClick="btnAddEditRating_Click" runat="server"/>
                     </div>
+                    <br />
+                    <asp:Panel ID="Panel3" runat="server">
+                            <asp:TextBox ID="txtNew" ToolTip="Enter Text Here" runat="server"></asp:TextBox>
+                            <asp:DropDownList ID="ddlFilmMoods" runat="server"></asp:DropDownList>
+                            <asp:Button ID="btnAssignTag" OnClientClick="return btnAssignTag_Clicked()" OnClick="btnAssignTag_Click" runat="server" Text="Add tag to film" />
+                        </asp:Panel>
                 </div>
-
 
             </div>
             <asp:Panel ID="pnlContentContainer" CssClass="contentContainer" runat="server">
@@ -169,14 +174,6 @@
 
         <br />
         <br />
-
-        <asp:Panel ID="Panel3" runat="server">
-            <asp:TextBox ID="txtNew" ToolTip="Enter Text Here" runat="server"></asp:TextBox>
-            <asp:DropDownList ID="ddlFilmMoods" runat="server"></asp:DropDownList>
-            <asp:Button ID="btnAssignTag" OnClientClick="return btnAssignTag_Clicked()" OnClick="btnAssignTag_Click" runat="server" Text="Add tag to film" />
-        </asp:Panel>
-
-
 
         <div class="footer">
             <div class="links">

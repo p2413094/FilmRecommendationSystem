@@ -20,15 +20,11 @@ namespace FilmRecommendationSystem
             pnlAllUsers.Visible = true;
             lblActionStaffMember.Text = "Add new staff member";
 
-            //if (!IsPostBack)
-            //{
-                //LoadUserData();
-                pnlNewStaffMember.Visible = false;
-                //LoadStaffMemberData();
-                pnlAllStaffMembers.Visible = false;
-            pnlAllUsers.Visible = true;
-            LoadUserData();
-            //}
+            //LoadUserData();
+            pnlNewStaffMember.Visible = false;
+            LoadStaffMemberData();
+            pnlAllStaffMembers.Visible = true;
+            //pnlAllUsers.Visible = true;
         }
 
         protected void btnRegisterStaffMember_Click(object sender, EventArgs e)
@@ -36,11 +32,12 @@ namespace FilmRecommendationSystem
             string firstName = txtNewStaffMemberFirstName.Text;
             string lastName = txtNewStaffMemberLastName.Text;
             Int32 userId = Convert.ToInt32(ddlUserId.SelectedItem.Value);
+            Int32 privilegeLevelId = Convert.ToInt32(ddlPrivilegelevel.SelectedValue);
             Boolean suspended = chkStaffMemberSuspended.Checked;
 
             clsStaffMemberCollection AllStaffMembers = new clsStaffMemberCollection();
             AllStaffMembers.ThisStaffMember.UserId = userId;
-            AllStaffMembers.ThisStaffMember.PrivilegeLevelId = 1;
+            AllStaffMembers.ThisStaffMember.PrivilegeLevelId = privilegeLevelId;
             AllStaffMembers.ThisStaffMember.FirstName = firstName;
             AllStaffMembers.ThisStaffMember.LastName = lastName;
             AllStaffMembers.ThisStaffMember.Allowed = suspended;
@@ -51,6 +48,9 @@ namespace FilmRecommendationSystem
 
             if (editStaffMember == true)
             {
+                //need to do something here to check if new privilege level
+                //has changed or not  
+
                 if (suspended == true)
                 {
                     DateTime suspendedEndDate = DateTime.Now.AddDays(3);
@@ -64,10 +64,8 @@ namespace FilmRecommendationSystem
             else
             {
                 AllStaffMembers.Add();            
-                AnEmail.SendNewStaffMemberNoticeEmail();
+                //AnEmail.SendNewStaffMemberNoticeEmail();
             }
-
-
 
 
             LoadStaffMemberData();
@@ -105,6 +103,7 @@ namespace FilmRecommendationSystem
             txtNewStaffMemberFirstName.Text = ((Label)grdAllStaffMembers.Rows[rowIndex].FindControl("lblFirstName")).Text;
             txtNewStaffMemberLastName.Text = ((Label)grdAllStaffMembers.Rows[rowIndex].FindControl("lblLastName")).Text;
             Int32 privilegeLevel = Convert.ToInt32(((Label)grdAllStaffMembers.Rows[rowIndex].FindControl("lblPrivilegeLevelId")).Text);
+            ddlPrivilegelevel.SelectedValue = privilegeLevel.ToString();
 
             btnRegisterStaffMember.Text = "UPDATE STAFF MEMBER";
             pnlNewStaffMemberUserId.Visible = false;
