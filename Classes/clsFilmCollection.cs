@@ -76,6 +76,47 @@ namespace Classes
             DB.AddParameter("@Title", mThisFilm.Title);
             DB.Execute("sproc_tblFilm_Update");
         }
+        
+        public void Delete()
+        {
+            clsDataConnection DB = new clsDataConnection();
+            DB.AddParameter("@FilmId", mThisFilm.FilmId);
+            DB.Execute("sproc_tblFilmGenre_DeleteAllByFilmId");
+
+            DB = new clsDataConnection();
+            DB.AddParameter("@FilmId", mThisFilm.FilmId);
+            DB.Execute("sproc_tblFilmMood_DeleteByFilmId");
+            
+            DB = new clsDataConnection();
+            DB.AddParameter("@FilmId", mThisFilm.FilmId);
+            DB.Execute("sproc_tblLinks_DeleteByFilmId");
+
+            DB = new clsDataConnection();
+            DB.AddParameter("@FilmId", mThisFilm.FilmId);
+            DB.Execute("sproc_tblFavouriteFilm_DeleteByFilmId");
+            
+            DB = new clsDataConnection();
+            DB.AddParameter("@FilmId", mThisFilm.FilmId);
+            DB.Execute("sproc_tblFilmRatings_DeleteByFilmId");
+            
+            DB = new clsDataConnection();
+            DB.AddParameter("@FilmId", mThisFilm.FilmId);
+            DB.Execute("sproc_tblMostRecommendedFilms_DeleteByFilmId");
+
+            DB = new clsDataConnection();
+            DB.AddParameter("@FilmId", mThisFilm.FilmId);
+            DB.Execute("sproc_tblWatchList_DeleteByFilmId");
+
+            DB = new clsDataConnection();
+            DB.AddParameter("@FilmId", mThisFilm.FilmId);
+            DB.Execute("sproc_tblFilmRecommendation_DeleteByFilmId");
+   
+
+            DB = new clsDataConnection();
+            DB.AddParameter("@FilmId", mThisFilm.FilmId);
+            DB.Execute("sproc_tblFilm_Delete");
+        }
+
         public Boolean FilmAlreadyExistsCheck(string title)
         {
             title = title.ToLower();
@@ -91,5 +132,6 @@ namespace Classes
                 return false;
             }
         }
+
     }
 }

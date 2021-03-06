@@ -119,8 +119,8 @@
 
             <asp:Panel ID="pnlAllFilms" runat="server">
                 <asp:TextBox ID="txtFilmSearch" OnTextChanged="txtFilmSearch_TextChanged" AutoPostBack="true" runat="server"></asp:TextBox>
-                <asp:GridView ID="grdAllFilms" AllowPaging="true" PageSize="20" OnRowEditing="grdAllFilms_RowEditing" OnRowUpdating="grdAllFilms_RowUpdating"
-                    AutoGenerateColumns="false" runat="server">
+                <asp:GridView ID="grdAllFilms" AllowPaging="true" PageSize="20" OnRowEditing="grdAllFilms_RowEditing" OnRowUpdating="grdAllFilms_RowUpdating" 
+                    OnRowDeleting="grdAllFilms_RowDeleting" AutoGenerateColumns="false" runat="server">
                     <Columns>
                         <asp:TemplateField HeaderText="FilmId">
                             <ItemTemplate>
@@ -132,7 +132,7 @@
                                 <asp:Label ID="lblTitle" Text='<%#Eval("Title")%>' runat="server"></asp:Label>
                             </ItemTemplate>
                         </asp:TemplateField>
-                        <asp:CommandField ShowEditButton="true"/>
+                        <asp:CommandField ShowEditButton="true" ShowDeleteButton="true"/>
                     </Columns>
                 </asp:GridView>
             </asp:Panel>

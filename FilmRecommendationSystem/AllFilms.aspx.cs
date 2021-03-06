@@ -296,5 +296,13 @@ namespace FilmRecommendationSystem
             
             //pnlActionFilm.Visible = false;
         }
+
+        protected void grdAllFilms_RowDeleting(object sender, GridViewDeleteEventArgs e)
+        {
+            Int32 filmId = Convert.ToInt32(((Label)grdAllFilms.Rows[e.RowIndex].FindControl("lblFilmId")).Text);
+            clsFilmCollection AllFilms = new clsFilmCollection();
+            AllFilms.ThisFilm.FilmId = filmId;
+            AllFilms.Delete();
+        }
     }
 }
