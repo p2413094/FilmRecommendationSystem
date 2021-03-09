@@ -7,7 +7,7 @@
     <title>Film recommender | Login</title>
     <link rel="stylesheet" href="StyleSheet.css" />
 </head>
-<body class="body">
+<body class="body" onload="onLoad()">
     <form runat="server">
         <p class="logo textlink">
             <a href="Homepage.aspx">FILM RECOMMENDER</a>
@@ -23,51 +23,26 @@
         <br />
         <br />
 
-        <section class="search">
-            <div class="textentry-label">
-                SEARCH
-            </div>
+        <div class="search">
+                <a onclick="hyplnkSearch_Clicked()" class="label">SEARCH</a>
             <div class="textentry-container">
-                <input autocomplete="off" class="textentry-field" type="text" oninput="myFunction()" id="myInput" onkeyup="filterFunction()" />
-                <div>
-                    <div id="myDropdown" class="dropdown-content">
-                        <a href="FilmInformation.aspx">The Terminator (1984)</a>
-                        <a>Little Women (2019)</a>
-                    </div>
-                </div>
-                <br />
-                <br />
+                <input autocomplete="off" class="textentry-field" type="text" id="myInput" onkeyup="filterSearchFunction()" />
             </div>
-        </section>
+        </div>
 
-        <br />
-        <br />
-        <br />
-        <br />
-        <br />
-        <br />
-        <br />
-        <br />
-        <div class="account">
-            <p class="page-header">
-                Login
-            </p>
-            <br />
-            <br />
-            <br />
-            <br />
-            <br />
-            <br />
-
-            <div class="register-section">
+        <div class="mainContent">
+            <div class="header">Login</div>
+            <asp:Panel ID="pnlLoginError" CssClass="loginSectionError" runat="server">
+                <asp:Label ID="lblError" runat="server"></asp:Label>
+            </asp:Panel>
+            <div class="loginSection">
                 <asp:Label runat="server" AssociatedControlID="txtUsername" CssClass="textentry-label">Username</asp:Label>
                 <div class="textentry-field">
                     <asp:TextBox runat="server" ID="txtUsername"  CssClass="textentry-fieldsize"></asp:TextBox>
                     <asp:RequiredFieldValidator runat="server" ControlToValidate="txtUsername" ID="RequiredFieldValidator2"  ErrorMessage="Username is required"></asp:RequiredFieldValidator>
                 </div>
             </div>
-
-            <div class="register-section">
+            <div class="loginSection">
                 <asp:Label ID="lblPassword" runat="server" AssociatedControlID="txtPassword" Text="Password" CssClass="textentry-label"></asp:Label>
                 <div class="textentry-field">
                     <asp:TextBox ID="txtPassword" TextMode="Password" runat="server" CssClass="textentry-fieldsize"></asp:TextBox>
@@ -75,37 +50,21 @@
                     <asp:RequiredFieldValidator ControlToValidate="txtPassword" ID="rqValPassword" runat="server" ErrorMessage="Password is required."></asp:RequiredFieldValidator>
                 </div>
             </div>
-
-            <div class="register-section">
+            <div class="loginSection">
                 <asp:Label runat="server" CssClass="textentry-label" AssociatedControlID="RememberMe">Remember me?</asp:Label>
                 <div class="textentry-field">
                     <asp:CheckBox runat="server" ID="RememberMe" />
                 </div>
             </div>
-
-            <div class="register-section">
-                <asp:Label ID="Label1" runat="server" CssClass="textentry-label"></asp:Label>
+            <div class="loginSection">
+                <asp:Label ID="Label1" Text="" Visible="true" runat="server" CssClass="textentry-label"></asp:Label>
                 <div class="textentry-field">
-                    <asp:Button ID="btnLogin" runat="server" OnClick="btnLogin_Click" Text="Log in" CssClass="okbutton" />
+                    <asp:Button ID="btnLogin" runat="server" OnClick="btnLogin_Click" Text="Log in" CssClass="proceedButton" />
                     <br />
-                    <asp:Label ID="lblError" runat="server"></asp:Label>
-                </div>
-            </div>
-
-            <div>
-                <div class="textentry-field">
-                    <br />
-                    <br />
-                    <br />
-                    <br />
-                    <button type="button" class="okbutton" onclick="btnLoginStaffMember_Click()" id="btnLoginStaffMember">Staff member login</button>
-                    <br />
-                    <button type="button" class="okbutton" onclick="btnLoginAdmin_Click()">Administrator log in</button>
                     <br />
                     <a href="ForgottenResetPassword.aspx">Forgot/ need to reset password?</a>
                 </div>
             </div>
-            <br />
         </div>
 
         <div class="footer">
@@ -122,40 +81,31 @@
         </div>
 
     </form>
-        <script type="text/javascript">     
-            function btnLogin_Click() {
-                location.href = "MyAccount.aspx";
-            }
-            
-            function btnLoginStaffMember_Click() {
-                location.href = "MyAccountStaffMember.aspx";
-            }
-            
-            function btnLoginAdmin_Click() {
-                location.href = "MyAccountAdministrator.aspx";
+        <script>
+            function onLoad() {
+                document.getElementById("pnlLoginError").style.display = "none";
             }
 
-            /* When the user clicks on the button,
-            toggle between hiding and showing the dropdown content */
-            function myFunction() {
-            document.getElementById("myDropdown").classList.toggle("show");
-            }
+            function hyplnkSearch_Clicked() {
+                var searchText = document.getElementById("myInput").value;
 
-            function filterFunction() {
-            var input, filter, ul, li, a, i;
-            input = document.getElementById("myInput");
-            filter = input.value.toUpperCase();
-            div = document.getElementById("myDropdown");
-            a = div.getElementsByTagName("a");
-            for (i = 0; i < a.length; i++) {
-                txtValue = a[i].textContent || a[i].innerText;
-                if (txtValue.toUpperCase().indexOf(filter) > -1) {
-                a[i].style.display = "";
-                } else {
-                a[i].style.display = "none";
+                if (searchText.length == 0) {
+                    alert("Search text cannot be blank");
+                }
+                else {
+                    location.href = "SearchResults.aspx?searchText=" + searchText;
                 }
             }
-        }
+
+            myInput.addEventListener("keyup", function (event) {
+                // Number 13 is the "Enter" key on the keyboard
+                if (event.keyCode === 13) {
+                    // Cancel the default action, if needed
+                    event.preventDefault();
+                    // Trigger the button element with a click
+                    hyplnkSearch_Clicked();
+                }
+            });
         </script>
 </body>
 </html>

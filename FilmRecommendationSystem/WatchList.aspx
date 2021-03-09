@@ -62,57 +62,28 @@
         <br />
         <br />
 
-        <section class="search">
-            <div class="textentry-label">
-                SEARCH
-            </div>
+        <div class="search">
+                <a onclick="hyplnkSearch_Clicked()" class="label">SEARCH</a>
             <div class="textentry-container">
-                <input autocomplete="off" class="textentry-field" type="text" oninput="myFunction()" id="myInput" onkeyup="filterFunction()" />
-                <div>
-                    <div id="myDropdown" class="searchdropdown-content">
-                        <a href="FilmInformation.aspx">The Terminator (1984)</a>
-                        <a>Little Women (2019)</a>
-                    </div>
-                </div>
-                <br />
-                <br />
+                <input autocomplete="off" class="textentry-field" type="text" id="myInput" onkeyup="filterSearchFunction()" />
             </div>
-        </section>
-       
-        <br />
-        <br />
-        <br />
-        <br />
-        <br />
-        <br />
-        <br />
-        <br />
-        <div class="page-header">
-            My WatchList  
-        </div>  
+        </div>
         
+        <asp:Panel ID="pnlWatchList" runat="server" CssClass="mainContent">
+            <div class="header">My watchlist</div>
+        </asp:Panel>        
+
         <asp:Button ID="btnSort" OnClick="btnSort_Click" runat="server" Text="Sort" />
         
-        <br />
-        <br />
-        <br />
-        <br />
-
-        <asp:Panel ID="pnlError" runat="server">
-            <label class="page-subheader">Error</label>
-                <br />
-                <br />
+        <asp:Panel ID="pnlError" CssClass="mainContent" runat="server">
+            <div class="header">Error</div>
+            <div class="textSection">
                 There was an error fulfilling your request; please try again later.
-                <br />
-                <br />
-                <br />
-                <button type="button" id="btnReturnToHomepage" onclick="btnReturnToHomepage_Click()" class="registerbutton">Ok</button>
+            </div>
+            <div class="textSection">
+                <button type="button" id="btnReturnToHomepage" onclick="btnReturnToHomepage_Click()" class="proceedButton">Ok</button>
+            </div>
         </asp:Panel>
-
-
-            <asp:Panel ID="pnlWatchList" runat="server" CssClass="watchlist">
-            </asp:Panel>        
-
 
         <div class="footer">
             <div class="links">
@@ -128,6 +99,27 @@
         </div>
 
         <script>
+            function hyplnkSearch_Clicked() {
+                var searchText = document.getElementById("myInput").value;
+
+                if (searchText.length == 0) {
+                    alert("Search text cannot be blank");
+                }
+                else {
+                    location.href = "SearchResults.aspx?searchText=" + searchText;
+                }
+            }
+
+            myInput.addEventListener("keyup", function (event) {
+                // Number 13 is the "Enter" key on the keyboard
+                if (event.keyCode === 13) {
+                    // Cancel the default action, if needed
+                    event.preventDefault();
+                    // Trigger the button element with a click
+                    hyplnkSearch_Clicked();
+                }
+            });
+
             function btnReturnToHomepage_Click() {
                 location.href = "Homepage.aspx";
             }

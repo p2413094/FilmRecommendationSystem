@@ -17,14 +17,19 @@ namespace FilmRecommendationSystem
         protected void Page_Load(object sender, EventArgs e)
         {
             pnlError.Visible = false;
-            pnlAllUsers.Visible = true;
+            pnlAllUsers.Visible = false;
+            pnlAllStaffMembers.Visible = false;
+            pnlNewStaffMember.Visible = false;
+
             lblActionStaffMember.Text = "Add new staff member";
 
-            //LoadUserData();
-            pnlNewStaffMember.Visible = false;
-            LoadStaffMemberData();
-            pnlAllStaffMembers.Visible = true;
-            //pnlAllUsers.Visible = true;
+            bool administrator = Convert.ToBoolean(Session["Standard"]);
+
+            if (administrator)
+            {
+                LoadStaffMemberData();
+            }
+            LoadUserData();
         }
 
         protected void btnRegisterStaffMember_Click(object sender, EventArgs e)

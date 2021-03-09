@@ -20,7 +20,26 @@ namespace FilmRecommendationSystem
             userId = 1; //Request.QueryString["UserId"];
             DisplayFavouriteFilms();
             //TempRecommendations();
+
+
+            pnlFavouriteFilms.Visible = true;
         }
+        
+        
+        public static List<string> SearchFilms(string prefixTest, int count)
+        {
+            clsFilmCollection AllFilms = new clsFilmCollection();
+            List<string> filmTitles = new List<string>();
+            foreach (clsFilm aFilm in AllFilms.AllFilms)
+            {
+                if (aFilm.Title.Contains(prefixTest))
+                {
+                    filmTitles.Add(aFilm.Title);
+                }
+            }
+            return filmTitles;
+        }
+
 
         private void imgbtnWatchList_AddToWatchList(object sender, CommandEventArgs e)
         {
@@ -109,7 +128,7 @@ namespace FilmRecommendationSystem
             }
 
             Panel pnlFilm = new Panel();
-            pnlFilm.CssClass = "imagewithtext";
+            pnlFilm.CssClass = "filmWithTextContainer";
 
             ImageButton imgbtnFilmPoster = new ImageButton();
             imgbtnFilmPoster.CssClass = "image";
@@ -119,7 +138,7 @@ namespace FilmRecommendationSystem
             pnlFilm.Controls.Add(imgbtnFilmPoster);
 
             Panel pnlFilmTitle = new Panel();
-            pnlFilmTitle.CssClass = "textcontainer";
+            pnlFilmTitle.CssClass = "textContainer";
             Label lblFilmTitle = new Label();
             lblFilmTitle.Text = title;
             pnlFilmTitle.Controls.Add(lblFilmTitle);
@@ -185,7 +204,7 @@ namespace FilmRecommendationSystem
         void TempRecommendations()
         {
             Panel pnlFilm = new Panel();
-            pnlFilm.CssClass = "imagewithtext";
+            pnlFilm.CssClass = "filmWithTextContainer";
 
             ImageButton imgbtnFilmPoster = new ImageButton();
             imgbtnFilmPoster.CssClass = "image";

@@ -20,15 +20,31 @@ namespace FilmRecommendationSystem
             pnlError.Visible = false;
             pnlWatchList.Visible = false;
             //userId = //this would normally be done dynamically 
-            DisplayWatchLaterFilms(userId);
+            //DisplayWatchLaterFilms(userId);
 
-            //TempRecommendations();
+            TempRecommendations();
         }
+        
+        
+        public static List<string> SearchFilms(string prefixTest, int count)
+        {
+            clsFilmCollection AllFilms = new clsFilmCollection();
+            List<string> filmTitles = new List<string>();
+            foreach (clsFilm aFilm in AllFilms.AllFilms)
+            {
+                if (aFilm.Title.Contains(prefixTest))
+                {
+                    filmTitles.Add(aFilm.Title);
+                }
+            }
+            return filmTitles;
+        }
+
 
         void TempRecommendations()
         {
             Panel pnlFilm = new Panel();
-            pnlFilm.CssClass = "imagewithtext";
+            pnlFilm.CssClass = "filmWithTextContainer";
 
             ImageButton imgbtnFilmPoster = new ImageButton();
             imgbtnFilmPoster.CssClass = "image";
@@ -133,7 +149,7 @@ namespace FilmRecommendationSystem
             }
 
             Panel pnlFilm = new Panel();
-            pnlFilm.CssClass = "imagewithtext";
+            pnlFilm.CssClass = "textContainer";
 
             ImageButton imgbtnFilmPoster = new ImageButton();
             imgbtnFilmPoster.CssClass = "image";

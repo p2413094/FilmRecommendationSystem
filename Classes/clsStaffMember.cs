@@ -74,11 +74,11 @@ namespace Classes
             return errorList;
         }
 
-        public Boolean Find(int staffMemberId)
+        public Boolean Find(int userId)
         {
             clsDataConnection DB = new clsDataConnection();
-            DB.AddParameter("@StaffMemberId", staffMemberId);
-            DB.Execute("sproc_tblStaffMember_FilterByStaffMemberId");
+            DB.AddParameter("@StaffMemberId", userId);
+            DB.Execute("sproc_tblStaffMember_FilterByUserId");
             if (DB.Count == 1)
             {
                 mStaffMemberId = Convert.ToInt32(DB.DataTable.Rows[0]["StaffMemberId"]);

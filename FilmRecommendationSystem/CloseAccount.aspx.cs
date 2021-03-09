@@ -14,24 +14,46 @@ namespace FilmRecommendationSystem
     {
         protected void Page_Load(object sender, EventArgs e)
         {
-
+            pnlError.Visible = false;
         }
+
+        public static List<string> SearchFilms(string prefixTest, int count)
+        {
+            clsFilmCollection AllFilms = new clsFilmCollection();
+            List<string> filmTitles = new List<string>();
+            foreach (clsFilm aFilm in AllFilms.AllFilms)
+            {
+                if (aFilm.Title.Contains(prefixTest))
+                {
+                    filmTitles.Add(aFilm.Title);
+                }
+            }
+            return filmTitles;
+        }
+
 
         protected void btnDeleteAccount_Click(object sender, EventArgs e)
         {
-            var manager = Context.GetOwinContext().GetUserManager<ApplicationUserManager>();
-            var signinManager = Context.GetOwinContext().GetUserManager<ApplicationSignInManager>();
+            try
+            {
+                var manager = Context.GetOwinContext().GetUserManager<ApplicationUserManager>();
+                var signinManager = Context.GetOwinContext().GetUserManager<ApplicationSignInManager>();
 
-            Int32 userId = 50; //note that this UserId is hard-coded and temporary - the real one will be the one that you retrieve when you sign in 
-            var user = manager.FindById(userId);
-            manager.Delete(user);
-            clsEmail AnEmail = new clsEmail(user.Email);
-            AnEmail.SendAccountClosedEmail();
+                Int32 userId = 50; //note that this UserId is hard-coded and temporary - the real one will be the one that you retrieve when you sign in 
+                var user = manager.FindById(userId);
+                manager.Delete(user);
+                clsEmail AnEmail = new clsEmail(user.Email);
+                AnEmail.SendAccountClosedEmail();
 
-            clsUserCollection AllUsers = new clsUserCollection();
-            AllUsers.RemoveUserFromSystem(userId);
+                clsUserCollection AllUsers = new clsUserCollection();
+                AllUsers.RemoveUserFromSystem(userId);
 
-            Response.Redirect("Homepage.aspx");
+                Response.Redirect("Homepage.aspx");
+            }
+            catch
+            {
+                pnlError.Visible = true;
+            }
         }
     }
 }
