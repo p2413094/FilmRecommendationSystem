@@ -15,22 +15,22 @@ namespace FilmRecommendationSystem
     {
 
         /// <summary>
-        /// ListBox1 control.
+        /// Panel1 control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.ListBox ListBox1;
+        protected global::System.Web.UI.WebControls.Panel Panel1;
 
         /// <summary>
-        /// Panel2 control.
+        /// pnlFilmSection control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Panel Panel2;
+        protected global::System.Web.UI.WebControls.Panel pnlFilmSection;
 
         /// <summary>
         /// btnGenre control.
@@ -78,6 +78,15 @@ namespace FilmRecommendationSystem
         protected global::System.Web.UI.WebControls.DropDownList ddlMoods;
 
         /// <summary>
+        /// pnlGetRecommendationsContainer control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Panel pnlGetRecommendationsContainer;
+
+        /// <summary>
         /// btnGetRecommendations control.
         /// </summary>
         /// <remarks>
@@ -85,15 +94,6 @@ namespace FilmRecommendationSystem
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.Button btnGetRecommendations;
-
-        /// <summary>
-        /// Panel1 control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.Panel Panel1;
 
         /// <summary>
         /// pnlRecommendations control.
@@ -121,5 +121,14 @@ namespace FilmRecommendationSystem
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.Panel pnlUserFavouriteFilms;
+
+        /// <summary>
+        /// pnlError control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Panel pnlError;
     }
 }

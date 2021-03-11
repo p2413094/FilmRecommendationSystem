@@ -38,14 +38,14 @@
             <div class="loginSection">
                 <asp:Label runat="server" AssociatedControlID="txtUsername" CssClass="textentry-label">Username</asp:Label>
                 <div class="textentry-field">
-                    <asp:TextBox runat="server" ID="txtUsername"  CssClass="textentry-fieldsize"></asp:TextBox>
+                    <asp:TextBox runat="server" ID="txtUsername" placeholder="EllenRipley57"  CssClass="textentry-fieldsize"></asp:TextBox>
                     <asp:RequiredFieldValidator runat="server" ControlToValidate="txtUsername" ID="RequiredFieldValidator2"  ErrorMessage="Username is required"></asp:RequiredFieldValidator>
                 </div>
             </div>
             <div class="loginSection">
                 <asp:Label ID="lblPassword" runat="server" AssociatedControlID="txtPassword" Text="Password" CssClass="textentry-label"></asp:Label>
                 <div class="textentry-field">
-                    <asp:TextBox ID="txtPassword" TextMode="Password" runat="server" CssClass="textentry-fieldsize"></asp:TextBox>
+                    <asp:TextBox ID="txtPassword" placeholder="********" TextMode="Password" runat="server" CssClass="textentry-fieldsize"></asp:TextBox>
                     <br />
                     <asp:RequiredFieldValidator ControlToValidate="txtPassword" ID="rqValPassword" runat="server" ErrorMessage="Password is required."></asp:RequiredFieldValidator>
                 </div>

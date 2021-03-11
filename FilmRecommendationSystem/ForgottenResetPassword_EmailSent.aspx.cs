@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Classes;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
@@ -13,5 +14,20 @@ namespace FilmRecommendationSystem
         {
 
         }
+
+        public static List<string> SearchFilms(string prefixTest, int count)
+        {
+            clsFilmCollection AllFilms = new clsFilmCollection();
+            List<string> filmTitles = new List<string>();
+            foreach (clsFilm aFilm in AllFilms.AllFilms)
+            {
+                if (aFilm.Title.Contains(prefixTest))
+                {
+                    filmTitles.Add(aFilm.Title);
+                }
+            }
+            return filmTitles;
+        }
+
     }
 }

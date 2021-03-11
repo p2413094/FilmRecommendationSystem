@@ -62,200 +62,98 @@
         <br />
         <br />
 
-        <section class="search">
-            <div class="textentry-label">
-                SEARCH
-            </div>
+        <div class="search">
+            <a onclick="hyplnkSearch_Clicked()" class="label">SEARCH</a>
             <div class="textentry-container">
-                <input autocomplete="off" class="textentry-field" type="text" oninput="myFunction()" id="myInput" onkeyup="filterFunction()" />
-                <div>
-                    <div id="myDropdown" class="searchdropdown-content">
-                        <a href="FilmInformation2.aspx">The Terminator (1984)</a>
-                        <a>Little Women (2019)</a>
-                    </div>
-                </div>
-                <br />
-                <br />
+                <input autocomplete="off" class="textentry-field" type="text" id="myInput" onkeyup="filterSearchFunction()" />
             </div>
-        </section>
-
-        <br />
-        <br />
-        <br />
-        <br />
-        <br />
-        <div class="account">
-            <p class="page-header">
-                <asp:Label ID="lblAllPerson" runat="server"></asp:Label>
-            </p>
-            <br />
-            <br />
-        <br />
-        <br />
-        <br />
-
-        <div>
-            <asp:Panel ID="pnlError" runat="server">
-                <label class="page-subheader">Error</label>
-                <br />
-                <br />
-                There was an error fulfilling your request; please try again later.
-                <br />
-                <br />
-                <br />
-                <button type="button" id="btnReturnToHomepage" onclick="btnReturnToHomepage_Click()" class="registerbutton">Ok</button>
-            </asp:Panel>
-        </div>
-
-        <asp:Panel ID="pnlAllStaffMembers" runat="server">
-            <label class="page-subheader">All staff members</label>
-            <asp:ImageButton ID="imgbtnAddNewStaffMember" CssClass="allstaffmembers-add" OnClientClick="imgbtnAddNewStaffMemberProcess_Clicked()" OnClick="imgbtnAddNewStaffMember_Click" ImageUrl="~/Images/Add_plus icon.png" runat="server" />
-
-
-            <asp:GridView CssClass="table-management" ID="grdAllStaffMembers" runat="server" AutoGenerateColumns="false" 
-                OnRowEditing="grdAllStaffMembers_RowEditing" EnableViewState="false" OnRowUpdating="grdAllStaffMembers_RowUpdating" 
-                OnRowDeleting="grdAllStaffMembers_RowDeleting">
-                <Columns>
-                    <asp:TemplateField HeaderText="StaffMemberId">
-                        <ItemTemplate>
-                            <asp:Label ID="lblStaffMemberId" Text='<%#Eval("StaffMemberId")%>' runat="server"></asp:Label>
-                        </ItemTemplate>
-                    </asp:TemplateField>
-                    <asp:TemplateField HeaderText="UserId">
-                        <ItemTemplate>
-                            <asp:Label ID="lblUserId" runat="server" Text='<%# Eval("UserId") %>'></asp:Label>
-                        </ItemTemplate>
-                    </asp:TemplateField>
-                    <asp:TemplateField HeaderText="PrivilegeLevelId">
-                        <ItemTemplate>
-                            <asp:Label ID="lblPrivilegeLevelId" Text='<%# Eval("PrivilegeLevelId") %>' runat="server"></asp:Label>
-                        </ItemTemplate>
-                        <EditItemTemplate>
-                            <asp:TextBox ID="txtPrivilegeLevelId" Text='<%# Eval("PrivilegeLevelId") %>' runat="server"></asp:TextBox>
-                        </EditItemTemplate>
-                    </asp:TemplateField>
-                    <asp:TemplateField HeaderText="FirstName">
-                        <ItemTemplate>
-                            <asp:Label ID="lblFirstName" Text='<%# Eval("FirstName") %>' runat="server"></asp:Label>
-                        </ItemTemplate>
-                        <EditItemTemplate>
-                            <asp:TextBox ID="txtFirstName" Text='<%# Eval("FirstName") %>' runat="server"></asp:TextBox>
-                        </EditItemTemplate>
-                    </asp:TemplateField>
-                    <asp:TemplateField HeaderText="LastName">
-                        <ItemTemplate>
-                            <asp:Label ID="lblLastName" Text='<%# Eval("LastName") %>' runat="server"></asp:Label>
-                        </ItemTemplate>
-                        <EditItemTemplate>
-                            <asp:TextBox ID="txtLastName" Text='<%# Eval("LastName") %>' runat="server"></asp:TextBox>
-                        </EditItemTemplate>
-                    </asp:TemplateField>
-                    <asp:TemplateField HeaderText="Suspended">
-                        <ItemTemplate>
-                            <asp:Label ID="lblAllowed" Text='<%# Eval("Allowed") %>' runat="server"></asp:Label>
-                        </ItemTemplate>
-                        <EditItemTemplate>
-                            <asp:CheckBox ID="chkAllowed" Text='<%# Eval("Allowed") %>' runat="server" />
-                        </EditItemTemplate>
-                    </asp:TemplateField>
-                    <asp:CommandField ShowEditButton="true" ShowDeleteButton="true" />
-                </Columns>
-            </asp:GridView>
-            <div>
-                <table>
-                    <tr>
-                        <th id="UserId">UserId</th>
-                        <th id="firstName">First name</th>
-                        <th id="lastName">Last name</th>
-                        <th id="PrivilegeLevel">Privilege level</th>
-                        <th id="Confirmed">Confirmed?</th>                 
-                        <th id="Suspended">Suspended?</th>
-                        <th id="Actions">Actions</th>
-                    </tr>
-
-                    <tr id="rowHouse">
-                        <td>#1</td>
-                        <td>
-                            <input class="textbox-transparent" value="Greg" readonly="true" id="txtFirstName" type="text"/>
-                        </td>
-                        <td>
-                            <input class="textbox-transparent" value="House" readonly="true" id="txtLastName" type="text"/>
-                        </td>
-                        <td>
-                            <select disabled="disabled" id="slctPrivilege">
-                                <option>Standard</option>
-                                <option>Administrator</option>
-                            </select>
-                        </td>
-                        <td>
-                            <input class="textbox-transparent" value="Y" readonly="true" id="txtConfirmed" type="text"/>
-                        </td>
-                        <td>
-                            <input class="textbox-transparent" value="N" readonly="true" id="txtSuspended" type="text"/>
-                        </td>
-                        <td class="tablecell-actions" id="cellTableActions">
-                            <img src="Images/Edit%20icon.png" class="action_icon" onclick="btnEdit_Clicked()" id="icnEdit" />
-                            <img src="Images/NoIcon.png" id="iconSuspendUser" class="action_icon" onclick="btnSuspend_Clicked()"/>
-                            <img src="Images/TrashCanRed.png" class="action_icon" onclick="imgDelete_Clicked()"/>
-                        </td>
-                    </tr>
-                    <tr>
-                        <td>#13</td>
-                        <td>Remy</td>
-                        <td>Hadley</td>
-                        <td>
-                            <select disabled="disabled">
-                                <option>Standard</option>
-                                <option>Administrator</option>
-                            </select>
-                        </td>
-                        <td>Y</td>
-                        <td>Y</td>
-                        <td></td>
-                    </tr>
-
-                    <tr id="rowAdd">
-                        <td>#14</td>
-                        <td>
-                            <input type="text" class="textbox-semitransparent" id="txtAddFirstName"/>
-                        </td>
-                        <td>
-                            <input type="text" class="textbox-semitransparent" id="txtAddLastName"/>
-                        </td>
-                        <td>
-                            <select id="slctAddPrivilegeLevel">
-                                <option>Standard</option>
-                                <option>Administrator</option>
-                            </select>
-                        </td>
-                        <td>N</td>
-                        <td>N</td>
-                        <td class="tablecell-actions" id="cellTableActions">
-                            <img src="Images/Green tick_save.png" class="action_icon" onclick="btnSave_Clicked()" />
-                        </td>
-                    </tr>
-                
-                </table>
-            </div>
-        </asp:Panel>
+            <a onclick="hyplnkSearch_Clicked()" class="label">SEARCH</a>
         </div>
         
-        <br />
-        <br />
-        <br />
-        <asp:Panel ID="pnlNewStaffMember" class="account" runat="server">
+        <asp:Panel ID="pnlError" CssClass="mainContent" runat="server">
+            <div class="header">Error</div>
+            <div class="textSection">
+                There was an error fulfilling your request; please try again later.
+            </div>
+            <div class="textSection">
+                <button type="button" id="btnReturnToHomepage" onclick="btnReturnToHomepage_Click()" class="proceedButton">Ok</button>
+            </div>
+        </asp:Panel>       
 
-                <asp:Label ID="lblActionStaffMember" class="page-subheader" runat="server"></asp:Label>
+        <asp:Panel ID="pnlAllStaffMembers" CssClass="mainContent" runat="server">
+            <label class="header">All staff members</label>
+            <asp:ImageButton ID="imgbtnAddNewStaffMember" CssClass="addIcon" OnClick="imgbtnAddNewStaffMember_Click" ImageUrl="~/Images/Add_plus icon.png" runat="server" />
+            <asp:Panel ID="Panel1" CssClass="AllUsersFilmsContainer" runat="server">
+                <asp:GridView ID="grdAllStaffMembers" CssClass="AllUsersFilmsTable" runat="server" AutoGenerateColumns="false" 
+                    OnRowEditing="grdAllStaffMembers_RowEditing" EnableViewState="false" OnRowUpdating="grdAllStaffMembers_RowUpdating" 
+                    OnRowDeleting="grdAllStaffMembers_RowDeleting">
+                    <Columns>
+                        <asp:TemplateField HeaderText="StaffMemberId" HeaderStyle-CssClass="columnHeader" ItemStyle-CssClass="columnContent">
+                            <ItemTemplate>
+                                <asp:Label ID="lblStaffMemberId" Text='<%#Eval("StaffMemberId")%>' runat="server"></asp:Label>
+                            </ItemTemplate>
+                        </asp:TemplateField>
+                        <asp:TemplateField HeaderText="UserId" HeaderStyle-CssClass="columnHeader" ItemStyle-CssClass="columnContent">
+                            <ItemTemplate>
+                                <asp:Label ID="lblUserId" runat="server" Text='<%# Eval("UserId") %>'></asp:Label>
+                            </ItemTemplate>
+                        </asp:TemplateField>
+                        <asp:TemplateField HeaderText="PrivilegeLevelId" HeaderStyle-CssClass="columnHeader" ItemStyle-CssClass="columnContent">
+                            <ItemTemplate>
+                                <asp:Label ID="lblPrivilegeLevelId" Text='<%# Eval("PrivilegeLevelId") %>' runat="server"></asp:Label>
+                            </ItemTemplate>
+                            <EditItemTemplate>
+                                <asp:TextBox ID="txtPrivilegeLevelId" Text='<%# Eval("PrivilegeLevelId") %>' runat="server"></asp:TextBox>
+                            </EditItemTemplate>
+                        </asp:TemplateField>
+                        <asp:TemplateField HeaderText="FirstName" HeaderStyle-CssClass="columnHeader" ItemStyle-CssClass="columnContent">
+                            <ItemTemplate>
+                                <asp:Label ID="lblFirstName" Text='<%# Eval("FirstName") %>' runat="server"></asp:Label>
+                            </ItemTemplate>
+                            <EditItemTemplate>
+                                <asp:TextBox ID="txtFirstName" Text='<%# Eval("FirstName") %>' runat="server"></asp:TextBox>
+                            </EditItemTemplate>
+                        </asp:TemplateField>
+                        <asp:TemplateField HeaderText="LastName" HeaderStyle-CssClass="columnHeader" ItemStyle-CssClass="columnContent">
+                            <ItemTemplate>
+                                <asp:Label ID="lblLastName" Text='<%# Eval("LastName") %>' runat="server"></asp:Label>
+                            </ItemTemplate>
+                            <EditItemTemplate>
+                                <asp:TextBox ID="txtLastName" Text='<%# Eval("LastName") %>' runat="server"></asp:TextBox>
+                            </EditItemTemplate>
+                        </asp:TemplateField>
+                        <asp:TemplateField HeaderText="Suspended" HeaderStyle-CssClass="columnHeader" ItemStyle-CssClass="columnContent">
+                            <ItemTemplate>
+                                <asp:Label ID="lblAllowed" Text='<%# Eval("Allowed") %>' runat="server"></asp:Label>
+                            </ItemTemplate>
+                            <EditItemTemplate>
+                                <asp:CheckBox ID="chkAllowed" Text='<%# Eval("Allowed") %>' runat="server" />
+                            </EditItemTemplate>
+                        </asp:TemplateField>
+                        <asp:TemplateField ItemStyle-CssClass="tablecell-actions" HeaderStyle-CssClass="tablecell-actions">
+                            <ItemTemplate>
+                                <asp:ImageButton ID="imgbtnEdit" ImageUrl="~/Images/Edit_icon.png" CssClass="action_icon" commandname="Edit" ToolTip="Edit this record" runat="server" />
+                                <asp:ImageButton ID="imgbtnDelete" ImageUrl="~/Images/TrashCan.png" OnClientClick="return DeleteFilm()" CssClass="action_icon" commandname="Delete" ToolTip="Delete this record" runat="server" />
+                            </ItemTemplate>
+                        </asp:TemplateField>
+                    </Columns>
+                </asp:GridView>
+            </asp:Panel>
+        </asp:Panel>        
 
+
+
+        <asp:Panel ID="pnlNewStaffMember" CssClass="mainContent" runat="server">
+                <asp:Label ID="lblActionStaffMember" CssClass="header" runat="server"></asp:Label>
             
-            <asp:Panel ID="pnlNewStaffMemberUserId" CssClass="register-section" runat="server">
+            <asp:Panel ID="pnlNewStaffMemberUserId" CssClass="loginSection" runat="server">
                     <asp:Label runat="server" AssociatedControlID="ddlUserId" CssClass="textentry-label">UserId</asp:Label>
                     <div class="textentry-field">
                         <asp:DropDownList ID="ddlUserId" runat="server"></asp:DropDownList>
                     </div>
             </asp:Panel>
 
-                <div class="register-section">
+                <div class="loginSection">
                     <asp:Label runat="server" AssociatedControlID="txtNewStaffMemberFirstName" CssClass="textentry-label">First name</asp:Label>
                     <div class="textentry-field">
                         <asp:TextBox runat="server" placeholder="Carl" ID="txtNewStaffMemberFirstName" CssClass="textentry-fieldsize"></asp:TextBox>
@@ -270,7 +168,7 @@
                         </asp:CustomValidator>
                     </div>
                 </div>
-            <div class="register-section">
+            <div class="loginSection">
                 <asp:Label runat="server" AssociatedControlID="txtNewStaffMemberLastName" CssClass="textentry-label">Last name:</asp:Label>
                 <div class="textentry-field">
                     <asp:TextBox runat="server" placeholder="Denham" ID="txtNewStaffMemberLastName" CssClass="textentry-fieldsize"></asp:TextBox>
@@ -284,8 +182,7 @@
                     </asp:CustomValidator>
                 </div>
             </div>
-
-                <div class="register-section">
+                <div class="loginSection">
                     <asp:Label runat="server" AssociatedControlID="ddlPrivilegelevel" CssClass="textentry-label">Privilege level:</asp:Label>
                     <div class="textentry-field">
                     <asp:DropDownList ID="ddlPrivilegelevel" runat="server">
@@ -294,130 +191,75 @@
                     </asp:DropDownList>
                     </div>
                 </div>
-
-            <div class="register-section">
+            <div class="loginSection">
                 <label class="textentry-label">Suspended</label>
-                <asp:CheckBox ID="chkStaffMemberSuspended" runat="server" />
+                <div class="textentry-field">
+                    <asp:CheckBox ID="chkStaffMemberSuspended" runat="server" />
+                </div>
             </div>
-
-            <div class="register-section">
+            <div class="loginSection">
                 <div class="textentry-label"></div>
                 <div class="textentry-field">
                     <asp:Button ID="btnRegisterStaffMember" ValidationGroup="vldgrpNewStaffMember" 
                         OnClientClick="return btnRegisterStaffMember_Click()" OnClick="btnRegisterStaffMember_Click"
-                        runat="server" Text="ADD STAFF MEMBER" CssClass="registerbutton" />
+                        runat="server" Text="ADD STAFF MEMBER" CssClass="proceedButton" />
                 </div>
             </div>
         </asp:Panel>
 
-
-
-        <br />
-        <br />
-        <br />
-        <br />
-
-
-
-
-
-
-        <div class="account">
-            <label class="page-subheader">All users</label>
-            
-            <asp:Panel ID="pnlAllUsers" runat="server">
-            <asp:GridView ID="grdAllUsers" OnRowEditing="grdAllUsers_RowEditing" OnRowUpdating="grdAllUsers_RowUpdating" AutoGenerateColumns="false" runat="server">
-                <Columns>
-                    <asp:TemplateField HeaderText="UserId">
-                        <ItemTemplate>
-                            <asp:Label ID="lblUserId" Text='<%#Eval("UserId")%>' runat="server"></asp:Label>
-                        </ItemTemplate>
-                    </asp:TemplateField>
-                    <asp:TemplateField HeaderText="Username">
-                        <ItemTemplate>
-                            <asp:Label ID="lblUsername" Text='<%#Eval("UserName")%>' runat="server"></asp:Label>
-                        </ItemTemplate>
-                    </asp:TemplateField>
-                    <asp:TemplateField HeaderText="Email address">
-                        <ItemTemplate>
-                            <asp:Label ID="lblEmail" Text='<%#Eval("Email")%>' runat="server"></asp:Label>
-                        </ItemTemplate>
-                    </asp:TemplateField>
-                    <asp:TemplateField HeaderText="Email confirmed?">
-                        <ItemTemplate>
-                            <asp:Label ID="lblEmailConfirmed" Text='<%#Eval("EmailConfirmed")%>' runat="server"></asp:Label>
-                        </ItemTemplate>
-                    </asp:TemplateField>
-                    <asp:TemplateField HeaderText="Phone number">
-                        <ItemTemplate>
-                            <asp:Label ID="lblPhoneNumber" Text='<%#Eval("PhoneNumber")%>' runat="server"></asp:Label>
-                        </ItemTemplate>
-                    </asp:TemplateField>
-                    <asp:TemplateField HeaderText="Phone confirmed?">
-                        <ItemTemplate>
-                            <asp:Label ID="lblPhoneConfirmed" Text='<%#Eval("PhoneConfirmed")%>' runat="server"></asp:Label>
-                        </ItemTemplate>
-                    </asp:TemplateField>
-                    <asp:TemplateField HeaderText="Last login">
-                        <ItemTemplate>
-                            <asp:Label ID="lblLastLogin" Text='<%#Eval("LastLogin")%>' runat="server"></asp:Label>
-                        </ItemTemplate>
-                    </asp:TemplateField>
-                    <asp:TemplateField HeaderText="Suspended?">
-                        <ItemTemplate>
-                            <asp:Label ID="lblSuspended" runat="server" Text='<%#Eval("LockoutEnabled")%>'></asp:Label>
-                        </ItemTemplate>
-                        <EditItemTemplate>
-                            <asp:CheckBox ID="chkSuspended" runat="server" Text='<%#Eval("LockoutEnabled")%>' />
-                        </EditItemTemplate>
-                    </asp:TemplateField>
-                    <asp:TemplateField HeaderText="Suspended end date">
-                        <ItemTemplate>
-                            <asp:Label ID="lblSuspendedEndDate" Text='<%#Eval("LockoutEndDateUtc")%>' runat="server"></asp:Label>
-                        </ItemTemplate>
-                    </asp:TemplateField>
-                    <asp:CommandField ShowEditButton="true"  />  
-                </Columns>
-            </asp:GridView>
-                <table>
-                    <tr>
-                        <th id="Username">Username</th>
-                        <th id="Email">Email</th>
-                        <th id="PhoneNumber">Phone number</th>
-                        <th id="EmailPhoneConfirmed">Email/ phone confirmed?</th>
-                        <th id="LastLogin">Last login</th>
-                        <th id="Suspended">Susp?</th>
-                        <th id="Actions">Actions</th>
-                        
-                    </tr>
-
-                    <tr>
-                        <td>GreatestEver98</td>
-                        <td>greatestever98@icloud.com</td>
-                        <td>01902714537</td>
-                        <td>Y/ N</td>
-                        <td>19:10, 20/10/20</td>
-                        <td>
-                            <label id="lblSuspended">N</label>
-                        </td>
-                        <td class="tablecell-actions" id="cellTableActions">
-                            <img src="Images/NoIcon.png" id="iconSuspendUser" class="action_icon" onclick="SuspendUserAccount()" />
-                        </td>
-                    </tr>
-
-                    <tr>
-                        <td>SecondGreatestEver99</td>
-                        <td>secondever99@icloud.com</td>
-                        <td>0121765432</td>
-                        <td>Y/ Y</td>
-                        <td>17:34, 28/10/20</td>
-                        <td>N</td>
-                        <td></td>
-                    </tr>
-               </table>
+            <asp:Panel ID="pnlAllUsers" CssClass="mainContent" runat="server">
+                <label class="header">All users</label>
+                <asp:Panel ID="Panel2" CssClass="AllUsersFilmsContainer" runat="server">
+                    <asp:GridView ID="grdAllUsers" CssClass="AllUsersFilmsTable" OnRowEditing="grdAllUsers_RowEditing" OnRowUpdating="grdAllUsers_RowUpdating"
+                        AutoGenerateColumns="false" runat="server">
+                        <Columns>
+                            <asp:TemplateField HeaderText="UserId" HeaderStyle-CssClass="columnHeader" ItemStyle-CssClass="columnContent">
+                                <ItemTemplate>
+                                    <asp:Label ID="lblUserId" Text='<%#Eval("UserId")%>' runat="server"></asp:Label>
+                                </ItemTemplate>
+                            </asp:TemplateField>
+                            <asp:TemplateField HeaderText="Username" HeaderStyle-CssClass="columnHeader" ItemStyle-CssClass="columnContent">
+                                <ItemTemplate>
+                                    <asp:Label ID="lblUsername" Text='<%#Eval("UserName")%>' runat="server"></asp:Label>
+                                </ItemTemplate>
+                            </asp:TemplateField>
+                            <asp:TemplateField HeaderText="Email address" HeaderStyle-CssClass="columnHeader" ItemStyle-CssClass="columnContent">
+                                <ItemTemplate>
+                                    <asp:Label ID="lblEmail" Text='<%#Eval("Email")%>' runat="server"></asp:Label>
+                                </ItemTemplate>
+                            </asp:TemplateField>
+                            <asp:TemplateField HeaderText="Email confirmed?" HeaderStyle-CssClass="columnHeader" ItemStyle-CssClass="columnContent">
+                                <ItemTemplate>
+                                    <asp:Label ID="lblEmailConfirmed" Text='<%#Eval("EmailConfirmed")%>' runat="server"></asp:Label>
+                                </ItemTemplate>
+                            </asp:TemplateField>
+                            <asp:TemplateField HeaderText="Last login" HeaderStyle-CssClass="columnHeader" ItemStyle-CssClass="columnContent">
+                                <ItemTemplate>
+                                    <asp:Label ID="lblLastLogin" Text='<%#Eval("LastLogin")%>' runat="server"></asp:Label>
+                                </ItemTemplate>
+                            </asp:TemplateField>
+                            <asp:TemplateField HeaderText="Suspended?" HeaderStyle-CssClass="columnHeader" ItemStyle-CssClass="columnContent">
+                                <ItemTemplate>
+                                    <asp:Label ID="lblSuspended" runat="server" Text='<%#Eval("LockoutEnabled")%>'></asp:Label>
+                                </ItemTemplate>
+                                <EditItemTemplate>
+                                    <asp:CheckBox ID="chkSuspended" runat="server" Text='<%#Eval("LockoutEnabled")%>' />
+                                </EditItemTemplate>
+                            </asp:TemplateField>
+                            <asp:TemplateField HeaderText="Suspended end date" HeaderStyle-CssClass="columnHeader" ItemStyle-CssClass="columnContent">
+                                <ItemTemplate>
+                                    <asp:Label ID="lblSuspendedEndDate" Text='<%#Eval("LockoutEndDateUtc")%>' runat="server"></asp:Label>
+                                </ItemTemplate>
+                            </asp:TemplateField>
+                            <asp:TemplateField ItemStyle-CssClass="tablecell-actions" HeaderStyle-CssClass="tablecell-actions">
+                                <ItemTemplate>
+                                    <asp:ImageButton ID="imgbtnEdit" ImageUrl="~/Images/Edit_icon.png" CssClass="action_icon" commandname="Edit" ToolTip="Edit this record" runat="server" />
+                                </ItemTemplate>
+                            </asp:TemplateField>
+                        </Columns>
+                    </asp:GridView>
+                </asp:Panel>
         </asp:Panel>
-        </div>
-
 
 
         <div class="footer">
@@ -434,12 +276,30 @@
         </div>
 
         <script>
-            var count = 0,
-                suspended = false;
-
             function onLoad() {
                 //document.getElementById("pnlNewStaffMember").style.display = "none";
             }
+
+            function hyplnkSearch_Clicked() {
+                var searchText = document.getElementById("myInput").value;
+
+                if (searchText.length == 0) {
+                    alert("Search text cannot be blank");
+                }
+                else {
+                    location.href = "SearchResults.aspx?searchText=" + searchText;
+                }
+            }
+
+            myInput.addEventListener("keyup", function (event) {
+                // Number 13 is the "Enter" key on the keyboard
+                if (event.keyCode === 13) {
+                    // Cancel the default action, if needed
+                    event.preventDefault();
+                    // Trigger the button element with a click
+                    hyplnkSearch_Clicked();
+                }
+            })
 
             function btnReturnToHomepage_Click() {
                 location.href = "Homepage.aspx";
@@ -491,40 +351,17 @@
                 }
             }
 
-
-
-
-            function imgbtnAddNewStaffMemberProcess_Clicked() {
-                document.getElementById("pnlNewStaffMember").style.display = "inline-block";
-            }
-
-
-
-
-            function btnSuspend_Clicked() {
-                if (suspended == true) {
-                    var confirmMessage = confirm("Un-suspend staff member?");
-                    if (confirmMessage == true) {
-                        document.getElementById("txtSuspended").value = "N";
-                        alert("Staff member un-suspended");
-                        suspended = false;
-                    }
-                    else {
-                        alert("Staff member is still suspended");
-                    }
+            function imgbtnSuspendUser_Clicked() {
+                var confirmMessage = confirm("Suspend user?");
+                if (confirmMessage == true) {
+                    alert("User suspended");
                 }
                 else {
-                    var confirmMessage = confirm("Suspend staff member?");
-                    if (confirmMessage == true) {
-                        document.getElementById("txtSuspended").value = "Y";
-                        alert("Staff member suspended");
-                        suspended = true;
-                    }
-                    else {
-                        alert("Staff member was not suspended");
-                    }
+                    alert("No changes made");
+                    return false;
                 }
             }
+
 
             function imgDelete_Clicked() {
                 document.getElementById("rowHouse").style.display = "none";
@@ -537,28 +374,6 @@
                 }
             }
             
-
-            /* When the user clicks on the button,
-            toggle between hiding and showing the dropdown content */
-            function myFunction() {
-            document.getElementById("myDropdown").classList.toggle("show");
-            }
-
-            function filterFunction() {
-            var input, filter, ul, li, a, i;
-            input = document.getElementById("myInput");
-            filter = input.value.toUpperCase();
-            div = document.getElementById("myDropdown");
-            a = div.getElementsByTagName("a");
-            for (i = 0; i < a.length; i++) {
-                txtValue = a[i].textContent || a[i].innerText;
-                if (txtValue.toUpperCase().indexOf(filter) > -1) {
-                a[i].style.display = "";
-                } else {
-                a[i].style.display = "none";
-                }
-            }
-            }
         </script>
     </form>
 </body>

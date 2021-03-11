@@ -1,4 +1,5 @@
-﻿using FilmRecommendationSystem.Models;
+﻿using Classes;
+using FilmRecommendationSystem.Models;
 using Microsoft.AspNet.Identity;
 using Microsoft.AspNet.Identity.Owin;
 using System;
@@ -16,6 +17,21 @@ namespace FilmRecommendationSystem
         {
             
         }
+
+        public static List<string> SearchFilms(string prefixTest, int count)
+        {
+            clsFilmCollection AllFilms = new clsFilmCollection();
+            List<string> filmTitles = new List<string>();
+            foreach (clsFilm aFilm in AllFilms.AllFilms)
+            {
+                if (aFilm.Title.Contains(prefixTest))
+                {
+                    filmTitles.Add(aFilm.Title);
+                }
+            }
+            return filmTitles;
+        }
+
 
         protected void btnResetPassword_Click(object sender, EventArgs e)
         {

@@ -24,46 +24,16 @@
         <br />
         <br />
 
-        <section class="search">
-            <div class="textentry-label">
-                SEARCH
-            </div>
+        <div class="search">
+            <a onclick="hyplnkSearch_Clicked()" class="label">SEARCH</a>
             <div class="textentry-container">
-                <input autocomplete="off" class="textentry-field" type="text" oninput="myFunction()" id="myInput" onkeyup="filterFunction()" />
-                <div>
-                    <div id="myDropdown" class="dropdown-content">
-                        <a href="FilmInformation2.aspx">The Terminator (1984)</a>
-                        <a>Little Women (2019)</a>
-                    </div>
-                </div>
-                <br />
-                <br />
+                <input autocomplete="off" class="textentry-field" type="text" id="myInput" onkeyup="filterSearchFunction()" />
             </div>
-        </section>
+        </div>
 
-       
-        <br />
-        <br />
-        <br />
-        <br />
-        <br />
-        <br />
-        <br />
-        <br />
-        <div class="account">
-            <p class="page-header">
-                Register for account  
-            </p>
-            <br />
-            <br />
-            <br />
-            <br />
-            <br />
-            <br />
-            <br />
-            <br />
-            <br />
-            <div class="text">
+        <div class="mainContent">
+            <div class="header">Register for account</div>
+            <div class="textSection">
                 <p class="page-subheader">
                     What do you get when you register with us?
                 </p>
@@ -77,31 +47,27 @@
                     &#9989; add personalised tag to film, making search and recommendations even better
                 </div>
             </div>
-            <br />
-            <br />
-            <br />
-            <br />
 
-            <div class="register-section">
+            <div class="loginSection">
                 <asp:Label runat="server" AssociatedControlID="txtEmailAddress" CssClass="textentry-label">Email address</asp:Label>
                 <div class="textentry-field">
-                    <asp:TextBox runat="server" placeholder="ellenripley86@sulaco.com" ID="txtEmailAddress" TextMode="Email"  CssClass="textentry-fieldsize"></asp:TextBox>
+                    <asp:TextBox runat="server" placeholder="leatherface@texaschainsaw.com" ID="txtEmailAddress" TextMode="Email"  CssClass="textentry-fieldsize"></asp:TextBox>
                     <asp:RequiredFieldValidator runat="server" ControlToValidate="txtEmailAddress" ID="RequiredFieldValidator2"  ErrorMessage="RequiredFieldValidator"></asp:RequiredFieldValidator>
                 </div>
             </div>
             
-            <div class="register-section">
+            <div class="loginSection">
                 <asp:Label ID="lblUsername" runat="server" AssociatedControlID="txtUsername" Text="Username" CssClass="textentry-label"></asp:Label>
                 <div class="textentry-field">
-                    <asp:TextBox runat="server" placeholder="EllenRipley57" ID="txtUsername" CssClass="textentry-fieldsize"></asp:TextBox>
+                    <asp:TextBox runat="server" placeholder="Leatherface1974" ID="txtUsername" CssClass="textentry-fieldsize"></asp:TextBox>
                     <asp:RequiredFieldValidator ControlToValidate="txtUsername" ID="rqValUsername" runat="server" ErrorMessage="Username must not be blank"></asp:RequiredFieldValidator>
                 </div>
             </div>
             
-            <div class="register-section-password">
+            <div class="loginSection">
                 <asp:Label ID="lblPassword" runat="server" AssociatedControlID="txtPassword" Text="Password" CssClass="textentry-label"></asp:Label>
                 <div class="textentry-field">
-                    <asp:TextBox ID="txtPassword" TextMode="Password" runat="server" CssClass="textentry-fieldsize"></asp:TextBox>
+                    <asp:TextBox ID="txtPassword" placeholder="********" TextMode="Password" runat="server" CssClass="textentry-fieldsize"></asp:TextBox>
                     <br />
                     <div class="italiscised">
                         Password must:
@@ -120,7 +86,7 @@
                 </div>
             </div>
             
-            <div class="register-section">
+            <div class="loginSection">
                 <asp:Label ID="lblConfirmPassword" runat="server" AssociatedControlID="txtPasswordConfirmation" Text="Confirm password" CssClass="textentry-label"></asp:Label>
                 <div class="textentry-field">
                     <asp:TextBox ID="txtPasswordConfirmation" TextMode="Password" runat="server" CssClass="textentry-fieldsize"></asp:TextBox>
@@ -132,21 +98,20 @@
                 </div>
             </div>
             
-            <div class="register-section">
+            <div class="loginSection">
                 <div class="textentry-label"></div>
                 <div class="textentry-field">
                     <p style="font-style: italic;">By creating an account, you acknowledge our privacy statement.</p>
-                    <asp:Button ID="btnRegister" OnClick="btnRegister_Click" runat="server" Text="CREATE ACCOUNT" CssClass="registerbutton" />
+                    <asp:Button ID="btnRegister" OnClick="btnRegister_Click" runat="server" Text="CREATE ACCOUNT" CssClass="proceedButton" />
                 </div>
             </div>
-
-            <br />
         </div>
-        <br />
 
-        <br />
-        <br />
-        <br />
+
+
+
+
+
 
         <div class="footer">
             <div class="links">
@@ -162,28 +127,27 @@
         </div>
         
     </form>
-    <script type="text/javascript">
-        /* When the user clicks on the button,
-            toggle between hiding and showing the dropdown content */
-            function myFunction() {
-            document.getElementById("myDropdown").classList.toggle("show");
-            }
+    <script>
+        function hyplnkSearch_Clicked() {
+            var searchText = document.getElementById("myInput").value;
 
-            function filterFunction() {
-            var input, filter, ul, li, a, i;
-            input = document.getElementById("myInput");
-            filter = input.value.toUpperCase();
-            div = document.getElementById("myDropdown");
-            a = div.getElementsByTagName("a");
-            for (i = 0; i < a.length; i++) {
-                txtValue = a[i].textContent || a[i].innerText;
-                if (txtValue.toUpperCase().indexOf(filter) > -1) {
-                a[i].style.display = "";
-                } else {
-                a[i].style.display = "none";
-                }
+            if (searchText.length == 0) {
+                alert("Search text cannot be blank");
             }
+            else {
+                location.href = "SearchResults.aspx?searchText=" + searchText;
             }
+        }
+
+        myInput.addEventListener("keyup", function (event) {
+            // Number 13 is the "Enter" key on the keyboard
+            if (event.keyCode === 13) {
+                // Cancel the default action, if needed
+                event.preventDefault();
+                // Trigger the button element with a click
+                hyplnkSearch_Clicked();
+            }
+        });
     </script>
 </body>
 </html>

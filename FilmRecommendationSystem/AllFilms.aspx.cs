@@ -17,16 +17,33 @@ namespace FilmRecommendationSystem
         Int32 filmId;
         List<clsFilmGenre> GenresAlreadyAttachedToFilm = new List<clsFilmGenre>();
 
-
         protected void Page_Load(object sender, EventArgs e)
         {
             if (!IsPostBack)
             {
                 LoadData();
                 editFilm = false;
+                pnlAllFilms.Visible = true;
+                pnlActionFilm.Visible = false;
                 pnlError.Visible = false;
+                pnlActionFilmError.Visible = false;
             }
         }
+
+        public static List<string> SearchFilms(string prefixTest, int count)
+        {
+            clsFilmCollection AllFilms = new clsFilmCollection();
+            List<string> filmTitles = new List<string>();
+            foreach (clsFilm aFilm in AllFilms.AllFilms)
+            {
+                if (aFilm.Title.Contains(prefixTest))
+                {
+                    filmTitles.Add(aFilm.Title);
+                }
+            }
+            return filmTitles;
+        }
+
 
         void LoadData()
         {
@@ -100,7 +117,7 @@ namespace FilmRecommendationSystem
             {
                 Label lblError = new Label();
                 lblError.Text = error;
-                Panel1.Controls.Add(lblError);
+                pnlActionFilmErrorBody.Controls.Add(lblError);
             }
         }
 
@@ -124,9 +141,9 @@ namespace FilmRecommendationSystem
                 foreach (string error in filmTitleCheck)
                 {
                     Label lblError = new Label();
-                    lblError.Text = error;
-                    pnlActionFilmError.Controls.Add(lblError);
-                    pnlActionFilmError.Controls.Add(new LiteralControl("<br />"));
+                    lblError.Text = "- " + error;
+                    pnlActionFilmErrorBody.Controls.Add(lblError);
+                    pnlActionFilmErrorBody.Controls.Add(new LiteralControl("<br />"));
                 }
             }
 
@@ -137,9 +154,9 @@ namespace FilmRecommendationSystem
                 foreach (string error in imdbIdCheck)
                 {
                     Label lblError = new Label();
-                    lblError.Text = error;
-                    pnlActionFilmError.Controls.Add(lblError);
-                    pnlActionFilmError.Controls.Add(new LiteralControl("<br />"));
+                    lblError.Text = "- " + error;
+                    pnlActionFilmErrorBody.Controls.Add(lblError);
+                    pnlActionFilmErrorBody.Controls.Add(new LiteralControl("<br />"));
                     imdbIdOk = false;
                 }
             }
@@ -154,8 +171,8 @@ namespace FilmRecommendationSystem
                     {
                         Label lblError = new Label();
                         lblError.Text = "IMDBId already assigned to another film";
-                        pnlActionFilmError.Controls.Add(lblError);
-                        pnlActionFilmError.Controls.Add(new LiteralControl("<br />"));
+                        pnlActionFilmErrorBody.Controls.Add(lblError);
+                        pnlActionFilmErrorBody.Controls.Add(new LiteralControl("<br />"));
                         imdbIdOk = false;
                     }
 
@@ -166,8 +183,8 @@ namespace FilmRecommendationSystem
                         {
                             Label lblError = new Label();
                             lblError.Text = "IMDBId already assigned to another film";
-                            pnlActionFilmError.Controls.Add(lblError);
-                            pnlActionFilmError.Controls.Add(new LiteralControl("<br />"));
+                            pnlActionFilmErrorBody.Controls.Add(lblError);
+                            pnlActionFilmErrorBody.Controls.Add(new LiteralControl("<br />"));
                             imdbIdOk = false;
                         }
                         else
@@ -194,7 +211,7 @@ namespace FilmRecommendationSystem
                 {
                     Label lblError = new Label();
                     lblError.Text = "Film already exists";
-                    pnlActionFilmError.Controls.Add(lblError);
+                    pnlActionFilmErrorBody.Controls.Add(lblError);
                     filmAlreadyExists = true;
                 }
                 else //if we ARE editing a film
@@ -203,7 +220,7 @@ namespace FilmRecommendationSystem
                     {
                         Label lblError = new Label();
                         lblError.Text = "Film already exists";
-                        pnlActionFilmError.Controls.Add(lblError);
+                        pnlActionFilmErrorBody.Controls.Add(lblError);
                         filmAlreadyExists = true;
                     }
                     else
@@ -303,6 +320,7 @@ namespace FilmRecommendationSystem
             clsFilmCollection AllFilms = new clsFilmCollection();
             AllFilms.ThisFilm.FilmId = filmId;
             AllFilms.Delete();
+            LoadData();
         }
     }
 }

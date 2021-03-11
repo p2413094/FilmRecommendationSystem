@@ -24,81 +24,34 @@
         <br />
         <br />
 
-        <section class="search">
-            <div class="textentry-label">
-                SEARCH
-            </div>
+        <div class="search">
+                <a onclick="hyplnkSearch_Clicked()" class="label">SEARCH</a>
             <div class="textentry-container">
-                <input autocomplete="off" class="textentry-field" type="text" oninput="myFunction()" id="myInput" onkeyup="filterFunction()" />
-                <div>
-                    <div id="myDropdown" class="dropdown-content">
-                        <a href="FilmInformation2.aspx">The Terminator (1984)</a>
-                        <a>Little Women (2019)</a>
-                    </div>
-                </div>
-                <br />
-                <br />
+                <input autocomplete="off" class="textentry-field" type="text" id="myInput" onkeyup="filterSearchFunction()" />
             </div>
-        </section>
+        </div>
        
-        <br />
-        <br />
-        <br />
-        <br />
-        <br />
-        <br />
-        <br />
-        <br />
-        <div class="account">
-            <p class="page-header">
-                Reset password  
-            </p>
-            <br />
-            <br />
-            <br />
-            <br />
-            <br />
-            <br />
-            <br />
-            
-            <p>
+        <div class="mainContent">
+            <div class="header">Reset password</div>
+            <div class="textSection">
                 If you've forgotten your password or need to reset it, enter your account email
                 and we'll send you a link to change it.     
-            </p>
-            <br />
-            <br />
-            <br />
-            <div>
-                <div class="textentry-label">
-                Email address
-                </div>
+            </div>
+            <div class="loginSection">
+                <asp:Label runat="server" AssociatedControlID="txtEmailAddress" CssClass="textentry-label">Email address</asp:Label>
                 <div class="textentry-field">
-                    <asp:TextBox ID="txtEmailAddress" TextMode="Email" runat="server"></asp:TextBox>
-                    <br />
-                    <asp:RequiredFieldValidator runat="server" ControlToValidate="txtEmailAddress" 
-                        ErrorMessage="Email field is required"></asp:RequiredFieldValidator>
-                    <br />
+                    <asp:TextBox ID="txtEmailAddress" TextMode="Email" CssClass="textentry-fieldsize" runat="server"></asp:TextBox>
+                    <asp:RequiredFieldValidator runat="server" ControlToValidate="txtEmailAddress" ErrorMessage="Email address is required"></asp:RequiredFieldValidator>
                     <br />
                     <asp:Label ID="lblError" runat="server"></asp:Label>
                     <br />
                     <br />
-                    <asp:Button ID="btnResetPassword" OnClick="btnResetPassword_Click" runat="server" Text="Reset password" CssClass="okbutton" />
-                    <br />
-                    <br />
+                    <asp:Button ID="btnResetPassword" OnClick="btnResetPassword_Click" runat="server" Text="Reset password" CssClass="proceedButton" />
                 </div>
-                <br />  
-                <br />
-                <br />
-               
-                
             </div>
-            <br />
         </div>
-        <br />
-        <br />
-        <br />
-        <br />
-        
+
+
         <div class="footer">
             <div class="links">
                 Help
@@ -118,26 +71,26 @@
             location.href = "ResetPassword.aspx";
         }
 
-        /* When the user clicks on the button,
-            toggle between hiding and showing the dropdown content */
-            function myFunction() {
-            document.getElementById("myDropdown").classList.toggle("show");
-            }
+        function hyplnkSearch_Clicked() {
+            var searchText = document.getElementById("myInput").value;
 
-            function filterFunction() {
-            var input, filter, ul, li, a, i;
-            input = document.getElementById("myInput");
-            filter = input.value.toUpperCase();
-            div = document.getElementById("myDropdown");
-            a = div.getElementsByTagName("a");
-            for (i = 0; i < a.length; i++) {
-                txtValue = a[i].textContent || a[i].innerText;
-                if (txtValue.toUpperCase().indexOf(filter) > -1) {
-                a[i].style.display = "";
-                } else {
-                a[i].style.display = "none";
-                }
-            }}
+            if (searchText.length == 0) {
+                alert("Search text cannot be blank");
+            }
+            else {
+                location.href = "SearchResults.aspx?searchText=" + searchText;
+            }
+        }
+
+        myInput.addEventListener("keyup", function (event) {
+            // Number 13 is the "Enter" key on the keyboard
+            if (event.keyCode === 13) {
+                // Cancel the default action, if needed
+                event.preventDefault();
+                // Trigger the button element with a click
+                hyplnkSearch_Clicked();
+            }
+        });
     </script>
 </body>
 </html>

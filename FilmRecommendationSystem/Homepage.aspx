@@ -24,27 +24,12 @@
         <br />
         <br />
 
-        <asp:ListBox ID="ListBox1" runat="server"></asp:ListBox>
-
-        <asp:Panel ID="Panel2" runat="server"></asp:Panel>
-
         <div class="search">
-                <a onclick="hyplnkSearch_Clicked()" class="label">SEARCH</a>
+            <a onclick="hyplnkSearch_Clicked()" class="label">SEARCH</a>
             <div class="textentry-container">
                 <input autocomplete="off" class="textentry-field" type="text" id="myInput" onkeyup="filterSearchFunction()" />
-                    <div id="mySearchDropdown" class="searchdropdown-content">
-                        <a href="FilmInformation2.aspx">Terminator 2: Judgment Day (1991)</a>
-                        <a>Little Women (2019)</a>
-                    </div>
             </div>
         </div>
-
-        <br />
-        <br />
-        <br />
-        <br />
-        <br />
-
         <div>
             <p class="main-paragraph">
                 Not sure what to watch? Don't worry!
@@ -55,67 +40,55 @@
             </p>
         </div>
 
-        <div class="film">
-            <p class="homepage-subHeader">
-               What genre/ mood of movie do you want?
-            </p>
 
-            <div>
-                <asp:Button ID="btnGenre" ToolTip="Gets you recommendations based on genre" OnClick="btnGenre_Click"
-                    CssClass="recommendoption" runat="server" Text="genre" />
-                <asp:Button ID="btnMood" ToolTip="Gets you recommendations based on mood" OnClick="btnMood_Click"
-                    CssClass="recommendoption" runat="server" Text="mood" />
-            </div>
-            <br />
-            <br />
+        <asp:Panel ID="Panel1" CssClass="homepage" runat="server">
+            <asp:Panel ID="pnlFilmSection" CssClass="recommenderSelectionGenreMoodContainer" runat="server">
+                <p class="homepage-subHeader">First, search by genre, or mood?</p>
 
+                <div class="GenreMoodFirstSelector">
+                    <asp:Button ID="btnGenre" ToolTip="Gets you recommendations based on genre" OnClick="btnGenre_Click"
+                        CssClass="recommendoption" runat="server" Text="genre" />
+                    <asp:Button ID="btnMood" ToolTip="Gets you recommendations based on mood" OnClick="btnMood_Click"
+                        CssClass="recommendoption" runat="server" Text="mood" />
+                </div>
 
+                <asp:Panel ID="pnlSearchBy" CssClass="GenreMoodSecondSelector" runat="server">
+                    <asp:DropDownList ID="ddlGenres" AutoPostBack="true" CssClass="slctGenreMood" runat="server" OnSelectedIndexChanged="ddlGenres_SelectedIndexChanged"></asp:DropDownList>
+                    <asp:DropDownList ID="ddlMoods" AutoPostBack="true" CssClass="slctGenreMood" runat="server" OnSelectedIndexChanged="ddlGenres_SelectedIndexChanged"></asp:DropDownList>
+                </asp:Panel>
 
-            <asp:Panel ID="pnlSearchBy" runat="server">
-                <asp:DropDownList ID="ddlGenres" CssClass="slctGenreMood" runat="server"></asp:DropDownList>
-                <asp:DropDownList AutoPostBack="true" ID="ddlMoods" CssClass="slctGenreMood" runat="server"></asp:DropDownList>
+                <asp:Panel ID="pnlGetRecommendationsContainer" CssClass="GenreMoodSecondSelector" runat="server">
+                    <div class="btnGetRecommendationsContainer">
+                        <asp:Button ID="btnGetRecommendations" runat="server" Text="GET RECOMMENDATIONS" class="btnGetRecommendations" OnClick="btnGetRecommendations_Click" />
+                    </div>
+                </asp:Panel>
             </asp:Panel>
 
-
-
-            <br />
-            <br />
-            <br />
-            <br />
-            <asp:Button ID="btnGetRecommendations" runat="server" Text="GET RECOMMENDATIONS" class="getrecommendations-button" OnClick="btnGetRecommendations_Click" />
+           <asp:Panel ID="pnlRecommendations"  runat="server" CssClass="recommenderSelectionGenreMoodContainer">
+                <div class="homepage-subHeader">Your recommendations</div>
+            </asp:Panel>
             
-            
-            <asp:Panel ID="Panel1" CssClass="watchlist" runat="server"></asp:Panel>
+            <asp:Panel ID="pnlMostRecommendedFilms" runat="server" CssClass="recommenderSelectionGenreMoodContainer">
+                <div class="homepage-subHeader">Most recommended films</div>
+            </asp:Panel>
 
-        </div>
-
-        <br />
-        <br />
-        <br />
-        <asp:Panel ID="pnlRecommendations" runat="server" CssClass="watchlist">
-            <div class="homepage-subHeader">Your recommendations</div>
-            <br />
-            <br />
-        </asp:Panel>
-
-        <br />
-        <asp:Panel ID="pnlMostRecommendedFilms" CssClass="watchlist" runat="server">
-            <div class="homepage-subHeader">Most recommended films</div>
-
-        </asp:Panel>
-        <br />
-        <br />
-        <br />
-        <asp:Panel ID="pnlUserFavouriteFilms" runat="server" CssClass="watchlist">
-            <div class="homepage-subHeader">User favourite films</div>
-        </asp:Panel>
-
-
-
+            <asp:Panel ID="pnlUserFavouriteFilms" runat="server" CssClass="recommenderSelectionGenreMoodContainer">
+                <div class="homepage-subHeader">User favourite films</div>
+            </asp:Panel>
+            <asp:Panel ID="pnlError" CssClass="mainContent" runat="server">
+                <div class="header">Error</div>
+                <div class="textSection">
+                    There was an error fulfilling your request; please try again later.
+                </div>
+                <div class="textSection">
+                    <button type="button" id="btnReturnToHomepage" onclick="btnReturnToHomepage_Click()" class="proceedButton">Ok</button>
+                </div>
+            </asp:Panel>
+    </asp:Panel>
 
         <script>
             function onLoad() {
-                //document.getElementById("secYourRecommendations").style.display = "none";
+
             }
 
             function hyplnkSearch_Clicked() {
@@ -128,7 +101,6 @@
                     location.href = "SearchResults.aspx?searchText=" + searchText;
                 }
             }
-
             myInput.addEventListener("keyup", function (event) {
                 // Number 13 is the "Enter" key on the keyboard
                 if (event.keyCode === 13) {
@@ -139,62 +111,6 @@
                 }
             });
 
-            function btnGenre_Clicked() {
-                document.getElementById("ddlGenres").style.display = "inline";
-            }
-
-            function btnMood_Clicked() {
-                document.getElementById("ddlMoods").style.display = "inline-block";
-            }
-
-
-
-            function GetRecommendations() {
-                document.getElementById("secYourRecommendations").style.display = "block";
-            }
-
-            function AddGhostbustersToLabel() {
-                document.getElementById("lblFilmsAdded").innerText += ", Ghostbusters (1984)";
-                document.getElementById("filmSearchDropdown").style.visibility = "hidden";
-                document.getElementById("filmName").value = "";
-            }
-
-            //search bar for adding films to recommended 
-            function filterFunction() {
-                document.getElementById("filmSearchDropdown").style.visibility = "visible";
-                document.getElementById("filmSearchDropdown").classList.toggle("filmSearch-show");
-                var input, filter, ul, li, a, i;
-                input = document.getElementById("filmName");
-                filter = input.value.toUpperCase();
-                div = document.getElementById("filmSearchDropdown");
-                a = div.getElementsByTagName("a");
-                for (i = 0; i < a.length; i++) {
-                    txtValue = a[i].textContent || a[i].innerText;
-                    if (txtValue.toUpperCase().indexOf(filter) > -1) {
-                        a[i].style.display = "";
-                    } else {
-                        a[i].style.display = "none";
-                    }
-                }
-            }
-
-            //Search bar at top of screen
-            function filterSearchFunction() {
-                document.getElementById("mySearchDropdown").classList.toggle("show");
-                var input, filter, ul, li, a, i;
-                input = document.getElementById("myInput");
-                filter = input.value.toUpperCase();
-                div = document.getElementById("mySearchDropdown");
-                a = div.getElementsByTagName("a");
-                for (i = 0; i < a.length; i++) {
-                    txtValue = a[i].textContent || a[i].innerText;
-                    if (txtValue.toUpperCase().indexOf(filter) > -1) {
-                        a[i].style.display = "";
-                    } else {
-                        a[i].style.display = "none";
-                    }
-                }
-            }
         </script>
 
         <div class="footer">

@@ -13,6 +13,7 @@ namespace FilmRecommendationSystem
     public partial class FavouriteFilms : System.Web.UI.Page
     {
         Int32 userId;
+        clsImdbAPI anImdbApi = new clsImdbAPI();
         protected void Page_Load(object sender, EventArgs e)
         {
             pnlError.Visible = false;
@@ -79,7 +80,7 @@ namespace FilmRecommendationSystem
                 {
                     filmId = Convert.ToInt32(DB.DataTable.Rows[index]["FilmId"]);
                     title = DB.DataTable.Rows[index]["Title"].ToString();
-                    GetImdbInformation(filmId, title);
+                    pnlFavouriteFilms.Controls.Add(anImdbApi.GetImdbInformation(filmId));
                     index++;
                 }
                 pnlFavouriteFilms.Visible = true;

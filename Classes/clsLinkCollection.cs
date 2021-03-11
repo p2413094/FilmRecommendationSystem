@@ -77,5 +77,16 @@ namespace Classes
             }
             return false;
         }
+
+        public void GetLinkByFilmId()
+        {
+            clsDataConnection DB = new clsDataConnection();
+            DB.AddParameter("@FilmId", mThisLink.FilmId);
+            DB.Execute("sproc_tblLinksFilterByFilmId");
+            if (DB.Count == 1)
+            {
+                mThisLink.ImdbId = Convert.ToInt32(DB.DataTable.Rows[0]["ImdbId"]);
+            }
+        }
     }
 }

@@ -55,118 +55,70 @@
         <br />
         <br />
 
-        <section class="search">
-            <div class="textentry-label">
-                SEARCH
-            </div>
+        <div class="search">
+            <a onclick="hyplnkSearch_Clicked()" class="label">SEARCH</a>
             <div class="textentry-container">
-                <input autocomplete="off" class="textentry-field" type="text" oninput="myFunction()" id="myInput" onkeyup="filterFunction()" />
-                <div>
-                    <div id="myDropdown" class="searchdropdown-content">
-                        <a href="FilmInformation2.aspx">The Terminator (1984)</a>
-                        <a>Little Women (2019)</a>
-                    </div>
-                </div>
-                <br />
-                <br />
+                <input autocomplete="off" class="textentry-field" type="text" id="myInput" onkeyup="filterSearchFunction()" />
             </div>
-        </section>
-
-        <br />
-        <br />
-        <br />
-        §<br />
-        <br />
-        <div class="account">
-            <p class="page-header">
-                All films
-            </p>
-            <br />
-            <br />
-            <asp:ImageButton ID="imgbtnAdd" OnClick="imgbtnAdd_Click" ImageUrl="~/Images/Add_plus icon.png" CausesValidation="false"
-                class="allstaffmembers-add"
-                runat="server" />
-            <br />
-            <br />
-            <br />
-            <br />
-            <br />
-            <asp:Panel ID="Panel1" runat="server"></asp:Panel>
-            <br />
-            <br />
-            <br />
-            <br />
-
-        <div>
-            <asp:Panel ID="pnlError" runat="server">
-                <label class="page-subheader">Error</label>
-                <br />
-                <br />
-                There was an error fulfilling your request; please try again later.
-                <br />
-                <br />
-                <br />
-                <button type="button" id="btnReturnToHomepage" onclick="btnReturnToHomepage_Click()" class="registerbutton">Ok</button>
-            </asp:Panel>
+            <a onclick="hyplnkSearch_Clicked()" class="label">SEARCH</a>
         </div>
 
-
-            <br />
-            <br />
-            <br />
-            <br />
-
-
-            <asp:Panel ID="pnlAllFilms" runat="server">
-                <asp:TextBox ID="txtFilmSearch" OnTextChanged="txtFilmSearch_TextChanged" AutoPostBack="true" runat="server"></asp:TextBox>
+        <asp:Panel ID="pnlAllFilms" CssClass="mainContent" runat="server">
+            <div class="header">All films</div>
+            <asp:ImageButton ID="imgbtnAdd" OnClick="imgbtnAdd_Click" ImageUrl="~/Images/Add_plus icon.png" CausesValidation="false" class="addIcon"
+                runat="server" />   
+            <asp:Panel ID="Panel1" CssClass="AllUsersFilmsContainer" runat="server">
+                <asp:TextBox ID="txtFilmSearch" AutoCompleteType="Disabled" CssClass="gridviewSearch" OnTextChanged="txtFilmSearch_TextChanged" AutoPostBack="true" runat="server"></asp:TextBox>
                 <asp:GridView ID="grdAllFilms" AllowPaging="true" PageSize="20" OnRowEditing="grdAllFilms_RowEditing" OnRowUpdating="grdAllFilms_RowUpdating" 
-                    OnRowDeleting="grdAllFilms_RowDeleting" AutoGenerateColumns="false" runat="server">
-                    <Columns>
-                        <asp:TemplateField HeaderText="FilmId">
-                            <ItemTemplate>
-                                <asp:Label ID="lblFilmId" Text='<%#Eval("FilmId")%>' runat="server"></asp:Label>
-                            </ItemTemplate>
-                        </asp:TemplateField>
-                        <asp:TemplateField HeaderText="Title">
-                            <ItemTemplate>
-                                <asp:Label ID="lblTitle" Text='<%#Eval("Title")%>' runat="server"></asp:Label>
-                            </ItemTemplate>
-                        </asp:TemplateField>
-                        <asp:CommandField ShowEditButton="true" ShowDeleteButton="true"/>
-                    </Columns>
-                </asp:GridView>
+                        OnRowDeleting="grdAllFilms_RowDeleting" AutoGenerateColumns="false" CssClass="AllUsersFilmsTable" runat="server">
+                        <Columns>
+                            <asp:TemplateField HeaderText="FilmId" HeaderStyle-CssClass="columnHeader" ItemStyle-CssClass="columnContent">
+                                <ItemTemplate>
+                                    <asp:Label ID="lblFilmId" Text='<%#Eval("FilmId")%>' runat="server"></asp:Label>
+                                </ItemTemplate>
+                            </asp:TemplateField>
+                            <asp:TemplateField HeaderText="Title" HeaderStyle-CssClass="columnHeader" ItemStyle-CssClass="columnContent">
+                                <ItemTemplate>
+                                    <asp:Label ID="lblTitle" Text='<%#Eval("Title")%>' runat="server"></asp:Label>
+                                </ItemTemplate>
+                            </asp:TemplateField>
+                            <asp:TemplateField ItemStyle-CssClass="tablecell-actions" HeaderStyle-CssClass="tablecell-actions">
+                                <ItemTemplate>
+                                    <asp:ImageButton ID="imgbtnEdit" ImageUrl="~/Images/Edit_icon.png" CssClass="action_icon" commandname="Edit" ToolTip="Edit this record" runat="server" />
+                                    <asp:ImageButton ID="imgbtnDelete" ImageUrl="~/Images/TrashCan.png" OnClientClick="return DeleteFilm()" CssClass="action_icon" commandname="Delete" ToolTip="Delete this record" runat="server" />
+                                </ItemTemplate>
+                            </asp:TemplateField>
+                        </Columns>
+                    </asp:GridView>
+                </asp:Panel>
+
             </asp:Panel>
-            <br />
-            <br />
-            <br />
-            <br />
-            <br />
-            <br />
 
-
-
-        <asp:Panel ID="pnlActionFilm" CssClass="account" runat="server">
-
-                <asp:Label ID="lblActionFilm" class="page-subheader" runat="server">Add new film</asp:Label>
+        <asp:Panel ID="pnlActionFilm" CssClass="mainContent" runat="server">
+            <asp:Label ID="lblActionFilm" class="header" runat="server">Add new film</asp:Label>
             
-                <div class="register-section">
+            <asp:Panel ID="pnlActionFilmError" runat="server">
+                <div class="textSectionError"><p class="page-subheader">Fix errors before continuing</p>
+                    <asp:Panel ID="pnlActionFilmErrorBody" runat="server"></asp:Panel>
+                </div>
+            </asp:Panel>
+
+                <div class="loginSection">
                     <asp:Label runat="server" AssociatedControlID="txtFilmTitle" CssClass="textentry-label">Title</asp:Label>
                     <div class="textentry-field">
                         <asp:TextBox runat="server" placeholder="Ghostbusters (1984)" ID="txtFilmTitle" CssClass="textentry-fieldsize"></asp:TextBox>
                         <asp:RequiredFieldValidator ControlToValidate="txtFilmTitle" runat="server" ErrorMessage="Field must not be blank"></asp:RequiredFieldValidator>
                     </div>
                 </div>
-
-                <div class="register-section">
+                <div class="loginSection">
                     <asp:Label runat="server" AssociatedControlID="ddlYear" CssClass="textentry-label">Year released: </asp:Label>
                     <div class="textentry-field">
                         <asp:DropDownList ID="ddlYear" runat="server"></asp:DropDownList>
+                        <br />
                         <asp:RequiredFieldValidator ControlToValidate="ddlYear" runat="server" ErrorMessage="Field must not be blank"></asp:RequiredFieldValidator>
                     </div>
                 </div>
-
-
-            <div class="register-section">
+            <div class="loginSection">
                 <asp:Panel ID="pnlGenres" runat="server">
                         <asp:Label runat="server" CssClass="textentry-label">Genre(s): </asp:Label>
                         <div class="textentry-field">
@@ -191,12 +143,11 @@
                                 <asp:ListItem Value="17">War</asp:ListItem>
                                 <asp:ListItem Value="10">Western</asp:ListItem>
                             </asp:CheckBoxList>
-                            <asp:RequiredFieldValidator ControlToValidate="ddlYear" runat="server" ErrorMessage="Field must not be blank"></asp:RequiredFieldValidator>
                         </div>
                 </asp:Panel>
             </div>
 
-            <div class="register-section">
+            <div class="loginSection">
                 <asp:Label runat="server" AssociatedControlID="txtImdbId" CssClass="textentry-label">IMDBId:</asp:Label>
                 <div class="textentry-field">
                     <asp:TextBox runat="server" placeholder="087332" ID="txtImdbId" CssClass="textentry-fieldsize"></asp:TextBox>
@@ -210,127 +161,59 @@
                     </asp:CustomValidator>
                 </div>
             </div>
-
-            <div class="register-section">
+            <div class="loginSection">
                 <div class="textentry-label"></div>
                 <div class="textentry-field">
                     <asp:Button ID="btnActionFilm" OnClick="btnActionFilm_Click" 
                         Text="ADD NEW FILM"
                         ValidationGroup="vldgrpNewStaffMember" 
-                        runat="server" CssClass="registerbutton" />
+                        runat="server" CssClass="proceedButton" />
                     <asp:Button ID="btnActionFilmCancel" OnClick="btnActionFilmCancel_Click"
-                        CssClass="registerbutton"
+                        CssClass="proceedButton"
                         Text="CANCEL CHANGES" CausesValidation="false"
                         runat="server" />
                 </div>
             </div>
-            <asp:Panel ID="pnlActionFilmError" runat="server">
-                <div class="register-section">
-                </div>
-            </asp:Panel>
 
         </asp:Panel>
-            <asp:Panel ID="Panel2" runat="server">
 
-            </asp:Panel>
-
-    </div>
-            
-            <br />
-            <br />
-            <br />
-            <br />
-            <br />
-            <br />
-            <br />
-            <br />
-
-            <div>
-                <table>
-                    <tr>
-                        <th>Title</th>
-                        <th>Year released</th>
-                        <th>Genre(s)</th>
-                        <th>IMDB id</th>
-                        <th>TMIMDB id</th>
-                        <th id="Actions">Actions</th>
-                    </tr>
-
-                    <tr id="rowToyStory">
-                        <td>
-                            <input type="text" class="textbox-transparent" value="Toy Story" readonly="true" id="txtTitle" />
-                        </td>
-                        <td>
-                            <input type="text" class="textbox-transparent" value="1995" readonly="true" id="txtYearReleased" />
-                        </td>
-                        <td>
-                            <input type="text" class="textbox-transparent" value="Adventure, animation" readonly="true" id="txtGenre" />
-                        </td>
-                        <td>
-                            <input type="text" class="textbox-transparent" value="0114709" readonly="true" id="txtIMDB" />
-                        </td>
-                        <td>
-                            <input type="text" class="textbox-transparent" value="01111" readonly="true" id="txtTmIMDB" />                         
-                        </td>
-                        
-                        <td class="tablecell-actions" id="cellTableActions">
-                            <img src="Images/Edit%20icon.png" class="action_icon" onclick="btnEdit_Clicked()" id="icnEdit" />
-                            <img src="Images/TrashCan.png" class="action_icon" onclick="DeleteFilm()" />
-                        </td>
-                        
-                    </tr>
-
-                    <tr>
-                        <td>The Incredibles</td>
-                        <td>2004</td>
-                        <td>Adventure, animation, Disney</td>
-                        <td>0317705</td>
-                        <td>9806</td>
-                    </tr>
-
-                    <tr>
-                        <td>Cars</td>
-                        <td>2006</td>
-                        <td>Animation, Comedy, Disney</td>
-                        <td>tt0317219</td>
-                        <td>9806</td>
-                      
-                    </tr>
-
-                    <tr id="rowAdd">
-                        <td>
-                            <input type="text" class="textbox-semitransparent" id="txtAddTitle"/>
-                        </td>
-                        <td>
-                            <input type="text" class="textbox-semitransparent" id="txtAddYearReleased"/>
-                        </td>
-                        <td>
-                            <input type="text" class="textbox-semitransparent" id="txtAddGenre"/>
-                        </td>
-                        <td>
-                            <input type="text" class="textbox-semitransparent" id="txtAddImdbId"/>
-                        </td>
-                        <td>
-                            <input type="text" class="textbox-semitransparent" id="txtAddTmImdbId"/>
-                        </td>
-
-                        <td class="tablecell-actions" id="cellTableActions">
-                            <img src="Images/Green tick_save.png" class="action_icon" onclick="btnSave_Clicked()" />
-                        </td>
-                    </tr>
-                </table>
+                <asp:Panel ID="pnlError" CssClass="mainContent" runat="server">
+            <div class="header">Error</div>
+            <div class="textSection">
+                There was an error fulfilling your request; please try again later.
             </div>
-            
-            <div>
-                
+            <div class="textSection">
+                <button type="button" id="btnReturnToHomepage" onclick="btnReturnToHomepage_Click()" class="proceedButton">Ok</button>
             </div>
-            <br />
-            <br />
-
+        </asp:Panel>       
+        
+            
         <script>
             function onLoad() {
 
             }
+
+            function hyplnkSearch_Clicked() {
+                var searchText = document.getElementById("myInput").value;
+
+                if (searchText.length == 0) {
+                    alert("Search text cannot be blank");
+                }
+                else {
+                    location.href = "SearchResults.aspx?searchText=" + searchText;
+                }
+            }
+
+            myInput.addEventListener("keyup", function (event) {
+                // Number 13 is the "Enter" key on the keyboard
+                if (event.keyCode === 13) {
+                    // Cancel the default action, if needed
+                    event.preventDefault();
+                    // Trigger the button element with a click
+                    hyplnkSearch_Clicked();
+                }
+            });
+
 
             function btnReturnToHomepage_Click() {
                 location.href = "Homepage.aspx";
@@ -361,10 +244,9 @@
                         alert("Record was not updated");
                     }              
             }
-         
 
             function DeleteFilm() {
-                var confirmMessage = confirm("Delete film?");
+                var confirmMessage = confirm("Are you sure you want to delete this film?");
                 if (confirmMessage == true) {
                     alert("Film has been successfully deleted");
                     return true;

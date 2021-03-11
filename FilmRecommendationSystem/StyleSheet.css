@@ -78,6 +78,7 @@ a {
     }
 
 .main-paragraph {
+    margin-top: 15%;
     text-align: center;
     font-size: 35px;
 }
@@ -91,6 +92,86 @@ a {
     margin: auto;
 }
 
+.homepage-subHeader {
+    text-align: center;
+    font-style: italic;
+    font-size: 21px;
+}
+
+.homepage .filmSection {
+    border-style: solid;
+    border-color: lawngreen;
+    margin-bottom: 1%;
+}
+
+
+
+
+
+
+
+
+
+.recommenderSelectionGenreMoodContainer{
+    border-style: solid;
+    border-color: deeppink;
+    margin-top: 2%;
+}
+
+
+    .recommenderSelectionGenreMoodContainer .GenreMoodFirstSelector {
+        border-style: solid;
+        border-color: yellow;
+        width: 14%;
+        margin-top: 1%;
+        margin-left: auto;
+        margin-right: auto;
+    }
+
+    .recommenderSelectionGenreMoodContainer .GenreMoodSecondSelector {
+        border-style: solid;
+        border-color: deepskyblue;
+        width: auto;
+        margin-top: 2%;
+        margin-left: auto;
+        margin-right: auto;
+    }
+
+        .recommenderSelectionGenreMoodContainer .recommendoption {
+            background-color: transparent;
+            color: white;
+            border-radius: 6px;
+            margin-right: 4px;
+            width: 100px;
+            line-height: 30px;
+        }
+
+        .recommenderSelectionGenreMoodContainer .slctGenreMood {
+            background-color: black;
+            color: white;
+            width: auto;
+            padding: 8px;
+            border-radius: 4px;
+        }
+
+    .recommenderSelectionGenreMoodContainer .btnGetRecommendationsContainer {
+        border-style: solid;
+        border-color: purple;
+        margin-right: auto;
+        margin-left: auto;
+        margin-bottom: 2%;
+        width: 20%;
+    }
+
+        .recommenderSelectionGenreMoodContainer .btnGetRecommendationsContainer .btnGetRecommendations {
+            background-color: limegreen;
+            line-height: 40px;
+            border-radius: 6px;
+            width: 100%;
+            font-family: Open Sans, Arial, Helvetica, sans-serif;
+        }
+
+
 
 
 
@@ -102,20 +183,20 @@ a {
 
 
 .mainContent {
-    width: 60%;
+    width: 74%;
     margin-top: 14%;
-    margin-left: 4%;
+    margin-left: 3%;
     border-style: solid;
     border-color: red;
 }
 
     .mainContent .header {
         float: left;
-        width: 80%;
+        width: 90%;
         font-size: 40px;
         font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
         font-weight: lighter;
-        margin-bottom: 5%;
+        margin-bottom: 4%;
         border-style: solid;
         border-color: lawngreen;
         height: 80px;
@@ -126,11 +207,95 @@ a {
         border-color: yellow;
         float: left;
         width: 80%;
+        margin-top: 1%;
+        padding-top: 2%;
+        padding-bottom: 2%;
+    }
+
+    .mainContent .textSectionError {
+        border-style: solid;
+        border-color: red;
+        float: left;
+        width: 60%;
         margin-top: 2%;
         padding-top: 2%;
         padding-bottom: 2%;
     }
 
+
+
+
+
+
+
+
+
+    .mainContent .gridviewSearch {
+        width: 200px;
+        height: 20px;
+        text-align: left;
+        border-style: solid;
+        border-color: blue;
+        border-radius: 6px;
+        text-indent: 20px;
+    }
+
+
+    .AllUsersFilmsContainer {
+        margin-left: 4%;
+    }
+
+
+    .AllUsersFilmsTable {
+        border-style: solid;
+        border-width: 3px;
+        border-radius: 5px;
+        border-color: lightgrey;
+        width: 60%;
+    }
+
+        .AllUsersFilmsTable .columnHeader {
+            border-color: yellow;
+            border-style: solid;
+            text-align: left;
+            font-size: 18px;
+            padding-left: 12px;
+            padding-top: 10px;
+            padding-bottom: 4px;
+        }
+
+        .AllUsersFilmsTable .columnContent {
+            padding-left: 12px;
+            padding-top: 5px;
+        }
+
+        .AllUsersFilmsTable .action_icon {
+            margin-top: 4%;
+            height: 30px;
+            width: 27px;
+            border-style: solid;
+            border-color: red;
+            display: inline;
+        }
+
+        .AllUsersFilmsTable .tablecell-actions {
+            opacity: 0;
+            transition: .3s;
+            border-style: solid;
+            border-color: deepskyblue;
+        }
+
+            .tablecell-actions:hover {
+                opacity: 1;
+            }
+
+        .addIcon {
+            height: 25px;
+            width: 25px;
+            float: right;
+            margin: 10px;
+            margin-top: 17px;
+        }
 
 
 
@@ -182,7 +347,7 @@ a {
     }
 
     .mainContent .loginSection .textentry-field {
-        width: 35%;
+        width: 40%;
         margin-left: 5%;
         float: left;
         /*margin-bottom: 4%;*/
@@ -200,7 +365,7 @@ a {
     .mainContent .proceedButton {
         display: flex;
         justify-content: center;
-        line-height: 50px;
+        line-height: 40px;
         width: 185px;
         font-family: Open Sans, Arial, Helvetica, sans-serif;
         font-size: small;
@@ -279,21 +444,20 @@ a {
 
 
 
-    .mainContent .filmWithTextContainer {
-        position: relative;
-        height: 410px;
-        width: 250px;
-        float: left;
+     .filmWithTextContainer {
+        /*position: relative;*/
+        display: inline-block;
+        height: 380px;
+        width: 215px;
         margin-left: 20px;
         border-style: solid;
         border-color: deepskyblue;
+        margin-top: 2%;
     }
 
-        .mainContent .filmWithTextContainer .image {
-            float: left;
+         .filmWithTextContainer .image {
             height: 85%;
-            width: 99%;
-            margin-bottom: 13px;
+            width: 100%;
             opacity: 1;
         }
 
@@ -301,20 +465,20 @@ a {
                 opacity: 0.5;
             }
 
-    .mainContent .filmWithTextContainer .textContainer {
-        color: lawngreen;
-        text-align: center;
-        height: 14%;
-        width: 93%;
-        margin: auto;
-        border-style: solid;
-        border-color: deeppink;
-        position: absolute;
-        bottom: 0;
-        left: 0;
-    }
+         .filmWithTextContainer .titleContainer {
+            color: lawngreen;
+            text-align: center;
+            height: 14%;
+            width: 95%;
+            margin: auto;
+            border-style: solid;
+            border-color: deeppink;
+            position: relative;
+            bottom: 0;
 
-        .mainContent .filmWithTextContainer .overlay {
+        }
+
+        .filmWithTextContainer .overlay {
             position: absolute;
             top: 0;
             bottom: 0;
@@ -329,14 +493,14 @@ a {
                     opacity: 1;
             }
 
-            .mainContent .filmWithTextContainer .overlay .overlay-itemLeft {
+            .filmWithTextContainer .overlay .overlay-itemLeft {
                 margin-left: 2%;
                 margin-top: 3%;
                 width: 45px;
                 height: 45px;
             }
 
-            .mainContent .filmWithTextContainer .overlay .overlay-itemRight {
+            .filmWithTextContainer .overlay .overlay-itemRight {
                 float: right;
                 margin-right: 2%;
                 margin-top: 4%;
@@ -353,7 +517,8 @@ a {
 
 
 
-.register-section {
+
+    .register-section {
     border-style: solid;
     border-color: red;
     padding-top: 2%;
@@ -471,10 +636,11 @@ a {
         float: left;
         text-align: right;
         font-style: italic;
+        cursor: pointer;
     }
 
     .search .textentry-container {
-        width: 60%;
+        width: 50%;
         float: left;
         padding: 4px;
         height: 35px;
@@ -492,6 +658,7 @@ a {
             border-radius: 6px;
             font-size: large;
             margin-top: 0.5%;
+            opacity: 0.8;
         }
 
 
@@ -562,106 +729,11 @@ a {
     text-align: center;
 }
 
-.watchlist {
-    border-style: solid;
-    border-color: red;
-}
 
 
-.watchlistfavouritebutton {
-    width: 100%;
-    height: 100%;
-    font-size: xx-large;
-    font-weight: light;
-    background-color: transparent;
-}
 
-.watchlaterfavouriteicon {
-    width: 45px;
-    height: 45px;
-}
 
-.watchlist .image {
-    height: 300px;
-    width: 200px;
-    margin-left: 2%;
-    margin-top: 3%;
-}
 
-.stafffunctions {
-    width: 506px;
-    height: 222px;
-    border-style: solid;
-    border-width: 1px;
-    border-radius: 5px;
-    border-color: lightgrey;
-    padding-left: 12px;
-    padding-right: 12px;
-    position: relative;
-    margin-left: 20%;
-    font-family: Avenir, sans-serif;
-}
-
-.stafffunctions-button {
-    display: flex;
-    justify-content: center;
-    height: 50px;
-    width: 200px;
-    font-family: Open Sans, Arial, Helvetica, sans-serif;
-    font-size: small;
-    background-color: transparent;
-    color: white;
-    margin-left: 20%;
-}
-
-.table-management {
-    border-style: solid;
-    width: 100%;
-    border-width: 2px;
-    border-radius: 5px;
-    border-color: lightgrey;
-    padding-left: 15px;
-    padding-top: 10px;
-}
-
-th {
-    font-size: 18px;
-    text-align: left;
-    padding-bottom: 30px;
-}
-
-td {
-    font-size: 14px;
-    padding-bottom: 20px;
-}
-
-.actionButton {
-    border-style: solid;
-    border-color: red;
-    border-radius: 2px;
-    background-color: transparent;
-    color: white;
-}
-
-.action_icon {
-    height: 35px;
-    width: 35px;
-    margin-right: 13px;
-}
-
-.tablecell-actions {
-    opacity: 0;
-    min-width: 180px;
-}
-
-    .tablecell-actions:hover {
-        opacity: 1;
-        transition: 0.3s;
-    }
-
-.container-tableaction:hover {
-    opacity: 0.1;
-}
 
 .myaccount {
     width: 606px;
@@ -1091,101 +1163,8 @@ td {
 }
 
 
-    .film .recommendoption {
-        background-color: transparent;
-        color: white;
-        border-radius: 6px;
-        margin-right: 6px;
-        width: 100px;
-        line-height: 30px;
-    }
 
 
-
-.filmrecommendation-filmname {
-    font-style: italic;
-}
-
-.filmrecommendation-film-entry-field {
-    width: 50%;
-    text-align: center;
-    margin-left: 15%;
-    height: 20px;
-}
-
-.filmrecommendation-getrecommendationsbutton {
-    display: flex;
-    justify-content: center;
-    width: 45%;
-    margin-left: 14%;
-}
-
-.filmrecommendation-getrecommendationsbutton-buttonitself {
-    height: 50px;
-    width: 200px;
-    font-size: small;
-}
-
-.homepage-subHeader {
-    text-align: center;
-    font-style: italic;
-    font-size: 23px;
-}
-
-.homepage-mostRecommendedFilms {
-    text-align: center;
-    font-style: italic;
-    font-size: 20px;
-}
-
-.getrecommendations-button {
-    background-color: limegreen;
-    line-height: 60px;
-    border-radius: 6px;
-}
-
-.textbox-semitransparent {
-    background: none;
-    color: white;
-    border: 0px none;
-    border-style: solid;
-    border-color: white;
-    border-width: 1px;
-    border-radius: 4px;
-}
-
-.textbox-transparent {
-    background: none;
-    color: white;
-    border: 0px none;
-}
-
-.allstaffmembers-add {
-    height: 25px;
-    width: 25px;
-    float: right;
-    margin: 10px;
-    margin-top: 17px;
-}
-
-.myaccount-options {
-    line-height: 50px;
-    width: 300px;
-    font-family: Open Sans, Arial, Helvetica, sans-serif;
-    font-size: small;
-    background-color: transparent;
-    color: white;
-    margin-left: 5%;
-}
-
-
-.slctGenreMood {
-    background-color: transparent;
-    color: white;
-    width: 150px;
-    padding: 8px;
-    border-radius: 4px;
-}
 
 .register-section {
     border-style: solid;
@@ -1201,9 +1180,6 @@ td {
     padding-bottom: 25%;
 }
 
-.italiscised {
-    font-style: italic;
-}
 
 
 .searchResultsContainer {

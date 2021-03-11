@@ -15,13 +15,13 @@ namespace FilmRecommendationSystem
     {
 
         /// <summary>
-        /// pnlWatchList control.
+        /// pnlError control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Panel pnlWatchList;
+        protected global::System.Web.UI.WebControls.Panel pnlError;
 
         /// <summary>
         /// btnSort control.
@@ -33,12 +33,12 @@ namespace FilmRecommendationSystem
         protected global::System.Web.UI.WebControls.Button btnSort;
 
         /// <summary>
-        /// pnlError control.
+        /// pnlWatchList control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Panel pnlError;
+        protected global::System.Web.UI.WebControls.Panel pnlWatchList;
     }
 }

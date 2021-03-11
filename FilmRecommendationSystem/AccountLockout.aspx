@@ -24,56 +24,23 @@
         <br />
         <br />
 
-        <section class="search">
-            <div class="textentry-label">
-                SEARCH
-            </div>
+        <div class="search">
+                <a onclick="hyplnkSearch_Clicked()" class="label">SEARCH</a>
             <div class="textentry-container">
-                <input autocomplete="off" class="textentry-field" type="text" oninput="myFunction()" id="myInput" onkeyup="filterFunction()" />
-                <div>
-                    <div id="myDropdown" class="dropdown-content">
-                        <a href="FilmInformation2.aspx">The Terminator (1984)</a>
-                        <a>Little Women (2019)</a>
-                    </div>
-                </div>
-                <br />
-                <br />
+                <input autocomplete="off" class="textentry-field" type="text" id="myInput" onkeyup="filterSearchFunction()" />
             </div>
-        </section>
+        </div>
 
-        <br />
-        <br />
-        <br />
-        <br />
-        <br />
-        <br />
-        <br />
-        <br />
-        <div class="account">
-            <p class="page-header">
-                Account lockout
-            </p>
-            <br />
-            <br />
-            <br />
-            <br />
-            <br />
-            <br />
-            <br />
-            <br />
+        <div class="mainContent">
+            <div class="header">Account lockout</div>
+            <div class="textSection">
                 Your account has been locked for breaching our terms and conditions. Check your email to see when
                 you can re-access your account 
-            <br />
-            <br />
-            <div>
-                <button type="button" onclick="btnOk_Click()" id="btnOk" class="okbutton">Ok</button>
             </div>
-            <br />
-            <br />
+            <div class="textSection">
+                <button type="button" onclick="btnOk_Click()" id="btnOk" class="proceedButton">Ok</button>
             </div>
-
-        <br />
-        <br />
+        </div>
 
         <div class="footer">
             <div class="links">
@@ -93,27 +60,26 @@
                 location.href = "Homepage.aspx";
             }
 
-            /* When the user clicks on the button,
-            toggle between hiding and showing the dropdown content */
-            function myFunction() {
-            document.getElementById("myDropdown").classList.toggle("show");
-            }
+            function hyplnkSearch_Clicked() {
+                var searchText = document.getElementById("myInput").value;
 
-            function filterFunction() {
-            var input, filter, ul, li, a, i;
-            input = document.getElementById("myInput");
-            filter = input.value.toUpperCase();
-            div = document.getElementById("myDropdown");
-            a = div.getElementsByTagName("a");
-            for (i = 0; i < a.length; i++) {
-                txtValue = a[i].textContent || a[i].innerText;
-                if (txtValue.toUpperCase().indexOf(filter) > -1) {
-                a[i].style.display = "";
-                } else {
-                a[i].style.display = "none";
+                if (searchText.length == 0) {
+                    alert("Search text cannot be blank");
+                }
+                else {
+                    location.href = "SearchResults.aspx?searchText=" + searchText;
                 }
             }
-        }
+
+            myInput.addEventListener("keyup", function (event) {
+                // Number 13 is the "Enter" key on the keyboard
+                if (event.keyCode === 13) {
+                    // Cancel the default action, if needed
+                    event.preventDefault();
+                    // Trigger the button element with a click
+                    hyplnkSearch_Clicked();
+                }
+            });
         </script>
     </form>
 </body>

@@ -12,6 +12,7 @@ using System.Net.Mail;
 using System.Web;
 using SendGrid;
 using SendGrid.Helpers.Mail;
+using System.Configuration;
 
 namespace FilmRecommendationSystem
 {
@@ -20,7 +21,7 @@ namespace FilmRecommendationSystem
         public Task SendAsync(IdentityMessage message)
         {
             // Plug in your email service here to send an email.
-            var sendGridKey = "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";
+            var sendGridKey = ConfigurationManager.AppSettings["SendGridApiKey"];
             return Execute(sendGridKey, message);
         }
 

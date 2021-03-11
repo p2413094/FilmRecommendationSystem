@@ -15,15 +15,6 @@ namespace FilmRecommendationSystem
     {
 
         /// <summary>
-        /// lblAllPerson control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.Label lblAllPerson;
-
-        /// <summary>
         /// pnlError control.
         /// </summary>
         /// <remarks>
@@ -49,6 +40,15 @@ namespace FilmRecommendationSystem
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.ImageButton imgbtnAddNewStaffMember;
+
+        /// <summary>
+        /// Panel1 control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Panel Panel1;
 
         /// <summary>
         /// grdAllStaffMembers control.
@@ -148,6 +148,15 @@ namespace FilmRecommendationSystem
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.Panel pnlAllUsers;
+
+        /// <summary>
+        /// Panel2 control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Panel Panel2;
 
         /// <summary>
         /// grdAllUsers control.

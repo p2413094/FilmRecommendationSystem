@@ -15,6 +15,15 @@ namespace FilmRecommendationSystem
     {
 
         /// <summary>
+        /// pnlAllFilms control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Panel pnlAllFilms;
+
+        /// <summary>
         /// imgbtnAdd control.
         /// </summary>
         /// <remarks>
@@ -31,24 +40,6 @@ namespace FilmRecommendationSystem
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.Panel Panel1;
-
-        /// <summary>
-        /// pnlError control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.Panel pnlError;
-
-        /// <summary>
-        /// pnlAllFilms control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.Panel pnlAllFilms;
 
         /// <summary>
         /// txtFilmSearch control.
@@ -85,6 +76,24 @@ namespace FilmRecommendationSystem
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.Label lblActionFilm;
+
+        /// <summary>
+        /// pnlActionFilmError control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Panel pnlActionFilmError;
+
+        /// <summary>
+        /// pnlActionFilmErrorBody control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Panel pnlActionFilmErrorBody;
 
         /// <summary>
         /// txtFilmTitle control.
@@ -150,21 +159,12 @@ namespace FilmRecommendationSystem
         protected global::System.Web.UI.WebControls.Button btnActionFilmCancel;
 
         /// <summary>
-        /// pnlActionFilmError control.
+        /// pnlError control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Panel pnlActionFilmError;
-
-        /// <summary>
-        /// Panel2 control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.Panel Panel2;
+        protected global::System.Web.UI.WebControls.Panel pnlError;
     }
 }

@@ -300,48 +300,21 @@
     <Content Include="Content\bootstrap-grid.min.css.map" />
     <Content Include="Content\bootstrap-grid.css.map" />
     <Content Include="Homepage.aspx" />
-    <Content Include="Images\15.png" />
-    <Content Include="Images\18.png" />
     <Content Include="Images\Add_plus icon.png" />
-    <Content Include="Images\Alien.jpg" />
-    <Content Include="Images\Aliens.jpg" />
-    <Content Include="Images\BladeRunner2049.jpg" />
-    <Content Include="Images\Bridesmaids.jpg" />
-    <Content Include="Images\Casablanca.jpg" />
-    <Content Include="Images\District 9.jpg" />
-    <Content Include="Images\Dune.jpg" />
-    <Content Include="Images\Dunkirk.jpg" />
-    <Content Include="Images\Edit icon.png" />
-    <Content Include="Images\Endgame.jpg" />
+    <Content Include="Images\Edit_icon.png" />
     <Content Include="Images\Favourite.png" />
     <Content Include="Images\FavouriteInList.png" />
-    <Content Include="Images\Ghostbusters.jpg" />
     <Content Include="Images\Green tick_save.png" />
     <Content Include="Images\Help.png" />
     <Content Include="Images\King Kong.jpg" />
-    <Content Include="Images\LittleWomen.jpg" />
     <Content Include="Images\Log out.png" />
     <Content Include="Images\NoIcon.png" />
-    <Content Include="Images\Nosferatu.jpg" />
     <Content Include="Images\NotInWatchLater.png" />
-    <Content Include="Images\Parasite.jpg" />
-    <Content Include="Images\Raiders of the Lost Ark.jpg" />
     <Content Include="Images\RecommendedFilms.png" />
     <Content Include="Images\Remove.png" />
     <Content Include="Images\TCM.jpg" />
-    <Content Include="Images\Terminator 2.jpg" />
-    <Content Include="Images\Terminator.jpg" />
-    <Content Include="Images\The Bridge on the River Kwai.jpg" />
-    <Content Include="Images\The Shawshank Redemption.jpg" />
-    <Content Include="Images\The Wolf of Wall Street.jpg" />
-    <Content Include="Images\The World%27s End.jpg" />
-    <Content Include="Images\TheMartian.jpg" />
-    <Content Include="Images\ThePursuitOfHappyness.jpg" />
-    <Content Include="Images\Titanic.jpg" />
-    <Content Include="Images\ToyStory.jpg" />
     <Content Include="Images\TrashCan.png" />
     <Content Include="Images\TrashCanRed.png" />
-    <Content Include="Images\Tron Legacy.jpg" />
     <Content Include="Images\WatchLater.png" />
     <Content Include="Images\WatchLaterAdded.png" />
     <Content Include="Login.aspx" />
@@ -621,6 +594,7 @@
     <Compile Include="App_Start\IdentityConfig.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="App_Start\Startup.Auth.cs" />
+    <Compile Include="Class1.cs" />
     <Compile Include="CloseAccount.aspx.cs">
       <DependentUpon>CloseAccount.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
@@ -628,6 +602,7 @@
     <Compile Include="CloseAccount.aspx.designer.cs">
       <DependentUpon>CloseAccount.aspx</DependentUpon>
     </Compile>
+    <Compile Include="clsImdbAPI.cs" />
     <Compile Include="FavouriteFilms.aspx.cs">
       <DependentUpon>FavouriteFilms.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>

@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Configuration;
 using System.Linq;
 using System.Web;
 using System.Web.UI;
@@ -14,26 +15,23 @@ namespace FilmRecommendationSystem
     public partial class Homepage : System.Web.UI.Page
     {
         clsFilmCollection AllFilms = new clsFilmCollection();
+        clsImdbAPI anImdbApi = new clsImdbAPI();
 
         protected void Page_Load(object sender, EventArgs e)
         {
             if (IsPostBack == false)
             {
-
-
-
-
                 LoadGenres();
                 LoadMoods();
-                //GenerateRecommendations(4);
-                //GenerateTemporaryRecommendations();
+
+                pnlSearchBy.Visible = false;
+                pnlGetRecommendationsContainer.Visible = false;
                 pnlRecommendations.Visible = false;
-                //pnlUserFavouriteFilms.Visible = false;
+
                 GetMostRecommendedFilms();
-
-                //AllFilms = new clsFilmCollection();
-
                 //GetUserFavouriteFilms();
+                //GenerateTemporaryRecommendations();
+
             }
         }
 
@@ -63,8 +61,6 @@ namespace FilmRecommendationSystem
             ddlGenres.DataValueField = "GenreId";
             ddlGenres.DataTextField = "GenreDesc";
             ddlGenres.DataBind();
-            
-            ddlGenres.Visible = false;
         }
 
         void LoadMoods()
@@ -76,7 +72,7 @@ namespace FilmRecommendationSystem
             ddlMoods.DataTextField = "MoodDesc";
             ddlMoods.DataBind();
 
-            ddlMoods.Visible = false;
+            ddlMoods.Visible = true;
         }
 
         void GetMostRecommendedFilms()
@@ -84,220 +80,50 @@ namespace FilmRecommendationSystem
             clsMostRecommendedFilmsCollection AllMostRecommendedFilms = new clsMostRecommendedFilmsCollection();            
             foreach (clsMostRecommendedFilms aMostRecommendedFilm in AllMostRecommendedFilms.AllMostRecommendedFilms)
             {
-                GetImdbInformationForMostRecommendedFilms(aMostRecommendedFilm.FilmId);
-            }           
+                pnlMostRecommendedFilms.Controls.Add(anImdbApi.GetImdbInformation(aMostRecommendedFilm.FilmId));
+            }
+            pnlMostRecommendedFilms.Visible = true;
         }
 
         void GetUserFavouriteFilms()
         {
             clsFavouriteFilmCollection AllFavouriteFilms = new clsFavouriteFilmCollection();
-            Random newRandom = new Random();
-            Int32 filmsGenerated = 0;
-            List<int> indexesAlreadyUsed = new List<int>();
-            List<int> filmsAlreadyDisplayed = new List<int>();
-            Int32 filmId = 0;
-            while (filmsGenerated != 10)
+            AllFavouriteFilms.GetTopTenFavourites();
+            foreach (clsFavouriteFilm aFavouriteFilm in AllFavouriteFilms.TopTenFavourites)
             {
-                int filmToDisplay = newRandom.Next(AllFavouriteFilms.AllFavouriteFilms.Count);
-
-                if (!indexesAlreadyUsed.Contains(filmToDisplay))
-                {
-                    filmId = AllFavouriteFilms.AllFavouriteFilms[filmToDisplay].FilmId;
-
-                    if (!filmsAlreadyDisplayed.Contains(filmId))
-                    {
-                        GetImdbInformationForUserFavouriteFilms(filmId);
-                        filmsAlreadyDisplayed.Add(filmId);
-
-                        indexesAlreadyUsed.Add(filmToDisplay);
-                        filmsGenerated++;
-                    }
-                    else
-                    {
-                        filmsAlreadyDisplayed.Add(filmId);
-                    }
-
-                }
-                else
-                {
-                    indexesAlreadyUsed.Add(filmToDisplay);
-                }
+                pnlUserFavouriteFilms.Controls.Add(anImdbApi.GetImdbInformation(aFavouriteFilm.FilmId));
             }
-        }
-
-
-        void GetImdbInformationForUserFavouriteFilms(Int32 filmId)
-        {
-            clsDataConnection DB = new clsDataConnection();
-            DB.AddParameter("@FilmId", filmId);
-            DB.Execute("sproc_tblLinksFilterByFilmId");
-
-            string imdbId = DB.DataTable.Rows[0]["ImdbId"].ToString();
-
-            var client = new RestClient("https://movie-database-imdb-alternative.p.rapidapi.com/?i=" + imdbId);
-            var request = new RestRequest(Method.GET);
-            request.AddHeader("x-rapidapi-key", "2951edd025mshf1b0f9ca8a52c6ap1e71e9jsn67c827bdd770");
-            request.AddHeader("x-rapidapi-host", "movie-database-imdb-alternative.p.rapidapi.com");
-            IRestResponse response = client.Execute(request);
-            clsIMDBApi filmInfoReturned = new clsIMDBApi();
-            filmInfoReturned = Newtonsoft.Json.JsonConvert.DeserializeObject<clsIMDBApi>(response.Content);
-            var imdbIdOk = filmInfoReturned.Response;
-            Int32 count = 0;
-            string numberOfZeroes = "0";
-            string newImdbId = "tt";
-
-            //this part is inefficient - needs looking at 
-            while (imdbIdOk == false)
-            {
-                newImdbId = newImdbId + numberOfZeroes.PadRight(count, '0') + imdbId;
-
-                //may need the below if the search fails 
-                newImdbId = "tt" + numberOfZeroes.PadRight(count, '0') + imdbId;
-
-                //newImdbId = newImdbId.Replace(" ", string.Empty);
-                client = new RestClient("https://movie-database-imdb-alternative.p.rapidapi.com/?i=" + newImdbId);
-                request = new RestRequest(Method.GET);
-                request.AddHeader("x-rapidapi-key", "2951edd025mshf1b0f9ca8a52c6ap1e71e9jsn67c827bdd770");
-                request.AddHeader("x-rapidapi-host", "movie-database-imdb-alternative.p.rapidapi.com");
-                response = client.Execute(request);
-                filmInfoReturned = new clsIMDBApi();
-                filmInfoReturned = Newtonsoft.Json.JsonConvert.DeserializeObject<clsIMDBApi>(response.Content);
-                imdbIdOk = filmInfoReturned.Response;
-                count++;
-            }
-
-            ImageButton newClickableImage = new ImageButton();
-            newClickableImage.ImageUrl = filmInfoReturned.Poster;
-            newClickableImage.PostBackUrl = "FilmInformation.aspx?ImdbId=" + newImdbId;
-
-            newClickableImage.CssClass = "image";
-            pnlUserFavouriteFilms.Controls.Add(newClickableImage);
-
             pnlUserFavouriteFilms.Visible = true;
-        }
-
-
-
-
-
-        void GetImdbInformationForMostRecommendedFilms(Int32 filmId)
-        {
-            clsDataConnection DB = new clsDataConnection();
-            DB.AddParameter("@FilmId", filmId);
-            DB.Execute("sproc_tblLinksFilterByFilmId");
-
-            string imdbId = DB.DataTable.Rows[0]["ImdbId"].ToString();
-
-            var client = new RestClient("https://movie-database-imdb-alternative.p.rapidapi.com/?i=" + imdbId);
-            var request = new RestRequest(Method.GET);
-            request.AddHeader("x-rapidapi-key", "2951edd025mshf1b0f9ca8a52c6ap1e71e9jsn67c827bdd770");
-            request.AddHeader("x-rapidapi-host", "movie-database-imdb-alternative.p.rapidapi.com");
-            IRestResponse response = client.Execute(request);
-            clsIMDBApi filmInfoReturned = new clsIMDBApi();
-            filmInfoReturned = Newtonsoft.Json.JsonConvert.DeserializeObject<clsIMDBApi>(response.Content);
-            var imdbIdOk = filmInfoReturned.Response;
-            Int32 count = 0;
-            string numberOfZeroes = "0";
-            string newImdbId = "tt";
-
-            //this part is inefficient - needs looking at 
-            while (imdbIdOk == false)
-            {
-                newImdbId = newImdbId + numberOfZeroes.PadRight(count, '0') + imdbId;
-
-                //may need the below if the search fails 
-                newImdbId = "tt" + numberOfZeroes.PadRight(count, '0') + imdbId;
-
-                //newImdbId = newImdbId.Replace(" ", string.Empty);
-                client = new RestClient("https://movie-database-imdb-alternative.p.rapidapi.com/?i=" + newImdbId);
-                request = new RestRequest(Method.GET);
-                request.AddHeader("x-rapidapi-key", "2951edd025mshf1b0f9ca8a52c6ap1e71e9jsn67c827bdd770");
-                request.AddHeader("x-rapidapi-host", "movie-database-imdb-alternative.p.rapidapi.com");
-                response = client.Execute(request);
-                filmInfoReturned = new clsIMDBApi();
-                filmInfoReturned = Newtonsoft.Json.JsonConvert.DeserializeObject<clsIMDBApi>(response.Content);
-                imdbIdOk = filmInfoReturned.Response;
-                count++;
-            }
-
-            ImageButton newClickableImage = new ImageButton();
-            newClickableImage.ImageUrl = filmInfoReturned.Poster;
-            newClickableImage.PostBackUrl = "FilmInformation.aspx?ImdbId=" + newImdbId;
-
-            newClickableImage.CssClass = "image";
-            pnlMostRecommendedFilms.Controls.Add(newClickableImage);
-            pnlMostRecommendedFilms.Visible = true;
-        }
-
-        void GetImdbInformation(Int32 filmId)
-        {
-            clsDataConnection DB = new clsDataConnection();
-            DB.AddParameter("@FilmId", filmId);
-            DB.Execute("sproc_tblLinksFilterByFilmId");
-
-            string imdbId = DB.DataTable.Rows[0]["ImdbId"].ToString();
-
-            var client = new RestClient("https://movie-database-imdb-alternative.p.rapidapi.com/?i=" + imdbId);
-            var request = new RestRequest(Method.GET);
-            request.AddHeader("x-rapidapi-key", "2951edd025mshf1b0f9ca8a52c6ap1e71e9jsn67c827bdd770");
-            request.AddHeader("x-rapidapi-host", "movie-database-imdb-alternative.p.rapidapi.com");
-            IRestResponse response = client.Execute(request);
-            clsIMDBApi filmInfoReturned = new clsIMDBApi();
-            filmInfoReturned = Newtonsoft.Json.JsonConvert.DeserializeObject<clsIMDBApi>(response.Content);
-            var imdbIdOk = filmInfoReturned.Response;
-            Int32 count = 0;
-            string numberOfZeroes = "0";
-            string newImdbId = "tt";
-
-            //this part is inefficient - needs looking at 
-            while (imdbIdOk == false)
-            {
-                newImdbId = newImdbId + numberOfZeroes.PadRight(count, '0') + imdbId;
-
-                //may need the below if the search fails 
-                newImdbId = "tt" + numberOfZeroes.PadRight(count, '0') + imdbId;
-
-                //newImdbId = newImdbId.Replace(" ", string.Empty);
-                client = new RestClient("https://movie-database-imdb-alternative.p.rapidapi.com/?i=" + newImdbId);
-                request = new RestRequest(Method.GET);
-                request.AddHeader("x-rapidapi-key", "2951edd025mshf1b0f9ca8a52c6ap1e71e9jsn67c827bdd770");
-                request.AddHeader("x-rapidapi-host", "movie-database-imdb-alternative.p.rapidapi.com");
-                response = client.Execute(request);
-                filmInfoReturned = new clsIMDBApi();
-                filmInfoReturned = Newtonsoft.Json.JsonConvert.DeserializeObject<clsIMDBApi>(response.Content);
-                imdbIdOk = filmInfoReturned.Response;
-                count++;
-            }
-
-            ImageButton newClickableImage = new ImageButton();
-            newClickableImage.ImageUrl = filmInfoReturned.Poster;
-            newClickableImage.PostBackUrl = "FilmInformation.aspx?ImdbId=" + newImdbId;
-
-            newClickableImage.CssClass = "image";
-            pnlRecommendations.Controls.Add(newClickableImage);
-            pnlRecommendations.Visible = true;
         }
 
         void GenerateTemporaryRecommendations()
         {
-            ImageButton imgButton1 = new ImageButton();
-            Int32 count = 6;
             Int32 index = 0;
-            Int32 filmId = 1;
-            imgButton1.ImageUrl = "Images/Terminator.jpg";
-            imgButton1.PostBackUrl = "FilmInformation.aspx";
-            imgButton1.CssClass = "image";
-            pnlRecommendations.Controls.Add(imgButton1);
-            while (index < count)
-            {
-                imgButton1 = new ImageButton();
-                imgButton1.ImageUrl = "Images/The Wolf of Wall Street.jpg";
-                imgButton1.PostBackUrl = "FilmInformation.aspx?FilmId=" + filmId;
-                imgButton1.CssClass = "image";
+            Int32 timesToIterate = 6;
 
-                pnlRecommendations.Controls.Add(imgButton1);
+            while (index < timesToIterate)
+            {
+                Panel pnlFilm = new Panel();
+                pnlFilm.CssClass = "filmWithTextContainer";
+
+                ImageButton imgbtnFilmPoster = new ImageButton();
+                imgbtnFilmPoster.CssClass = "image";
+                imgbtnFilmPoster.ImageUrl = "Images/King Kong.jpg";
+
+                pnlFilm.Controls.Add(imgbtnFilmPoster);
+
+                Panel pnlFilmTitle = new Panel();
+                pnlFilmTitle.CssClass = "titleContainer";
+                Label lblFilmTitle = new Label();
+                lblFilmTitle.Text = "empty";
+                pnlFilmTitle.Controls.Add(lblFilmTitle);
+                pnlFilm.Controls.Add(pnlFilmTitle);
+
+                pnlRecommendations.Controls.Add(pnlFilm);
+
                 index++;
             }
+
             pnlRecommendations.Visible = true;
         }
 
@@ -365,9 +191,9 @@ namespace FilmRecommendationSystem
                 //{
                 //    AllMostRecommendedFilms.Add();
                 //}
-                
-                GetImdbInformation(aTopTenPrediction.FilmId);
+                pnlRecommendations.Controls.Add(anImdbApi.GetImdbInformation(aTopTenPrediction.FilmId));
             }
+            pnlRecommendations.Visible = true;
 
             mlContext.Model.Save(trainedModel, modelSchema, @"C:\Users\rajeshdhooper\source\repos\FilmRecommendationSystem\FilmRecommendationSystem\Model.zip");
         }
@@ -379,12 +205,24 @@ namespace FilmRecommendationSystem
 
         protected void btnGenre_Click(object sender, EventArgs e)
         {
-            ddlGenres.Visible = true;
+            pnlSearchBy.Visible = true;
+            ddlMoods.Visible = false;
         }
 
         protected void btnMood_Click(object sender, EventArgs e)
         {
-            ddlMoods.Visible = true;
+            pnlSearchBy.Visible = true;
+            ddlGenres.Visible = false;
+        }
+
+        protected void ddlGenres_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            pnlGetRecommendationsContainer.Visible = true;
+        }
+
+        protected void ddlMoods_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            pnlGetRecommendationsContainer.Visible = true;
         }
     }
 }

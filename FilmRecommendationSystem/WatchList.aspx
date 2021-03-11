@@ -63,27 +63,29 @@
         <br />
 
         <div class="search">
-                <a onclick="hyplnkSearch_Clicked()" class="label">SEARCH</a>
+            <a onclick="hyplnkSearch_Clicked()" class="label">SEARCH</a>
             <div class="textentry-container">
                 <input autocomplete="off" class="textentry-field" type="text" id="myInput" onkeyup="filterSearchFunction()" />
             </div>
         </div>
         
-        <asp:Panel ID="pnlWatchList" runat="server" CssClass="mainContent">
-            <div class="header">My watchlist</div>
-        </asp:Panel>        
-
-        <asp:Button ID="btnSort" OnClick="btnSort_Click" runat="server" Text="Sort" />
-        
         <asp:Panel ID="pnlError" CssClass="mainContent" runat="server">
             <div class="header">Error</div>
-            <div class="textSection">
+            <div class="textSectionError">
                 There was an error fulfilling your request; please try again later.
             </div>
             <div class="textSection">
                 <button type="button" id="btnReturnToHomepage" onclick="btnReturnToHomepage_Click()" class="proceedButton">Ok</button>
             </div>
         </asp:Panel>
+
+        <asp:Button ID="btnSort" OnClick="btnSort_Click" runat="server" Text="Sort" />
+
+        <asp:Panel ID="pnlWatchList" runat="server" CssClass="mainContent">
+            <div class="header">My watchlist</div>
+        </asp:Panel>     
+        
+
 
         <div class="footer">
             <div class="links">

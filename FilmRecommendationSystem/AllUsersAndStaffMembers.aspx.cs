@@ -23,8 +23,8 @@ namespace FilmRecommendationSystem
 
             lblActionStaffMember.Text = "Add new staff member";
 
-            bool administrator = Convert.ToBoolean(Session["Standard"]);
-
+            bool administrator = true; //= Convert.ToBoolean(Session["Standard"]);
+            
             if (administrator)
             {
                 LoadStaffMemberData();
@@ -183,6 +183,8 @@ namespace FilmRecommendationSystem
                 clsUserCollection AllUsers = new clsUserCollection();
                 grdAllUsers.DataSource = AllUsers.AllUsers;
                 grdAllUsers.DataBind();
+
+                pnlAllUsers.Visible = true;
             }
             catch
             {

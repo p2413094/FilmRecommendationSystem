@@ -13,16 +13,16 @@ namespace FilmRecommendationSystem
     {
         List<clsFilm> FilmList = new List<clsFilm>();
         clsFilm aFilm = new clsFilm();
-        Int32 userId = 1;
+        clsImdbAPI anImdbApi= new clsImdbAPI();
+        Int32 userId;
 
         protected void Page_Load(object sender, EventArgs e)
         {
+            userId = 1;
             pnlError.Visible = false;
             pnlWatchList.Visible = false;
             //userId = //this would normally be done dynamically 
-            //DisplayWatchLaterFilms(userId);
-
-            TempRecommendations();
+            DisplayWatchLaterFilms(userId);
         }
         
         
@@ -43,33 +43,33 @@ namespace FilmRecommendationSystem
 
         void TempRecommendations()
         {
-            Panel pnlFilm = new Panel();
-            pnlFilm.CssClass = "filmWithTextContainer";
+            Int32 index = 0;
+            Int32 timesToIterate = 7;
 
-            ImageButton imgbtnFilmPoster = new ImageButton();
-            imgbtnFilmPoster.CssClass = "image";
-            imgbtnFilmPoster.ImageUrl = "Images/King Kong.jpg";
-            pnlFilm.Controls.Add(imgbtnFilmPoster);
+            //pnlWatchList = new Panel();
+            while (index < timesToIterate)
+            {
+                Panel pnlFilm = new Panel();
+                pnlFilm.CssClass = "filmWithTextContainer";
 
-            Panel pnlFilmTitle = new Panel();
-            pnlFilmTitle.CssClass = "textcontainer";
-            Label lblFilmTitle = new Label();
-            lblFilmTitle.Text = "Test";
-            pnlFilmTitle.Controls.Add(lblFilmTitle);
-            pnlFilm.Controls.Add(pnlFilmTitle);
+                ImageButton img = new ImageButton();
+                img.CssClass= "image";
+                img.ImageUrl = "Images/King Kong.jpg";
 
-            Panel pnlOverlay = new Panel();
-            pnlOverlay.CssClass = "overlay";
+                pnlFilm.Controls.Add(img);
 
-            ImageButton imgbtnRemove = new ImageButton();
-            imgbtnRemove.ImageUrl = "Images/Remove.png";
-            imgbtnRemove.CssClass = "overlay-itemLeft";
-            imgbtnRemove.Command += ImgbtnRemove_Command;
+                Panel pnlFilmTitle = new Panel();
+                pnlFilmTitle.CssClass = "titleContainer";
+                Label lblFilmTitle = new Label();
+                lblFilmTitle.Text = "test";
+                pnlFilmTitle.Controls.Add(lblFilmTitle);
+                pnlFilm.Controls.Add(pnlFilmTitle);
 
-            pnlOverlay.Controls.Add(imgbtnRemove);
-            pnlFilm.Controls.Add(pnlOverlay);
-            pnlWatchList.Controls.Add(pnlFilm);
+                pnlWatchList.Controls.Add(pnlFilm);
+                index++;
+            }
 
+            pnlError.Visible = true;
             pnlWatchList.Visible = true;
         }
 
@@ -86,7 +86,6 @@ namespace FilmRecommendationSystem
 
         void DisplayWatchLaterFilms(Int32 userId)
         {
-            pnlWatchList.Controls.Clear();
             try
             {
                 clsDataConnection DB = new clsDataConnection();
@@ -100,8 +99,8 @@ namespace FilmRecommendationSystem
                 {
                     filmId = Convert.ToInt32(DB.DataTable.Rows[index]["FilmId"]);
                     title = DB.DataTable.Rows[index]["Title"].ToString();
-                    GetFilmNames(filmId);
-                    GetImdbInformation(filmId, title);
+                    //GetFilmNames(filmId);
+                    pnlWatchList.Controls.Add(anImdbApi.GetImdbInformation(filmId));                    
                     index++;
                 }
 
@@ -111,76 +110,6 @@ namespace FilmRecommendationSystem
             {
                 pnlError.Visible = true;
             }
-        }
-
-        void GetImdbInformation(Int32 filmId, string title)
-        {
-            clsDataConnection DB = new clsDataConnection();
-            DB.AddParameter("@FilmId", filmId);
-            DB.Execute("sproc_tblLinksFilterByFilmId");
-
-            string imdbId = DB.DataTable.Rows[0]["ImdbId"].ToString();
-
-            var client = new RestClient("https://movie-database-imdb-alternative.p.rapidapi.com/?i=" + imdbId);
-            var request = new RestRequest(Method.GET);
-            request.AddHeader("x-rapidapi-key", "2951edd025mshf1b0f9ca8a52c6ap1e71e9jsn67c827bdd770");
-            request.AddHeader("x-rapidapi-host", "movie-database-imdb-alternative.p.rapidapi.com");
-            IRestResponse response = client.Execute(request);
-            clsIMDBApi filmInfoReturned = new clsIMDBApi();
-            filmInfoReturned = Newtonsoft.Json.JsonConvert.DeserializeObject<clsIMDBApi>(response.Content);
-            var imdbIdOk = filmInfoReturned.Response;
-            Int32 count = 0;
-            string numberOfZeroes = "0";
-            string newImdbId = "tt";
-
-            while (imdbIdOk == false)
-            {
-                newImdbId = "tt" + numberOfZeroes.PadRight(count, '0') + imdbId;
-                newImdbId = newImdbId.Replace(" ", string.Empty);
-                client = new RestClient("https://movie-database-imdb-alternative.p.rapidapi.com/?i=" + newImdbId);
-                request = new RestRequest(Method.GET);
-                request.AddHeader("x-rapidapi-key", "2951edd025mshf1b0f9ca8a52c6ap1e71e9jsn67c827bdd770");
-                request.AddHeader("x-rapidapi-host", "movie-database-imdb-alternative.p.rapidapi.com");
-                response = client.Execute(request);
-                filmInfoReturned = new clsIMDBApi();
-                filmInfoReturned = Newtonsoft.Json.JsonConvert.DeserializeObject<clsIMDBApi>(response.Content);
-                imdbIdOk = filmInfoReturned.Response;
-                count++;
-            }
-
-            Panel pnlFilm = new Panel();
-            pnlFilm.CssClass = "textContainer";
-
-            ImageButton imgbtnFilmPoster = new ImageButton();
-            imgbtnFilmPoster.CssClass = "image";
-            imgbtnFilmPoster.ImageUrl = filmInfoReturned.Poster;
-            imgbtnFilmPoster.PostBackUrl = "FilmInformation.aspx?ImdbId=" + newImdbId;
-
-            pnlFilm.Controls.Add(imgbtnFilmPoster);
-
-            Panel pnlFilmTitle = new Panel();
-            pnlFilmTitle.CssClass = "textcontainer";
-            Label lblFilmTitle = new Label();
-            lblFilmTitle.Text = title;
-            pnlFilmTitle.Controls.Add(lblFilmTitle);
-            pnlFilm.Controls.Add(pnlFilmTitle);
-
-            Panel pnlOverlay = new Panel();
-            pnlOverlay.CssClass = "overlay";
-
-            ImageButton imgbtnRemove = new ImageButton();
-            imgbtnRemove.ImageUrl = "Images/Remove.png";
-            imgbtnRemove.CssClass = "overlay-itemLeft";
-            imgbtnRemove.Command += ImgbtnRemove_Command;
-
-            string stringFilmId = Convert.ToString(filmId);
-            imgbtnRemove.CommandArgument = stringFilmId;
-
-            pnlOverlay.Controls.Add(imgbtnRemove);
-            pnlFilm.Controls.Add(pnlOverlay);
-            pnlWatchList.Controls.Add(pnlFilm);
-
-            pnlWatchList.Visible = true;
         }
 
         private void ImgbtnRemove_Command(object sender, CommandEventArgs e)
@@ -202,7 +131,7 @@ namespace FilmRecommendationSystem
 
             foreach (clsFilm aFilm in FilmList)
             {
-                GetImdbInformation(aFilm.FilmId, aFilm.Title);
+                //GetImdbInformation(aFilm.FilmId, aFilm.Title);
             }
 
         }
