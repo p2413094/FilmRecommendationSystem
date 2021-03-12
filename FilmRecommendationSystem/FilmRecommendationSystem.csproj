@@ -602,6 +602,7 @@
     <Compile Include="CloseAccount.aspx.designer.cs">
       <DependentUpon>CloseAccount.aspx</DependentUpon>
     </Compile>
+    <Compile Include="clsDynamicPanel.cs" />
     <Compile Include="clsImdbAPI.cs" />
     <Compile Include="FavouriteFilms.aspx.cs">
       <DependentUpon>FavouriteFilms.aspx</DependentUpon>

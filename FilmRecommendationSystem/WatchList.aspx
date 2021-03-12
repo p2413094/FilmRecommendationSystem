@@ -10,11 +10,7 @@
 
 <body class="body">
     <form runat="server">
-        <p class="logo textlink">
-            <a href="Homepage.aspx">FILM RECOMMENDER</a>
-        </p>
-
-        <br />
+        <p class="logo"><a href="Homepage.aspx">FILM RECOMMENDER</a></p>
         <br />
         <br />
         <div class="navbar">
@@ -23,44 +19,13 @@
                     <a href="MyAccount.aspx" class="menutext">MY ACCOUNT</a>
                 </button>
                 <div class="dropdown-content">
-
-                    <div class="imagecontainer">
-                        <img class="imagedimensions" src="Images/RecommendedFilms.png" />
-                    </div>
                     <a href="RecommendedFilms.aspx">RECOMMENDATIONS</a>
-                    <br />
-                    <br />
-                    <br />
-
-                    <div class="imagecontainer">
-                        <img class="imagedimensions" src="Images/WatchLater.png" />
-                    </div>
                     <a href="WatchList.aspx">WATCHLIST</a>
-                    <br />
-                    <br />
-                    <br />
-
-                    <div class="imagecontainer">
-                        <img class="imagedimensions" src="Images/FavouriteInList.png" />
-                    </div>
                     <a href="FavouriteFilms.aspx">FAVOURITES</a>
-                    <br />
-                    <br />
-                    <br />
-
-                    <div class="imagecontainer">
-                        <img class="imagedimensions" src="Images/Log out.png" />
-                    </div>
                     <a href="Homepage.aspx">LOG OUT</a>
                 </div>
-              </div> 
-            </div>
-
-        <br />
-        <br />
-        <br />
-        <br />
-        <br />
+            </div> 
+        </div>
 
         <div class="search">
             <a onclick="hyplnkSearch_Clicked()" class="label">SEARCH</a>
@@ -79,12 +44,12 @@
             </div>
         </asp:Panel>
 
-        <asp:Button ID="btnSort" OnClick="btnSort_Click" runat="server" Text="Sort" />
 
         <asp:Panel ID="pnlWatchList" runat="server" CssClass="mainContent">
             <div class="header">My watchlist</div>
         </asp:Panel>     
         
+                <asp:Button ID="btnSort" OnClick="btnSort_Click" runat="server" Text="Sort" />
 
 
         <div class="footer">

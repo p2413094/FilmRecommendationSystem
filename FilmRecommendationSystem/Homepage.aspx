@@ -10,19 +10,15 @@
 
 <body class="body" onload="onLoad()">
     <form runat="server">
-        <p class="logo textlink">
-            <a href="Homepage.aspx">FILM RECOMMENDER</a>
+        <p class="logo"><a href="Homepage.aspx">FILM RECOMMENDER</a></p>
+        <br />
+        <br />
+        <asp:Panel ID="pnlNavBar" runat="server">
             <ul>
-                <br />
-                <br />
-                <br />
                 <li><a href="Register.aspx">REGISTER</a></li>
                 <li><a href="Login.aspx">SIGN IN</a></li>
             </ul>
-        </p>
-
-        <br />
-        <br />
+        </asp:Panel>
 
         <div class="search">
             <a onclick="hyplnkSearch_Clicked()" class="label">SEARCH</a>

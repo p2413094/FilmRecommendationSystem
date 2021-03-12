@@ -29,7 +29,7 @@ namespace FilmRecommendationSystem
                 //filmId = 1; //Session object required here 
                 imdbId = "tt0114709";
 
-                //DisplayFilm(imdbId);
+                DisplayFilm(imdbId);
                 DisplayAllMoods();
 
                 DisplayUserAssignedMoods();
@@ -77,6 +77,9 @@ namespace FilmRecommendationSystem
             lblDirector.Text = filmInfoReturned.Director;
             lblRuntime.Text = filmInfoReturned.Runtime;
             lblReleased.Text = filmInfoReturned.Released;
+            //hyplnkMoreInformation.NavigateUrl = "https://www.imdb.com/title/" + newImdbId + "/";
+            hyplnkMoreInformation.NavigateUrl = "https://www.imdb.com/title/tt0114709/";
+            hyplnkMoreInformation.Text = "Click here";
 
             clsFavouriteFilm aFavouriteFilm = new clsFavouriteFilm();
             if (aFavouriteFilm.Find(userId, filmId) == true)

@@ -76,7 +76,7 @@
                 <asp:Label ID="lblTitle" CssClass="headerText" runat="server"></asp:Label>
             </div>
             <div class="imageContainer">
-                <asp:Image ID="imgFilmPoster" ImageUrl="~/Images/ToyStory.jpg" runat="server" CssClass="image" />
+                <asp:Image ID="imgFilmPoster" ImageUrl="~/Images/King Kong.jpg" runat="server" CssClass="image" />
                 <div class="overlayContainer">
                     <div class="leftItem">
                         <asp:ImageButton ID="imgbtnFavourite" ImageUrl="~/Images/Favourite.png" CssClass="image" OnClick="imgbtnFavourite_Click" runat="server" />
@@ -148,6 +148,10 @@
                 <asp:Label ID="lblRuntime" runat="server"></asp:Label>
                 <br />
                 <br />
+                <label class="headerText">Want more information</label>
+                <br />
+                <br />
+                <asp:HyperLink ID="hyplnkMoreInformation" runat="server">HyperLink</asp:HyperLink>
                 <asp:Panel ID="pnlMyTags" runat="server">
                     <br />
                     <br />
@@ -158,19 +162,6 @@
             </asp:Panel>
 
         </asp:Panel>
-            <div class="film">
-                <div class="container">
-                    <div class="container-image">
-                        <div class="overlay-left">
-                            <img id="imgWatchLater" onclick="imgWatchLaterClick()" class="watchlaterfavouriteicon" src="Images/WatchLater.png" />
-                        </div>
-                        <div class="overlay-right">
-                            <img id="imgFavourite" onclick="imgFavouriteClick()" class="watchlaterfavouriteicon" src="Images/Favourite.png" />
-                        </div>    
-                    </div>
-                    <br />
-                </div>
-            </div>
 
         <br />
         <br />

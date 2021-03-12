@@ -42,7 +42,7 @@ namespace FilmRecommendationSystem
                 var result = signinManager.PasswordSignIn(txtUsername.Text, txtPassword.Text, RememberMe.Checked, shouldLockout: true);
 
                 var user = manager.FindByName(txtUsername.Text);
-
+                Session["UserId"] = user.Id;
                 switch (result)
                 {
                     case SignInStatus.Success:
