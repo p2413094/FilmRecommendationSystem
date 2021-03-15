@@ -1,5 +1,4 @@
 ﻿<%@ Page Language="C#" AutoEventWireup="true" CodeBehind="Homepage.aspx.cs" Inherits="FilmRecommendationSystem.Homepage" %>
-<%@ Register Assembly="AjaxControlToolkit" Namespace="AjaxControlToolkit" TagPrefix="ccl" %>
 
 <!DOCTYPE html>
 <html xmlns="http://www.w3.org/1999/xhtml">
@@ -26,15 +25,11 @@
                 <input autocomplete="off" class="textentry-field" type="text" id="myInput" onkeyup="filterSearchFunction()" />
             </div>
         </div>
-        <div>
-            <p class="main-paragraph">
-                Not sure what to watch? Don't worry!
-            </p>
+            <p class="main-paragraph">Not sure what to watch? Don't worry!</p>
             <p class="main-paragraph__explanation">
                 The problem with trying to find a new film to where to begin?! Here, 
                 all you have to do below is enter in films that you know you like, hit the button and bam. Personalised recommendations just for you!
             </p>
-        </div>
 
 
         <asp:Panel ID="Panel1" CssClass="homepage" runat="server">

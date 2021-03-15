@@ -12,21 +12,27 @@ namespace FilmRecommendationSystem
     {
         protected void Page_Load(object sender, EventArgs e)
         {
-            pnlError.Visible = false;
-            pnlAllPreviousStaffMembers.Visible = false;
+            //pnlError.Visible = false;
+            //pnlAllPreviousStaffMembers.Visible = false;
 
-            try
-            {
-                clsPreviousStaffMembersCollection AllPreviousStaffMembers = new clsPreviousStaffMembersCollection();
-                grdPreviousStaffMembers.DataSource = AllPreviousStaffMembers.AllPreviousStaffMembers;
-                grdPreviousStaffMembers.DataBind();
+            //try
+            //{
+            //    clsPreviousStaffMembersCollection AllPreviousStaffMembers = new clsPreviousStaffMembersCollection();
+            //    grdPreviousStaffMembers.DataSource = AllPreviousStaffMembers.AllPreviousStaffMembers;
+            //    grdPreviousStaffMembers.DataBind();
 
-                pnlAllPreviousStaffMembers.Visible = true;
-            }
-            catch
-            {
-                pnlError.Visible = true;
-            }
+            //    pnlAllPreviousStaffMembers.Visible = true;
+            //}
+            //catch
+            //{
+            //    pnlError.Visible = true;
+            //}
+        }
+
+        protected void lnkbtnLogOut_Click(object sender, EventArgs e)
+        {
+            HttpContext.Current.GetOwinContext().Authentication.SignOut();
+            Response.Redirect("Homepage.aspx");
         }
     }
 }

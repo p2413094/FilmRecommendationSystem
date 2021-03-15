@@ -10,79 +10,46 @@
 
 <body class="body">
     <form runat="server">
-        <p class="logo textlink">
-            <a href="Homepage.aspx">FILM RECOMMENDER</a>
-        </p>
-
+        <p class="logo"><a href="Homepage.aspx">FILM RECOMMENDER</a></p>
         <br />
         <br />
         <br />
         <div class="navbar">
             <div class="dropdown">
-                <button class="dropbtn">MY ACCOUNT 
-                    <i class="fa fa-caret-down"></i>
+                <button class="dropbtn">
+                    <a href="MyAccount.aspx" class="menutext">MY ACCOUNT</a>
                 </button>
                 <div class="dropdown-content">
-
-                    <div class="imagecontainer">
-                        <img class="imagedimensions" src="Images/RecommendedFilms.png" />
-                    </div>
                     <a href="RecommendedFilms.aspx">RECOMMENDATIONS</a>
-                    <br />
-                    <br />
-                    <br />
-
-                    <div class="imagecontainer">
-                        <img class="imagedimensions" src="Images/WatchLater.png" />
-                    </div>
                     <a href="WatchList.aspx">WATCHLIST</a>
-                    <br />
-                    <br />
-                    <br />
-
-                    <div class="imagecontainer">
-                        <img class="imagedimensions" src="Images/FavouriteInList.png" />
-                    </div>
                     <a href="FavouriteFilms.aspx">FAVOURITES</a>
-                    <br />
-                    <br />
-                    <br />
-
-                    <div class="imagecontainer">
-                        <img class="imagedimensions" src="Images/Log out.png" />
-                    </div>
-                    <a href="Homepage.aspx">LOG OUT</a>
-                    <br />
-                    <br />
-                    <br />
+                    <asp:LinkButton ID="lnkbtnLogOut" OnClick="lnkbtnLogOut_Click" runat="server">LOG OUT</asp:LinkButton>
                 </div>
             </div> 
         </div>
 
-        <br />
-        <br />
 
         <div class="search">
-                <a onclick="hyplnkSearch_Clicked()" class="label">SEARCH</a>
+            <a onclick="hyplnkSearch_Clicked()" class="label">SEARCH</a>
             <div class="textentry-container">
                 <input autocomplete="off" class="textentry-field" type="text" id="myInput" onkeyup="filterSearchFunction()" />
             </div>
         </div>
 
-        
-        <asp:Panel ID="pnlRecommendations" runat="server" CssClass="mainContent">
-                <div class="header">My recommended films</div>
-            </asp:Panel>
-
         <asp:Panel ID="pnlError" CssClass="mainContent" runat="server">
             <div class="header">Error</div>
-            <div class="textSection">
+            <div class="textSectionError">
                 There was an error fulfilling your request; please try again later.
             </div>
             <div class="textSection">
                 <button type="button" id="btnReturnToHomepage" onclick="btnReturnToHomepage_Click()" class="proceedButton">Ok</button>
             </div>
         </asp:Panel>
+
+        <asp:Panel ID="pnlRecommendations" runat="server" CssClass="mainContent">
+                <div class="header">My recommended films</div>
+            </asp:Panel>
+
 
         <div class="footer">
             <div class="links">

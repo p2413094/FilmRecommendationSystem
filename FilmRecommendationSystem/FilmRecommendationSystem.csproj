@@ -319,8 +319,6 @@
     <Content Include="Images\WatchLaterAdded.png" />
     <Content Include="Login.aspx" />
     <Content Include="MyAccount.aspx" />
-    <Content Include="MyAccountAdministrator.aspx" />
-    <Content Include="MyAccountStaffMember.aspx" />
     <Content Include="PreviousStaffMembers.aspx" />
     <Content Include="RecommendedFilms.aspx" />
     <Content Include="Register.aspx" />
@@ -594,7 +592,6 @@
     <Compile Include="App_Start\IdentityConfig.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="App_Start\Startup.Auth.cs" />
-    <Compile Include="Class1.cs" />
     <Compile Include="CloseAccount.aspx.cs">
       <DependentUpon>CloseAccount.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
@@ -670,14 +667,6 @@
     </Compile>
     <Compile Include="MyAccount.aspx.designer.cs">
       <DependentUpon>MyAccount.aspx</DependentUpon>
-    </Compile>
-    <Compile Include="MyAccountAdministrator.aspx.cs">
-      <DependentUpon>MyAccountAdministrator.aspx</DependentUpon>
-      <SubType>ASPXCodeBehind</SubType>
-    </Compile>
-    <Compile Include="MyAccountStaffMember.aspx.cs">
-      <DependentUpon>MyAccountStaffMember.aspx</DependentUpon>
-      <SubType>ASPXCodeBehind</SubType>
     </Compile>
     <Compile Include="PreviousStaffMembers.aspx.cs">
       <DependentUpon>PreviousStaffMembers.aspx</DependentUpon>

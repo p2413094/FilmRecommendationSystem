@@ -10,10 +10,7 @@
 
 <body class="body" onload="onLoad()" >
     <form runat="server">
-        <p class="logo textlink">
-            <a href="Homepage.aspx">FILM RECOMMENDER</a>
-        </p>
-
+        <p class="logo"><a href="Homepage.aspx">FILM RECOMMENDER</a></p>
         <br />
         <br />
         <br />
@@ -23,44 +20,13 @@
                     <a href="MyAccount.aspx" class="menutext">MY ACCOUNT</a>
                 </button>
                 <div class="dropdown-content">
-
-                    <div class="imagecontainer">
-                        <img class="imagedimensions" src="Images/RecommendedFilms.png" />
-                    </div>
                     <a href="RecommendedFilms.aspx">RECOMMENDATIONS</a>
-                    <br />
-                    <br />
-                    <br />
-
-                    <div class="imagecontainer">
-                        <img class="imagedimensions" src="Images/WatchLater.png" />
-                    </div>
                     <a href="WatchList.aspx">WATCHLIST</a>
-                    <br />
-                    <br />
-                    <br />
-
-                    <div class="imagecontainer">
-                        <img class="imagedimensions" src="Images/FavouriteInList.png" />
-                    </div>
                     <a href="FavouriteFilms.aspx">FAVOURITES</a>
-                    <br />
-                    <br />
-                    <br />
-
-                    <div class="imagecontainer">
-                        <img class="imagedimensions" src="Images/Log out.png" />
-                    </div>
                     <a href="Homepage.aspx">LOG OUT</a>
                 </div>
-              </div> 
-            </div>
-
-        <br />
-        <br />
-        <br />
-        <br />
-        <br />
+            </div> 
+        </div>
 
         <div class="search">
             <a onclick="hyplnkSearch_Clicked()" class="label">SEARCH</a>
@@ -88,7 +54,7 @@
                     OnRowEditing="grdAllStaffMembers_RowEditing" EnableViewState="false" OnRowUpdating="grdAllStaffMembers_RowUpdating" 
                     OnRowDeleting="grdAllStaffMembers_RowDeleting">
                     <Columns>
-                        <asp:TemplateField HeaderText="StaffMemberId" HeaderStyle-CssClass="columnHeader" ItemStyle-CssClass="columnContent">
+                        <asp:TemplateField HeaderText="Id" HeaderStyle-CssClass="columnHeader" ItemStyle-CssClass="columnContent">
                             <ItemTemplate>
                                 <asp:Label ID="lblStaffMemberId" Text='<%#Eval("StaffMemberId")%>' runat="server"></asp:Label>
                             </ItemTemplate>

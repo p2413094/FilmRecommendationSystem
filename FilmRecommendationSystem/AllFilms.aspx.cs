@@ -322,5 +322,11 @@ namespace FilmRecommendationSystem
             AllFilms.Delete();
             LoadData();
         }
+
+        protected void lnkbtnLogOut_Click(object sender, EventArgs e)
+        {
+            HttpContext.Current.GetOwinContext().Authentication.SignOut();
+            Response.Redirect("Homepage.aspx");
+        }
     }
 }

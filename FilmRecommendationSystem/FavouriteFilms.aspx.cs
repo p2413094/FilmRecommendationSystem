@@ -16,14 +16,13 @@ namespace FilmRecommendationSystem
         clsImdbAPI anImdbApi = new clsImdbAPI();
         protected void Page_Load(object sender, EventArgs e)
         {
-            pnlError.Visible = false;
+            //pnlError.Visible = false;
             pnlFavouriteFilms.Visible = false;
             userId = 1; //Request.QueryString["UserId"];
-            DisplayFavouriteFilms();
+            //DisplayFavouriteFilms();
             //TempRecommendations();
 
 
-            pnlFavouriteFilms.Visible = true;
         }
         
         
@@ -76,12 +75,23 @@ namespace FilmRecommendationSystem
                 Int32 index = 0;
                 Int32 filmId = 0;
                 string title;
-                while (index < recordCount)
+                if (recordCount == 0)
                 {
-                    filmId = Convert.ToInt32(DB.DataTable.Rows[index]["FilmId"]);
-                    title = DB.DataTable.Rows[index]["Title"].ToString();
-                    pnlFavouriteFilms.Controls.Add(anImdbApi.GetImdbInformation(filmId));
-                    index++;
+                    Label lblNoFavouriteFilms = new Label();
+                    lblNoFavouriteFilms.CssClass = "italicised";
+                    lblNoFavouriteFilms.Text = "No films in favourites";
+                    pnlFavouriteFilms.Controls.Add(lblNoFavouriteFilms);
+
+                }
+                else
+                {
+                    while (index < recordCount)
+                    {
+                        filmId = Convert.ToInt32(DB.DataTable.Rows[index]["FilmId"]);
+                        title = DB.DataTable.Rows[index]["Title"].ToString();
+                        pnlFavouriteFilms.Controls.Add(anImdbApi.GetImdbInformation(filmId));
+                        index++;
+                    }
                 }
                 pnlFavouriteFilms.Visible = true;
             }
@@ -258,6 +268,12 @@ namespace FilmRecommendationSystem
 
 
             pnlFavouriteFilms.Visible = true;
+        }
+
+        protected void lnkbtnLogOut_Click(object sender, EventArgs e)
+        {
+            HttpContext.Current.GetOwinContext().Authentication.SignOut();
+            Response.Redirect("Homepage.aspx");
         }
     }
 }

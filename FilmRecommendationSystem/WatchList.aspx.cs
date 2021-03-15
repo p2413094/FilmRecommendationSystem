@@ -19,10 +19,10 @@ namespace FilmRecommendationSystem
         protected void Page_Load(object sender, EventArgs e)
         {
             userId = 1;
-            pnlError.Visible = false;
+            //pnlError.Visible = false;
             pnlWatchList.Visible = false;
             //userId = //this would normally be done dynamically 
-            //DisplayWatchLaterFilms(userId);
+            DisplayWatchLaterFilms(userId);
 
         }    
         
@@ -95,15 +95,26 @@ namespace FilmRecommendationSystem
                 Int32 index = 0;
                 Int32 filmId = 0;
                 string title;
-                while (index < recordCount)
-                {
-                    filmId = Convert.ToInt32(DB.DataTable.Rows[index]["FilmId"]);
-                    title = DB.DataTable.Rows[index]["Title"].ToString();
-                    //GetFilmNames(filmId);
-                    pnlWatchList.Controls.Add(anImdbApi.GetImdbInformation(filmId));                    
-                    index++;
-                }
 
+                if (recordCount == 0)
+                {
+                    Label lblNoFilmsInWatchList = new Label();
+                    lblNoFilmsInWatchList.CssClass = "italicised";
+                    lblNoFilmsInWatchList.Text = "No films in watch list";
+                    pnlWatchList.Controls.Add(lblNoFilmsInWatchList);
+                }
+                else
+                {
+                    while (index < recordCount)
+                    {
+                        filmId = Convert.ToInt32(DB.DataTable.Rows[index]["FilmId"]);
+                        title = DB.DataTable.Rows[index]["Title"].ToString();
+                        //GetFilmNames(filmId);
+                        pnlWatchList.Controls.Add(anImdbApi.GetImdbInformation(filmId));                    
+                        index++;
+                    }
+
+                }
                 pnlWatchList.Visible = true;
             }
             catch
@@ -134,6 +145,12 @@ namespace FilmRecommendationSystem
                 //GetImdbInformation(aFilm.FilmId, aFilm.Title);
             }
 
+        }
+
+        protected void lnkbtnLogOut_Click(object sender, EventArgs e)
+        {
+            HttpContext.Current.GetOwinContext().Authentication.SignOut();
+            Response.Redirect("Homepage.aspx");
         }
     }
 }

@@ -7,53 +7,26 @@
     <title>Film recommender</title>
     <link rel="stylesheet" href="StyleSheet.css" />
     <script src="Scripts/jquery-3.5.1.js" type="text/javascript"></script>
-
 </head>
-
 <body class="body">
     <form runat="server">
-        <p class="logo textlink">
-            <a href="Homepage.aspx">FILM RECOMMENDER</a>
+        <p class="logo"><a href="Homepage.aspx">FILM RECOMMENDER</a></p>
+        <br />
+        <br />
+        <asp:Panel ID="pnlNavBar" runat="server">
             <ul>
-                <br />
-                <br />
-                <br />
                 <li><a href="Register.aspx">REGISTER</a></li>
                 <li><a href="Login.aspx">SIGN IN</a></li>
             </ul>
-        </p>
+        </asp:Panel>
 
-        <br />
-        <br />
 
-        <section class="search">
-            <div class="textentry-label">
-                SEARCH
-            </div>
+        <div class="search">
+            <a onclick="hyplnkSearch_Clicked()" class="label">SEARCH</a>
             <div class="textentry-container">
                 <input autocomplete="off" class="textentry-field" type="text" id="myInput" onkeyup="filterSearchFunction()" />
-                <div>
-                    <div id="mySearchDropdown" class="searchdropdown-content">
-                        <a href="FilmInformation2.aspx">Terminator 2: Judgment Day (1991)</a>
-                        <a>Little Women (2019)</a>
-                    </div>
-                </div>
-                <br />
-                <br />
             </div>
-        </section>
-        <br />
-        <br />
-        <br />
-        <br />
-        <br />
-        <br />
-        <br />
-        <br />
-        
-        <br />
-            <br />
-            <br />
+        </div>
 
         <asp:Panel ID="pnlError" runat="server">
                 <label class="page-subheader">Error</label>

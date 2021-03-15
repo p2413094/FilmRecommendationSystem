@@ -13,6 +13,7 @@
         <p class="logo"><a href="Homepage.aspx">FILM RECOMMENDER</a></p>
         <br />
         <br />
+        <br />
         <div class="navbar">
             <div class="dropdown">
                 <button class="dropbtn">
@@ -22,7 +23,7 @@
                     <a href="RecommendedFilms.aspx">RECOMMENDATIONS</a>
                     <a href="WatchList.aspx">WATCHLIST</a>
                     <a href="FavouriteFilms.aspx">FAVOURITES</a>
-                    <a href="Homepage.aspx">LOG OUT</a>
+                    <asp:LinkButton ID="lnkbtnLogOut" OnClick="lnkbtnLogOut_Click" runat="server">LinkButton</asp:LinkButton>
                 </div>
             </div> 
         </div>
@@ -44,14 +45,11 @@
             </div>
         </asp:Panel>
 
-
         <asp:Panel ID="pnlWatchList" runat="server" CssClass="mainContent">
             <div class="header">My watchlist</div>
+            <asp:Button ID="btnSort" CssClass="sortButton" OnClick="btnSort_Click" ToolTip="Sorts films by title" runat="server" Text="sort" />
         </asp:Panel>     
         
-                <asp:Button ID="btnSort" OnClick="btnSort_Click" runat="server" Text="Sort" />
-
-
         <div class="footer">
             <div class="links">
                 Help

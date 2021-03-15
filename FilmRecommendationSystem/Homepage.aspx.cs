@@ -32,16 +32,21 @@ namespace FilmRecommendationSystem
                 //GetUserFavouriteFilms();
                 //GenerateTemporaryRecommendations();
 
-                temp();
+                CheckIfUserIsLoggedIn();
             }
         }
 
-        void temp()
+        void CheckIfUserIsLoggedIn()
         {
-            clsDynamicPanel aDynamicPanel = new clsDynamicPanel();
-            pnlNavBar.Controls.Clear();
-            pnlNavBar.CssClass = "navbar";
-            pnlNavBar.Controls.Add(aDynamicPanel.GenerateMyAccountDropDown());
+            //bool userLoggedIn = System.Web.HttpContext.Current.User.Identity.IsAuthenticated;
+            bool userLoggedIn = HttpContext.Current.User.Identity.IsAuthenticated;
+            if (userLoggedIn)
+            {
+                clsDynamicPanel aDynamicPanel = new clsDynamicPanel();
+                pnlNavBar.Controls.Clear();
+                pnlNavBar.CssClass = "navbar";
+                pnlNavBar.Controls.Add(aDynamicPanel.GenerateMyAccountDropDown());
+            }
         }
 
         public static List<string> SearchFilms(string prefixTest, int count)

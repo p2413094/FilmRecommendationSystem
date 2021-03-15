@@ -15,13 +15,13 @@ namespace FilmRecommendationSystem
     {
 
         /// <summary>
-        /// pnlRecommendations control.
+        /// lnkbtnLogOut control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Panel pnlRecommendations;
+        protected global::System.Web.UI.WebControls.LinkButton lnkbtnLogOut;
 
         /// <summary>
         /// pnlError control.
@@ -31,5 +31,14 @@ namespace FilmRecommendationSystem
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.Panel pnlError;
+
+        /// <summary>
+        /// pnlRecommendations control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Panel pnlRecommendations;
     }
 }

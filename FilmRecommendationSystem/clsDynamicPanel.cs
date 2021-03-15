@@ -63,8 +63,8 @@ namespace FilmRecommendationSystem
 
         private void LnkbtnLogOut_Click(object sender, EventArgs e)
         {            
-            var authentication = HttpContext.Current.GetOwinContext().Authentication;
-            authentication.SignOut();
+            HttpContext.Current.GetOwinContext().Authentication.SignOut();
+            HttpContext.Current.Response.Redirect("Homepage.aspx");
         }
     }
 }

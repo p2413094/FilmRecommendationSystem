@@ -83,9 +83,6 @@
 
         <asp:Panel ID="pnlMyAccount" CssClass="mainContent" runat="server">
             <asp:Panel ID="Panel2" CssClass="header" runat="server">Account details</asp:Panel>
-            <asp:Panel ID="pnlSwitchAccountType" CssClass="switchAccountTypeContainer" runat="server">
-                <asp:Button ID="btnSwitchAccountType" OnClick="btnSwitchAccountType_Click" CssClass="button" runat="server" Text="SWITCH ACC TYPE" />
-            </asp:Panel>
 
 
 

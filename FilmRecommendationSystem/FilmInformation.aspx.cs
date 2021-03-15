@@ -20,6 +20,7 @@ namespace FilmRecommendationSystem
         bool ratingExists = false;
         protected void Page_Load(object sender, EventArgs e)
         {
+            CheckIfUserIsLoggedIn();
             //if (!IsPostBack)
             //{
                 pnlError.Visible = false;
@@ -38,6 +39,21 @@ namespace FilmRecommendationSystem
             //}
 
         }
+
+        void CheckIfUserIsLoggedIn()
+        {
+            //bool userLoggedIn = System.Web.HttpContext.Current.User.Identity.IsAuthenticated;
+            bool userLoggedIn = HttpContext.Current.User.Identity.IsAuthenticated;
+            if (userLoggedIn)
+            {
+                clsDynamicPanel aDynamicPanel = new clsDynamicPanel();
+                pnlNavBar.Controls.Clear();
+                pnlNavBar.CssClass = "navbar";
+                pnlNavBar.Controls.Add(aDynamicPanel.GenerateMyAccountDropDown());
+            }
+        }
+
+
 
         void DisplayFilm(string imdbId)
         {

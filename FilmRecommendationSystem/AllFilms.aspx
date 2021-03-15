@@ -9,51 +9,24 @@
 </head>
 
 <body class="body" onload="onLoad()">
-    
     <form runat="server">
-        <p class="logo textlink">
-            <a href="Homepage.aspx">FILM RECOMMENDER</a>
-        </p>
-
+        <p class="logo"><a href="Homepage.aspx">FILM RECOMMENDER</a></p>
         <br />
         <br />
         <br />
         <div class="navbar">
             <div class="dropdown">
-                <button class="dropbtn">MY ACCOUNT 
-                    <i class="fa fa-caret-down"></i>
+                <button class="dropbtn">
+                    <a href="MyAccount.aspx" class="menutext">MY ACCOUNT</a>
                 </button>
                 <div class="dropdown-content">
-
-                    <div class="imagecontainer">
-                        <img class="imagedimensions" src="Images/WatchLater.png" />
-                    </div>
+                    <a href="RecommendedFilms.aspx">RECOMMENDATIONS</a>
                     <a href="WatchList.aspx">WATCHLIST</a>
-                    <br />
-                    <br />
-                    <br />
-
-                    <div class="imagecontainer">
-                        <img class="imagedimensions" src="Images/FavouriteInList.png" />
-                    </div>
                     <a href="FavouriteFilms.aspx">FAVOURITES</a>
-                    <br /> 
-                    <br />
-                    <br />
-
-                    <div class="imagecontainer">
-                        <img class="imagedimensions" src="Images/Log out.png" />
-                    </div>
-                    <a href="Homepage.aspx">LOG OUT</a>
+                    <asp:LinkButton ID="lnkbtnLogOut" OnClick="lnkbtnLogOut_Click" runat="server">LOG OUT</asp:LinkButton>
                 </div>
             </div> 
         </div>
-
-        <br />
-        <br />
-        <br />
-        <br />
-        <br />
 
         <div class="search">
             <a onclick="hyplnkSearch_Clicked()" class="label">SEARCH</a>

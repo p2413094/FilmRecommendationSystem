@@ -14,10 +14,10 @@ namespace FilmRecommendationSystem
         clsImdbAPI anImdbApi = new clsImdbAPI();
         protected void Page_Load(object sender, EventArgs e)
         {
-            pnlError.Visible = false;
-            pnlRecommendations.Visible = false;
+            //pnlError.Visible = false;
+            //pnlRecommendations.Visible = false;
             Int32 userId = 1;
-            DisplayRecommendedFilms(userId);
+            //DisplayRecommendedFilms(userId);
         }
         
         public static List<string> SearchFilms(string prefixTest, int count)
@@ -44,13 +44,22 @@ namespace FilmRecommendationSystem
                 Int32 recordCount = DB.Count;
                 Int32 index = 0;
                 Int32 filmId = 0;
-                while (index < recordCount)
+                if (recordCount == 0)
                 {
-                    filmId = Convert.ToInt32(DB.DataTable.Rows[index]["FilmId"]);
-                    pnlRecommendations.Controls.Add(anImdbApi.GetImdbInformation(filmId));
-                    index++;
+                    Label lblNoRecommendedFilms = new Label();
+                    lblNoRecommendedFilms.CssClass = "italicised";
+                    lblNoRecommendedFilms.Text = "No recommended films";
+                    pnlRecommendations.Controls.Add(lblNoRecommendedFilms);
                 }
-
+                else
+                {
+                    while (index < recordCount)
+                    {
+                        filmId = Convert.ToInt32(DB.DataTable.Rows[index]["FilmId"]);
+                        pnlRecommendations.Controls.Add(anImdbApi.GetImdbInformation(filmId));
+                        index++;
+                    }
+                }
                 pnlRecommendations.Visible = true;
             }
             catch
@@ -58,7 +67,11 @@ namespace FilmRecommendationSystem
                 pnlError.Visible = true;
             }
         }
-        
 
+        protected void lnkbtnLogOut_Click(object sender, EventArgs e)
+        {
+            HttpContext.Current.GetOwinContext().Authentication.SignOut();
+            Response.Redirect("Homepage.aspx");
+        }
     }
 }

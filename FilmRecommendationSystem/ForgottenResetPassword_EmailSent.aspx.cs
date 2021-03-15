@@ -12,8 +12,23 @@ namespace FilmRecommendationSystem
     {
         protected void Page_Load(object sender, EventArgs e)
         {
-
+            CheckIfUserIsLoggedIn();
         }
+
+        void CheckIfUserIsLoggedIn()
+        {
+            //bool userLoggedIn = System.Web.HttpContext.Current.User.Identity.IsAuthenticated;
+            bool userLoggedIn = HttpContext.Current.User.Identity.IsAuthenticated;
+            if (userLoggedIn)
+            {
+                clsDynamicPanel aDynamicPanel = new clsDynamicPanel();
+                pnlNavBar.Controls.Clear();
+                pnlNavBar.CssClass = "navbar";
+                pnlNavBar.Controls.Add(aDynamicPanel.GenerateMyAccountDropDown());
+            }
+        }
+
+
 
         public static List<string> SearchFilms(string prefixTest, int count)
         {
