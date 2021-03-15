@@ -15,7 +15,9 @@ namespace FilmRecommendationSystem
         {
             pnlError.Visible = false;
             searchText = Request.QueryString["searchText"];//Session["searchText"].ToString();
-            
+
+            CheckIfUserIsLoggedIn();
+
             clsFilmCollection AllFilms = new clsFilmCollection();
             Panel pnlSearchResult = new Panel();
             HyperLink hyplnkSearchResultTitle = new HyperLink();
@@ -48,5 +50,33 @@ namespace FilmRecommendationSystem
                 hyplnkSearchResultTitle.Text = "No titles to display";
             }
         }
+
+        void CheckIfUserIsLoggedIn()
+        {
+            //bool userLoggedIn = System.Web.HttpContext.Current.User.Identity.IsAuthenticated;
+            bool userLoggedIn = HttpContext.Current.User.Identity.IsAuthenticated;
+            if (userLoggedIn)
+            {
+                clsDynamicPanel aDynamicPanel = new clsDynamicPanel();
+                pnlNavBar.Controls.Clear();
+                pnlNavBar.CssClass = "navbar";
+                pnlNavBar.Controls.Add(aDynamicPanel.GenerateMyAccountDropDown());
+            }
+        }
+
+        public static List<string> SearchFilms(string prefixTest, int count)
+        {
+            clsFilmCollection AllFilms = new clsFilmCollection();
+            List<string> filmTitles = new List<string>();
+            foreach (clsFilm aFilm in AllFilms.AllFilms)
+            {
+                if (aFilm.Title.Contains(prefixTest))
+                {
+                    filmTitles.Add(aFilm.Title);
+                }
+            }
+            return filmTitles;
+        }
+
     }
 }

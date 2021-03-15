@@ -14,49 +14,49 @@ namespace FilmRecommendationSystem
     {
         protected void Page_Load(object sender, EventArgs e)
         {
-            if (!IsPostBack)
-            {
-                try
-                {
-                    pnlError.Visible = false;
-                    pnlMyAccount.Visible = false;
-                    pnlStaffAdmin.Visible = false;
-                    btnViewStaffMembers.Visible = false;
-                    btnViewPreviousStaffMembers.Visible = false;
-                    Int32 userId = 1; //Convert.ToInt32(Session["UserId"]); //this would normally be dynamic 
-                    var manager = Context.GetOwinContext().GetUserManager<ApplicationUserManager>();
-                    var user = manager.FindById(userId);
-                    if (user == null)
-                    {
-                        clsStaffMemberCollection AllStaffMembers = new clsStaffMemberCollection();
-                        AllStaffMembers.ThisStaffMember.UserId = userId;
-                        AllStaffMembers.ThisStaffMember.Find(userId);
+            //if (!IsPostBack)
+            //{
+            //    try
+            //    {
+            //        pnlError.Visible = false;
+            //        pnlMyAccount.Visible = false;
+            //        pnlStaffAdmin.Visible = false;
+            //        btnViewStaffMembers.Visible = false;
+            //        btnViewPreviousStaffMembers.Visible = false;
+            //        Int32 userId = 1; //Convert.ToInt32(Session["UserId"]); //this would normally be dynamic 
+            //        var manager = Context.GetOwinContext().GetUserManager<ApplicationUserManager>();
+            //        var user = manager.FindById(userId);
+            //        if (user == null)
+            //        {
+            //            clsStaffMemberCollection AllStaffMembers = new clsStaffMemberCollection();
+            //            AllStaffMembers.ThisStaffMember.UserId = userId;
+            //            AllStaffMembers.ThisStaffMember.Find(userId);
 
-                        if (AllStaffMembers.ThisStaffMember.PrivilegeLevelId != 1)
-                        {
-                            pnlStaffAdmin.Visible = true;
-                            btnViewStaffMembers.Visible = true;
-                            btnViewPreviousStaffMembers.Visible = true;
-                            Session["Standard"] = false;
-                        }
-                        else
-                        {
-                            Session["Standard"] = true;
-                        }
-                    }
-                    else
-                    {
-                        lblEmailAddress.Text = user.Email;
-                        lblLastLogin.Text = user.LastLogin.ToString();
+            //            if (AllStaffMembers.ThisStaffMember.PrivilegeLevelId != 1)
+            //            {
+            //                pnlStaffAdmin.Visible = true;
+            //                btnViewStaffMembers.Visible = true;
+            //                btnViewPreviousStaffMembers.Visible = true;
+            //                Session["Standard"] = false;
+            //            }
+            //            else
+            //            {
+            //                Session["Standard"] = true;
+            //            }
+            //        }
+            //        else
+            //        {
+            //            lblEmailAddress.Text = user.Email;
+            //            lblLastLogin.Text = user.LastLogin.ToString();
 
-                        pnlMyAccount.Visible = true;
-                    }
-                }
-                catch
-                {
-                    pnlError.Visible = true;
-                }
-            }
+            //            pnlMyAccount.Visible = true;
+            //        }
+            //    }
+            //    catch
+            //    {
+            //        pnlError.Visible = true;
+            //    }
+            //}
         }
 
         public static List<string> SearchFilms(string prefixTest, int count)
@@ -73,11 +73,6 @@ namespace FilmRecommendationSystem
             return filmTitles;
         }
 
-        protected void btnSwitchAccountType_Click(object sender, EventArgs e)
-        {
-
-        }
-
         protected void btnViewUsers_Click(object sender, EventArgs e)
         {
             Response.Redirect("AllUsers.aspx");
@@ -91,6 +86,12 @@ namespace FilmRecommendationSystem
         protected void btnViewPreviousStaffMembers_Click(object sender, EventArgs e)
         {
             Response.Redirect("PreviousStaffMembers.aspx");
+        }
+
+        protected void lnkbtnLogOut_Click(object sender, EventArgs e)
+        {
+            HttpContext.Current.GetOwinContext().Authentication.SignOut();
+            Response.Redirect("Homepage.aspx");
         }
     }
 }

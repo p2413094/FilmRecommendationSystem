@@ -15,13 +15,13 @@ namespace FilmRecommendationSystem
     {
 
         /// <summary>
-        /// pnlError control.
+        /// pnlNavBar control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Panel pnlError;
+        protected global::System.Web.UI.WebControls.Panel pnlNavBar;
 
         /// <summary>
         /// pnlAllSearchResults control.
@@ -31,5 +31,14 @@ namespace FilmRecommendationSystem
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.Panel pnlAllSearchResults;
+
+        /// <summary>
+        /// pnlError control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Panel pnlError;
     }
 }

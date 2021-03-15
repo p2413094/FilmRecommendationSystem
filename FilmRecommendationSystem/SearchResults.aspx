@@ -10,67 +10,36 @@
 
 <body class="body">
     <form runat="server">
-        <p class="logo textlink">
-            <a href="Homepage.aspx">FILM RECOMMENDER</a>
+        <p class="logo"><a href="Homepage.aspx">FILM RECOMMENDER</a></p>
+        <br />
+        <br />
+        <asp:Panel ID="pnlNavBar" runat="server">
             <ul>
-                <br />
-                <br />
-                <br />
                 <li><a href="Register.aspx">REGISTER</a></li>
                 <li><a href="Login.aspx">SIGN IN</a></li>
             </ul>
-        </p>
-
-        <br />
-        <br />
-        <br />
-        <br />
-        <br />
-
-        <div class="search">
-            <div class="label">
-                SEARCH
-            </div>
-            <div class="textentry-container">
-                <input autocomplete="off" class="textentry-field" type="text" id="myInput" onkeyup="filterSearchFunction()" />
-                    <div id="mySearchDropdown" class="searchdropdown-content">
-                        <a href="FilmInformation2.aspx">Terminator 2: Judgment Day (1991)</a>
-                        <a>Little Women (2019)</a>
-                    </div>
-            </div>
-        </div>
-       
-        <br />
-        <br />
-        <br />
-        <br />
-        <br />
-        <br />
-        <br />
-        <br />
-        <div class="page-header">
-            Search results  
-        </div>  
-       
-        
-        <br />
-        <br />
-        <br />
-        <br />
-
-        <asp:Panel ID="pnlError" runat="server">
-            <label class="page-subheader">Error</label>
-                <br />
-                <br />
-                There was an error fulfilling your request; please try again later.
-                <br />
-                <br />
-                <br />
-                <button type="button" id="btnReturnToHomepage" onclick="btnReturnToHomepage_Click()" class="registerbutton">Ok</button>
         </asp:Panel>
 
-        <asp:Panel ID="pnlAllSearchResults" runat="server"></asp:Panel>
-        
+        <div class="search">
+            <a onclick="hyplnkSearch_Clicked()" class="label">SEARCH</a>
+            <div class="textentry-container">
+                <input autocomplete="off" class="textentry-field" type="text" id="myInput" onkeyup="filterSearchFunction()" />
+            </div>
+        </div>
+
+        <asp:Panel ID="pnlAllSearchResults" CssClass="mainContent" runat="server">
+            <div class="header">Search results</div>
+        </asp:Panel>
+
+            <asp:Panel ID="pnlError" CssClass="mainContent" runat="server">
+                <div class="header">Error</div>
+                <div class="textSection">
+                    There was an error fulfilling your request; please try again later.
+                </div>
+                <div class="textSection">
+                    <button type="button" id="btnReturnToHomepage" onclick="btnReturnToHomepage_Click()" class="proceedButton">Ok</button>
+                </div>
+            </asp:Panel>
 
         <div class="footer">
             <div class="links">

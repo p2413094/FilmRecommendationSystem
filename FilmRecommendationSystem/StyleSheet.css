@@ -222,7 +222,7 @@ a {
         border-color: red;
         float: left;
         width: 60%;
-        margin-top: 2%;
+        margin-top: 1%;
         padding-top: 2%;
         padding-bottom: 2%;
     }
@@ -357,29 +357,33 @@ a {
             padding-left: 15px;
         }
 
-    .proceedButton {
-        display: flex;
-        justify-content: center;
-        line-height: 40px;
-        width: 185px;
-        font-family: Open Sans, Arial, Helvetica, sans-serif;
-        font-size: small;
-        background-color: transparent;
-        color: white;
-    }
+.proceedButton {
+    display: flex;
+    justify-content: center;
+    line-height: 40px;
+    width: auto;
+    min-width: 140px;
+    font-family: Open Sans, Arial, Helvetica, sans-serif;
+    font-size: small;
+    background-color: transparent;
+    color: white;
+    border-radius: 4px;
+}
 
     .mainContent .myAccount {
         width: 606px;
-        height: 220px;
-        border-style: solid;
-        border-width: 1px;
+        height: 230px;
+        border-width: 2px;
         border-radius: 5px;
-        border-color: lightgrey;
         padding-left: 12px;
         padding-right: 12px;
-        position: relative;
+        display: block;
         font-family: Avenir, sans-serif;
         margin-left: 3%;
+        margin-bottom: 2%;
+        float: left;
+        border-style: solid;
+        border-color: lightgrey;
     }
 
         .mainContent .myAccount .section-container {
@@ -389,24 +393,39 @@ a {
             padding-top: 3%;
         }
 
-        .mainContent .myAccount .section-container-password {
-            width: 80%;
-            height: 35px;
-            float: left;
-            padding-top: 3%;
-        }
-
-        .mainContent .myAccount .changepasswordcontainer {
-            float: right;
-            width: 17.5%;
-            height: 40px;
-        }
-
-            .mainContent .myAccount .changepasswordcontainer .changepasswordicon {
-                float: right;
-                height: 38px;
-                cursor: pointer;
+            .mainContent .myAccount .section-container-password {
+                float: left;
+                width: 100%;
+                height: 30px;
             }
+
+                .mainContent .myAccount .section-container-password .password {
+                    width: 80%;
+                    float: left;
+                    padding-top: 1%;
+                }
+
+                .mainContent .myAccount .section-container-password .changepasswordContainer {
+                    margin-right: 1%;
+                    float: right;
+                    width: 5%;
+                    height: 90%;
+                    cursor: pointer;
+                }
+
+                    .mainContent .section-container-password .changepasswordContainer .changepasswordIcon 
+                    {
+                        width: 100%;
+                        height: 100%;
+                    }
+
+
+        .mainContent .myAccount .closeAccount-Container {
+            width: 100%;
+            height: auto;
+            padding-top: 3%;
+            float: left;
+        }
 
 
     .mainContent .closeAccountButtonContainer {
@@ -731,15 +750,16 @@ a {
 .myaccount {
     width: 606px;
     height: 220px;
-    border-style: solid;
     border-width: 1px;
     border-radius: 5px;
-    border-color: lightgrey;
     padding-left: 12px;
     padding-right: 12px;
     position: relative;
+  
     font-family: Avenir, sans-serif;
     margin-left: 5%;
+    border-style: solid;
+    border-color: lightgrey;
 }
 
 
