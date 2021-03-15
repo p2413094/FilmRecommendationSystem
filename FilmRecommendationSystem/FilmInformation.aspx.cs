@@ -20,24 +20,27 @@ namespace FilmRecommendationSystem
         bool ratingExists = false;
         protected void Page_Load(object sender, EventArgs e)
         {
-            CheckIfUserIsLoggedIn();
             //if (!IsPostBack)
             //{
+            //    CheckIfUserIsLoggedIn();
+
                 pnlError.Visible = false;
-                //pnlFilmInformation.Visible = false;
-                string imdbId; //= Request.QueryString["imdbId"];
+            //    //pnlFilmInformation.Visible = false;
+            //    string imdbId; //= Request.QueryString["imdbId"];
                 userId = 1;
-                //filmId = 1; //Session object required here 
-                imdbId = "tt0114709";
+            //    //filmId = 1; //Session object required here 
+            //    imdbId = "tt0114709";
 
-                DisplayFilm(imdbId);
-                DisplayAllMoods();
+            //    //DisplayFilm(imdbId);
+                //DisplayAllMoods();
 
-                DisplayUserAssignedMoods();
+            //    DisplayUserAssignedMoods();
 
 
             //}
-
+            lblPlot.Text = "Encrypting sensitive sections of the Web.Config is important because they are just that, sensitive. " +
+                "Think about production Web.Config file. It may contain all information that requires running your web application. There are often passwords for SQL database connections, SMTP server, API Keys, or other critical information. In addition to this, Web.Config files are usually treated as just another source code file, that means, any developer on the team, or more accurately anyone with" +
+                " access to the source code, can see what information is stored in Web.Config file.";
         }
 
         void CheckIfUserIsLoggedIn()
@@ -113,15 +116,13 @@ namespace FilmRecommendationSystem
 
             clsFilmRatingCollection AllRatings = new clsFilmRatingCollection();
             bool found = AllRatings.ThisFilmRating.Find(filmId, userId);
-            if (found == true)
+            if (found)
             {
                 ddlRating.SelectedValue = Convert.ToString(AllRatings.ThisFilmRating.Rating);
-                btnAddEditRating.Text = "UPDATE RATING";
                 ratingExists = true;
             }
             else
             {
-                btnAddEditRating.Text = "ADD RATING";
                 ratingExists = false;
             }
                 
@@ -245,6 +246,10 @@ namespace FilmRecommendationSystem
         }
 
         protected void btnAddEditRating_Click(object sender, EventArgs e)
+        {
+        }
+
+        protected void ddlRating_SelectedIndexChanged(object sender, EventArgs e)
         {
             clsFilmRatingCollection AllRatings = new clsFilmRatingCollection();
             AllRatings.ThisFilmRating.UserId = userId;

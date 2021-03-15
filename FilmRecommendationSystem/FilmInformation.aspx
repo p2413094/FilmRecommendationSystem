@@ -20,7 +20,6 @@
             </ul>
         </asp:Panel>
 
-
         <div class="search">
             <a onclick="hyplnkSearch_Clicked()" class="label">SEARCH</a>
             <div class="textentry-container">
@@ -28,25 +27,11 @@
             </div>
         </div>
 
-        <asp:Panel ID="pnlError" runat="server">
-                <label class="page-subheader">Error</label>
-                <br />
-                <br />
-                There was an error fulfilling your request; please try again later.
-                <br />
-                <br />
-                <br />
-                <button type="button" id="btnReturnToHomepage" onclick="btnReturnToHomepage_Click()" class="registerbutton">Ok</button>
-                            <br />
-                <br />
-                <br />
-
-        </asp:Panel>
 
 
         <asp:Panel ID="pnlFilmInformation" CssClass="filmInformation" runat="server">
             <div class="headerContainer">
-                <asp:Label ID="lblTitle" CssClass="headerText" runat="server"></asp:Label>
+                <asp:Label ID="lblTitle" CssClass="headerText" runat="server">Temp</asp:Label>
             </div>
             <div class="imageContainer">
                 <asp:Image ID="imgFilmPoster" ImageUrl="~/Images/King Kong.jpg" runat="server" CssClass="image" />
@@ -59,9 +44,8 @@
                     </div>
                 </div>
                 <div class="myRatingContainer">
-                    <div class="textContainer">
                         <label class="headerText">My rating</label>
-                        <asp:DropDownList ID="ddlRating" runat="server">
+                        <asp:DropDownList ID="ddlRating" CssClass="ratingdropdown" OnSelectedIndexChanged="ddlRating_SelectedIndexChanged" AutoPostBack="true" runat="server">
                             <asp:ListItem Value="0.5">0.5</asp:ListItem>
                             <asp:ListItem Text="1" Value="1"></asp:ListItem>
                             <asp:ListItem Text="1.5" Value="1.5"></asp:ListItem>
@@ -73,58 +57,58 @@
                             <asp:ListItem Text="4.5" Value="4.5"></asp:ListItem>
                             <asp:ListItem Text="5" Value="5"></asp:ListItem>
                         </asp:DropDownList>
-                        <asp:Button ID="btnAddEditRating" OnClick="btnAddEditRating_Click" runat="server"/>
-                    </div>
                     <br />
-                    <asp:Panel ID="Panel3" runat="server">
-                            <asp:TextBox ID="txtNew" ToolTip="Enter Text Here" runat="server"></asp:TextBox>
-                            <asp:DropDownList ID="ddlFilmMoods" runat="server"></asp:DropDownList>
-                            <asp:Button ID="btnAssignTag" OnClientClick="return btnAssignTag_Clicked()" OnClick="btnAssignTag_Click" runat="server" Text="Add tag to film" />
-                        </asp:Panel>
+                </div>
+
+                <div>
+                    <label class="headerText">Assign tags to film?</label>
+                    <asp:TextBox ID="txtNew" CssClass="tagSearchField" autocomplete="off" placeholder="enter text here..." ToolTip="Enter tag search here" runat="server"></asp:TextBox>
+                    <asp:DropDownList ID="ddlFilmMoods" CssClass="allTagsDropdown" runat="server"></asp:DropDownList>
+                    <asp:Button ID="btnAssignTag" OnClientClick="return btnAssignTag_Clicked()" OnClick="btnAssignTag_Click" runat="server" CssClass="proceedButton" Text="Add tag to film" />
                 </div>
 
             </div>
             <asp:Panel ID="pnlContentContainer" CssClass="contentContainer" runat="server">
-                <label class="headerText">Description</label>
+                <label class="filmInformationheaderContainer">Description</label>
                 <br />
                 <br />
                 <asp:Label ID="lblPlot" runat="server"></asp:Label>
                 <br />
                 <br />
-                <label class="headerText">Genre</label>
+                <label class="filmInformationheaderContainer">Genre</label>
                 <br />
                 <br />
                 <asp:Label ID="lblGenre" runat="server"></asp:Label>
                 <br />
                 <br />
-                <label class="headerText">Age rating</label>
+                <label class="filmInformationheaderContainer">Age rating</label>
                 <br />
                 <br />
                 <asp:Label ID="lblAgeRating" runat="server"></asp:Label>
                 <br />
                 <br />
-                <label class="headerText">Director</label>
+                <label class="filmInformationheaderContainer">Director</label>
                 <br />
                 <br />
                 <asp:Label ID="lblDirector" runat="server"></asp:Label>
                 <br />
                 <br />
-                <label class="headerText">Released</label>
+                <label class="filmInformationheaderContainer">Released</label>
                 <br />
                 <br />
                 <asp:Label ID="lblReleased" runat="server"></asp:Label>
                 <br />
                 <br />
-                <label class="headerText">Runtime</label>
+                <label class="filmInformationheaderContainer">Runtime</label>
                 <br />
                 <br />
                 <asp:Label ID="lblRuntime" runat="server"></asp:Label>
                 <br />
                 <br />
-                <label class="headerText">Want more information</label>
+                <label class="filmInformationheaderContainer hyperlink">Want more information?</label>
                 <br />
                 <br />
-                <asp:HyperLink ID="hyplnkMoreInformation" runat="server">HyperLink</asp:HyperLink>
+                <asp:HyperLink ID="hyplnkMoreInformation" CssClass="hyperlink" runat="server">HyperLink</asp:HyperLink>
                 <asp:Panel ID="pnlMyTags" runat="server">
                     <br />
                     <br />
@@ -138,6 +122,23 @@
 
         <br />
         <br />
+
+
+
+
+        <asp:Panel ID="pnlError" CssClass="mainContent" runat="server">
+            <div class="header">Error</div>
+            <div class="textSectionError">
+                There was an error fulfilling your request; please try again later.
+            </div>
+            <div class="textSection">
+                <button type="button" id="btnReturnToHomepage" onclick="btnReturnToHomepage_Click()" class="proceedButton">Ok</button>
+            </div>
+        </asp:Panel>
+
+
+
+
 
         <div class="footer">
             <div class="links">
