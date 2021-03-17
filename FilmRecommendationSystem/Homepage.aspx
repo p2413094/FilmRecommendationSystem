@@ -22,9 +22,11 @@
         <div class="search">
             <a onclick="hyplnkSearch_Clicked()" class="label">SEARCH</a>
             <div class="textentry-container">
-                <input autocomplete="off" class="textentry-field" type="text" id="myInput" onkeyup="filterSearchFunction()" />
+                <input autocomplete="off" class="textentry-field" type="text" id="myInput" onkeyup="filterSearchFunction()"  />
             </div>
         </div>
+
+
             <p class="main-paragraph">Not sure what to watch? Don't worry!</p>
             <p class="main-paragraph__explanation">
                 The problem with trying to find a new film to where to begin?! Here, 
@@ -35,7 +37,6 @@
         <asp:Panel ID="Panel1" CssClass="homepage" runat="server">
             <asp:Panel ID="pnlFilmSection" CssClass="recommenderSelectionGenreMoodContainer" runat="server">
                 <p class="homepage-subHeader">First, search by genre, or mood?</p>
-
                 <div class="GenreMoodFirstSelector">
                     <asp:Button ID="btnGenre" ToolTip="Gets you recommendations based on genre" OnClick="btnGenre_Click"
                         CssClass="recommendoption" runat="server" Text="genre" />
@@ -92,6 +93,8 @@
                     location.href = "SearchResults.aspx?searchText=" + searchText;
                 }
             }
+
+
             myInput.addEventListener("keyup", function (event) {
                 // Number 13 is the "Enter" key on the keyboard
                 if (event.keyCode === 13) {
@@ -102,18 +105,21 @@
                 }
             });
 
+            myInput.addEventListener("keydown", function (event))
+            {
+
+            }
+
         </script>
 
         <div class="footer">
             <div class="links">
-                Help
+                <a href="Help.aspx" target="_blank">Help</a> 
             </div>
             <div class="footercopyright">
                 © 2020 FILM RECOMMENDER
                 <br />
                 All rights are reserved
-                <br />
-                Site NOT for rollout
             </div>
         </div>
 </form>

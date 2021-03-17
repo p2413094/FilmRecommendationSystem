@@ -31,10 +31,10 @@
 
         <asp:Panel ID="pnlFilmInformation" CssClass="filmInformation" runat="server">
             <div class="headerContainer">
-                <asp:Label ID="lblTitle" CssClass="headerText" runat="server">Temp</asp:Label>
+                <asp:Label ID="lblTitle" CssClass="headerText" runat="server">King Kong (2005)</asp:Label>
             </div>
             <div class="imageContainer">
-                <asp:Image ID="imgFilmPoster" ImageUrl="~/Images/King Kong.jpg" runat="server" CssClass="image" />
+                <asp:Image ID="imgFilmPoster" ImageUrl="~/Images/King Kong.jpg" CssClass="largeImage" runat="server" />
                 <div class="overlayContainer">
                     <div class="leftItem">
                         <asp:ImageButton ID="imgbtnFavourite" ImageUrl="~/Images/Favourite.png" CssClass="image" OnClick="imgbtnFavourite_Click" runat="server" />
@@ -105,10 +105,10 @@
                 <asp:Label ID="lblRuntime" runat="server"></asp:Label>
                 <br />
                 <br />
-                <label class="filmInformationheaderContainer hyperlink">Want more information?</label>
+                <label class="filmInformationheaderHyperlinkContainer hyperlink">Want more information?</label>
                 <br />
                 <br />
-                <asp:HyperLink ID="hyplnkMoreInformation" CssClass="hyperlink" runat="server">HyperLink</asp:HyperLink>
+                <asp:HyperLink ID="hyplnkMoreInformation" CssClass="hyperlink" runat="server">click here for more</asp:HyperLink>
                 <asp:Panel ID="pnlMyTags" runat="server">
                     <br />
                     <br />
@@ -119,12 +119,6 @@
             </asp:Panel>
 
         </asp:Panel>
-
-        <br />
-        <br />
-
-
-
 
         <asp:Panel ID="pnlError" CssClass="mainContent" runat="server">
             <div class="header">Error</div>
@@ -142,14 +136,12 @@
 
         <div class="footer">
             <div class="links">
-                Help
+                <a href="Help.aspx" target="_blank">Help</a> 
             </div>
             <div class="footercopyright">
                 © 2020 FILM RECOMMENDER
                 <br />
                 All rights are reserved
-                <br />
-                Site NOT for rollout
             </div>
         </div>
 

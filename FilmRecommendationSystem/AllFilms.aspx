@@ -4,7 +4,7 @@
 
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head runat="server">
-    <title>Film recommender | All films</title>
+    <title>FILM RECOMMENDER | ALL FILMS</title>
     <link rel="stylesheet" href="StyleSheet.css" />
 </head>
 
@@ -41,7 +41,7 @@
             <asp:ImageButton ID="imgbtnAdd" OnClick="imgbtnAdd_Click" ImageUrl="~/Images/Add_plus icon.png" CausesValidation="false" class="addIcon"
                 runat="server" />   
             <asp:Panel ID="Panel1" CssClass="AllUsersFilmsContainer" runat="server">
-                <asp:TextBox ID="txtFilmSearch" AutoCompleteType="Disabled" CssClass="gridviewSearch" OnTextChanged="txtFilmSearch_TextChanged" AutoPostBack="true" runat="server"></asp:TextBox>
+                <asp:TextBox ID="txtFilmSearch" placeholder="search..." AutoCompleteType="Disabled" CssClass="gridviewSearch" OnTextChanged="txtFilmSearch_TextChanged" AutoPostBack="true" runat="server"></asp:TextBox>
                 <asp:GridView ID="grdAllFilms" AllowPaging="true" PageSize="20" OnRowEditing="grdAllFilms_RowEditing" OnRowUpdating="grdAllFilms_RowUpdating" 
                         OnRowDeleting="grdAllFilms_RowDeleting" AutoGenerateColumns="false" CssClass="AllUsersFilmsTable" runat="server">
                         <Columns>
@@ -150,7 +150,7 @@
 
         </asp:Panel>
 
-                <asp:Panel ID="pnlError" CssClass="mainContent" runat="server">
+        <asp:Panel ID="pnlError" CssClass="mainContent" runat="server">
             <div class="header">Error</div>
             <div class="textSection">
                 There was an error fulfilling your request; please try again later.
@@ -237,14 +237,12 @@
         <br />
         <div class="footer">
             <div class="links">
-                Help
+                <a href="Help.aspx" target="_blank">Help</a> 
             </div>
             <div class="footercopyright">
                 © 2020 FILM RECOMMENDER
                 <br />
                 All rights are reserved
-                <br />
-                Site NOT for rollout
             </div>
         </div>
     </form>

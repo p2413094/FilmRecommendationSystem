@@ -4,7 +4,7 @@
 
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head runat="server">
-    <title>Film recommender | All staff members</title>
+    <title>FILM RECOMMENDER | MANAGEMENT</title>
     <link rel="stylesheet" href="StyleSheet.css" />
 </head>
 
@@ -49,9 +49,8 @@
         <asp:Panel ID="pnlAllStaffMembers" CssClass="mainContent" runat="server">
             <label class="header">All staff members</label>
             <asp:ImageButton ID="imgbtnAddNewStaffMember" CssClass="addIcon" OnClick="imgbtnAddNewStaffMember_Click" ImageUrl="~/Images/Add_plus icon.png" runat="server" />
-            <asp:Panel ID="Panel1" CssClass="AllUsersFilmsContainer" runat="server">
                 <asp:GridView ID="grdAllStaffMembers" CssClass="AllUsersFilmsTable" runat="server" AutoGenerateColumns="false" 
-                    OnRowEditing="grdAllStaffMembers_RowEditing" EnableViewState="false" OnRowUpdating="grdAllStaffMembers_RowUpdating" 
+                    OnRowEditing="grdAllStaffMembers_RowEditing" OnRowUpdating="grdAllStaffMembers_RowUpdating" 
                     OnRowDeleting="grdAllStaffMembers_RowDeleting">
                     <Columns>
                         <asp:TemplateField HeaderText="Id" HeaderStyle-CssClass="columnHeader" ItemStyle-CssClass="columnContent">
@@ -96,7 +95,7 @@
                                 <asp:CheckBox ID="chkAllowed" Text='<%# Eval("Allowed") %>' runat="server" />
                             </EditItemTemplate>
                         </asp:TemplateField>
-                        <asp:TemplateField ItemStyle-CssClass="tablecell-actions" HeaderStyle-CssClass="tablecell-actions">
+                        <asp:TemplateField HeaderText="Actions" HeaderStyle-Font-Italic="true" ItemStyle-CssClass="tablecell-actions">
                             <ItemTemplate>
                                 <asp:ImageButton ID="imgbtnEdit" ImageUrl="~/Images/Edit_icon.png" CssClass="action_icon" commandname="Edit" ToolTip="Edit this record" runat="server" />
                                 <asp:ImageButton ID="imgbtnDelete" ImageUrl="~/Images/TrashCan.png" OnClientClick="return DeleteFilm()" CssClass="action_icon" commandname="Delete" ToolTip="Delete this record" runat="server" />
@@ -104,18 +103,15 @@
                         </asp:TemplateField>
                     </Columns>
                 </asp:GridView>
-            </asp:Panel>
         </asp:Panel>        
 
-
-
         <asp:Panel ID="pnlNewStaffMember" CssClass="mainContent" runat="server">
-                <asp:Label ID="lblActionStaffMember" CssClass="header" runat="server"></asp:Label>
+                <asp:Label ID="lblActionStaffMember" CssClass="header" runat="server">Add new staff member</asp:Label>
             
             <asp:Panel ID="pnlNewStaffMemberUserId" CssClass="loginSection" runat="server">
                     <asp:Label runat="server" AssociatedControlID="ddlUserId" CssClass="textentry-label">UserId</asp:Label>
                     <div class="textentry-field">
-                        <asp:DropDownList ID="ddlUserId" runat="server"></asp:DropDownList>
+                        <asp:DropDownList ID="ddlUserId" CssClass="userPrivilegeDropdown" runat="server"></asp:DropDownList>
                     </div>
             </asp:Panel>
 
@@ -123,7 +119,8 @@
                     <asp:Label runat="server" AssociatedControlID="txtNewStaffMemberFirstName" CssClass="textentry-label">First name</asp:Label>
                     <div class="textentry-field">
                         <asp:TextBox runat="server" placeholder="Carl" ID="txtNewStaffMemberFirstName" CssClass="textentry-fieldsize"></asp:TextBox>
-                        <asp:RequiredFieldValidator ControlToValidate="txtNewStaffMemberFirstName" runat="server" ErrorMessage="Field must not be blank"></asp:RequiredFieldValidator>
+                        <asp:RequiredFieldValidator ID="test" ControlToValidate="txtNewStaffMemberFirstName" runat="server" ErrorMessage="Field must not be blank"></asp:RequiredFieldValidator>
+                        <br />
                         <asp:CustomValidator runat="server"
                             ValidationGroup="vldgrpNewStaffMember"
                             ValidateEmptyText="true"
@@ -139,9 +136,11 @@
                 <div class="textentry-field">
                     <asp:TextBox runat="server" placeholder="Denham" ID="txtNewStaffMemberLastName" CssClass="textentry-fieldsize"></asp:TextBox>
                     <asp:RequiredFieldValidator ControlToValidate="txtNewStaffMemberLastName" runat="server" ErrorMessage="Field must not be blank"></asp:RequiredFieldValidator>
+                    <br />
                     <asp:CustomValidator runat="server"
                         ValidationGroup="vldgrpNewStaffMember"
                         EnableClientScript="true"
+                        ValidateEmptyText="true"
                         ErrorMessage="Last name must be between 0-50 characters."
                         ClientValidationFunction="ValidateNewStaffMemberLastName" 
                         ControlToValidate="txtNewStaffMemberLastName">
@@ -151,7 +150,7 @@
                 <div class="loginSection">
                     <asp:Label runat="server" AssociatedControlID="ddlPrivilegelevel" CssClass="textentry-label">Privilege level:</asp:Label>
                     <div class="textentry-field">
-                    <asp:DropDownList ID="ddlPrivilegelevel" runat="server">
+                    <asp:DropDownList ID="ddlPrivilegelevel" CssClass="userPrivilegeDropdown" runat="server">
                         <asp:ListItem Value="1">Standard</asp:ListItem>
                         <asp:ListItem Value="2">Administrator</asp:ListItem>
                     </asp:DropDownList>
@@ -164,11 +163,13 @@
                 </div>
             </div>
             <div class="loginSection">
-                <div class="textentry-label"></div>
+                <div class="actionStaffMemberContainer">
                 <div class="textentry-field">
                     <asp:Button ID="btnRegisterStaffMember" ValidationGroup="vldgrpNewStaffMember" 
-                        OnClientClick="return btnRegisterStaffMember_Click()" OnClick="btnRegisterStaffMember_Click"
+                         OnClick="btnRegisterStaffMember_Click" CausesValidation="true"
                         runat="server" Text="ADD STAFF MEMBER" CssClass="proceedButton" />
+                </div>
+
                 </div>
             </div>
         </asp:Panel>
@@ -177,7 +178,7 @@
                 <label class="header">All users</label>
                 <asp:Panel ID="Panel2" CssClass="AllUsersFilmsContainer" runat="server">
                     <asp:GridView ID="grdAllUsers" CssClass="AllUsersFilmsTable" OnRowEditing="grdAllUsers_RowEditing" OnRowUpdating="grdAllUsers_RowUpdating"
-                        AutoGenerateColumns="false" runat="server">
+                        OnRowCancelingEdit="grdAllUsers_RowCancelingEdit" AutoGenerateColumns="false" runat="server">
                         <Columns>
                             <asp:TemplateField HeaderText="UserId" HeaderStyle-CssClass="columnHeader" ItemStyle-CssClass="columnContent">
                                 <ItemTemplate>
@@ -221,6 +222,10 @@
                                 <ItemTemplate>
                                     <asp:ImageButton ID="imgbtnEdit" ImageUrl="~/Images/Edit_icon.png" CssClass="action_icon" commandname="Edit" ToolTip="Edit this record" runat="server" />
                                 </ItemTemplate>
+                                <EditItemTemplate>
+                                    <asp:ImageButton ID="imgbtnSaveChanges" ImageUrl="~/Images/Green tick_save.png" CssClass="action_icon" CommandName="Update" ToolTip="Save changes" runat="server" />
+                                    <asp:ImageButton ID="imgbtUndoChanges" ImageUrl="~/Images/WatchLater.png" CssClass="action_icon" OnClick="imgbtUndoChanges_Click" ToolTip="Undo changes" runat="server" />
+                                </EditItemTemplate>
                             </asp:TemplateField>
                         </Columns>
                     </asp:GridView>
@@ -230,14 +235,12 @@
 
         <div class="footer">
             <div class="links">
-                Help
+                <a href="Help.aspx" target="_blank">Help</a> 
             </div>
             <div class="footercopyright">
                 © 2020 FILM RECOMMENDER
                 <br />
                 All rights are reserved
-                <br />
-                Site NOT for rollout
             </div>
         </div>
 
@@ -290,30 +293,28 @@
             }
 
             function ValidateNewStaffMemberFirstName(sender, args) {
-                var firstName = document.getElementById('txtNewStaffMemberFirstName').value;
+                var firstName = document.getElementById("txtNewStaffMemberFirstName").value;
                 if (firstName.length == 0) {
-                    args.IsValid = false;
+                    return args.IsValid = false;
                 }
                 if (firstName.length > 50) {
-                    args.IsValid = false;
+                    return args.IsValid = false;
                 }
                 else {
-                    args.IsValid = true;
+                    return args.IsValid = true;
                 }
-
             }
 
             function ValidateNewStaffMemberLastName(sender, args) {
-                var lastName = document.getElementById('txtNewStaffMemberLastName').value;
+                var lastName = document.getElementById("txtNewStaffMemberLastName").value;
                 if (lastName.length == 0) {
-                    args.IsValid = false;
-
+                    return args.IsValid = false;
                 }
                 if (lastName.length > 50) {
-                    args.IsValid = false;
+                    return args.IsValid = false;
                 }
                 else {
-                    args.IsValid = true;
+                    return args.IsValid = true;
                 }
             }
 

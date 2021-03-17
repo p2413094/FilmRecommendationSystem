@@ -190,16 +190,33 @@ a {
     display: inline-block;
 }
 
+.mainContent .helpContainer {
+    margin-top: 1%;
+    border-style: solid;
+    border-color: deepskyblue;
+    width: 70%;
+    float: left;
+}
+
+    .mainContent .helpContainer .helpQuestionHeader {
+        border-style: solid;
+        border-color: purple;
+        font-size: 18px;
+        font-weight: bold;
+        margin-top: 2%;
+        margin-bottom: 1%;
+    }
+
     .mainContent .header {
         float: left;
-        width: 100%;
+        width: 90%;
         font-size: 40px;
         font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
         font-weight: lighter;
-        margin-bottom: 4%;
+        margin-bottom: 1%;
         border-style: solid;
         border-color: lawngreen;
-        height: 80px;
+        height: 70px;
     }
 
     .mainContent .italicised {
@@ -236,36 +253,29 @@ a {
         font-style: italic;
     }
 
-
-
-
-
-
-
-
     .mainContent .gridviewSearch {
         width: 200px;
         height: 20px;
         text-align: left;
         border-style: solid;
-        border-color: blue;
+        border-color: white;
         border-radius: 6px;
         text-indent: 20px;
+        background-color: black;
+        color: white;
     }
 
-
-    .AllUsersFilmsContainer {
-        margin-left: 4%;
-    }
-
-
-    .AllUsersFilmsTable {
-        border-style: solid;
-        border-width: 3px;
-        border-radius: 5px;
-        border-color: lightgrey;
-        width: 60%;
-    }
+.AllUsersFilmsTable {
+    border-width: 3px;
+    border-radius: 5px;
+    border-style: solid;
+    border-color: lightgrey;
+    min-width: 40%;
+    width: auto;
+    float: left;
+    display: block;
+    margin-bottom: 2%;
+}
 
         .AllUsersFilmsTable .columnHeader {
             border-color: yellow;
@@ -275,6 +285,8 @@ a {
             padding-left: 12px;
             padding-top: 10px;
             padding-bottom: 4px;
+            min-width: 30px;
+            width: auto;
         }
 
         .AllUsersFilmsTable .columnContent {
@@ -282,33 +294,38 @@ a {
             padding-top: 5px;
         }
 
-        .AllUsersFilmsTable .action_icon {
-            margin-top: 4%;
-            height: 30px;
-            width: 27px;
-            border-style: solid;
-            border-color: red;
-            display: inline;
-        }
-
         .AllUsersFilmsTable .tablecell-actions {
             opacity: 0;
             transition: .3s;
             border-style: solid;
             border-color: deepskyblue;
+            font-style: italic;
+            min-width: 70px;
+            width: auto;
+        }
+
+        .AllUsersFilmsTable .action_icon {
+            margin-top: 4%;
+            height: 24px;
+            width: 21px;
+            border-style: solid;
+            border-color: red;
+            display: inline;
         }
 
             .tablecell-actions:hover {
                 opacity: 1;
             }
 
-        .addIcon {
-            height: 25px;
-            width: 25px;
-            float: right;
-            margin: 10px;
-            margin-top: 17px;
-        }
+    .mainContent .addIcon {
+        height: 30px;
+        width: 30px;
+        float: right;
+        margin: 10px;
+        margin-top: 17px;
+        border-style: solid;
+        border-color: purple;
+    }
 
 
 
@@ -319,10 +336,8 @@ a {
         border-style: solid;
         border-color: yellow;
         float: left;
-        width: 80%;
-        margin-top: 2%;
-        padding-top: 2%;
-        padding-bottom: 2%;
+        width: 100%;
+        padding-top: 3%;
     }
 
     .mainContent .loginSectionError {
@@ -349,16 +364,29 @@ a {
     }
 
         .mainContent .loginSection .textentry-field .textentry-fieldsize {
-            width: 100%;
+            width: 98%;
             height: 25px;
             border-style: solid;
             font-style: italic;
             border-radius: 4px;
             padding-left: 15px;
+            background-color: black;
+            color: white;
         }
 
+    .mainContent .loginSection .actionStaffMemberContainer {
+        margin-left: 16%;
+    }
+
+.loginSection .userPrivilegeDropdown {
+    background-color: black;
+    color: white;
+    width: auto;
+    border-radius: 4px;
+}
+
 .proceedButton {
-    display: flex;
+    display: inline;
     justify-content: center;
     line-height: 40px;
     width: auto;
@@ -655,6 +683,26 @@ a {
         cursor: pointer;
     }
 
+    .search .rightLabel {
+        font-size: 15px;
+        letter-spacing: 3px;
+        color: white;
+        padding: 12px;
+        float: right;
+        text-align: right;
+        font-style: italic;
+        cursor: pointer;
+    }
+
+
+
+    .search:hover .rightLabel {
+        opacity: 0;
+    }
+
+
+
+
     .search .textentry-container {
         width: 50%;
         float: left;
@@ -827,7 +875,7 @@ a {
     position: absolute;
     background-color: transparent;
     z-index: 1;
-    margin-left: 14px;
+    margin-left: 1%;
     width: 20%;
 }
 
@@ -841,7 +889,8 @@ a {
         text-align: left;
         font-size: 12px;
         letter-spacing: 2px;
-        width: 62%;
+        min-width: 53%;
+        width: auto;
         border-radius: 5px;
         padding-top: 14px;
     }
@@ -897,7 +946,7 @@ a {
 
 
 .filmInformation {
-    width: 80%;
+    width: 90%;
     border-style: solid;
     border-color: purple;
     display: inline-block;
@@ -917,7 +966,8 @@ a {
     width: 100%;
     border-style: solid;
     border-color: lawngreen;
-    height: 120px;
+    min-height: 60px;
+    padding-bottom: 10px;
 }
 
     .filmInformation .headerContainer .headerText {
@@ -939,7 +989,7 @@ a {
     border-color: aquamarine;
 }
 
-    .filmInformation .imageContainer .image {
+    .filmInformation .imageContainer .largeImage {
         height: 500px;
         width: 100%;
         opacity: 1;
@@ -960,27 +1010,34 @@ a {
 
 .filmInformation .overlayContainer {
     border-style: solid;
-    border-color: brown;
+    border-color: red;
     position: absolute;
     top: 0;
     bottom: 0;
     left: 0;
     right: 0;
     height: 496px;
-    width: 97%;
+    width: 99%;
     opacity: 0;
     transition: .5s ease;
 }
 
 
-.imageContainer:hover .image {
-    opacity: 0.2;
-}
+    .filmInformation .imageContainer:hover .largeImage {
+        opacity: 0.2;
+    }
+
 
 
 .overlayContainer:hover {
     opacity: 1;
 }
+
+
+
+
+
+
 
 
 .filmInformation .overlayContainer .leftItem {
@@ -1013,9 +1070,7 @@ a {
     height: 45px;
 }
 
-.filmInformation .hyperlink {
-    font-style: italic;
-}
+
 
 
 
@@ -1035,7 +1090,7 @@ a {
 .filmInformation .contentContainer {
     border-style: solid;
     border-color: lawngreen;
-    width: 50%;
+    width: 60%;
     height: 700px;
     float: left;
 }
@@ -1052,6 +1107,15 @@ a {
         color: red;
     }
 
+    .filmInformation .contentContainer .filmInformationheaderHyperlinkContainer {
+        font-size: 14px;
+        font-weight: bold;
+    }
+    
+
+.filmInformation .hyperlink {
+    font-style: italic;
+}
 
 .filmInformation .tagWholeContainer {
     width: 25%;

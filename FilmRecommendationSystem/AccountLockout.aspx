@@ -44,7 +44,7 @@
 
         <div class="footer">
             <div class="links">
-                Help
+                <a href="Help.aspx" target="_blank">Help</a> 
             </div>
             <div class="footercopyright">
                 © 2020 FILM RECOMMENDER

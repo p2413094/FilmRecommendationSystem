@@ -13,7 +13,7 @@ namespace FilmRecommendationSystem
 {
     public partial class AllUsersAndStaffMembers : System.Web.UI.Page
     {
-        bool editStaffMember = false;
+        bool editStaffMember;
         protected void Page_Load(object sender, EventArgs e)
         {
             pnlError.Visible = false;
@@ -21,59 +21,62 @@ namespace FilmRecommendationSystem
             pnlAllStaffMembers.Visible = false;
             pnlNewStaffMember.Visible = false;
 
-            lblActionStaffMember.Text = "Add new staff member";
-
             bool administrator = true; //= Convert.ToBoolean(Session["Standard"]);
             
-            if (administrator)
+            if (!IsPostBack)
             {
-                LoadStaffMemberData();
+                if (administrator)
+                {
+                   LoadStaffMemberData();
+                    //LoadUserData();
+                    //pnlNewStaffMember.Visible = true;
+                }
+                //LoadUserData();
             }
-            LoadUserData();
         }
 
         protected void btnRegisterStaffMember_Click(object sender, EventArgs e)
         {
             string firstName = txtNewStaffMemberFirstName.Text;
-            string lastName = txtNewStaffMemberLastName.Text;
-            Int32 userId = Convert.ToInt32(ddlUserId.SelectedItem.Value);
-            Int32 privilegeLevelId = Convert.ToInt32(ddlPrivilegelevel.SelectedValue);
-            Boolean suspended = chkStaffMemberSuspended.Checked;
 
-            clsStaffMemberCollection AllStaffMembers = new clsStaffMemberCollection();
-            AllStaffMembers.ThisStaffMember.UserId = userId;
-            AllStaffMembers.ThisStaffMember.PrivilegeLevelId = privilegeLevelId;
-            AllStaffMembers.ThisStaffMember.FirstName = firstName;
-            AllStaffMembers.ThisStaffMember.LastName = lastName;
-            AllStaffMembers.ThisStaffMember.Allowed = suspended;
+
+                string lastName = txtNewStaffMemberLastName.Text;
+                Int32 userId = Convert.ToInt32(ddlUserId.SelectedItem.Value);
+                Int32 privilegeLevelId = Convert.ToInt32(ddlPrivilegelevel.SelectedValue);
+                Boolean suspended = chkStaffMemberSuspended.Checked;
+
+                clsStaffMemberCollection AllStaffMembers = new clsStaffMemberCollection();
+                AllStaffMembers.ThisStaffMember.UserId = userId;
+                AllStaffMembers.ThisStaffMember.PrivilegeLevelId = privilegeLevelId;
+                AllStaffMembers.ThisStaffMember.FirstName = firstName;
+                AllStaffMembers.ThisStaffMember.LastName = lastName;
+                AllStaffMembers.ThisStaffMember.Allowed = suspended;
             
-            var manager = Context.GetOwinContext().GetUserManager<ApplicationUserManager>();
-            var user = manager.FindById(userId);
-            clsEmail AnEmail = new clsEmail(user.Email);
+                var manager = Context.GetOwinContext().GetUserManager<ApplicationUserManager>();
+                var user = manager.FindById(userId);
+                clsEmail AnEmail = new clsEmail(user.Email);
 
-            if (editStaffMember == true)
-            {
-                //need to do something here to check if new privilege level
-                //has changed or not  
-
-                if (suspended == true)
+                if (editStaffMember == true)
                 {
-                    DateTime suspendedEndDate = DateTime.Now.AddDays(3);
-                    AnEmail.SendUserSuspensionEmail(suspendedEndDate);
-                    user.LockoutEnabled = true;
-                    user.LockoutEndDateUtc = suspendedEndDate;
-                    manager.Update(user);
+                    //need to do something here to check if new privilege level
+                    //has changed or not  
+
+                    if (suspended == true)
+                    {
+                        DateTime suspendedEndDate = DateTime.Now.AddDays(3);
+                        AnEmail.SendUserSuspensionEmail(suspendedEndDate);
+                        user.LockoutEnabled = true;
+                        user.LockoutEndDateUtc = suspendedEndDate;
+                        manager.Update(user);
+                    }
+                    AllStaffMembers.Update();
                 }
-                AllStaffMembers.Update();
-            }
-            else
-            {
-                AllStaffMembers.Add();            
-                //AnEmail.SendNewStaffMemberNoticeEmail();
-            }
-
-
-            LoadStaffMemberData();
+                else
+                {
+                    AllStaffMembers.Add();            
+                    //AnEmail.SendNewStaffMemberNoticeEmail();
+                }
+                LoadStaffMemberData();
         }
 
 
@@ -115,6 +118,8 @@ namespace FilmRecommendationSystem
             pnlNewStaffMember.Visible = true;
 
             LoadStaffMemberData();
+
+            Page.SetFocus(btnRegisterStaffMember);
         }
 
         
@@ -223,6 +228,20 @@ namespace FilmRecommendationSystem
         protected void imgbtnAddNewStaffMember_Click(object sender, ImageClickEventArgs e)
         {
             pnlNewStaffMember.Visible = true;
+        }
+
+        protected void grdAllUsers_RowCancelingEdit(object sender, GridViewCancelEditEventArgs e)
+        {
+            grdAllUsers.EditIndex = -1;
+            LoadUserData();
+
+
+        }
+
+        protected void imgbtUndoChanges_Click(object sender, ImageClickEventArgs e)
+        {
+            grdAllUsers.EditIndex = -1;
+            LoadUserData();
         }
 
     }

@@ -48,20 +48,19 @@
 
          <asp:Panel ID="pnlAllPreviousStaffMembers" CssClass="mainContent" runat="server">
              <div class="header">All previous staff members</div>
-             <asp:GridView ID="grdPreviousStaffMembers" runat="server"></asp:GridView>
+             <asp:GridView ID="grdPreviousStaffMembers" HeaderStyle-CssClass="columnHeader" ItemStyle-CssClass="columnContent"
+                 CssClass="AllUsersFilmsTable" runat="server"></asp:GridView>
         </asp:Panel>
          
 
         <div class="footer">
             <div class="links">
-                Help
+                <a href="Help.aspx" target="_blank">Help</a> 
             </div>
             <div class="footercopyright">
                 © 2020 FILM RECOMMENDER
                 <br />
                 All rights are reserved
-                <br />
-                Site NOT for rollout
             </div>
         </div>
 

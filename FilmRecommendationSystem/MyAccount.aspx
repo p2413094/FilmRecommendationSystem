@@ -74,7 +74,7 @@
 
         <asp:Panel ID="pnlStaffAdmin" CssClass="mainContent" runat="server">
             <asp:Label ID="lblStaffAdminHeader" CssClass="header" runat="server"></asp:Label>
-            <asp:Button ID="btnViewUsers" OnClick="btnViewUsers_Click" runat="server" CssClass="proceedButton" Text="VIEW USERS" />
+            <asp:Button ID="btnViewUsers" OnClick="btnViewUsers_Click" runat="server" CssClass="proceedButton" Text="ALL USERS" />
             <button onclick="btnViewFilms_Clicked" class="proceedButton">VIEW ALL FILMS</button>
             <asp:Button ID="btnViewStaffMembers" OnClick="btnViewStaffMembers_Click" CssClass="proceedButton" runat="server" Text="VIEW ALL STAFF MEMBERS" />
             <asp:Button ID="btnViewPreviousStaffMembers" OnClick="btnViewPreviousStaffMembers_Click" runat="server" CssClass="proceedButton" Text="VIEW ALL PREVIOUS STAFF MEMBERS" />
@@ -98,14 +98,12 @@
 
         <div class="footer">
             <div class="links">
-                Help
+                <a href="Help.aspx" target="_blank">Help</a> 
             </div>
             <div class="footercopyright">
                 © 2020 FILM RECOMMENDER
                 <br />
                 All rights are reserved
-                <br />
-                Site NOT for rollout
             </div>
         </div>
 
