@@ -29,8 +29,8 @@
         <div class="mainContent">
             <div class="header">Help</div>
             <div class="helpContainer">
-                <div class="helpQuestionHeader">What is film recommender?</div>
-                Film recommender is a website that allows you to get film recommendations based on what genre of film you want or what kind 
+                <div class="helpQuestionHeader">What is FILM RECOMMENDER?</div>
+                FILM RECOMMENDER is a website that allows you to get film recommendations based on what genre of film you want or what kind 
                 of mood you’re in. It takes a lot of the tedious work out of finding a film to watch.
 
                 <div class="helpQuestionHeader">How does it recommend films?</div>

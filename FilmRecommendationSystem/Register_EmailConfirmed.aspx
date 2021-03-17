@@ -4,7 +4,7 @@
 
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head runat="server">
-    <title>Film recommender | Confirm email address</title>
+    <title>FILM RECOMMENDER | EMAIL CONFIRMED</title>
     <link rel="stylesheet" href="StyleSheet.css" />
 </head>
 

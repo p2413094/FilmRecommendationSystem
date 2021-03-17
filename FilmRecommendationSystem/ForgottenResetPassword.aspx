@@ -30,17 +30,15 @@
         <div class="mainContent">
             <div class="header">Reset password</div>
             <div class="textSection">
-                If you've forgotten your password or need to reset it, enter your account email
-                and we'll send you a link to change it.     
+                Enter your account email and we'll send you a link to change your password.     
             </div>
             <div class="loginSection">
                 <asp:Label runat="server" AssociatedControlID="txtEmailAddress" CssClass="textentry-label">Email address</asp:Label>
                 <div class="textentry-field">
-                    <asp:TextBox ID="txtEmailAddress" TextMode="Email" CssClass="textentry-fieldsize" runat="server"></asp:TextBox>
+                    <asp:TextBox ID="txtEmailAddress" placeholder="lightningmcqueen@95.com" AutoCompleteType="Disabled" TextMode="Email" CssClass="textentry-fieldsize" runat="server"></asp:TextBox>
                     <asp:RequiredFieldValidator runat="server" ControlToValidate="txtEmailAddress" ErrorMessage="Email address is required"></asp:RequiredFieldValidator>
                     <br />
                     <asp:Label ID="lblError" runat="server"></asp:Label>
-                    <br />
                     <br />
                     <asp:Button ID="btnResetPassword" OnClick="btnResetPassword_Click" runat="server" Text="Reset password" CssClass="proceedButton" />
                 </div>

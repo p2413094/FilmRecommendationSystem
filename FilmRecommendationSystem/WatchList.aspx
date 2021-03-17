@@ -4,7 +4,7 @@
 
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head runat="server">
-    <title>Film recommender | My WatchList</title>
+    <title>FILM RECOMMENDER | WATCHLIST</title>
     <link rel="stylesheet" href="StyleSheet.css" />
 </head>
 
@@ -23,7 +23,7 @@
                     <a href="RecommendedFilms.aspx">RECOMMENDATIONS</a>
                     <a href="WatchList.aspx">WATCHLIST</a>
                     <a href="FavouriteFilms.aspx">FAVOURITES</a>
-                    <asp:LinkButton ID="lnkbtnLogOut" OnClick="lnkbtnLogOut_Click" runat="server">LinkButton</asp:LinkButton>
+                    <asp:LinkButton ID="lnkbtnLogOut" OnClick="lnkbtnLogOut_Click" runat="server">LOG OUT</asp:LinkButton>
                 </div>
             </div> 
         </div>

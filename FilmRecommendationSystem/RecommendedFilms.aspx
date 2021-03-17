@@ -4,7 +4,7 @@
 
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head runat="server">
-    <title>Film recommender | Recommended films</title>
+    <title>FILM RECOMMENDER | RECOMMENDED FILMS</title>
     <link rel="stylesheet" href="StyleSheet.css" />
 </head>
 

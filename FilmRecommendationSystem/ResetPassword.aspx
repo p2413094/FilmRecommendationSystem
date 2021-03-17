@@ -4,42 +4,28 @@
 
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head runat="server">
-    <title>Film recommender | Login</title>
+    <title>FILM RECOMMENDER | RESET PASSWORD</title>
     <link rel="stylesheet" href="StyleSheet.css" />
 </head>
 
 <body class="body">
     <form runat="server">
-        <p class="logo textlink">
-            <a href="Homepage.aspx">FILM RECOMMENDER</a>
+        <p class="logo"><a href="Homepage.aspx">FILM RECOMMENDER</a></p>
+        <br />
+        <br />
+        <asp:Panel ID="pnlNavBar" runat="server">
             <ul>
-                <br />
-                <br />
-                <br />
                 <li><a href="Register.aspx">REGISTER</a></li>
                 <li><a href="Login.aspx">SIGN IN</a></li>
             </ul>
-        </p>
+        </asp:Panel>
 
-        <br />
-        <br />
-
-        <section class="search">
-            <div class="textentry-label">
-                SEARCH
-            </div>
+        <div class="search">
+            <a onclick="hyplnkSearch_Clicked()" class="label">SEARCH</a>
             <div class="textentry-container">
-                <input autocomplete="off" class="textentry-field" type="text" oninput="myFunction()" id="myInput" onkeyup="filterFunction()" />
-                <div>
-                    <div id="myDropdown" class="dropdown-content">
-                        <a href="FilmInformation2.aspx">The Terminator (1984)</a>
-                        <a>Little Women (2019)</a>
-                    </div>
-                </div>
-                <br />
-                <br />
+                <input autocomplete="off" class="textentry-field" type="text" id="myInput" onkeyup="filterSearchFunction()" />
             </div>
-        </section>
+        </div>
 
        
         <br />
@@ -50,24 +36,12 @@
         <br />
         <br />
         <br />
-        <div class="account">
-            <p class="page-header">Reset password</p>
+        <div class="mainContent">
+            <div class="header">Reset password</div>
+        
+        <asp:Label ID="lblError" runat="server"></asp:Label>
 
-            <br />
-            <br />
-            <br />
-            <br />
-            <br />
-            <br />
-            <br />
-            <asp:Label ID="lblError" runat="server"></asp:Label>
-            <br />
-            <br />
-            <br />
-            <br />
-
-            
-            <div class="register-section">
+            <div class="loginSection">
                 <asp:Label runat="server" AssociatedControlID="txtEmailAddress" CssClass="textentry-label">Email address</asp:Label>
                 <div class="textentry-field">
                     <asp:TextBox runat="server" placeholder="ellenripley86@sulaco.com" ID="txtEmailAddress" TextMode="Email"  CssClass="textentry-fieldsize"></asp:TextBox>
@@ -75,7 +49,7 @@
                 </div>
             </div>
             
-            <div class="register-section-password">
+            <div class="loginSection">
                 <asp:Label ID="lblPassword" runat="server" AssociatedControlID="txtPassword" Text="Password" CssClass="textentry-label"></asp:Label>
                 <div class="textentry-field">
                     <asp:TextBox ID="txtPassword" TextMode="Password" runat="server" CssClass="textentry-fieldsize"></asp:TextBox>
@@ -97,7 +71,7 @@
                 </div>
             </div>
             
-            <div class="register-section">
+            <div class="loginSection">
                 <asp:Label ID="lblConfirmPassword" runat="server" AssociatedControlID="txtPasswordConfirmation" Text="Confirm password" CssClass="textentry-label"></asp:Label>
                 <div class="textentry-field">
                     <asp:TextBox ID="txtPasswordConfirmation" TextMode="Password" runat="server" CssClass="textentry-fieldsize"></asp:TextBox>
@@ -109,15 +83,16 @@
                 </div>
             </div>
             
-            <div class="register-section">
+            <div class="loginSection">
                 <div class="textentry-label"></div>
                 <div class="textentry-field">
                     <p style="font-style: italic;">By creating an account, you acknowledge our privacy statement.</p>
-                    <asp:Button ID="btnResetPassword" OnClick="btnResetPassword_Click" runat="server" Text="Reset password" CssClass="registerbutton" />
+                    <asp:Button ID="btnResetPassword" OnClick="btnResetPassword_Click" runat="server" Text="Reset password" CssClass="proceedButton" />
                 </div>
             </div>
 
-        </div>      
+        </div>
+
         <div class="footer">
             <div class="links">
                 <a href="Help.aspx" target="_blank">Help</a> 
@@ -129,7 +104,18 @@
             </div>
         </div>
 
-        <script type="text/javascript">
+        <script>
+            function hyplnkSearch_Clicked() {
+                var searchText = document.getElementById("myInput").value;
+
+                if (searchText.length == 0) {
+                    alert("Search text cannot be blank");
+                }
+                else {
+                    location.href = "SearchResults.aspx?searchText=" + searchText;
+                }
+            }
+
             function btnLogin_Click() {
                 location.href = "ResetPasswordConfirmation.aspx";
             }
@@ -138,27 +124,6 @@
                 alert("Your new password has been saved");
                 location.href="Login.aspx";        
             }
-
-            /* When the user clicks on the button,
-            toggle between hiding and showing the dropdown content */
-            function myFunction() {
-                document.getElementById("myDropdown").classList.toggle("show");
-            }
-
-            function filterFunction() {
-                var input, filter, ul, li, a, i;
-                input = document.getElementById("myInput");
-                filter = input.value.toUpperCase();
-                div = document.getElementById("myDropdown");
-                a = div.getElementsByTagName("a");
-                for (i = 0; i < a.length; i++) {
-                    txtValue = a[i].textContent || a[i].innerText;
-                    if (txtValue.toUpperCase().indexOf(filter) > -1) {
-                    a[i].style.display = "";
-                    } else {
-                    a[i].style.display = "none";}
-                }
-                }
         </script>
     </form>
 </body>

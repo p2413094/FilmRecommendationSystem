@@ -4,7 +4,7 @@
 
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head runat="server">
-    <title>Film recommender | Close account</title>
+    <title>FILM RECOMMENDER | CLOSE ACCOUNT</title>
     <link rel="stylesheet" href="StyleSheet.css" />
 </head>
 
@@ -38,11 +38,12 @@
         
         <asp:Panel ID="pnlError" CssClass="mainContent" runat="server">
             <div class="header">Error</div>
-            There was an error fulfilling your request; please try again later.
-            <br />
-            <br />
-                <br />
+            <div class="textSection">
+                There was an error fulfilling your request; please try again later.
+            </div>
+            <div class="textSection">
                 <button type="button" id="btnReturnToHomepage" onclick="btnReturnToHomepage_Click()" class="proceedButton">Ok</button>
+            </div>
         </asp:Panel>
 
         <div class="mainContent">

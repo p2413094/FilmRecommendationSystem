@@ -22,8 +22,8 @@ namespace FilmRecommendationSystem
             //pnlError.Visible = false;
             pnlWatchList.Visible = false;
             //userId = //this would normally be done dynamically 
-            DisplayWatchLaterFilms(userId);
-
+            //DisplayWatchLaterFilms(userId);
+            TempRecommendations();
         }    
         
         public static List<string> SearchFilms(string prefixTest, int count)

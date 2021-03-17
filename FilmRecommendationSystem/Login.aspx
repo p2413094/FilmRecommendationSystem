@@ -4,7 +4,7 @@
 
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head runat="server">
-    <title>Film recommender | Login</title>
+    <title>FILM RECOMMENDER | LOGIN</title>
     <link rel="stylesheet" href="StyleSheet.css" />
 </head>
 <body class="body" onload="onLoad()">

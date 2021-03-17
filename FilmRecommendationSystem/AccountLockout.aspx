@@ -4,25 +4,21 @@
 
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head runat="server">
-    <title>Film recommender | Confirm email address</title>
+    <title>FILM RECOMMENDER | ACCOUNT LOCKOUT</title>
     <link rel="stylesheet" href="StyleSheet.css" />
 </head>
 
 <body class="body">
     <form runat="server">
-        <p class="logo textlink">
-            <a href="Homepage.aspx">FILM RECOMMENDER</a>
+        <p class="logo"><a href="Homepage.aspx">FILM RECOMMENDER</a></p>
+        <br />
+        <br />
+        <asp:Panel ID="pnlNavBar" runat="server">
             <ul>
-                <br />
-                <br />
-                <br />
                 <li><a href="Register.aspx">REGISTER</a></li>
                 <li><a href="Login.aspx">SIGN IN</a></li>
             </ul>
-        </p>
-
-        <br />
-        <br />
+        </asp:Panel>
 
         <div class="search">
                 <a onclick="hyplnkSearch_Clicked()" class="label">SEARCH</a>
@@ -35,7 +31,7 @@
             <div class="header">Account lockout</div>
             <div class="textSection">
                 Your account has been locked for breaching our terms and conditions. Check your email to see when
-                you can re-access your account 
+                you can re-access your account.
             </div>
             <div class="textSection">
                 <button type="button" onclick="btnOk_Click()" id="btnOk" class="proceedButton">Ok</button>
