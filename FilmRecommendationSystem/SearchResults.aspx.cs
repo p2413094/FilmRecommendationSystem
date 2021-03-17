@@ -13,41 +13,53 @@ namespace FilmRecommendationSystem
         string searchText;
         protected void Page_Load(object sender, EventArgs e)
         {
+            pnlAllSearchResults.Visible = false;
             pnlError.Visible = false;
-            searchText = Request.QueryString["searchText"];//Session["searchText"].ToString();
 
-            CheckIfUserIsLoggedIn();
-
-            clsFilmCollection AllFilms = new clsFilmCollection();
-            Panel pnlSearchResult = new Panel();
-            HyperLink hyplnkSearchResultTitle = new HyperLink();
-
-            if (AllFilms.SearchForFilm(searchText).Count != 0)
+            try
             {
-                foreach (clsFilm aFilm in AllFilms.SearchForFilm(searchText))
+                searchText = Request.QueryString["searchText"];//Session["searchText"].ToString();
+
+                CheckIfUserIsLoggedIn();
+
+                clsFilmCollection AllFilms = new clsFilmCollection();
+                Panel pnlSearchResult = new Panel();
+                clsDataConnection DB = new clsDataConnection();
+                HyperLink hyplnkSearchResultTitle = new HyperLink();
+
+                if (AllFilms.SearchForFilm(searchText).Count != 0)
+                {
+                    foreach (clsFilm aFilm in AllFilms.SearchForFilm(searchText))
+                    {
+                        pnlSearchResult = new Panel();
+                        pnlSearchResult.CssClass = "searchResultsContainer";
+                        hyplnkSearchResultTitle = new HyperLink();
+
+                        hyplnkSearchResultTitle.Text = aFilm.Title;
+
+                        DB = new clsDataConnection();
+                        DB.AddParameter("@FilmId", aFilm.FilmId);
+                        DB.Execute("sproc_tblLinksFilterByFilmId");
+                        hyplnkSearchResultTitle.NavigateUrl = "FilmInformation.aspx?ImdbId=" + DB.DataTable.Rows[0]["ImdbId"].ToString();
+                                        
+                        pnlSearchResult.Controls.Add(hyplnkSearchResultTitle);
+                        pnlAllSearchResults.Controls.Add(pnlSearchResult);
+                    }
+
+                    pnlAllSearchResults.Visible = true;
+                }
+                else
                 {
                     pnlSearchResult = new Panel();
                     pnlSearchResult.CssClass = "searchResultsContainer";
                     hyplnkSearchResultTitle = new HyperLink();
-
-                    hyplnkSearchResultTitle.Text = aFilm.Title;
-
-                    clsDataConnection DB = new clsDataConnection();
-                    DB.AddParameter("@FilmId", aFilm.FilmId);
-                    DB.Execute("sproc_tblLinksFilterByFilmId");
-                    hyplnkSearchResultTitle.NavigateUrl = "FilmInformation.aspx?ImdbId=" + DB.DataTable.Rows[0]["ImdbId"].ToString();
-                                        
-                    pnlSearchResult.Controls.Add(hyplnkSearchResultTitle);
-                    pnlAllSearchResults.Controls.Add(pnlSearchResult);
+                
+                    hyplnkSearchResultTitle.Text = "No titles to display";
                 }
             }
-            else
+            catch
             {
-                pnlSearchResult = new Panel();
-                pnlSearchResult.CssClass = "searchResultsContainer";
-                hyplnkSearchResultTitle = new HyperLink();
-                
-                hyplnkSearchResultTitle.Text = "No titles to display";
+                pnlError.Visible = true;
             }
         }
 
@@ -63,20 +75,5 @@ namespace FilmRecommendationSystem
                 pnlNavBar.Controls.Add(aDynamicPanel.GenerateMyAccountDropDown());
             }
         }
-
-        public static List<string> SearchFilms(string prefixTest, int count)
-        {
-            clsFilmCollection AllFilms = new clsFilmCollection();
-            List<string> filmTitles = new List<string>();
-            foreach (clsFilm aFilm in AllFilms.AllFilms)
-            {
-                if (aFilm.Title.Contains(prefixTest))
-                {
-                    filmTitles.Add(aFilm.Title);
-                }
-            }
-            return filmTitles;
-        }
-
     }
 }

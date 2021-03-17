@@ -16,13 +16,11 @@ namespace FilmRecommendationSystem
         clsImdbAPI anImdbApi = new clsImdbAPI();
         protected void Page_Load(object sender, EventArgs e)
         {
-            //pnlError.Visible = false;
-            pnlFavouriteFilms.Visible = false;
-            userId = 1; //Request.QueryString["UserId"];
+            pnlError.Visible = false;
+            pnlFavouriteFilms.Visible = true;
+            userId = 3; //Request.QueryString["UserId"];
             //DisplayFavouriteFilms();
             //TempRecommendations();
-
-
         }
         
         
@@ -77,11 +75,8 @@ namespace FilmRecommendationSystem
                 string title;
                 if (recordCount == 0)
                 {
-                    Label lblNoFavouriteFilms = new Label();
-                    lblNoFavouriteFilms.CssClass = "italicised";
-                    lblNoFavouriteFilms.Text = "No films in favourites";
-                    pnlFavouriteFilms.Controls.Add(lblNoFavouriteFilms);
-
+                    clsDynamicPanel aDynamicPanel = new clsDynamicPanel();
+                    pnlFavouriteFilms.Controls.Add(aDynamicPanel.GenerateEmptyListPanel("favourite films"));
                 }
                 else
                 {

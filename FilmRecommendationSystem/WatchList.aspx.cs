@@ -6,6 +6,7 @@ using System.Web.UI;
 using System.Web.UI.WebControls;
 using RestSharp;
 using Classes;
+using System.Drawing;
 
 namespace FilmRecommendationSystem
 {
@@ -19,11 +20,11 @@ namespace FilmRecommendationSystem
         protected void Page_Load(object sender, EventArgs e)
         {
             userId = 1;
-            //pnlError.Visible = false;
+            pnlError.Visible = false;
             pnlWatchList.Visible = false;
             //userId = //this would normally be done dynamically 
-            //DisplayWatchLaterFilms(userId);
-            TempRecommendations();
+            DisplayWatchLaterFilms(userId);
+            //TempRecommendations();
         }    
         
         public static List<string> SearchFilms(string prefixTest, int count)
@@ -98,10 +99,9 @@ namespace FilmRecommendationSystem
 
                 if (recordCount == 0)
                 {
-                    Label lblNoFilmsInWatchList = new Label();
-                    lblNoFilmsInWatchList.CssClass = "italicised";
-                    lblNoFilmsInWatchList.Text = "No films in watch list";
-                    pnlWatchList.Controls.Add(lblNoFilmsInWatchList);
+                    clsDynamicPanel aDynamicPanel = new clsDynamicPanel();
+                    pnlWatchList.Controls.Add(aDynamicPanel.GenerateEmptyListPanel("watch list"));
+                    btnSort.Visible = false;
                 }
                 else
                 {

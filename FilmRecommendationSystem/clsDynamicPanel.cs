@@ -61,6 +61,26 @@ namespace FilmRecommendationSystem
             return pnlSignInRegister;
         }
 
+        public Panel GenerateEmptyListPanel(string emptyListName)
+        {
+            Panel pnlEmptyList = new Panel();
+
+            Panel pnlEmptyListHeaderContainer = new Panel();
+            pnlEmptyListHeaderContainer.CssClass = "page-subheader";
+            pnlEmptyList.Controls.Add(pnlEmptyListHeaderContainer);
+
+            Label lblAlert = new Label();
+            lblAlert.Text = "Alert";
+            pnlEmptyListHeaderContainer.Controls.Add(lblAlert);
+
+            Label lblNoItems = new Label();
+            lblNoItems.CssClass = "italicised";
+            lblNoItems.Text = "No " + emptyListName;
+            pnlEmptyList.Controls.Add(lblNoItems);
+
+            return pnlEmptyList;
+        }
+
         private void LnkbtnLogOut_Click(object sender, EventArgs e)
         {            
             HttpContext.Current.GetOwinContext().Authentication.SignOut();

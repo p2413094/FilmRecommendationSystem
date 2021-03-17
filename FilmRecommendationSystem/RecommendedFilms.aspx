@@ -48,7 +48,7 @@
 
         <asp:Panel ID="pnlRecommendations" runat="server" CssClass="mainContent">
                 <div class="header">My recommended films</div>
-            </asp:Panel>
+        </asp:Panel>
 
 
         <div class="footer">

@@ -28,8 +28,6 @@
             </div> 
         </div>
 
-
-
         <div class="search">
                 <a onclick="hyplnkSearch_Clicked()" class="label">SEARCH</a>
             <div class="textentry-container">

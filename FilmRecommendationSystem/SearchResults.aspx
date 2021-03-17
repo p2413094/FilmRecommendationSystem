@@ -53,6 +53,27 @@
         </div>
 
         <script>
+            function hyplnkSearch_Clicked() {
+                var searchText = document.getElementById("myInput").value;
+
+                if (searchText.length == 0) {
+                    alert("Search text cannot be blank");
+                }
+                else {
+                    location.href = "SearchResults.aspx?searchText=" + searchText;
+                }
+            }
+
+            myInput.addEventListener("keyup", function (event) {
+                // Number 13 is the "Enter" key on the keyboard
+                if (event.keyCode === 13) {
+                    // Cancel the default action, if needed
+                    event.preventDefault();
+                    // Trigger the button element with a click
+                    hyplnkSearch_Clicked();
+                }
+            });
+
             function btnReturnToHomepage_Click() {
                 location.href = "Homepage.aspx";
             }

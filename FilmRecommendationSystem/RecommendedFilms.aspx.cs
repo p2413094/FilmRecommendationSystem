@@ -6,6 +6,7 @@ using System.Web;
 using System.Web.UI;
 using System.Web.UI.WebControls;
 using Classes;
+using System.Drawing;
 
 namespace FilmRecommendationSystem
 {
@@ -14,10 +15,10 @@ namespace FilmRecommendationSystem
         clsImdbAPI anImdbApi = new clsImdbAPI();
         protected void Page_Load(object sender, EventArgs e)
         {
-            //pnlError.Visible = false;
-            //pnlRecommendations.Visible = false;
-            Int32 userId = 1;
-            //DisplayRecommendedFilms(userId);
+            pnlError.Visible = false;
+            pnlRecommendations.Visible = false;
+            Int32 userId = 98; //Convert.ToInt32(Session["UserId"]);
+            DisplayRecommendedFilms(userId);
         }
         
         public static List<string> SearchFilms(string prefixTest, int count)
@@ -46,10 +47,8 @@ namespace FilmRecommendationSystem
                 Int32 filmId = 0;
                 if (recordCount == 0)
                 {
-                    Label lblNoRecommendedFilms = new Label();
-                    lblNoRecommendedFilms.CssClass = "italicised";
-                    lblNoRecommendedFilms.Text = "No recommended films";
-                    pnlRecommendations.Controls.Add(lblNoRecommendedFilms);
+                    clsDynamicPanel aDynamicPanel = new clsDynamicPanel();
+                    pnlRecommendations.Controls.Add(aDynamicPanel.GenerateEmptyListPanel("recommended films"));
                 }
                 else
                 {

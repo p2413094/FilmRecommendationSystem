@@ -14,13 +14,16 @@ namespace FilmRecommendationSystem
     {
         protected void Page_Load(object sender, EventArgs e)
         {
-
+            pnlError.Visible = false;;
         }
 
         protected void btnResetPassword_Click(object sender, EventArgs e)
         {
             string code = IdentityHelper.GetCodeFromRequest(Request);
             string email;
+
+            Label lblError = new Label();
+
             if (code != null)
             {
                 var manager = Context.GetOwinContext().GetUserManager<ApplicationUserManager>();
@@ -28,7 +31,10 @@ namespace FilmRecommendationSystem
                 var user = manager.FindByEmail(txtEmailAddress.Text);
                 if (user == null)
                 {
-                    lblError.Text = "No user found";
+                    lblError.Text = "We can't find an account with that email address";
+                    pnlError.Controls.Add(lblError);
+                    pnlError.Controls.Add(new LiteralControl("<br />"));
+                    pnlError.Visible = true;
                     return;
                 }
                 var result = manager.ResetPassword(user.Id, code, txtPassword.Text);
@@ -42,11 +48,12 @@ namespace FilmRecommendationSystem
                     Response.Redirect("MyAccount.aspx");
                     return;
                 }
+                pnlPasswordErrors.CssClass = "passwordErrorContainer";
                 lblError.Text = result.Errors.FirstOrDefault();
+                pnlError.Controls.Add(lblError);
+                pnlError.Visible = true;
                 return;
             }
-
-            lblError.Text = "An error has occurred";
         }
     }
 }

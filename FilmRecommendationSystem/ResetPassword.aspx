@@ -27,34 +27,27 @@
             </div>
         </div>
 
-       
-        <br />
-        <br />
-        <br />
-        <br />
-        <br />
-        <br />
-        <br />
-        <br />
         <div class="mainContent">
             <div class="header">Reset password</div>
-        
-        <asp:Label ID="lblError" runat="server"></asp:Label>
+
+            <asp:Panel ID="pnlError" runat="server">
+                <div class="page-subheader">Alert</div>
+            </asp:Panel>
 
             <div class="loginSection">
                 <asp:Label runat="server" AssociatedControlID="txtEmailAddress" CssClass="textentry-label">Email address</asp:Label>
                 <div class="textentry-field">
-                    <asp:TextBox runat="server" placeholder="ellenripley86@sulaco.com" ID="txtEmailAddress" TextMode="Email"  CssClass="textentry-fieldsize"></asp:TextBox>
-                    <asp:RequiredFieldValidator runat="server" ControlToValidate="txtEmailAddress" ID="RequiredFieldValidator2"  ErrorMessage="RequiredFieldValidator"></asp:RequiredFieldValidator>
+                    <asp:TextBox runat="server"  placeholder="ellenripley86@sulaco.com" AutoCompleteType="Disabled" ID="txtEmailAddress" TextMode="Email"  CssClass="textentry-fieldsize"></asp:TextBox>
+                    <asp:RequiredFieldValidator runat="server" ControlToValidate="txtEmailAddress"  ErrorMessage="Field cannot be blank"></asp:RequiredFieldValidator>
                 </div>
             </div>
             
             <div class="loginSection">
                 <asp:Label ID="lblPassword" runat="server" AssociatedControlID="txtPassword" Text="Password" CssClass="textentry-label"></asp:Label>
                 <div class="textentry-field">
-                    <asp:TextBox ID="txtPassword" TextMode="Password" runat="server" CssClass="textentry-fieldsize"></asp:TextBox>
+                    <asp:TextBox ID="txtPassword" TextMode="Password" placeholder="***********" runat="server" CssClass="textentry-fieldsize"></asp:TextBox>
                     <br />
-                    <div class="italiscised">
+                    <asp:Panel ID="pnlPasswordErrors" runat="server">
                         Password must:
                         <br />
                         &#8226; be a minimum of 8 characters
@@ -66,7 +59,7 @@
                         &#8226; contain numbers
                         <br />
                         <br />
-                    </div>
+                    </asp:Panel>
                     <asp:RequiredFieldValidator ControlToValidate="txtPassword" ID="rqValPassword" runat="server" ErrorMessage="Password does not comply with above."></asp:RequiredFieldValidator>
                 </div>
             </div>
@@ -84,8 +77,7 @@
             </div>
             
             <div class="loginSection">
-                <div class="textentry-label"></div>
-                <div class="textentry-field">
+                <div class="confirmationContainer">
                     <p style="font-style: italic;">By creating an account, you acknowledge our privacy statement.</p>
                     <asp:Button ID="btnResetPassword" OnClick="btnResetPassword_Click" runat="server" Text="Reset password" CssClass="proceedButton" />
                 </div>
