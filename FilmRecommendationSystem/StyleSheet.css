@@ -18,7 +18,6 @@
 
 .page-subheader {
     font-size: 27px;
-    margin-top: 7%;
     margin-bottom: 1%;
     width: 90%;
     border-style: solid;
@@ -108,18 +107,11 @@ a {
     margin-bottom: 1%;
 }
 
-
-
-
-
-
-
-
-
 .recommenderSelectionGenreMoodContainer{
     border-style: solid;
     border-color: deeppink;
     margin-top: 2%;
+    margin-bottom: 2%;
 }
 
 
@@ -203,15 +195,6 @@ a {
     float: left;
 }
 
-    .mainContent .helpContainer .helpQuestionHeader {
-        border-style: solid;
-        border-color: purple;
-        font-size: 18px;
-        font-weight: bold;
-        margin-top: 2%;
-        margin-bottom: 1%;
-    }
-
     .mainContent .header {
         float: left;
         width: 90%;
@@ -223,6 +206,16 @@ a {
         border-color: lawngreen;
         height: 70px;
     }
+
+    .mainContent .helpContainer .helpQuestionHeader {
+        border-style: solid;
+        border-color: purple;
+        font-size: 18px;
+        font-weight: bold;
+        margin-top: 2%;
+        margin-bottom: 1%;
+    }
+
 
     .mainContent .italicised {
         margin-left: 2%;
@@ -406,6 +399,7 @@ a {
 .loginSection .userPrivilegeDropdown {
     background-color: black;
     color: white;
+    min-width: 10px;
     width: auto;
     border-radius: 4px;
 }
@@ -443,6 +437,7 @@ a {
         font-family: Avenir, sans-serif;
         margin-left: 3%;
         margin-bottom: 2%;
+        margin-top: 1%;
         float: left;
         border-style: solid;
         border-color: lightgrey;
@@ -482,18 +477,20 @@ a {
                     }
 
 
-        .mainContent .myAccount .closeAccount-Container {
-            width: 100%;
+        .mainContent .closeAccount-Container {
+            width: 40%;
             height: auto;
-            padding-top: 3%;
+            margin-top: 1%;
             float: left;
+            border-style: solid;
+            border-color: purple;
         }
 
 
     .mainContent .closeAccountButtonContainer {
         border-style: solid;
         border-color: red;
-        width: 40%;
+        width: auto;
         margin-top: 4%;
     }
 
@@ -505,20 +502,8 @@ a {
             font-size: small;
             background-color: transparent;
             color: white;
+            display: inline-block;
         }
-
-        .mainContent .closeAccountButtonContainer .rightButton {
-            justify-content: center;
-            line-height: 50px;
-            width: 185px;
-            font-family: Open Sans, Arial, Helvetica, sans-serif;
-            font-size: small;
-            background-color: transparent;
-            color: white;
-            float: right;
-        }
-
-
 
      .filmWithTextContainer {
         /*position: relative;*/

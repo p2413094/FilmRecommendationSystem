@@ -7,7 +7,7 @@ namespace Classes
     {
         private List<clsFavouriteFilm> mAllFavourites = new List<clsFavouriteFilm>();
         private clsFavouriteFilm mThisFavouriteFilm = new clsFavouriteFilm();
-        private List<clsFavouriteFilm> mTopTenFavourites = new List<clsFavouriteFilm>();
+        private List<clsFavouriteFilm> mTopFavourites = new List<clsFavouriteFilm>();
 
         public int Count
         {
@@ -26,10 +26,10 @@ namespace Classes
             set {mThisFavouriteFilm = value;}
         }
 
-        public List<clsFavouriteFilm> TopTenFavourites
+        public List<clsFavouriteFilm> TopFavourites
         {
-            get {return mTopTenFavourites;}
-            set {mTopTenFavourites = value;}
+            get {return mTopFavourites;}
+            set {mTopFavourites = value;}
         }
 
         public clsFavouriteFilmCollection()
@@ -64,17 +64,17 @@ namespace Classes
             DB.Execute("sproc_tblFavouriteFilms_Delete");
         }
 
-        public void GetTopTenFavourites()
+        public void GetTopFavourites()
         {
             clsDataConnection DB = new clsDataConnection();
-            DB.Execute("sproc_tblFavouriteFilms_GetTopTen");
+            DB.Execute("sproc_tblFavouriteFilms_GetTopFavourites");
             Int32 recordCount = DB.Count;
             Int32 index = 0;
             while (index < recordCount)
             {
                 clsFavouriteFilm aFavouriteFilm = new clsFavouriteFilm();
                 aFavouriteFilm.FilmId = Convert.ToInt32(DB.DataTable.Rows[index]["FilmId"]);
-                mTopTenFavourites.Add(aFavouriteFilm);
+                mTopFavourites.Add(aFavouriteFilm);
                 index++;
             }
         }

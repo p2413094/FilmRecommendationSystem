@@ -12,9 +12,11 @@ namespace FilmRecommendationSystem
 {
     public partial class CloseAccount : System.Web.UI.Page
     {
+        Int32 userId;
         protected void Page_Load(object sender, EventArgs e)
         {
             pnlError.Visible = false;
+            userId = Convert.ToInt32(Session["UserId"]);
         }
 
         public static List<string> SearchFilms(string prefixTest, int count)
@@ -39,7 +41,7 @@ namespace FilmRecommendationSystem
                 var manager = Context.GetOwinContext().GetUserManager<ApplicationUserManager>();
                 var signinManager = Context.GetOwinContext().GetUserManager<ApplicationSignInManager>();
 
-                Int32 userId = 50; //note that this UserId is hard-coded and temporary - the real one will be the one that you retrieve when you sign in 
+                //Int32 userId = 50; //note that this UserId is hard-coded and temporary - the real one will be the one that you retrieve when you sign in 
                 var user = manager.FindById(userId);
                 manager.Delete(user);
                 clsEmail AnEmail = new clsEmail(user.Email);
@@ -54,6 +56,12 @@ namespace FilmRecommendationSystem
             {
                 pnlError.Visible = true;
             }
+        }
+
+        protected void lnkbtnLogOut_Click(object sender, EventArgs e)
+        {
+            HttpContext.Current.GetOwinContext().Authentication.SignOut();
+            Response.Redirect("Homepage.aspx");
         }
     }
 }

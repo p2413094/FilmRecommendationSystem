@@ -21,12 +21,13 @@ namespace FilmRecommendationSystem
         {
             if (!IsPostBack)
             {
-                LoadData();
                 editFilm = false;
                 pnlAllFilms.Visible = true;
                 pnlActionFilm.Visible = false;
                 pnlError.Visible = false;
                 pnlActionFilmError.Visible = false;
+                LoadData();
+                GenerateFilmYears();
             }
         }
 
@@ -59,7 +60,6 @@ namespace FilmRecommendationSystem
                     grdAllFilms.DataSource = AllFilmsInDatabase.SearchForFilm(txtFilmSearch.Text);
                     grdAllFilms.DataBind();
                 }
-
             }
             catch
             {
@@ -75,7 +75,9 @@ namespace FilmRecommendationSystem
 
             lblActionFilm.Text = "Edit film record";
             btnActionFilm.Text = "UPDATE FILM";
-            txtFilmTitle.Text = ((Label)grdAllFilms.Rows[rowIndex].FindControl("lblTitle")).Text;
+            string filmTitle = ((Label)grdAllFilms.Rows[rowIndex].FindControl("lblTitle")).Text;
+
+            txtFilmTitle.Text = filmTitle;
 
             clsLink aLink = new clsLink();
             aLink.Find(filmId);
@@ -83,7 +85,9 @@ namespace FilmRecommendationSystem
             txtImdbId.Text = imdbId.ToString();
 
             Session["FilmId"] = filmId;
+            Session["Title"] = filmTitle;
             Session["originalIMDBId"] = imdbId;
+            Session["EditFilm"] = true;
 
             pnlActionFilm.Visible = true;
             LoadData();
@@ -104,6 +108,8 @@ namespace FilmRecommendationSystem
                 index++;
             }
 
+            GenerateFilmYears();
+            Page.SetFocus(btnActionFilmCancel);
         }
 
         protected void grdAllFilms_RowUpdating(object sender, GridViewUpdateEventArgs e)
@@ -128,7 +134,13 @@ namespace FilmRecommendationSystem
 
         protected void btnActionFilm_Click(object sender, EventArgs e)
         {
-            string originalTitle = Session["Title"].ToString();
+            string originalTitle = "";
+            editFilm = Convert.ToBoolean(Session["EditFilm"]);
+            if (editFilm)
+            {
+                originalTitle = Session["Title"].ToString();
+            }
+
             string newTitle = txtFilmTitle.Text;
             string tempImdbId = txtImdbId.Text;
             Int32 imdbId = 0;
@@ -159,6 +171,7 @@ namespace FilmRecommendationSystem
                     pnlActionFilmErrorBody.Controls.Add(new LiteralControl("<br />"));
                     imdbIdOk = false;
                 }
+                pnlActionFilmError.Visible = true;
             }
             else
             {
@@ -167,31 +180,43 @@ namespace FilmRecommendationSystem
 
                 if (ImdbIdAlreadyExists)
                 {
-                    if (!editFilm) //adding a new film
-                    {
+                    //if (!editFilm) //adding a new film
+                    //{
                         Label lblError = new Label();
-                        lblError.Text = "IMDBId already assigned to another film";
+                        lblError.Text = "- IMDBId already assigned to another film";
                         pnlActionFilmErrorBody.Controls.Add(lblError);
                         pnlActionFilmErrorBody.Controls.Add(new LiteralControl("<br />"));
+                        pnlActionFilmError.Visible = true;
+                        imdbIdOk = false;
+                    //}
+
+                    Int32 originalImdbId = Convert.ToInt32(Session["originalIMDBId"]);
+
+                    if (originalImdbId == imdbId)
+                    {
+                        imdbIdOk = true;
+                    }
+                    else
+                    {
                         imdbIdOk = false;
                     }
 
-                    else //if we're editing a film
-                    {
-                        Int32 originalImdbId = Convert.ToInt32(Session["originalIMDBId"]);
-                        if (originalImdbId != imdbId)
-                        {
-                            Label lblError = new Label();
-                            lblError.Text = "IMDBId already assigned to another film";
-                            pnlActionFilmErrorBody.Controls.Add(lblError);
-                            pnlActionFilmErrorBody.Controls.Add(new LiteralControl("<br />"));
-                            imdbIdOk = false;
-                        }
-                        else
-                        {
-                            imdbIdOk = true;
-                        }
-                    }
+                    //else //if we're editing a film
+                    //{
+                    //    Int32 originalImdbId = Convert.ToInt32(Session["originalIMDBId"]);
+                    //    if (originalImdbId != imdbId)
+                    //    {
+                    //        Label lblError = new Label();
+                    //        lblError.Text = "- IMDBId already assigned to another film";
+                    //        pnlActionFilmErrorBody.Controls.Add(lblError);
+                    //        pnlActionFilmErrorBody.Controls.Add(new LiteralControl("<br />"));
+                    //        imdbIdOk = false;
+                    //    }
+                    //    else
+                    //    {
+                    //        imdbIdOk = true;
+                    //    }
+                    //}
                 }
                 else
                 {
@@ -255,12 +280,16 @@ namespace FilmRecommendationSystem
                         AllFilmGenres = new clsFilmGenreCollection();
                     }
                 }
+                LoadData();
+                pnlActionFilm.Visible = false;
             }
 
             if (editFilm)
             {
                 AllFilms = new clsFilmCollection();
                 AllFilms.ThisFilm.FilmId = Convert.ToInt32(Session["FilmId"]);
+
+                newTitle = titleAndYearReleased;
 
                 if (newTitle == originalTitle)
                 {
@@ -289,12 +318,19 @@ namespace FilmRecommendationSystem
                 }
 
                 LoadData();
+                pnlActionFilm.Visible = false;
             }
         }
 
         protected void imgbtnAdd_Click(object sender, ImageClickEventArgs e)
         {
             pnlActionFilm.Visible = true;
+            GenerateFilmYears();
+            Page.SetFocus(btnActionFilmCancel);
+        }
+
+        void GenerateFilmYears()
+        {
             int year = DateTime.Now.Year;
             for (int i = year - 120; i <= year + 4; i++)
             {
@@ -302,6 +338,7 @@ namespace FilmRecommendationSystem
                 ddlYear.Items.Add(li);
             }
             ddlYear.Items.FindByText(year.ToString()).Selected = true;
+
         }
 
         protected void btnActionFilmCancel_Click(object sender, EventArgs e)
@@ -327,6 +364,13 @@ namespace FilmRecommendationSystem
         {
             HttpContext.Current.GetOwinContext().Authentication.SignOut();
             Response.Redirect("Homepage.aspx");
+        }
+
+        protected void grdAllFilms_PageIndexChanging(object sender, GridViewPageEventArgs e)
+        {
+            LoadData();
+            grdAllFilms.PageIndex = e.NewPageIndex;
+            grdAllFilms.DataBind();
         }
     }
 }

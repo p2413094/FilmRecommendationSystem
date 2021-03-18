@@ -28,8 +28,8 @@ namespace FilmRecommendationSystem
                 pnlGetRecommendationsContainer.Visible = false;
                 pnlRecommendations.Visible = false;
 
-                //GetMostRecommendedFilms();
-                //GetUserFavouriteFilms();
+                GetMostRecommendedFilms();
+                GetUserFavouriteFilms();
                 //GenerateTemporaryRecommendations();
 
                 CheckIfUserIsLoggedIn();
@@ -38,7 +38,6 @@ namespace FilmRecommendationSystem
 
         void CheckIfUserIsLoggedIn()
         {
-            //bool userLoggedIn = System.Web.HttpContext.Current.User.Identity.IsAuthenticated;
             bool userLoggedIn = HttpContext.Current.User.Identity.IsAuthenticated;
             if (userLoggedIn)
             {
@@ -102,8 +101,8 @@ namespace FilmRecommendationSystem
         void GetUserFavouriteFilms()
         {
             clsFavouriteFilmCollection AllFavouriteFilms = new clsFavouriteFilmCollection();
-            AllFavouriteFilms.GetTopTenFavourites();
-            foreach (clsFavouriteFilm aFavouriteFilm in AllFavouriteFilms.TopTenFavourites)
+            AllFavouriteFilms.GetTopFavourites();
+            foreach (clsFavouriteFilm aFavouriteFilm in AllFavouriteFilms.TopFavourites)
             {
                 pnlUserFavouriteFilms.Controls.Add(anImdbApi.GetImdbInformation(aFavouriteFilm.FilmId));
             }
@@ -238,5 +237,12 @@ namespace FilmRecommendationSystem
         {
             pnlGetRecommendationsContainer.Visible = true;
         }
+
+        protected void lnkbtnLogOut_Click(object sender, EventArgs e)
+        {
+            HttpContext.Current.GetOwinContext().Authentication.SignOut();
+            Response.Redirect("Homepage.aspx");
+        }
+
     }
 }

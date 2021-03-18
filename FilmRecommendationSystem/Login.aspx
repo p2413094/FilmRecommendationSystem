@@ -53,10 +53,8 @@
                 </div>
             </div>
             <div class="loginSection">
-                <asp:Label ID="Label1" Text="" Visible="true" runat="server" CssClass="textentry-label"></asp:Label>
-                <div class="textentry-field">
+                <div class="confirmationContainer">
                     <asp:Button ID="btnLogin" runat="server" OnClick="btnLogin_Click" Text="Log in" CssClass="proceedButton" />
-                    <br />
                     <br />
                     <a href="ForgottenResetPassword.aspx">Forgot/ need to reset password?</a>
                 </div>

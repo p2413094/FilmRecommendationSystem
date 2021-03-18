@@ -48,21 +48,22 @@
 
         <div class="mainContent">
             <div class="header">Are you sure you want to delete your account?</div>
+            <div class="closeAccount-Container">
                 You'll lose access to your:
                 <br />
                 <br />
-                &#9989; personalised film recommendations
+                &#9989; recommendations
                 <br />
-                &#9989; personal favourite film manager 
+                &#9989; watch list 
                 <br />
-                &#9989; personal watch list
+                &#9989; favourite film 
                 <br />
                 and more!
                 <br />
-            <div class="closeAccountButtonContainer">
-                <button type="button" onclick="KeepMyAccount()" class="button">KEEP MY ACCOUNT</button>
-                <asp:Button ID="btnDeleteAccount" OnClientClick="return QuestionDeleteAccount()" OnClick="btnDeleteAccount_Click" class="rightButton" runat="server" Text="DELETE MY ACCOUNT" />
-
+                <div class="closeAccountButtonContainer">
+                    <button type="button" onclick="KeepMyAccount()" class="button">KEEP MY ACCOUNT</button>
+                    <asp:Button ID="btnDeleteAccount" OnClientClick="return QuestionDeleteAccount()" OnClick="btnDeleteAccount_Click" class="button" runat="server" Text="DELETE MY ACCOUNT" />
+                </div>
             </div>
 
         </div>
@@ -109,7 +110,6 @@
                 else {
                     alert("Your account was not deleted");
                     location.href = "Homepage.aspx";
-
                     return false;
                 }
             }

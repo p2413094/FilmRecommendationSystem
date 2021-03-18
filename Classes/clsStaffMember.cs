@@ -77,7 +77,7 @@ namespace Classes
         public Boolean Find(int userId)
         {
             clsDataConnection DB = new clsDataConnection();
-            DB.AddParameter("@StaffMemberId", userId);
+            DB.AddParameter("@UserId", userId);
             DB.Execute("sproc_tblStaffMember_FilterByUserId");
             if (DB.Count == 1)
             {

@@ -7,7 +7,7 @@
     <link rel="stylesheet" href="StyleSheet.css" />
 </head>
 
-<body class="body" onload="onLoad()">
+<body class="body">
     <form runat="server">
         <p class="logo"><a href="Homepage.aspx">FILM RECOMMENDER</a></p>
         <br />
@@ -26,13 +26,11 @@
             </div>
         </div>
 
-
             <p class="main-paragraph">Not sure what to watch? Don't worry!</p>
             <p class="main-paragraph__explanation">
                 The problem with trying to find a new film to where to begin?! Here, 
                 all you have to do below is enter in films that you know you like, hit the button and bam. Personalised recommendations just for you!
             </p>
-
 
         <asp:Panel ID="Panel1" CssClass="homepage" runat="server">
             <asp:Panel ID="pnlFilmSection" CssClass="recommenderSelectionGenreMoodContainer" runat="server">
@@ -79,10 +77,6 @@
     </asp:Panel>
 
         <script>
-            function onLoad() {
-
-            }
-
             function hyplnkSearch_Clicked() {
                 var searchText = document.getElementById("myInput").value;
 
@@ -94,7 +88,6 @@
                 }
             }
 
-
             myInput.addEventListener("keyup", function (event) {
                 // Number 13 is the "Enter" key on the keyboard
                 if (event.keyCode === 13) {
@@ -104,12 +97,6 @@
                     hyplnkSearch_Clicked();
                 }
             });
-
-            myInput.addEventListener("keydown", function (event))
-            {
-
-            }
-
         </script>
 
         <div class="footer">

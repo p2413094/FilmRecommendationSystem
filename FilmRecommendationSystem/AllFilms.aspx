@@ -41,9 +41,10 @@
             <asp:ImageButton ID="imgbtnAdd" OnClick="imgbtnAdd_Click" ImageUrl="~/Images/Add_plus icon.png" CausesValidation="false" class="addIcon"
                 runat="server" />   
             <asp:Panel ID="Panel1" CssClass="AllUsersFilmsContainer" runat="server">
-                <asp:TextBox ID="txtFilmSearch" placeholder="search..." AutoCompleteType="Disabled" CssClass="gridviewSearch" OnTextChanged="txtFilmSearch_TextChanged" AutoPostBack="true" runat="server"></asp:TextBox>
-                <asp:GridView ID="grdAllFilms" AllowPaging="true" PageSize="20" OnRowEditing="grdAllFilms_RowEditing" OnRowUpdating="grdAllFilms_RowUpdating" 
-                        OnRowDeleting="grdAllFilms_RowDeleting" AutoGenerateColumns="false" CssClass="AllUsersFilmsTable" runat="server">
+                <asp:TextBox ID="txtFilmSearch" placeholder="search..." AutoCompleteType="Disabled" OnTextChanged="txtFilmSearch_TextChanged" CssClass="gridviewSearch" AutoPostBack="true" runat="server"></asp:TextBox>
+                <asp:GridView EmptyDataText="No films to show" PagerSettings-Mode="NumericFirstLast" PagerSettings-LastPageText="last" OnPageIndexChanging="grdAllFilms_PageIndexChanging" ID="grdAllFilms"
+                    AllowPaging="true" PageSize="20" OnRowEditing="grdAllFilms_RowEditing" OnRowUpdating="grdAllFilms_RowUpdating" OnRowDeleting="grdAllFilms_RowDeleting" AutoGenerateColumns="false" 
+                    CssClass="AllUsersFilmsTable" runat="server">
                         <Columns>
                             <asp:TemplateField HeaderText="FilmId" HeaderStyle-CssClass="columnHeader" ItemStyle-CssClass="columnContent">
                                 <ItemTemplate>
@@ -79,14 +80,14 @@
                 <div class="loginSection">
                     <asp:Label runat="server" AssociatedControlID="txtFilmTitle" CssClass="textentry-label">Title</asp:Label>
                     <div class="textentry-field">
-                        <asp:TextBox runat="server" placeholder="Ghostbusters (1984)" ID="txtFilmTitle" CssClass="textentry-fieldsize"></asp:TextBox>
+                        <asp:TextBox runat="server" AutoCompleteType="Disabled" placeholder="Ghostbusters (1984)" ID="txtFilmTitle" CssClass="textentry-fieldsize"></asp:TextBox>
                         <asp:RequiredFieldValidator ControlToValidate="txtFilmTitle" runat="server" ErrorMessage="Field must not be blank"></asp:RequiredFieldValidator>
                     </div>
                 </div>
                 <div class="loginSection">
                     <asp:Label runat="server" AssociatedControlID="ddlYear" CssClass="textentry-label">Year released: </asp:Label>
                     <div class="textentry-field">
-                        <asp:DropDownList ID="ddlYear" runat="server"></asp:DropDownList>
+                        <asp:DropDownList ID="ddlYear" CssClass="userPrivilegeDropdown" runat="server"></asp:DropDownList>
                         <br />
                         <asp:RequiredFieldValidator ControlToValidate="ddlYear" runat="server" ErrorMessage="Field must not be blank"></asp:RequiredFieldValidator>
                     </div>
@@ -123,7 +124,7 @@
             <div class="loginSection">
                 <asp:Label runat="server" AssociatedControlID="txtImdbId" CssClass="textentry-label">IMDBId:</asp:Label>
                 <div class="textentry-field">
-                    <asp:TextBox runat="server" placeholder="087332" ID="txtImdbId" CssClass="textentry-fieldsize"></asp:TextBox>
+                    <asp:TextBox runat="server" AutoCompleteType="Disabled" placeholder="087332" ID="txtImdbId" CssClass="textentry-fieldsize"></asp:TextBox>
                     <asp:RequiredFieldValidator ControlToValidate="txtImdbId" runat="server" ErrorMessage="Field must not be blank"></asp:RequiredFieldValidator>
                     <asp:CustomValidator runat="server"
                         ValidationGroup="vldgrpFilm"

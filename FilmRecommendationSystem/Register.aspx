@@ -50,7 +50,7 @@
             <div class="loginSection">
                 <asp:Label runat="server" AssociatedControlID="txtEmailAddress" CssClass="textentry-label">Email address</asp:Label>
                 <div class="textentry-field">
-                    <asp:TextBox runat="server" placeholder="leatherface@texaschainsaw.com" ID="txtEmailAddress" TextMode="Email"  CssClass="textentry-fieldsize"></asp:TextBox>
+                    <asp:TextBox runat="server" AutoCompleteType="Disabled" placeholder="leatherface@texaschainsaw.com" ID="txtEmailAddress" TextMode="Email"  CssClass="textentry-fieldsize"></asp:TextBox>
                     <asp:RequiredFieldValidator runat="server" ControlToValidate="txtEmailAddress" ID="RequiredFieldValidator2"  ErrorMessage="RequiredFieldValidator"></asp:RequiredFieldValidator>
                 </div>
             </div>
@@ -58,7 +58,7 @@
             <div class="loginSection">
                 <asp:Label ID="lblUsername" runat="server" AssociatedControlID="txtUsername" Text="Username" CssClass="textentry-label"></asp:Label>
                 <div class="textentry-field">
-                    <asp:TextBox runat="server" placeholder="Leatherface1974" ID="txtUsername" CssClass="textentry-fieldsize"></asp:TextBox>
+                    <asp:TextBox runat="server" AutoCompleteType="Disabled" placeholder="Leatherface1974" ID="txtUsername" CssClass="textentry-fieldsize"></asp:TextBox>
                     <asp:RequiredFieldValidator ControlToValidate="txtUsername" ID="rqValUsername" runat="server" ErrorMessage="Username must not be blank"></asp:RequiredFieldValidator>
                 </div>
             </div>
@@ -98,19 +98,12 @@
             </div>
             
             <div class="loginSection">
-                <div class="textentry-label"></div>
-                <div class="textentry-field">
+                <div class="confirmationContainer">
                     <p style="font-style: italic;">By creating an account, you acknowledge our privacy statement.</p>
                     <asp:Button ID="btnRegister" OnClick="btnRegister_Click" runat="server" Text="CREATE ACCOUNT" CssClass="proceedButton" />
                 </div>
             </div>
         </div>
-
-
-
-
-
-
 
         <div class="footer">
             <div class="links">

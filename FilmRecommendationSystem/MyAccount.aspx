@@ -35,8 +35,6 @@
             </div>
         </div>
 
-
-
         <asp:Panel ID="pnlMyAccount" CssClass="mainContent" runat="server">
             <div class="header">Account details</div>
             <div class="myAccount">
@@ -54,10 +52,6 @@
                     </div>
                 </div>
 
-
-
-
-
                 <div class="section-container">
                     Last login: <asp:Label ID="lblLastLogin" runat="server"></asp:Label>
                 </div>
@@ -67,24 +61,13 @@
             </div>
         </asp:Panel>
 
-
-
-
-
-
         <asp:Panel ID="pnlStaffAdmin" CssClass="mainContent" runat="server">
-            <asp:Label ID="lblStaffAdminHeader" CssClass="header" runat="server"></asp:Label>
-            <asp:Button ID="btnViewUsers" OnClick="btnViewUsers_Click" runat="server" CssClass="proceedButton" Text="ALL USERS" />
-            <button onclick="btnViewFilms_Clicked" class="proceedButton">VIEW ALL FILMS</button>
-            <asp:Button ID="btnViewStaffMembers" OnClick="btnViewStaffMembers_Click" CssClass="proceedButton" runat="server" Text="VIEW ALL STAFF MEMBERS" />
+            <label class="header">Management functions</label>
+            <asp:Button ID="btnViewUsers" OnClick="btnViewUsers_Click" runat="server" CssClass="proceedButton" Text="VIEW ALL USERS" />
+            <asp:Button ID="btnViewFilms" OnClick="btnViewFilms_Click" CssClass="proceedButton" runat="server" Text="VIEW ALL FILMS" />
+            <asp:Button ID="btnViewStaffMembers" OnClick="btnViewUsers_Click" CssClass="proceedButton" runat="server" Text="VIEW ALL STAFF MEMBERS" />
             <asp:Button ID="btnViewPreviousStaffMembers" OnClick="btnViewPreviousStaffMembers_Click" runat="server" CssClass="proceedButton" Text="VIEW ALL PREVIOUS STAFF MEMBERS" />
         </asp:Panel>
-
-
-
-
-
-
 
         <asp:Panel ID="pnlError" CssClass="mainContent" runat="server">
             <div class="header">Error</div>
@@ -139,10 +122,6 @@
 
             function btnCloseAccount_Click() {
                     location.href = "CloseAccount.aspx"
-            }
-
-            function btnViewUsers_Clicked() {
-                location.href = "AllUsers.aspx";
             }
 
             function btnViewFilms_Clicked() {
