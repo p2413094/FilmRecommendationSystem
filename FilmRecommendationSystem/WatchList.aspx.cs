@@ -19,12 +19,10 @@ namespace FilmRecommendationSystem
 
         protected void Page_Load(object sender, EventArgs e)
         {
-            userId = 1;
             pnlError.Visible = false;
             pnlWatchList.Visible = false;
-            //userId = //this would normally be done dynamically 
+            userId = Convert.ToInt32(Session["UserId"]);
             DisplayWatchLaterFilms(userId);
-            //TempRecommendations();
         }    
         
         public static List<string> SearchFilms(string prefixTest, int count)
@@ -39,39 +37,6 @@ namespace FilmRecommendationSystem
                 }
             }
             return filmTitles;
-        }
-
-
-        void TempRecommendations()
-        {
-            Int32 index = 0;
-            Int32 timesToIterate = 7;
-
-            //pnlWatchList = new Panel();
-            while (index < timesToIterate)
-            {
-                Panel pnlFilm = new Panel();
-                pnlFilm.CssClass = "filmWithTextContainer";
-
-                ImageButton img = new ImageButton();
-                img.CssClass= "image";
-                img.ImageUrl = "Images/King Kong.jpg";
-
-                pnlFilm.Controls.Add(img);
-
-                Panel pnlFilmTitle = new Panel();
-                pnlFilmTitle.CssClass = "titleContainer";
-                Label lblFilmTitle = new Label();
-                lblFilmTitle.Text = "test";
-                pnlFilmTitle.Controls.Add(lblFilmTitle);
-                pnlFilm.Controls.Add(pnlFilmTitle);
-
-                pnlWatchList.Controls.Add(pnlFilm);
-                index++;
-            }
-
-            pnlError.Visible = true;
-            pnlWatchList.Visible = true;
         }
 
         void GetFilmNames (Int32 filmId)

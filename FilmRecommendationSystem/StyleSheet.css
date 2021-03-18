@@ -179,7 +179,7 @@ a {
 
 
 .mainContent {
-    width: 88%;
+    width: 90%;
     margin-top: 3%;
     margin-left: 3%;
     border-style: solid;
@@ -899,7 +899,7 @@ a {
 
 /* Dropdown content (hidden by default) */
 .dropdown-content {
-    display: block; /*none*/
+    display: none;
     position: absolute;
     background-color: transparent;
     z-index: 1;

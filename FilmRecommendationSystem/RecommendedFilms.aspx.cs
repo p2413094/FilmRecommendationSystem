@@ -17,7 +17,7 @@ namespace FilmRecommendationSystem
         {
             pnlError.Visible = false;
             pnlRecommendations.Visible = false;
-            Int32 userId = 98; //Convert.ToInt32(Session["UserId"]);
+            Int32 userId = Convert.ToInt32(Session["UserId"]);
             DisplayRecommendedFilms(userId);
         }
         

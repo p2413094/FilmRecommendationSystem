@@ -6,6 +6,9 @@ using System.Web;
 using System.Web.UI;
 using System.Web.UI.WebControls;
 using Classes;
+using FilmRecommendationSystem.Models;
+using Microsoft.AspNet.Identity;
+using Microsoft.AspNet.Identity.Owin;
 using Microsoft.ML;
 using Newtonsoft.Json;
 using RestSharp;
@@ -39,6 +42,7 @@ namespace FilmRecommendationSystem
         void CheckIfUserIsLoggedIn()
         {
             bool userLoggedIn = HttpContext.Current.User.Identity.IsAuthenticated;
+
             if (userLoggedIn)
             {
                 clsDynamicPanel aDynamicPanel = new clsDynamicPanel();
@@ -109,37 +113,6 @@ namespace FilmRecommendationSystem
             pnlUserFavouriteFilms.Visible = true;
         }
 
-        void GenerateTemporaryRecommendations()
-        {
-            Int32 index = 0;
-            Int32 timesToIterate = 6;
-
-            while (index < timesToIterate)
-            {
-                Panel pnlFilm = new Panel();
-                pnlFilm.CssClass = "filmWithTextContainer";
-
-                ImageButton imgbtnFilmPoster = new ImageButton();
-                imgbtnFilmPoster.CssClass = "image";
-                imgbtnFilmPoster.ImageUrl = "Images/King Kong.jpg";
-
-                pnlFilm.Controls.Add(imgbtnFilmPoster);
-
-                Panel pnlFilmTitle = new Panel();
-                pnlFilmTitle.CssClass = "titleContainer";
-                Label lblFilmTitle = new Label();
-                lblFilmTitle.Text = "empty";
-                pnlFilmTitle.Controls.Add(lblFilmTitle);
-                pnlFilm.Controls.Add(pnlFilmTitle);
-
-                pnlRecommendations.Controls.Add(pnlFilm);
-
-                index++;
-            }
-
-            pnlRecommendations.Visible = true;
-        }
-
         void GenerateRecommendations(int genreId)
         {
             DataViewSchema modelSchema;
@@ -149,11 +122,19 @@ namespace FilmRecommendationSystem
 
             var predictionEngine = mlContext.Model.CreatePredictionEngine<clsFilmRating, MovieRatingPrediction>(trainedModel);
             
-            //var testInput = new clsFilmRating { UserId = 6, FilmId = 10 };
+            var tempUserId = Session["UserId"];
+            Single userId;
+            Boolean signedIn = false;
 
-            //var movieRatingPrediction = predictionEngine.Predict(testInput);
-
-            Int32 dummyUserId = 1;
+            if (tempUserId == null)
+            {
+                userId = 1;
+            }
+            else
+            {
+                userId = Convert.ToSingle(tempUserId);
+                signedIn = true;
+            }
 
             clsFilmGenreCollection AllFilms = new clsFilmGenreCollection();
             AllFilms.GetAllFilmsByGenre(genreId);
@@ -163,7 +144,7 @@ namespace FilmRecommendationSystem
                         
             foreach (clsFilmGenre aFilm in AllFilms.AllFilmsByGenre)
             {
-                var potentialRecommendation = new clsFilmRating { UserId = dummyUserId, FilmId = aFilm.FilmId};
+                var potentialRecommendation = new clsFilmRating { UserId = userId, FilmId = aFilm.FilmId};
                 var movieRatingPrediction = predictionEngine.Predict(potentialRecommendation);
                 if (Math.Round(movieRatingPrediction.Score, 1) > 4.4)
                 {
@@ -187,23 +168,26 @@ namespace FilmRecommendationSystem
 
             foreach (clsFilmPrediction aTopTenPrediction in topTenPredictions)
             {
-                //aRecommendationToAdd = new clsFilmRecommendation();
-                //aRecommendationToAdd.FilmId = aTopTenPrediction.FilmId;
-                //aRecommendationToAdd.UserId = dummyUserId;
-                //FilmRecommendations.ThisFilmRecommendation = aRecommendationToAdd;
-                //FilmRecommendations.Add();
+                if (signedIn)
+                {
+                    aRecommendationToAdd = new clsFilmRecommendation();
+                    aRecommendationToAdd.FilmId = aTopTenPrediction.FilmId;
+                    aRecommendationToAdd.UserId = Convert.ToInt32(userId);
+                    FilmRecommendations.ThisFilmRecommendation = aRecommendationToAdd;
+                    FilmRecommendations.Add();
+                }
 
-                //aMostRecommendedFilm = new clsMostRecommendedFilms();
-                //AllMostRecommendedFilms.ThisMostRecommendedFilm.FilmId = aTopTenPrediction.FilmId;
+                aMostRecommendedFilm = new clsMostRecommendedFilms();
+                AllMostRecommendedFilms.ThisMostRecommendedFilm.FilmId = aTopTenPrediction.FilmId;
 
-                //if (AllMostRecommendedFilms.ThisMostRecommendedFilm.Find(aTopTenPrediction.FilmId) == true)
-                //{
-                //    AllMostRecommendedFilms.IncreaseTimesRecommended();
-                //}
-                //else
-                //{
-                //    AllMostRecommendedFilms.Add();
-                //}
+                if (AllMostRecommendedFilms.ThisMostRecommendedFilm.Find(aTopTenPrediction.FilmId) == true)
+                {
+                    AllMostRecommendedFilms.IncreaseTimesRecommended();
+                }
+                else
+                {
+                    AllMostRecommendedFilms.Add();
+                }
                 pnlRecommendations.Controls.Add(anImdbApi.GetImdbInformation(aTopTenPrediction.FilmId));
             }
             pnlRecommendations.Visible = true;

@@ -18,11 +18,9 @@ namespace FilmRecommendationSystem
         {
             pnlError.Visible = false;
             pnlFavouriteFilms.Visible = true;
-            userId = 3; //Request.QueryString["UserId"];
-            //DisplayFavouriteFilms();
-            //TempRecommendations();
+            userId = Convert.ToInt32(Session["UserId"]);
+            DisplayFavouriteFilms();
         }
-        
         
         public static List<string> SearchFilms(string prefixTest, int count)
         {
@@ -204,65 +202,6 @@ namespace FilmRecommendationSystem
             //you could just try and get the sender's image container and then remove it from view
             //rather than re-querying the IMDB api 
             DisplayFavouriteFilms();
-        }
-
-
-        void TempRecommendations()
-        {
-            Panel pnlFilm = new Panel();
-            pnlFilm.CssClass = "filmWithTextContainer";
-
-            ImageButton imgbtnFilmPoster = new ImageButton();
-            imgbtnFilmPoster.CssClass = "image";
-            imgbtnFilmPoster.ImageUrl = "Images/King Kong.jpg";
-            pnlFilm.Controls.Add(imgbtnFilmPoster);
-
-            Panel pnlFilmTitle = new Panel();
-            pnlFilmTitle.CssClass = "textcontainer";
-            Label lblFilmTitle = new Label();
-            lblFilmTitle.Text = "Test";
-            pnlFilmTitle.Controls.Add(lblFilmTitle);
-            pnlFilm.Controls.Add(pnlFilmTitle);
-
-            Panel pnlOverlay = new Panel();
-            pnlOverlay.CssClass = "overlay";
-
-            ImageButton imgbtnRemove = new ImageButton();
-            imgbtnRemove.ImageUrl = "Images/Remove.png";
-            imgbtnRemove.CssClass = "overlay-itemLeft";
-            imgbtnRemove.Command += ImgbtnRemove_Command;
-
-            Int32 filmId = 1;
-            string stringFilmId = Convert.ToString(filmId);
-            imgbtnRemove.CommandArgument = stringFilmId;
-
-            ImageButton imgbtnWatchList = new ImageButton();
-            imgbtnWatchList.CssClass = "overlay-itemRight";
-            imgbtnWatchList.CommandArgument = filmId.ToString();
-
-            clsDataConnection DB = new clsDataConnection();
-            DB.AddParameter("@UserId", userId);
-            DB.AddParameter("FilmId", filmId);
-            DB.Execute("sproc_tblWatchList_SelectByUserAndFilmId");
-            
-            if (DB.Count != 1)
-            {
-                imgbtnWatchList.ImageUrl = "Images/NotInWatchLater.png";
-                imgbtnWatchList.Command += imgbtnWatchList_AddToWatchList;
-            }
-            else
-            {
-                imgbtnWatchList.ImageUrl = "Images/WatchLaterAdded.png";
-                imgbtnWatchList.Command += imgbtnWatchList_RemoveFromWatchList;
-            }
-
-            pnlOverlay.Controls.Add(imgbtnWatchList);
-            pnlOverlay.Controls.Add(imgbtnRemove);
-            pnlFilm.Controls.Add(pnlOverlay);
-            pnlFavouriteFilms.Controls.Add(pnlFilm);
-
-
-            pnlFavouriteFilms.Visible = true;
         }
 
         protected void lnkbtnLogOut_Click(object sender, EventArgs e)

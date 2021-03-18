@@ -17,7 +17,7 @@ namespace FilmRecommendationSystem
         Int32 originalPrivilegeLevel;
         protected void Page_Load(object sender, EventArgs e)
         {
-            bool administrator = true; //= Convert.ToBoolean(Session["Standard"]);
+            bool administrator = Convert.ToBoolean(Session["Standard"]);
             
             if (!IsPostBack)
             {
@@ -32,7 +32,7 @@ namespace FilmRecommendationSystem
                     {
                        LoadStaffMemberData();
                     }
-                    //LoadUserData();
+                    LoadUserData();
                 }
                 catch
                 {
@@ -247,8 +247,6 @@ namespace FilmRecommendationSystem
         {
             grdAllUsers.EditIndex = -1;
             LoadUserData();
-
-
         }
 
         protected void imgbtUndoChanges_Click(object sender, ImageClickEventArgs e)
