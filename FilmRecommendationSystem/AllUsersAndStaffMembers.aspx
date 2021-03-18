@@ -92,7 +92,7 @@
                                 <asp:Label ID="lblAllowed" Text='<%# Eval("Allowed") %>' runat="server"></asp:Label>
                             </ItemTemplate>
                             <EditItemTemplate>
-                                <asp:CheckBox ID="chkAllowed" Text='<%# Eval("Allowed") %>' runat="server" />
+                                <asp:CheckBox ID="chkAllowed" EnableViewState="false" Text='<%# Eval("Allowed") %>' runat="server" />
                             </EditItemTemplate>
                         </asp:TemplateField>
                         <asp:TemplateField HeaderText="Actions" HeaderStyle-Font-Italic="true" ItemStyle-CssClass="tablecell-actions">
@@ -118,7 +118,7 @@
                 <div class="loginSection">
                     <asp:Label runat="server" AssociatedControlID="txtNewStaffMemberFirstName" CssClass="textentry-label">First name</asp:Label>
                     <div class="textentry-field">
-                        <asp:TextBox runat="server" placeholder="Carl" ID="txtNewStaffMemberFirstName" CssClass="textentry-fieldsize"></asp:TextBox>
+                        <asp:TextBox runat="server" AutoCompleteType="Disabled" placeholder="Carl" ID="txtNewStaffMemberFirstName" CssClass="textentry-fieldsize"></asp:TextBox>
                         <asp:RequiredFieldValidator ID="test" ControlToValidate="txtNewStaffMemberFirstName" runat="server" ErrorMessage="Field must not be blank"></asp:RequiredFieldValidator>
                         <br />
                         <asp:CustomValidator runat="server"
@@ -134,7 +134,7 @@
             <div class="loginSection">
                 <asp:Label runat="server" AssociatedControlID="txtNewStaffMemberLastName" CssClass="textentry-label">Last name:</asp:Label>
                 <div class="textentry-field">
-                    <asp:TextBox runat="server" placeholder="Denham" ID="txtNewStaffMemberLastName" CssClass="textentry-fieldsize"></asp:TextBox>
+                    <asp:TextBox runat="server" placeholder="Denham" AutoCompleteType="Disabled" ID="txtNewStaffMemberLastName" CssClass="textentry-fieldsize"></asp:TextBox>
                     <asp:RequiredFieldValidator ControlToValidate="txtNewStaffMemberLastName" runat="server" ErrorMessage="Field must not be blank"></asp:RequiredFieldValidator>
                     <br />
                     <asp:CustomValidator runat="server"
@@ -166,10 +166,9 @@
                 <div class="actionStaffMemberContainer">
                 <div class="textentry-field">
                     <asp:Button ID="btnRegisterStaffMember" ValidationGroup="vldgrpNewStaffMember" 
-                         OnClick="btnRegisterStaffMember_Click" CausesValidation="true"
+                         OnClick="btnRegisterStaffMember_Click"
                         runat="server" Text="ADD STAFF MEMBER" CssClass="proceedButton" />
                 </div>
-
                 </div>
             </div>
         </asp:Panel>

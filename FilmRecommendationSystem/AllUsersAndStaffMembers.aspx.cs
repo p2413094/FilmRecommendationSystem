@@ -13,93 +13,47 @@ namespace FilmRecommendationSystem
 {
     public partial class AllUsersAndStaffMembers : System.Web.UI.Page
     {
-        bool editStaffMember;
+        bool editStaffMember = true;
+        Int32 originalPrivilegeLevel;
         protected void Page_Load(object sender, EventArgs e)
         {
-            pnlError.Visible = false;
-            pnlAllUsers.Visible = false;
-            pnlAllStaffMembers.Visible = false;
-            pnlNewStaffMember.Visible = false;
-
             bool administrator = true; //= Convert.ToBoolean(Session["Standard"]);
             
             if (!IsPostBack)
             {
-                if (administrator)
+                try
                 {
-                   LoadStaffMemberData();
+                    pnlError.Visible = false;
+                    pnlAllUsers.Visible = false;
+                    pnlAllStaffMembers.Visible = false;
+                    pnlNewStaffMember.Visible = false;
+
+                    if (administrator)
+                    {
+                       LoadStaffMemberData();
+                    }
                     //LoadUserData();
-                    //pnlNewStaffMember.Visible = true;
                 }
-                //LoadUserData();
+                catch
+                {
+                    pnlError.Visible = true;
+                }
             }
         }
-
-        protected void btnRegisterStaffMember_Click(object sender, EventArgs e)
-        {
-            string firstName = txtNewStaffMemberFirstName.Text;
-
-
-                string lastName = txtNewStaffMemberLastName.Text;
-                Int32 userId = Convert.ToInt32(ddlUserId.SelectedItem.Value);
-                Int32 privilegeLevelId = Convert.ToInt32(ddlPrivilegelevel.SelectedValue);
-                Boolean suspended = chkStaffMemberSuspended.Checked;
-
-                clsStaffMemberCollection AllStaffMembers = new clsStaffMemberCollection();
-                AllStaffMembers.ThisStaffMember.UserId = userId;
-                AllStaffMembers.ThisStaffMember.PrivilegeLevelId = privilegeLevelId;
-                AllStaffMembers.ThisStaffMember.FirstName = firstName;
-                AllStaffMembers.ThisStaffMember.LastName = lastName;
-                AllStaffMembers.ThisStaffMember.Allowed = suspended;
-            
-                var manager = Context.GetOwinContext().GetUserManager<ApplicationUserManager>();
-                var user = manager.FindById(userId);
-                clsEmail AnEmail = new clsEmail(user.Email);
-
-                if (editStaffMember == true)
-                {
-                    //need to do something here to check if new privilege level
-                    //has changed or not  
-
-                    if (suspended == true)
-                    {
-                        DateTime suspendedEndDate = DateTime.Now.AddDays(3);
-                        AnEmail.SendUserSuspensionEmail(suspendedEndDate);
-                        user.LockoutEnabled = true;
-                        user.LockoutEndDateUtc = suspendedEndDate;
-                        manager.Update(user);
-                    }
-                    AllStaffMembers.Update();
-                }
-                else
-                {
-                    AllStaffMembers.Add();            
-                    //AnEmail.SendNewStaffMemberNoticeEmail();
-                }
-                LoadStaffMemberData();
-        }
-
 
         protected void LoadStaffMemberData()
         {
-            try
-            {
-                clsStaffMemberCollection AllStaffMembers = new clsStaffMemberCollection();
-                grdAllStaffMembers.DataSource = AllStaffMembers.AllStaffMembers;
-                grdAllStaffMembers.DataBind();
+            clsStaffMemberCollection AllStaffMembers = new clsStaffMemberCollection();
+            grdAllStaffMembers.DataSource = AllStaffMembers.AllStaffMembers;
+            grdAllStaffMembers.DataBind();
                 
-                clsUserCollection AllUsers = new clsUserCollection();
-                ddlUserId.DataSource = AllUsers.AllUsers;
-                ddlUserId.DataValueField = "UserId";
-                ddlUserId.DataTextField = "UserId";
-                ddlUserId.DataBind();
+            clsUserCollection AllUsers = new clsUserCollection();
+            ddlUserId.DataSource = AllUsers.AllUsers;
+            ddlUserId.DataValueField = "UserId";
+            ddlUserId.DataTextField = "UserId";
+            ddlUserId.DataBind();
 
-                pnlAllStaffMembers.Visible = true;
-            }
-            catch
-            {
-                pnlError.Visible = true;
-            }
+            pnlAllStaffMembers.Visible = true;
         }
 
         protected void grdAllStaffMembers_RowEditing(object sender, GridViewEditEventArgs e)
@@ -108,9 +62,15 @@ namespace FilmRecommendationSystem
             int rowIndex = e.NewEditIndex;
 
             lblActionStaffMember.Text = "Edit staff member";
+            Session["UserId"] = Convert.ToInt32(((Label)grdAllStaffMembers.Rows[rowIndex].FindControl("lblUserId")).Text);
+            Session["StaffMemberId"] = Convert.ToInt32(((Label)grdAllStaffMembers.Rows[rowIndex].FindControl("lblStaffMemberId")).Text);
             txtNewStaffMemberFirstName.Text = ((Label)grdAllStaffMembers.Rows[rowIndex].FindControl("lblFirstName")).Text;
             txtNewStaffMemberLastName.Text = ((Label)grdAllStaffMembers.Rows[rowIndex].FindControl("lblLastName")).Text;
             Int32 privilegeLevel = Convert.ToInt32(((Label)grdAllStaffMembers.Rows[rowIndex].FindControl("lblPrivilegeLevelId")).Text);
+            Boolean suspended = Convert.ToBoolean(((Label)grdAllStaffMembers.Rows[rowIndex].FindControl("lblAllowed")).Text);
+            chkStaffMemberSuspended.Checked = suspended;
+
+            originalPrivilegeLevel = privilegeLevel;
             ddlPrivilegelevel.SelectedValue = privilegeLevel.ToString();
 
             btnRegisterStaffMember.Text = "UPDATE STAFF MEMBER";
@@ -118,10 +78,63 @@ namespace FilmRecommendationSystem
             pnlNewStaffMember.Visible = true;
 
             LoadStaffMemberData();
-
+            
             Page.SetFocus(btnRegisterStaffMember);
         }
 
+
+        protected void btnRegisterStaffMember_Click(object sender, EventArgs e)
+        {
+            string firstName = txtNewStaffMemberFirstName.Text;
+            string lastName = txtNewStaffMemberLastName.Text;
+            Int32 userId = Convert.ToInt32(ddlUserId.SelectedItem.Value);
+            Int32 privilegeLevelId = Convert.ToInt32(ddlPrivilegelevel.SelectedValue);
+            Boolean suspended = chkStaffMemberSuspended.Checked;
+
+            clsStaffMemberCollection AllStaffMembers = new clsStaffMemberCollection();
+            AllStaffMembers.ThisStaffMember.StaffMemberId = Convert.ToInt32(Session["StaffMemberId"]);
+            AllStaffMembers.ThisStaffMember.UserId = userId;
+            AllStaffMembers.ThisStaffMember.PrivilegeLevelId = privilegeLevelId;
+            AllStaffMembers.ThisStaffMember.FirstName = firstName;
+            AllStaffMembers.ThisStaffMember.LastName = lastName;
+            AllStaffMembers.ThisStaffMember.Allowed = suspended;
+            
+            if (editStaffMember)
+            {
+                userId = Convert.ToInt32(Session["UserId"]);
+            }
+
+            var manager = Context.GetOwinContext().GetUserManager<ApplicationUserManager>();
+            var user = manager.FindById(userId);
+            clsEmail AnEmail = new clsEmail(user.Email);
+
+            if (editStaffMember)
+            {
+                if (suspended)
+                {
+                    DateTime suspendedEndDate = DateTime.Now.AddDays(3);
+                    AnEmail.SendUserSuspensionEmail(suspendedEndDate);
+                    user.LockoutEnabled = true;
+                    user.LockoutEndDateUtc = suspendedEndDate;
+                    manager.Update(user);
+                }
+                if (privilegeLevelId != originalPrivilegeLevel)
+                {
+                    AnEmail.SendStaffMemberPrivilegeChangeEmail();
+                }
+                AllStaffMembers.Update();
+            }
+            else
+            {
+                AllStaffMembers.Add();            
+                AnEmail.SendNewStaffMemberStandardNoticeEmail();
+            }
+            
+            grdAllStaffMembers.EditIndex = -1;
+
+            pnlNewStaffMember.Visible = false;
+            LoadStaffMemberData();
+        }
         
         protected void grdAllStaffMembers_RowUpdating(object sender, GridViewUpdateEventArgs e)
         {
@@ -200,6 +213,7 @@ namespace FilmRecommendationSystem
         protected void grdAllUsers_RowEditing(object sender, GridViewEditEventArgs e)
         {
             grdAllUsers.EditIndex = e.NewEditIndex;
+
             LoadUserData();
         }
 
@@ -221,7 +235,6 @@ namespace FilmRecommendationSystem
 
                 AnEmail.SendUserSuspensionEmail(lockoutEnd);
             }
-
             LoadUserData();
         }
 
@@ -244,5 +257,9 @@ namespace FilmRecommendationSystem
             LoadUserData();
         }
 
+        protected void grdAllStaffMembers_RowCreated(object sender, GridViewRowEventArgs e)
+        {
+
+        }
     }
 }

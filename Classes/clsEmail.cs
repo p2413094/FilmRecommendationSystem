@@ -82,24 +82,41 @@ namespace Classes
             return client.SendEmailAsync(msg);
         }
 
-        public Task SendNewStaffMemberStandardNoticeEmail(string privilegeLevel)
+        public Task SendNewStaffMemberStandardNoticeEmail()
         {
             var client = new SendGridClient(sendGridKey);
             var msg = new SendGridMessage()
             {
                 From = new EmailAddress("no-reply@filmrecommender.co.uk"),
                 Subject = "Welcome!",
-                PlainTextContent = "You have been successfully added as a new staff member with" + privilegeLevel
-                + "privileges for the FILM RECOMMENDER system. You now have extended privileges" +
-                "in addition to being able to still access your user account.",
-                HtmlContent = "You have been successfully added as a new staff member with" + privilegeLevel
-                + "privileges for the FILM RECOMMENDER system. You now have extended privileges" +
-                "in addition to being able to still access your user account."
+                PlainTextContent = "You have been successfully added as a new staff member with standard"
+                + " privileges for the FILM RECOMMENDER system. You now have extended privileges" +
+                " in addition to being able to still access your user account.",
+                HtmlContent = "You have been successfully added as a new staff member with standard"
+                + " privileges for the FILM RECOMMENDER system. You now have extended privileges" +
+                " in addition to being able to still access your user account."
             };
 
             msg.AddTo(new EmailAddress(destination));
             msg.SetClickTracking(false, false);
             return client.SendEmailAsync(msg);
         }
+
+        public Task SendStaffMemberPrivilegeChangeEmail()
+        {
+            var client = new SendGridClient(sendGridKey);
+            var msg = new SendGridMessage()
+            {
+                From = new EmailAddress("no-reply@filmrecommender.co.uk"),
+                Subject = "Account status change",
+                PlainTextContent = "Your account status has changed, please login to see new changes",
+                HtmlContent = "Your account status has changed, please login to see new changes"
+            };
+
+            msg.AddTo(new EmailAddress(destination));
+            msg.SetClickTracking(false, false);
+            return client.SendEmailAsync(msg);
+        }
+
     }
 }
