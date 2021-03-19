@@ -41,7 +41,6 @@
                     <asp:Button ID="btnMood" ToolTip="Gets you recommendations based on mood" OnClick="btnMood_Click"
                         CssClass="recommendoption" runat="server" Text="mood" />
                 </div>
-
                 <asp:Panel ID="pnlSearchBy" CssClass="GenreMoodSecondSelector" runat="server">
                     <asp:DropDownList ID="ddlGenres" AutoPostBack="true" CssClass="slctGenreMood" runat="server" OnSelectedIndexChanged="ddlGenres_SelectedIndexChanged"></asp:DropDownList>
                     <asp:DropDownList ID="ddlMoods" AutoPostBack="true" CssClass="slctGenreMood" runat="server" OnSelectedIndexChanged="ddlGenres_SelectedIndexChanged"></asp:DropDownList>
@@ -59,15 +58,16 @@
             <asp:Panel ID="pnlUserFavouriteFilms" runat="server" CssClass="recommenderSelectionGenreMoodContainer">
                 <div class="homepage-subHeader">User favourite films</div>
             </asp:Panel>
-            <asp:Panel ID="pnlError" CssClass="mainContent" runat="server">
-                <div class="header">Error</div>
-                <div class="textSection">
-                    There was an error fulfilling your request; please try again later.
-                </div>
-                <div class="textSection">
-                    <button type="button" id="btnReturnToHomepage" onclick="btnReturnToHomepage_Click()" class="proceedButton">Ok</button>
-                </div>
-            </asp:Panel>
+
+        <asp:Panel ID="pnlError" CssClass="mainContent" runat="server">
+            <div class="header">Error</div>
+            <div class="textSection">
+                There was an error fulfilling your request; please try again later.
+                <br />
+                <br />
+                <button type="button" id="btnReturnToHomepage" onclick="btnReturnToHomepage_Click()" class="proceedButton">Ok</button>
+            </div>
+        </asp:Panel>       
     </asp:Panel>
 
         <script>

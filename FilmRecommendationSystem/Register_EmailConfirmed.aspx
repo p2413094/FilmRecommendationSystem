@@ -35,8 +35,8 @@
             <div class="header">Email address confirmed</div>
             <div class="textSection">
                 Thanks for verifying, you're now free to use the service!
-            </div>
-            <div class="textSection">
+                <br />
+                <br />
                 <button type="button" onclick="btnOk_Click()" id="btnOk" class="proceedButton">Ok</button>
             </div>
         </div>

@@ -32,8 +32,8 @@
             <div class="textSection">
                 Your account has been locked for breaching our terms and conditions. Check your email to see when
                 you can re-access your account.
-            </div>
-            <div class="textSection">
+                <br />
+                <br />
                 <button type="button" onclick="btnOk_Click()" id="btnOk" class="proceedButton">Ok</button>
             </div>
         </div>

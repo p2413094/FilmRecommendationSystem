@@ -33,8 +33,8 @@
                 An email has been sent to the email address you specified.
                 Once you've got the email, simply click on verify and you're
                 then free to use the service!
-            </div>
-            <div class="textSection">
+                <br />
+                <br />
                 <button type="button" onclick="btnOk_Click()" id="btnOk" class="proceedButton">Ok</button>
             </div>
         </div>

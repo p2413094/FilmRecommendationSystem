@@ -16,9 +16,7 @@
         <br />
         <div class="navbar">
             <div class="dropdown">
-                <button class="dropbtn">
-                    <a href="MyAccount.aspx" class="menutext">MY ACCOUNT</a>
-                </button>
+                <button class="dropbtn"><a href="MyAccount.aspx" class="menutext">MY ACCOUNT</a></button>
                 <div class="dropdown-content">
                     <a href="RecommendedFilms.aspx">RECOMMENDATIONS</a>
                     <a href="WatchList.aspx">WATCHLIST</a>
@@ -35,21 +33,21 @@
             </div>
         </div>
         
-        <asp:Panel ID="pnlError" CssClass="mainContent" runat="server">
-            <div class="header">Error</div>
-            <div class="textSectionError">
-                There was an error fulfilling your request; please try again later.
-            </div>
-            <div class="textSection">
-                <button type="button" id="btnReturnToHomepage" onclick="btnReturnToHomepage_Click()" class="proceedButton">Ok</button>
-            </div>
-        </asp:Panel>
-
         <asp:Panel ID="pnlWatchList" runat="server" CssClass="mainContent">
             <div class="header">My watchlist</div>
             <asp:Button ID="btnSort" CssClass="sortButton" OnClick="btnSort_Click" ToolTip="Sort films by title" runat="server" Text="sort" />
-        </asp:Panel>     
-        
+        </asp:Panel>   
+       
+        <asp:Panel ID="pnlError" CssClass="mainContent" runat="server">
+            <div class="header">Error</div>
+            <div class="textSection">
+                There was an error fulfilling your request; please try again later.
+                <br />
+                <br />
+                <button type="button" id="btnReturnToHomepage" onclick="btnReturnToHomepage_Click()" class="proceedButton">Ok</button>
+            </div>
+        </asp:Panel>       
+
         <div class="footer">
             <div class="links">
                 <a href="Help.aspx" target="_blank">Help</a> 

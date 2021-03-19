@@ -40,8 +40,8 @@
             <div class="header">Error</div>
             <div class="textSection">
                 There was an error fulfilling your request; please try again later.
-            </div>
-            <div class="textSection">
+                <br />
+                <br />
                 <button type="button" id="btnReturnToHomepage" onclick="btnReturnToHomepage_Click()" class="proceedButton">Ok</button>
             </div>
         </asp:Panel>       

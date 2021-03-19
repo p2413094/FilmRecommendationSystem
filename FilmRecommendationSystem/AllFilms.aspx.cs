@@ -348,7 +348,7 @@ namespace FilmRecommendationSystem
             chkbxlstGenres.ClearSelection();
             txtImdbId.Text = string.Empty;
             
-            //pnlActionFilm.Visible = false;
+            pnlActionFilm.Visible = false;
         }
 
         protected void grdAllFilms_RowDeleting(object sender, GridViewDeleteEventArgs e)

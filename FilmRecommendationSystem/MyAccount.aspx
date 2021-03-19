@@ -27,7 +27,6 @@
             </div> 
         </div>
 
-
         <div class="search">
                 <a onclick="hyplnkSearch_Clicked()" class="label">SEARCH</a>
             <div class="textentry-container">
@@ -71,14 +70,14 @@
 
         <asp:Panel ID="pnlError" CssClass="mainContent" runat="server">
             <div class="header">Error</div>
-            <div class="textSectionError">
-                There was an error fulfilling your request; please try again later.
-            </div>
             <div class="textSection">
+                There was an error fulfilling your request; please try again later.
+                <br />
+                <br />
                 <button type="button" id="btnReturnToHomepage" onclick="btnReturnToHomepage_Click()" class="proceedButton">Ok</button>
             </div>
-        </asp:Panel>
-
+        </asp:Panel>      
+        
         <div class="footer">
             <div class="links">
                 <a href="Help.aspx" target="_blank">Help</a> 

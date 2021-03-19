@@ -32,8 +32,8 @@
             <div class="header">Check your email address</div>
             <div class="textSection">
                 An email with a link to reset your password has been sent to your email address. 
-            </div>
-            <div class="textSection">
+                <br />
+                <br />
                 <button type="button" onclick="btnOk_Click()" id="btnOk" class="proceedButton">Ok</button>
             </div>
         </div>

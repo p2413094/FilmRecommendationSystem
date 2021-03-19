@@ -29,7 +29,6 @@
 
         <div class="mainContent">
             <div class="header">Reset password</div>
-
             <asp:Panel ID="pnlError" runat="server">
                 <div class="page-subheader">Alert</div>
             </asp:Panel>

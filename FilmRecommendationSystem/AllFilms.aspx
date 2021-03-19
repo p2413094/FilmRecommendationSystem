@@ -33,14 +33,13 @@
             <div class="textentry-container">
                 <input autocomplete="off" class="textentry-field" type="text" id="myInput" onkeyup="filterSearchFunction()" />
             </div>
-            <a onclick="hyplnkSearch_Clicked()" class="label">SEARCH</a>
         </div>
 
         <asp:Panel ID="pnlAllFilms" CssClass="mainContent" runat="server">
             <div class="header">All films</div>
             <asp:ImageButton ID="imgbtnAdd" OnClick="imgbtnAdd_Click" ImageUrl="~/Images/Add_plus icon.png" CausesValidation="false" class="addIcon"
                 runat="server" />   
-            <asp:Panel ID="Panel1" CssClass="AllUsersFilmsContainer" runat="server">
+            <asp:Panel ID="Panel1" runat="server">
                 <asp:TextBox ID="txtFilmSearch" placeholder="search..." AutoCompleteType="Disabled" OnTextChanged="txtFilmSearch_TextChanged" CssClass="gridviewSearch" AutoPostBack="true" runat="server"></asp:TextBox>
                 <asp:GridView EmptyDataText="No films to show" PagerSettings-Mode="NumericFirstLast" PagerSettings-LastPageText="last" OnPageIndexChanging="grdAllFilms_PageIndexChanging" ID="grdAllFilms"
                     AllowPaging="true" PageSize="20" OnRowEditing="grdAllFilms_RowEditing" OnRowUpdating="grdAllFilms_RowUpdating" OnRowDeleting="grdAllFilms_RowDeleting" AutoGenerateColumns="false" 
@@ -142,21 +141,20 @@
                         Text="ADD NEW FILM"
                         ValidationGroup="vldgrpNewStaffMember" 
                         runat="server" CssClass="proceedButton" />
-                    <asp:Button ID="btnActionFilmCancel" OnClick="btnActionFilmCancel_Click"
+                    <asp:Button ID="btnActionFilmCancel" OnClientClick="btnActionFilmCancel_Clicked()" OnClick="btnActionFilmCancel_Click"
                         CssClass="proceedButton"
                         Text="CANCEL CHANGES" CausesValidation="false"
                         runat="server" />
                 </div>
             </div>
-
         </asp:Panel>
 
         <asp:Panel ID="pnlError" CssClass="mainContent" runat="server">
             <div class="header">Error</div>
             <div class="textSection">
                 There was an error fulfilling your request; please try again later.
-            </div>
-            <div class="textSection">
+                <br />
+                <br />
                 <button type="button" id="btnReturnToHomepage" onclick="btnReturnToHomepage_Click()" class="proceedButton">Ok</button>
             </div>
         </asp:Panel>       
@@ -231,6 +229,9 @@
                 }
             }
 
+            function btnActionFilmCancel_Clicked() {
+                alert("No changes have been made.");
+            }
 
         </script>
         
