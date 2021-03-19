@@ -35,7 +35,7 @@ namespace Classes
             if (DB.Count == 1)
             {
                 mFilmId = Convert.ToInt32(DB.DataTable.Rows[0]["FilmId"]);
-                mTimesRecommended = Convert.ToInt32(DB.DataTable.Rows[0]["TimesRecommended"]);
+                //mTimesRecommended = Convert.ToInt32(DB.DataTable.Rows[0]["TimesRecommended"]);
                 return true;
             }
             else

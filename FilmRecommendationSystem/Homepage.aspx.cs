@@ -17,25 +17,31 @@ namespace FilmRecommendationSystem
 {
     public partial class Homepage : System.Web.UI.Page
     {
-        clsFilmCollection AllFilms = new clsFilmCollection();
         clsImdbAPI anImdbApi = new clsImdbAPI();
 
         protected void Page_Load(object sender, EventArgs e)
         {
-            if (IsPostBack == false)
+            pnlError.Visible = false;
+            try
             {
-                LoadGenres();
-                LoadMoods();
-
                 pnlSearchBy.Visible = false;
-                pnlGetRecommendationsContainer.Visible = false;
+
+                if (!IsPostBack)
+                {
+                    LoadGenres();
+                    LoadMoods();
+                }
+
                 pnlRecommendations.Visible = false;
 
                 GetMostRecommendedFilms();
-
-                //GetUserFavouriteFilms();
+                GetUserFavouriteFilms();
 
                 CheckIfUserIsLoggedIn();
+            }
+            catch
+            {
+                pnlError.Visible = true;
             }
         }
 
@@ -66,11 +72,6 @@ namespace FilmRecommendationSystem
             return filmTitles;
         }
                
-        protected void btnGetRecommendations_Click(object sender, EventArgs e)
-        {
-            Int32 genreId = Convert.ToInt32(ddlGenres.SelectedValue);
-            GenerateRecommendations(genreId);
-        }
         void LoadGenres()
         {
             clsGenreCollection AllGenres = new clsGenreCollection();
@@ -214,12 +215,14 @@ namespace FilmRecommendationSystem
 
         protected void ddlGenres_SelectedIndexChanged(object sender, EventArgs e)
         {
-            pnlGetRecommendationsContainer.Visible = true;
+            Int32 genreId = Convert.ToInt32(ddlGenres.SelectedValue);
+            GenerateRecommendations(genreId);
         }
 
         protected void ddlMoods_SelectedIndexChanged(object sender, EventArgs e)
         {
-            pnlGetRecommendationsContainer.Visible = true;
+            Int32 genreId = Convert.ToInt32(ddlGenres.SelectedValue);
+            GenerateRecommendations(genreId);
         }
 
         protected void lnkbtnLogOut_Click(object sender, EventArgs e)

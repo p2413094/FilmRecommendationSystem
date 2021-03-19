@@ -46,12 +46,6 @@
                     <asp:DropDownList ID="ddlGenres" AutoPostBack="true" CssClass="slctGenreMood" runat="server" OnSelectedIndexChanged="ddlGenres_SelectedIndexChanged"></asp:DropDownList>
                     <asp:DropDownList ID="ddlMoods" AutoPostBack="true" CssClass="slctGenreMood" runat="server" OnSelectedIndexChanged="ddlGenres_SelectedIndexChanged"></asp:DropDownList>
                 </asp:Panel>
-
-                <asp:Panel ID="pnlGetRecommendationsContainer" CssClass="GenreMoodSecondSelector" runat="server">
-                    <div class="btnGetRecommendationsContainer">
-                        <asp:Button ID="btnGetRecommendations" runat="server" Text="GET RECOMMENDATIONS" class="btnGetRecommendations" OnClick="btnGetRecommendations_Click" />
-                    </div>
-                </asp:Panel>
             </asp:Panel>
 
            <asp:Panel ID="pnlRecommendations"  runat="server" CssClass="recommenderSelectionGenreMoodContainer">

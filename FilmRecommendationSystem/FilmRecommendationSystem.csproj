@@ -329,7 +329,6 @@
     <Content Include="SearchResults.aspx" />
     <Content Include="StyleSheet.css" />
     <Content Include="WatchList.aspx" />
-    <Content Include="WebForm1.aspx" />
     <None Include="Properties\PublishProfiles\filmRecommender - Web Deploy.pubxml" />
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>
@@ -757,13 +756,6 @@
     </Compile>
     <Compile Include="WatchList.aspx.designer.cs">
       <DependentUpon>WatchList.aspx</DependentUpon>
-    </Compile>
-    <Compile Include="WebForm1.aspx.cs">
-      <DependentUpon>WebForm1.aspx</DependentUpon>
-      <SubType>ASPXCodeBehind</SubType>
-    </Compile>
-    <Compile Include="WebForm1.aspx.designer.cs">
-      <DependentUpon>WebForm1.aspx</DependentUpon>
     </Compile>
   </ItemGroup>
   <ItemGroup>
