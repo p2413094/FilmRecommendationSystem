@@ -1139,7 +1139,6 @@ a {
         font-size: 14px;
         font-weight: bold;
     }
-    
 
 .filmInformation .hyperlink {
     font-style: italic;
@@ -1156,6 +1155,7 @@ a {
     margin-top: 15px;
     margin-left: 15px;
     margin-right: 17px;
+    display: inline-block;
 }
 
     .filmInformation .tagWholeContainer .textcontainer {
@@ -1168,13 +1168,13 @@ a {
 
     .filmInformation .tagWholeContainer .removeContainer {
         float: right;
-        width: 13%;
-        height: 98%;
+        width: 18%;
+        height: 97%;
         opacity: 0;
-        transition: .25s ease;
+        transition: .2s ease;
     }
 
-.removeContainer:hover {
+.filmInformation .removeContainer:hover {
     opacity: 1;
 }
 

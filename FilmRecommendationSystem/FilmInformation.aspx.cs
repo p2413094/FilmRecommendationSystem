@@ -20,27 +20,21 @@ namespace FilmRecommendationSystem
         bool ratingExists = false;
         protected void Page_Load(object sender, EventArgs e)
         {
-            //if (!IsPostBack)
-            //{
-            //    CheckIfUserIsLoggedIn();
+            if (!IsPostBack)
+            {
+                CheckIfUserIsLoggedIn();
 
                 pnlError.Visible = false;
-            //    //pnlFilmInformation.Visible = false;
-            //    string imdbId; //= Request.QueryString["imdbId"];
+                pnlFilmInformation.Visible = false;
+                string imdbId; //= Request.QueryString["imdbId"];
                 userId = 1;
-            //    //filmId = 1; //Session object required here 
-            //    imdbId = "tt0114709";
+                imdbId = "tt0114709";
 
-            //    //DisplayFilm(imdbId);
-                //DisplayAllMoods();
+                DisplayFilm(imdbId);
+                DisplayAllMoods();
 
-            //    DisplayUserAssignedMoods();
-
-
-            //}
-            lblPlot.Text = "Encrypting sensitive sections of the Web.Config is important because they are just that, sensitive. " +
-                "Think about production Web.Config file. It may contain all information that requires running your web application. There are often passwords for SQL database connections, SMTP server, API Keys, or other critical information. In addition to this, Web.Config files are usually treated as just another source code file, that means, any developer on the team, or more accurately anyone with" +
-                " access to the source code, can see what information is stored in Web.Config file.";
+                DisplayUserAssignedMoods();
+            }
         }
 
         void CheckIfUserIsLoggedIn()
@@ -132,7 +126,7 @@ namespace FilmRecommendationSystem
         }
         void DisplayUserAssignedMoods()
         {
-            pnlMyTags.Controls.Clear();
+            //pnlMyTags.Controls.Clear();
             clsDataConnection DB = new clsDataConnection();
             DB.AddParameter("@UserId", userId);
             DB.AddParameter("@FilmId", filmId);
@@ -170,6 +164,7 @@ namespace FilmRecommendationSystem
                 
                     index++;
                 }
+                pnlMyTags.Visible = true;
             }
             else
             {

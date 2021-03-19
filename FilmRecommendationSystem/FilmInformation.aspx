@@ -27,8 +27,6 @@
             </div>
         </div>
 
-
-
         <asp:Panel ID="pnlFilmInformation" CssClass="filmInformation" runat="server">
             <div class="headerContainer">
                 <asp:Label ID="lblTitle" CssClass="headerText" runat="server">King Kong (2005)</asp:Label>
@@ -112,12 +110,15 @@
                 <asp:Panel ID="pnlMyTags" runat="server">
                     <br />
                     <br />
-                    <label class="headerText">My tags</label>
+                    <br />
+                    <label class="filmInformationheaderContainer">My tags</label>
+                    <br />
+                    <br />
+                    <br />
                 </asp:Panel>
                 <br />
                 <br />
             </asp:Panel>
-
         </asp:Panel>
 
         <asp:Panel ID="pnlError" CssClass="mainContent" runat="server">
@@ -129,10 +130,6 @@
                 <button type="button" id="btnReturnToHomepage" onclick="btnReturnToHomepage_Click()" class="proceedButton">Ok</button>
             </div>
         </asp:Panel>
-
-
-
-
 
         <div class="footer">
             <div class="links">
