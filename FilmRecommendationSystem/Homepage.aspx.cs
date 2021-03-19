@@ -32,8 +32,8 @@ namespace FilmRecommendationSystem
                 pnlRecommendations.Visible = false;
 
                 GetMostRecommendedFilms();
-                GetUserFavouriteFilms();
-                //GenerateTemporaryRecommendations();
+
+                //GetUserFavouriteFilms();
 
                 CheckIfUserIsLoggedIn();
             }
@@ -227,6 +227,5 @@ namespace FilmRecommendationSystem
             HttpContext.Current.GetOwinContext().Authentication.SignOut();
             Response.Redirect("Homepage.aspx");
         }
-
     }
 }

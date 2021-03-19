@@ -137,7 +137,7 @@ namespace FilmRecommendationSystem
             ImageButton imgbtnFilmPoster = new ImageButton();
             imgbtnFilmPoster.CssClass = "image";
             imgbtnFilmPoster.ImageUrl = filmInfoReturned.Poster;
-            imgbtnFilmPoster.PostBackUrl = "FilmInformation.aspx?ImdbId=" + newImdbId;
+            imgbtnFilmPoster.PostBackUrl = "FilmInformation.aspx?FilmId=" + filmId + "&ImdbId=" + newImdbId;
 
             pnlFilm.Controls.Add(imgbtnFilmPoster);
 

@@ -29,18 +29,18 @@
 
         <asp:Panel ID="pnlFilmInformation" CssClass="filmInformation" runat="server">
             <div class="headerContainer">
-                <asp:Label ID="lblTitle" CssClass="headerText" runat="server">King Kong (2005)</asp:Label>
+                <asp:Label ID="lblTitle" CssClass="headerText" runat="server"></asp:Label>
             </div>
             <div class="imageContainer">
-                <asp:Image ID="imgFilmPoster" ImageUrl="~/Images/King Kong.jpg" CssClass="largeImage" runat="server" />
-                <div class="overlayContainer">
+                <asp:Image ID="imgFilmPoster" CssClass="largeImage" runat="server" />
+                <asp:Panel ID="pnlFilmOverlay" CssClass="overlayContainer" runat="server">
                     <div class="leftItem">
                         <asp:ImageButton ID="imgbtnFavourite" ImageUrl="~/Images/Favourite.png" CssClass="image" OnClick="imgbtnFavourite_Click" runat="server" />
                     </div>
                     <div class="rightItem">
                         <asp:ImageButton ID="imgbtnWatchLater" ImageUrl="~/Images/WatchLater.png" CssClass="image" OnClick="imgbtnWatchLater_Click" runat="server" style="margin-bottom: 0px" />
                     </div>
-                </div>
+                </asp:Panel>
                 <div class="myRatingContainer">
                         <label class="headerText">My rating</label>
                         <asp:DropDownList ID="ddlRating" CssClass="ratingdropdown" OnSelectedIndexChanged="ddlRating_SelectedIndexChanged" AutoPostBack="true" runat="server">

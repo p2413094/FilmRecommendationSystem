@@ -68,7 +68,7 @@ namespace FilmRecommendationSystem
             ImageButton newClickableImage = new ImageButton();
             newClickableImage.CssClass = "image";
             newClickableImage.ImageUrl = filmInfoReturned.Poster;
-            newClickableImage.PostBackUrl = "FilmInformation.aspx?ImdbId=" + newImdbId;
+            newClickableImage.PostBackUrl = "FilmInformation.aspx?FilmId=" + filmId + "&ImdbId=" + newImdbId;
             
             Panel pnlFilmTitle = new Panel();
             pnlFilmTitle.CssClass = "titleContainer";
