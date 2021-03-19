@@ -25,13 +25,15 @@ namespace FilmRecommendationSystem
             {
                 pnlError.Visible = false;
                 pnlFilmInformation.Visible = false;
-                
+                btnAssignTag.Enabled = false;
+
                 bool userLoggedIn = HttpContext.Current.User.Identity.IsAuthenticated;
                 if (userLoggedIn)
                 {
                     displayOverlayContainer = true;
                     Session["displayOverlayContainer"] = displayOverlayContainer;
                     userId = Convert.ToInt32(Session["UserId"]);
+                    btnAssignTag.Enabled = true;
                 }
 
                 filmId = Convert.ToInt32(Request.QueryString["FilmId"]);
@@ -260,18 +262,22 @@ namespace FilmRecommendationSystem
 
         protected void ddlRating_SelectedIndexChanged(object sender, EventArgs e)
         {
-            clsFilmRatingCollection AllRatings = new clsFilmRatingCollection();
-            AllRatings.ThisFilmRating.UserId = Convert.ToInt32(Session["UserId"]);
-            AllRatings.ThisFilmRating.FilmId = Convert.ToInt32(Session["FilmId"]);
-            AllRatings.ThisFilmRating.Rating = float.Parse(ddlRating.SelectedValue);
+            bool userLoggedIn = HttpContext.Current.User.Identity.IsAuthenticated;
+            if (userLoggedIn)
+            {
+                clsFilmRatingCollection AllRatings = new clsFilmRatingCollection();
+                AllRatings.ThisFilmRating.UserId = Convert.ToInt32(Session["UserId"]);
+                AllRatings.ThisFilmRating.FilmId = Convert.ToInt32(Session["FilmId"]);
+                AllRatings.ThisFilmRating.Rating = float.Parse(ddlRating.SelectedValue);
 
-            if (ratingExists == true)
-            {
-                AllRatings.Update();
-            }
-            else
-            {
-                AllRatings.Add();
+                if (ratingExists == true)
+                {
+                    AllRatings.Update();
+                }
+                else
+                {
+                    AllRatings.Add();
+                }
             }
         }
     }
