@@ -62,6 +62,7 @@
 
         <asp:Panel ID="pnlStaffAdmin" CssClass="mainContent" runat="server">
             <label class="header">Management functions</label>
+            <br /><br /><br /><br /><br /><br />
             <asp:Button ID="btnViewUsers" OnClick="btnViewUsers_Click" runat="server" CssClass="proceedButton" Text="VIEW ALL USERS" />
             <asp:Button ID="btnViewFilms" OnClick="btnViewFilms_Click" CssClass="proceedButton" runat="server" Text="VIEW ALL FILMS" />
             <asp:Button ID="btnViewStaffMembers" OnClick="btnViewUsers_Click" CssClass="proceedButton" runat="server" Text="VIEW ALL STAFF MEMBERS" />

@@ -332,7 +332,7 @@ a {
 }
 
 .proceedButton {
-    display: inline;
+    display: inline-block;
     justify-content: center;
     line-height: 40px;
     width: auto;
