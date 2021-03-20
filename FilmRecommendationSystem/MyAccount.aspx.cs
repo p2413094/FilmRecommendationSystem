@@ -23,7 +23,7 @@ namespace FilmRecommendationSystem
                     pnlStaffAdmin.Visible = false;
                     btnViewStaffMembers.Visible = false;
                     btnViewPreviousStaffMembers.Visible = false;
-                    Int32 userId = 52; //Convert.ToInt32(Session["UserId"]); 
+                    Int32 userId = Convert.ToInt32(Session["UserId"]); 
                     var manager = Context.GetOwinContext().GetUserManager<ApplicationUserManager>();
                     var user = manager.FindById(userId);
 
