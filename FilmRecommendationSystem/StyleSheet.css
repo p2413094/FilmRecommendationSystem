@@ -1083,3 +1083,8 @@ a {
     margin-right: 4%;
     display: inline-block;
 }
+
+.textAlignCentre {
+    margin-top: .7%;
+    text-align: center;
+}

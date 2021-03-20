@@ -49,6 +49,10 @@
 
            <asp:Panel ID="pnlRecommendations"  runat="server" CssClass="recommenderSelectionGenreMoodContainer">
                 <div class="homepage-subHeader">Your recommendations</div>
+               <asp:Panel CssClass="textAlignCentre" runat="server">
+                   te
+
+               </asp:Panel>
             </asp:Panel>
             
             <asp:Panel ID="pnlMostRecommendedFilms" runat="server" CssClass="recommenderSelectionGenreMoodContainer">

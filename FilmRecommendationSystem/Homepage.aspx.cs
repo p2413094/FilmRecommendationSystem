@@ -221,8 +221,33 @@ namespace FilmRecommendationSystem
 
         protected void ddlMoods_SelectedIndexChanged(object sender, EventArgs e)
         {
+            Int32 moodId = Convert.ToInt32(ddlMoods.SelectedValue);
             Int32 genreId = Convert.ToInt32(ddlGenres.SelectedValue);
             GenerateRecommendations(genreId);
+
+            clsFilmMood aFilmMood = new clsFilmMood();
+            clsDataConnection DB = new clsDataConnection();
+            DB.AddParameter("@MoodId", moodId);
+            DB.Execute("sproc_tblFilmMood_FilterByMoodId");
+            Int32 recordCount = DB.Count;
+            Int32 index = 0;
+
+            if (DB.Count != 0)
+            {
+                while (index < recordCount)
+                {
+                    pnlRecommendations.Controls.Add(anImdbApi.GetImdbInformation((Convert.ToInt32(DB.DataTable.Rows[index]["FilmId"]))));
+                    index++;
+                }
+            }
+            else
+            {
+                Panel pnlNoFilmsAvailableContainer = new Panel();
+                pnlNoFilmsAvailableContainer.CssClass = "textAlignCentre";
+                Label lblNoFilmsAvailableText = new Label();
+                lblNoFilmsAvailableText.Text = "There are no films available that suit your criteria. Please try again later.";
+                pnlNoFilmsAvailableContainer.Controls.Add(lblNoFilmsAvailableText);
+            }
         }
 
         protected void lnkbtnLogOut_Click(object sender, EventArgs e)
