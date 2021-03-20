@@ -30,6 +30,7 @@ namespace FilmRecommendationSystem
             Button btnMyAccount = new Button();
             btnMyAccount.CssClass = "dropbtn";
             btnMyAccount.Text = "MY ACCOUNT";
+            btnMyAccount.PostBackUrl = "MyAccount.aspx";
             pnlSignInRegister.Controls.Add(btnMyAccount);
 
             Panel pnlDropDownContent = new Panel();
