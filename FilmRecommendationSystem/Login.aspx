@@ -54,6 +54,7 @@
             </div>
             <div class="loginSection">
                 <div class="confirmationContainer">
+                    <br />
                     <asp:Button ID="btnLogin" runat="server" OnClick="btnLogin_Click" Text="Log in" CssClass="proceedButton" />
                     <br />
                     <a href="ForgottenResetPassword.aspx">Forgot/ need to reset password?</a>
