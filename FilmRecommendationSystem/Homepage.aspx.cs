@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Configuration;
+using System.IO;
 using System.Linq;
 using System.Web;
 using System.Web.UI;
@@ -118,7 +119,12 @@ namespace FilmRecommendationSystem
         {
             DataViewSchema modelSchema;
             MLContext mlContext = new MLContext();
-            ITransformer trainedModel = mlContext.Model.Load(@"C:\Users\rajeshdhooper\source\repos\FilmRecommendationSystem\FilmRecommendationSystem\Model.zip", 
+            var path = Server.MapPath(@"~/Model.zip");
+
+            //ITransformer trainedModel = mlContext.Model.Load(@"C:\Users\rajeshdhooper\source\repos\FilmRecommendationSystem\FilmRecommendationSystem\Model.zip", 
+            //    out modelSchema);
+
+            ITransformer trainedModel = mlContext.Model.Load(path,
                 out modelSchema);
 
             var predictionEngine = mlContext.Model.CreatePredictionEngine<clsFilmRating, MovieRatingPrediction>(trainedModel);
@@ -193,12 +199,7 @@ namespace FilmRecommendationSystem
             }
             pnlRecommendations.Visible = true;
 
-            mlContext.Model.Save(trainedModel, modelSchema, @"C:\Users\rajeshdhooper\source\repos\FilmRecommendationSystem\FilmRecommendationSystem\Model.zip");
-        }
-
-        protected void ImageButton1_Click(object sender, ImageClickEventArgs e)
-        {
-            Response.Redirect("FilmInformation.aspx?imdbId=tt0360717");
+            mlContext.Model.Save(trainedModel, modelSchema, path);
         }
 
         protected void btnGenre_Click(object sender, EventArgs e)
