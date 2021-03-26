@@ -117,22 +117,27 @@ namespace FilmRecommendationSystem
 
         void GenerateRecommendations(int genreId)
         {
+            //create an instance of the class which represents the IDataView/ DataViewRow schema  
             DataViewSchema modelSchema;
+
+            //create a new instance of the MLContext class
             MLContext mlContext = new MLContext();
+
+            //find the saved model 
             var path = Server.MapPath(@"~/Model.zip");
 
-            //ITransformer trainedModel = mlContext.Model.Load(@"C:\Users\rajeshdhooper\source\repos\FilmRecommendationSystem\FilmRecommendationSystem\Model.zip", 
-            //    out modelSchema);
-
+            //load the saved model  
             ITransformer trainedModel = mlContext.Model.Load(path,
                 out modelSchema);
 
+            //create a prediction engine for film recommendations 
             var predictionEngine = mlContext.Model.CreatePredictionEngine<clsFilmRating, MovieRatingPrediction>(trainedModel);
             
             var tempUserId = Session["UserId"];
             Single userId;
             Boolean signedIn = false;
 
+            //check if user is signed in 
             if (tempUserId == null)
             {
                 userId = 1;
@@ -143,6 +148,7 @@ namespace FilmRecommendationSystem
                 signedIn = true;
             }
 
+            //get all films from the database
             clsFilmGenreCollection AllFilms = new clsFilmGenreCollection();
             AllFilms.GetAllFilmsByGenre(genreId);
 
@@ -153,6 +159,7 @@ namespace FilmRecommendationSystem
             {
                 var potentialRecommendation = new clsFilmRating { UserId = userId, FilmId = aFilm.FilmId};
                 var movieRatingPrediction = predictionEngine.Predict(potentialRecommendation);
+                //if a rating is high enough, add it to film predictions 
                 if (Math.Round(movieRatingPrediction.Score, 1) > 4.4)
                 {
                     aFilmPrediction = new clsFilmPrediction();
@@ -163,8 +170,10 @@ namespace FilmRecommendationSystem
                 }
             }
             
+            //sort them by score
             AllPredictions.Sort();
 
+            //get the ten best recommendations 
             var topTenPredictions = AllPredictions.Take(10);
 
             clsFilmRecommendationCollection FilmRecommendations = new clsFilmRecommendationCollection();
@@ -177,6 +186,7 @@ namespace FilmRecommendationSystem
             {
                 if (signedIn)
                 {
+                    //save the recommendations for future use 
                     aRecommendationToAdd = new clsFilmRecommendation();
                     aRecommendationToAdd.FilmId = aTopTenPrediction.FilmId;
                     aRecommendationToAdd.UserId = Convert.ToInt32(userId);
@@ -195,10 +205,12 @@ namespace FilmRecommendationSystem
                 {
                     AllMostRecommendedFilms.Add();
                 }
+                //get imdb information for film 
                 pnlRecommendations.Controls.Add(anImdbApi.GetImdbInformation(aTopTenPrediction.FilmId));
             }
             pnlRecommendations.Visible = true;
 
+            //save the model for later use
             mlContext.Model.Save(trainedModel, modelSchema, path);
         }
 
