@@ -15,7 +15,7 @@ namespace FilmRecommendationSystem
     {
         protected void Page_Load(object sender, EventArgs e)
         {
-            
+            pnlErrorContainer.Visible = false;
         }
 
         public static List<string> SearchFilms(string prefixTest, int count)
@@ -38,6 +38,7 @@ namespace FilmRecommendationSystem
             var manager = Context.GetOwinContext().GetUserManager<ApplicationUserManager>();
             var signInManager = Context.GetOwinContext().Get<ApplicationSignInManager>();
             var user = new ApplicationUser() { UserName = txtUsername.Text, Email = txtEmailAddress.Text };
+
             IdentityResult result = manager.Create(user, txtPassword.Text);
             if (result.Succeeded)
             {
@@ -53,7 +54,15 @@ namespace FilmRecommendationSystem
             }
             else 
             {
-                //lblError.Text = result.Errors.FirstOrDefault();
+                Label lblErrorItem = new Label();
+                foreach (var error in result.Errors)
+                {
+                    lblErrorItem = new Label();
+                    lblErrorItem.Text = "- " +  error;
+                    pnlErrors.Controls.Add(lblErrorItem);
+                    pnlErrors.Controls.Add(new LiteralControl("<br />"));
+                }
+                pnlErrorContainer.Visible = true;
             }
         }
     }

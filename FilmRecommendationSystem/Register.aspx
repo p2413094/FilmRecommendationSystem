@@ -33,9 +33,7 @@
         <div class="mainContent">
             <div class="header">Register for account</div>
             <div class="textSection">
-                <p class="page-subheader">
-                    What do you get when you register with us?
-                </p>
+                <p class="page-subheader">What do you get when you register with us?</p>
                 <div>
                     &#9989; save personalised recommendations
                     <br />
@@ -46,6 +44,11 @@
                     &#9989; add personalised tag to film, making search and recommendations even better
                 </div>
             </div>
+
+            <asp:Panel ID="pnlErrorContainer" CssClass="errorPanelContainer" runat="server">
+                <label class="page-subheader italicised">Fix errors before continuing</label>
+                <asp:Panel ID="pnlErrors" CssClass="errors" runat="server"></asp:Panel>
+            </asp:Panel>
 
             <div class="loginSection">
                 <asp:Label runat="server" AssociatedControlID="txtEmailAddress" CssClass="textentry-label">Email address</asp:Label>

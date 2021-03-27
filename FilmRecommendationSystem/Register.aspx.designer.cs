@@ -24,6 +24,24 @@ namespace FilmRecommendationSystem
         protected global::System.Web.UI.WebControls.Panel pnlNavBar;
 
         /// <summary>
+        /// pnlErrorContainer control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Panel pnlErrorContainer;
+
+        /// <summary>
+        /// pnlErrors control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Panel pnlErrors;
+
+        /// <summary>
         /// txtEmailAddress control.
         /// </summary>
         /// <remarks>

@@ -161,7 +161,6 @@ a {
 
 
     .mainContent .italicised {
-        margin-left: 2%;
         font-style: italic;
     }
 
@@ -170,6 +169,7 @@ a {
         width: 86%;
         padding-top: 2%;
         padding-bottom: 2%;
+        margin-bottom: 1%;
     }
 
     .mainContent .textSectionError {
@@ -1071,7 +1071,6 @@ a {
     padding-bottom: 25%;
 }
 
-
 .searchResultsContainer {
     margin-top: 2%;
     min-height: 40px;
@@ -1087,4 +1086,16 @@ a {
 .textAlignCentre {
     margin-top: .7%;
     text-align: center;
+}
+
+.errorPanelContainer {
+    border-style: solid;
+    border-color: red;
+    margin-top: 21%;
+    margin-bottom: 2%;
+}
+.errorPanelContainer .errors {
+    margin-top: 1%;
+    margin-bottom: 1%;
+    width: 30%;
 }
