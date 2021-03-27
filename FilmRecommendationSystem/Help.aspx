@@ -34,7 +34,7 @@
                 of mood you’re in. It takes a lot of the tedious work out of finding a film to watch.
 
                 <div class="helpQuestionHeader">How does it recommend films?</div>
-                We look at how films have been previously rated and make a prediction on how likely you’re going to like another film of the san genre or mood. 
+                We look at how films have been previously rated and make a prediction on how likely you’re going to like another film of the same genre or mood. 
                 Then, we give you the best recommendations.
 
                 <div class="helpQuestionHeader">Can I save my recommended films?</div>
