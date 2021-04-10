@@ -38,6 +38,17 @@ namespace Testing
         }
 
         [TestMethod]
+        public void ThisLinkPropertyOk()
+        {
+            clsLinkCollection Links = new clsLinkCollection();
+            clsLink aLink = new clsLink();
+            aLink.FilmId = 1;
+            aLink.ImdbId = 0114709;
+            Links.ThisLink = aLink;
+            Assert.AreEqual(Links.ThisLink, aLink);
+        }
+
+        [TestMethod]
         public void CountMatchesList()
         {
             clsLinkCollection Links = new clsLinkCollection();
@@ -97,15 +108,32 @@ namespace Testing
             Assert.IsFalse(found);
         }
 
+        [TestMethod]
+        public void ImdbIdAlreadyExistsCheckMethodOk()
+        {
+            clsLinkCollection AllLinks = new clsLinkCollection();
+            bool exists;
+            Int32 imdbId = 0114709;
+            exists = AllLinks.ImdbIdAlreadyExistsCheck(imdbId);
+            Assert.IsTrue(exists);
+        }
 
         [TestMethod]
-        public void FindMethodOk()
+        public void GetLinkByFilmIdMethodOk()
         {
-            clsLink aLink = new clsLink();
-            Boolean found = false;
-            Int32 filmId = 1;
-            found = aLink.Find(filmId);
-            Assert.IsTrue(found);
+            bool imdbIdExists = false;
+            clsLinkCollection AllLinks = new clsLinkCollection();
+            AllLinks.ThisLink.FilmId = 256;
+            AllLinks.GetLinkByFilmId();
+            string imdbId = AllLinks.ThisLink.ImdbId.ToString();
+            if (imdbId.Length != 0)
+            {
+                imdbIdExists = true;
+            }
+            else
+            {
+            }
+            Assert.IsTrue(imdbIdExists);
         }
     }
 }

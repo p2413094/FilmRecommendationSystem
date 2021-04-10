@@ -51,6 +51,17 @@ namespace Testing
         }
 
         [TestMethod]
+        public void ThisFilmRecommendationPropertyOk()
+        {
+            clsFilmRecommendationCollection FilmRecommendations = new clsFilmRecommendationCollection();
+            clsFilmRecommendation aFilmRecommendation = new clsFilmRecommendation();
+            aFilmRecommendation.UserId = 1;
+            aFilmRecommendation.FilmId = 6;
+            FilmRecommendations.ThisFilmRecommendation = aFilmRecommendation;
+            Assert.AreEqual(FilmRecommendations.ThisFilmRecommendation, aFilmRecommendation);
+        }
+
+        [TestMethod]
         public void AddMethodOk()
         {
             clsFilmRecommendationCollection AllFilmRecommendations = new clsFilmRecommendationCollection();

@@ -31,5 +31,16 @@ namespace Testing
             aFilmGenre.GenreId = genreId;
             Assert.AreEqual(aFilmGenre.GenreId, genreId);
         }
+
+        [TestMethod]
+        public void FindMethodOk()
+        {
+            bool found;
+            clsFilmGenre aFilmGenre = new clsFilmGenre();
+            Int32 filmId = 1;
+            Int32 genreId = 2;
+            found = aFilmGenre.Find(filmId, genreId);
+            Assert.IsTrue(found);
+        }
     }
 }

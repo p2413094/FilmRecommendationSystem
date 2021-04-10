@@ -19,7 +19,7 @@ namespace Testing
         public void CountPropertyOk()
         {
             clsFavouriteFilmCollection allFavouriteFilms = new clsFavouriteFilmCollection();
-            Int32 count = 5;
+            Int32 count = 12;
             allFavouriteFilms.Count = count;
             Assert.AreEqual(allFavouriteFilms.Count, count);
         }
@@ -35,6 +35,29 @@ namespace Testing
             testList.Add(testItem);
             favouriteFilms.AllFavouriteFilms = testList;
             Assert.AreEqual(favouriteFilms.AllFavouriteFilms, testList);
+        }
+
+        [TestMethod]
+        public void ThisFavouriteFilmPropertyOk()
+        {
+            clsFavouriteFilmCollection favouriteFilms = new clsFavouriteFilmCollection();
+            clsFavouriteFilm testFavouriteFilm = new clsFavouriteFilm();
+            testFavouriteFilm.UserId = 1;
+            testFavouriteFilm.FilmId = 1;
+            favouriteFilms.ThisFavouriteFilm = testFavouriteFilm;
+            Assert.AreEqual(favouriteFilms.ThisFavouriteFilm, testFavouriteFilm);
+        }
+
+        [TestMethod]
+        public void TopFavouritesPropertyOk()
+        {
+            clsFavouriteFilmCollection favouriteFilms = new clsFavouriteFilmCollection();
+            List<clsFavouriteFilm> testList = new List<clsFavouriteFilm>();
+            clsFavouriteFilm testItem = new clsFavouriteFilm();
+            testItem.FilmId = 2459;
+            testList.Add(testItem);
+            favouriteFilms.TopFavourites = testList;
+            Assert.AreEqual(favouriteFilms.TopFavourites, testList);
         }
 
         [TestMethod]
@@ -56,7 +79,7 @@ namespace Testing
             clsFavouriteFilmCollection AllFavouriteFilms = new clsFavouriteFilmCollection();
             clsFavouriteFilm testItem = new clsFavouriteFilm();
             testItem.UserId = 1;
-            testItem.FilmId = 12;
+            testItem.FilmId = 13;
             AllFavouriteFilms.ThisFavouriteFilm = testItem;
             AllFavouriteFilms.Add();
             AllFavouriteFilms.ThisFavouriteFilm.Find(testItem.UserId, testItem.FilmId);
@@ -69,7 +92,7 @@ namespace Testing
             clsFavouriteFilmCollection AllFavouriteFilms = new clsFavouriteFilmCollection();
             clsFavouriteFilm testItem = new clsFavouriteFilm();
             testItem.UserId = 1;
-            testItem.FilmId = 8;
+            testItem.FilmId = 15;
             AllFavouriteFilms.ThisFavouriteFilm = testItem;
             AllFavouriteFilms.Add();
             AllFavouriteFilms.ThisFavouriteFilm.Find(testItem.UserId, testItem.FilmId);
@@ -79,14 +102,12 @@ namespace Testing
         }
 
         [TestMethod]
-        public void FindMethodOk()
+        public void GetTopFavouritesMethodOk()
         {
-            clsFavouriteFilm aFavouriteFilm = new clsFavouriteFilm();
-            Boolean found = false;
-            Int32 userId = 1;
-            Int32 filmId = 2;
-            found = aFavouriteFilm.Find(userId, filmId);
-            Assert.IsTrue(found);
+            clsFavouriteFilmCollection AllFavouriteFilms = new clsFavouriteFilmCollection();
+            AllFavouriteFilms.GetTopFavourites();
+            Int32 topTenFilmsCount = 10;
+            Assert.AreEqual(AllFavouriteFilms.TopFavourites.Count, topTenFilmsCount);
         }
     }
 }

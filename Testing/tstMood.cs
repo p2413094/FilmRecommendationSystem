@@ -136,5 +136,15 @@ namespace Testing
             error = aMood.Valid(moodDesc);
             Assert.AreNotEqual(error, "");
         }
+
+        [TestMethod]
+        public void FindMethodOk()
+        {
+            Boolean found;
+            clsMood aMood = new clsMood();
+            Int32 moodId = 3648;
+            found = aMood.Find(moodId);
+            Assert.IsTrue(found);
+        }
     }
 }

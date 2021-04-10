@@ -40,5 +40,17 @@ namespace Testing
             aFilmMood.UserId = userId;
             Assert.AreEqual(aFilmMood.UserId, userId);
         }
+
+        [TestMethod]
+        public void FindMethodOk()
+        {
+            bool found;
+            clsFilmMood aFilmMood = new clsFilmMood();
+            Int32 filmId = 1;
+            Int32 userId = 1;
+            Int32 moodId = 1;
+            found = aFilmMood.Find(filmId, userId, moodId);
+            Assert.IsTrue(found);
+        }
     }
 }

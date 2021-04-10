@@ -126,5 +126,15 @@ namespace Testing
             errorCount = aFilm.Valid(newFilmTitle).Count;
             Assert.AreEqual(errorCount, 0);
         }
+
+        [TestMethod]
+        public void FindMethodOk()
+        {
+            bool found;
+            clsFilm aFilm = new clsFilm();
+            Int32 filmId = 1;
+            found = aFilm.Find(filmId);
+            Assert.IsTrue(found);
+        }
     }
 }

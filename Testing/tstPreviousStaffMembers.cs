@@ -58,5 +58,15 @@ namespace Testing
             aPreviousStaffMember.DateTimeRemoved = dateTimeRemoved;
             Assert.AreEqual(aPreviousStaffMember.DateTimeRemoved, dateTimeRemoved);
         }
+
+        [TestMethod]
+        public void FindMethodOk()
+        {
+            clsPreviousStaffMembers APreviousStaffMember = new clsPreviousStaffMembers();
+            Boolean found;
+            Int32 previousStaffMemberId = 1;
+            found = APreviousStaffMember.Find(previousStaffMemberId);
+            Assert.IsTrue(found);
+        }
     }
 }

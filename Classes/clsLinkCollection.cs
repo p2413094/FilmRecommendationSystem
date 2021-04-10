@@ -50,20 +50,19 @@ namespace Classes
             DB.AddParameter("@ImdbId", mThisLink.ImdbId);
             DB.Execute("sproc_tblLinks_Insert");
         }
-
-        public void Delete()
-        {
-            clsDataConnection DB = new clsDataConnection();
-            DB.AddParameter("@FilmId", mThisLink.FilmId);
-            DB.Execute("sproc_tblLinks_Delete");
-        }
-
         public void Update()
         {
             clsDataConnection DB = new clsDataConnection();
             DB.AddParameter("@FilmId", mThisLink.FilmId);
             DB.AddParameter("@ImdbId", mThisLink.ImdbId);
             DB.Execute("sproc_tblLinks_Update");
+        }
+
+        public void Delete()
+        {
+            clsDataConnection DB = new clsDataConnection();
+            DB.AddParameter("@FilmId", mThisLink.FilmId);
+            DB.Execute("sproc_tblLinks_Delete");
         }
 
         public bool ImdbIdAlreadyExistsCheck(int imdbId)

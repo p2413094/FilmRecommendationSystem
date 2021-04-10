@@ -31,5 +31,16 @@ namespace Testing
             aFilmRecommendation.FilmId = filmId;
             Assert.AreEqual(aFilmRecommendation.FilmId, filmId);
         }
+
+        [TestMethod]
+        public void FindMethodOk()
+        {
+            bool found;
+            clsFilmRecommendation aFilmRecommendation = new clsFilmRecommendation();
+            Int32 userId = 1;
+            Int32 filmId = 53996;
+            found = aFilmRecommendation.Find(userId, filmId);
+            Assert.IsTrue(found);
+        }
     }
 }

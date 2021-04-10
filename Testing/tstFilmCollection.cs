@@ -38,6 +38,17 @@ namespace Testing
         }
 
         [TestMethod]
+        public void ThisFilmPropertyOk()
+        {
+            clsFilmCollection AllFilms = new clsFilmCollection();
+            clsFilm testFilm = new clsFilm();
+            testFilm.FilmId = 1;
+            testFilm.Title = "Midsommar(2019)";
+            AllFilms.ThisFilm = testFilm;
+            Assert.AreEqual(AllFilms.ThisFilm, testFilm);        
+        }
+
+        [TestMethod]
         public void CountMatchesList()
         {
             clsFilmCollection Films = new clsFilmCollection();
@@ -83,16 +94,6 @@ namespace Testing
         }
 
         [TestMethod]
-        public void FindMethodOk()
-        {
-            clsFilm aFilm = new clsFilm();
-            Boolean found = false;
-            Int32 filmId = 1;
-            found = aFilm.Find(filmId);
-            Assert.IsTrue(found);
-        }
-
-        [TestMethod]
         public void FilmAlreadyExistsMethodOk()
         {
             clsFilmCollection AllFilms = new clsFilmCollection();
@@ -100,6 +101,14 @@ namespace Testing
             string title = "Dune (2021)";
             found = AllFilms.FilmAlreadyExistsCheck(title);
             Assert.IsTrue(found);
+        }
+
+        [TestMethod]
+        public void SearchForFilmMethodOk()
+        {
+            clsFilmCollection AllFilms = new clsFilmCollection();
+            string searchText = "Story";
+            Assert.IsNotNull(AllFilms.SearchForFilm(searchText));
         }
     }
 }

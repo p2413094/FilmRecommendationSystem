@@ -79,6 +79,29 @@ namespace Testing
         }
 
         [TestMethod]
+        public void UpdateMethodOk()
+        {
+            clsFilmRatingCollection AllFilmRatings = new clsFilmRatingCollection();
+            clsFilmRating testItem = new clsFilmRating();
+            Single filmId = 1;
+            Single userId = 2;
+            testItem.FilmId = filmId;
+            testItem.UserId = userId;
+            testItem.Rating = 4f;
+            AllFilmRatings.ThisFilmRating = testItem;
+            AllFilmRatings.Add();
+
+            testItem.FilmId = filmId;
+            testItem.UserId = userId;
+            testItem.Rating = 5f;
+            AllFilmRatings.ThisFilmRating = testItem;
+            AllFilmRatings.Update();
+
+            AllFilmRatings.ThisFilmRating.Find(filmId, userId);
+            Assert.AreEqual(AllFilmRatings.ThisFilmRating, testItem);
+        }
+
+        [TestMethod]
         public void DeleteMethodOk()
         {
             clsFilmRatingCollection AllFilmRatings = new clsFilmRatingCollection();
@@ -93,18 +116,5 @@ namespace Testing
             Boolean found = AllFilmRatings.ThisFilmRating.Find(TestItem.FilmId, TestItem.UserId);
             Assert.IsFalse(found);
         }
-
-        [TestMethod]
-        public void FindMethodOk()
-        {
-            clsFilmRating aFilmRating = new clsFilmRating();
-            Boolean found = false;
-            Int32 filmId = 1;
-            Int32 userId = 1;
-            found = aFilmRating.Find(filmId, userId);
-            Assert.IsTrue(found);
-        }
-
-
     }
 }

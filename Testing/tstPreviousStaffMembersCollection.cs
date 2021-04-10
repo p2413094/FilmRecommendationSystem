@@ -31,13 +31,26 @@ namespace Testing
             List<clsPreviousStaffMembers> TestList = new List<clsPreviousStaffMembers>();
             clsPreviousStaffMembers TestItem = new clsPreviousStaffMembers();
             TestItem.PreviousStaffMemberId = 1;
-            TestItem.FirstName = "Brian";
-            TestItem.LastName = "May";
+            TestItem.FirstName = "David";
+            TestItem.LastName = "Gilmour";
             TestItem.PrivilegeLevelId = 1;
             TestItem.DateTimeRemoved = DateTime.Now;
             TestList.Add(TestItem);
             PreviousStaffMembers.AllPreviousStaffMembers = TestList;
             Assert.AreEqual(PreviousStaffMembers.AllPreviousStaffMembers, TestList);
+        }
+
+        [TestMethod]
+        public void ThisPreviousStaffMemberPropertyOk()
+        {
+            clsPreviousStaffMembersCollection AllPreviousStaffMembers = new clsPreviousStaffMembersCollection();
+            clsPreviousStaffMembers aPreviousStaffMember = new clsPreviousStaffMembers();
+            aPreviousStaffMember.PreviousStaffMemberId = 1;
+            aPreviousStaffMember.FirstName = "Jimi";
+            aPreviousStaffMember.LastName = "Hendrix";
+            aPreviousStaffMember.PrivilegeLevelId = 1;
+            AllPreviousStaffMembers.ThisPreviousStaffMember = aPreviousStaffMember;
+            Assert.AreEqual(AllPreviousStaffMembers.ThisPreviousStaffMember, aPreviousStaffMember);
         }
 
         [TestMethod]
@@ -62,24 +75,14 @@ namespace Testing
             clsPreviousStaffMembersCollection AllPreviousStaffMembers = new clsPreviousStaffMembersCollection();
             clsPreviousStaffMembers TestItem = new clsPreviousStaffMembers();
             Int32 primaryKey = 0;
-            TestItem.FirstName = "Ridley";
-            TestItem.LastName = "Scott";
-            TestItem.PrivilegeLevelId = 1;
+            TestItem.FirstName = "Taylor";
+            TestItem.LastName = "Swift";
+            TestItem.PrivilegeLevelId = 2;
             AllPreviousStaffMembers.ThisPreviousStaffMember = TestItem;
             primaryKey = AllPreviousStaffMembers.Add();
             TestItem.PreviousStaffMemberId = primaryKey;
             AllPreviousStaffMembers.ThisPreviousStaffMember.Find(primaryKey);
             Assert.AreEqual(AllPreviousStaffMembers.ThisPreviousStaffMember, TestItem);
-        }
-
-        [TestMethod]
-        public void FindMethodOk()
-        {
-            clsPreviousStaffMembers APreviousStaffMember = new clsPreviousStaffMembers();
-            Boolean found = false;
-            Int32 previousStaffMemberId = 1;
-            found = APreviousStaffMember.Find(previousStaffMemberId);
-            Assert.IsTrue(found);
         }
     }
 }

@@ -56,6 +56,17 @@ namespace Classes
             return DB.Execute("sproc_tblStaffMember_Insert");
         }
 
+        public void Update()
+        {
+            clsDataConnection DB = new clsDataConnection();
+            DB.AddParameter("@StaffMemberId", mThisStaffMember.StaffMemberId);
+            DB.AddParameter("@PrivilegeLevelId", mThisStaffMember.PrivilegeLevelId);
+            DB.AddParameter("@FirstName", mThisStaffMember.FirstName);
+            DB.AddParameter("@LastName", mThisStaffMember.LastName);
+            DB.AddParameter("@Allowed", mThisStaffMember.Allowed);
+            DB.Execute("sproc_tblStaffMember_Update");
+        }
+
         public void Delete()
         {
             clsDataConnection DB = new clsDataConnection();
@@ -67,17 +78,6 @@ namespace Classes
             DB.AddParameter("@LastName", mThisStaffMember.LastName);
             DB.AddParameter("@PrivilegeLevelId", mThisStaffMember.PrivilegeLevelId);
             DB.Execute("sproc_tblPreviousStaffMembers_Insert");
-        }
-
-        public void Update()
-        {
-            clsDataConnection DB = new clsDataConnection();
-            DB.AddParameter("@StaffMemberId", mThisStaffMember.StaffMemberId);
-            DB.AddParameter("@PrivilegeLevelId", mThisStaffMember.PrivilegeLevelId);
-            DB.AddParameter("@FirstName", mThisStaffMember.FirstName);
-            DB.AddParameter("@LastName", mThisStaffMember.LastName);
-            DB.AddParameter("@Allowed", mThisStaffMember.Allowed);
-            DB.Execute("sproc_tblStaffMember_Update");
         }
     }
 }

@@ -38,6 +38,17 @@ namespace Testing
         }
 
         [TestMethod]
+        public void ThisMoodPropertyOk()
+        {
+            clsMoodCollection AllMoods = new clsMoodCollection();
+            clsMood aMood = new clsMood();
+            aMood.MoodId = 1;
+            aMood.MoodDesc = "Greatest horror of all time";
+            AllMoods.ThisMood = aMood;
+            Assert.AreEqual(AllMoods.ThisMood, aMood);
+        }
+
+        [TestMethod]
         public void CountMatchesList()
         {
             clsMoodCollection moods = new clsMoodCollection();
@@ -62,16 +73,6 @@ namespace Testing
             TestItem.MoodId = primaryKey;
             AllMoods.ThisMood.Find(primaryKey);
             Assert.AreEqual(AllMoods.ThisMood, TestItem);
-        }
-
-        [TestMethod]
-        public void FindMethodOk()
-        {
-            clsMood aMood = new clsMood();
-            Boolean found = false;
-            Int32 moodId = 3648;
-            found = aMood.Find(moodId);
-            Assert.IsTrue(found);
         }
     }
 }

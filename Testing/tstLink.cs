@@ -122,5 +122,25 @@ namespace Testing
             error = aLink.Valid(imdbId).Count;
             Assert.AreNotEqual(error, 0);
         }
+
+        [TestMethod]
+        public void IllictCharacter()
+        {
+            clsLink aLink = new clsLink();
+            Int32 error = 0;
+            string illicitCharacter = "111111@";
+            error = aLink.Valid(illicitCharacter).Count;
+            Assert.AreNotEqual(error, 0);
+        }
+
+        [TestMethod]
+        public void FindMethodOk()
+        {
+            clsLink aLink = new clsLink();
+            Boolean found;
+            Int32 filmId = 1;
+            found = aLink.Find(filmId);
+            Assert.IsTrue(found);
+        }
     }
 }

@@ -18,7 +18,7 @@ namespace Testing
         public void FilmIdPropertyOk()
         {
             clsFilmRating aFilmRating = new clsFilmRating();
-            Int32 filmId = 1;
+            Single filmId = 1;
             aFilmRating.FilmId = filmId;
             Assert.AreEqual(aFilmRating.FilmId, filmId);
         }
@@ -27,7 +27,7 @@ namespace Testing
         public void UserIdPropertyOk()
         {
             clsFilmRating aFilmRating = new clsFilmRating();
-            Int32 userId = 1;
+            Single userId = 1;
             aFilmRating.UserId = userId;
             Assert.AreEqual(aFilmRating.UserId, userId);
         }
@@ -39,6 +39,17 @@ namespace Testing
             Single rating = 4.5F;
             aFilmRating.Rating = rating;
             Assert.AreEqual(aFilmRating.Rating, rating);
+        }
+
+        [TestMethod]
+        public void FindMethodOk()
+        {
+            clsFilmRating aFilmRating = new clsFilmRating();
+            Boolean found;
+            Int32 filmId = 1;
+            Int32 userId = 1;
+            found = aFilmRating.Find(filmId, userId);
+            Assert.IsTrue(found);
         }
     }
 }

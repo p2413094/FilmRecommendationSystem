@@ -33,13 +33,26 @@ namespace Testing
             TestItem.StaffMemberId = 1;
             TestItem.UserId = 1;
             TestItem.PrivilegeLevelId = 1;
-            TestItem.FirstName = "Tobe";
-            TestItem.LastName = "Hooper";
+            TestItem.FirstName = "James";
+            TestItem.LastName = "Cameron";
             TestItem.Confirmed = true;
             TestItem.Allowed = true;
             TestList.Add(TestItem);
             StaffMembers.AllStaffMembers = TestList;
             Assert.AreEqual(StaffMembers.AllStaffMembers, TestList);
+        }
+
+        [TestMethod]
+        public void ThisStaffMemberPropertyOk()
+        {
+            clsStaffMemberCollection AllStaffMembers = new clsStaffMemberCollection();
+            clsStaffMember TestItem = new clsStaffMember();
+            TestItem.UserId = 1;
+            TestItem.PrivilegeLevelId = 1;
+            TestItem.FirstName = "Lana";
+            TestItem.LastName = "Del Rey";
+            AllStaffMembers.ThisStaffMember = TestItem;
+            Assert.AreEqual(AllStaffMembers.ThisStaffMember, TestItem);
         }
 
         [TestMethod]
@@ -68,8 +81,8 @@ namespace Testing
             Int32 primaryKey = 0;
             TestItem.UserId = 2;
             TestItem.PrivilegeLevelId = 1;
-            TestItem.FirstName = "Peter";
-            TestItem.LastName = "Jackson";
+            TestItem.FirstName = "Martin";
+            TestItem.LastName = "Scorsese";
             AllStaffMembers.ThisStaffMember = TestItem;
             primaryKey = AllStaffMembers.Add();
             AllStaffMembers.ThisStaffMember.Find(primaryKey);
@@ -123,16 +136,6 @@ namespace Testing
             AllStaffMembers.Delete();
             Boolean found = AllStaffMembers.ThisStaffMember.Find(primaryKey);
             Assert.IsFalse(found);       
-        }
-
-        [TestMethod]
-        public void FindMethodOk()
-        {
-            clsStaffMember AStaffMember = new clsStaffMember();
-            Boolean found = false;
-            Int32 staffMemberId = 1;
-            found = AStaffMember.Find(staffMemberId);
-            Assert.IsTrue(found);
         }
     }
 }

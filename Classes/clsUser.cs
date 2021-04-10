@@ -9,8 +9,6 @@ namespace Classes
         public string Email { get; set; }
         public string EmailConfirmed { get; set; }
         public string UserName { get; set; }
-        public string PhoneNumber {get; set;}
-        public bool PhoneConfirmed {get; set;}
         public string LockoutEnabled { get; set; }
         public string LockoutEndDateUtc {get; set;}
         public DateTime LastLogin {get; set;}

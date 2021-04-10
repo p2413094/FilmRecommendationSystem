@@ -38,6 +38,30 @@ namespace Testing
         }
 
         [TestMethod]
+        public void ThisFilmGenrePropertyOk()
+        {
+            clsFilmGenreCollection FilmGenres = new clsFilmGenreCollection();
+            clsFilmGenre aFilmGenre = new clsFilmGenre();
+            aFilmGenre.FilmId = 45517;
+            aFilmGenre.GenreId = 3;
+            FilmGenres.ThisFilmGenre = aFilmGenre;
+            Assert.AreEqual(FilmGenres.ThisFilmGenre, aFilmGenre);
+        }
+
+        [TestMethod]
+        public void AllFilmsByGenrePropertyOk()
+        {
+            clsFilmGenreCollection FilmGenres = new clsFilmGenreCollection();
+            List<clsFilmGenre> testList = new List<clsFilmGenre>();
+            clsFilmGenre testItem = new clsFilmGenre();
+            testItem.FilmId = 1;
+            testItem.GenreId = 1;
+            testList.Add(testItem);
+            FilmGenres.AllFilmsByGenre = testList;
+            Assert.AreEqual(FilmGenres.AllFilmsByGenre, testList);
+        }
+
+        [TestMethod]
         public void CountMatchesList()
         {
             clsFilmGenreCollection FilmGenres = new clsFilmGenreCollection();
@@ -78,14 +102,30 @@ namespace Testing
         }
 
         [TestMethod]
-        public void FindMethodOk()
+        public void DeleteByFilmIdMethodOk()
         {
-            clsFilmGenre aFilmGenre = new clsFilmGenre();
-            Boolean found = false;
-            Int32 filmId = 1;
-            Int32 genreId = 2;
-            found = aFilmGenre.Find(filmId, genreId);
-            Assert.IsTrue(found);
+            bool found;
+            clsFilmGenreCollection AllFilmGenres = new clsFilmGenreCollection();
+            clsFilmCollection AllFilms = new clsFilmCollection();
+            AllFilms.ThisFilm.Title = "test";
+            Int32 primaryKey = AllFilms.Add();
+            Int32 genreId = 1;
+            AllFilmGenres.ThisFilmGenre.FilmId = primaryKey;
+            AllFilmGenres.ThisFilmGenre.GenreId = genreId;
+            AllFilmGenres.Add();
+            AllFilmGenres.DeleteByFilmId();
+            found = AllFilmGenres.ThisFilmGenre.Find(primaryKey, genreId);
+            Assert.IsFalse(found);
+        }
+
+        [TestMethod]
+        public void GetAllFilmsByGenreMethodOk()
+        {
+            clsFilmGenreCollection AllFilmGenres = new clsFilmGenreCollection();
+            Int32 numberofFilmsByGenre = 1830;
+            Int32 genreId = 1;
+            AllFilmGenres.GetAllFilmsByGenre(genreId);
+            Assert.AreEqual(AllFilmGenres.AllFilmsByGenre.Count, numberofFilmsByGenre);
         }
     }
 }

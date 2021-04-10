@@ -49,15 +49,32 @@ namespace Testing
             aUser.UserName = userName;
             Assert.AreEqual(aUser.UserName, userName);
         }
-
         
         [TestMethod]
-        public void SuspendedPropertyOk()
+        public void LockoutEnabledPropertyOk()
         {
             clsUser aUser = new clsUser();
             string lockoutEnabled = "False";
             aUser.LockoutEnabled = lockoutEnabled;
             Assert.AreEqual(aUser.LockoutEnabled, lockoutEnabled);
+        }
+
+        [TestMethod]
+        public void LockoutEndDateUtcPropertyOk()
+        {
+            clsUser aUser = new clsUser();
+            string lockoutEndDateUtc = Convert.ToString(DateTime.Now.AddDays(3));
+            aUser.LockoutEndDateUtc = lockoutEndDateUtc;
+            Assert.AreEqual(aUser.LockoutEndDateUtc, lockoutEndDateUtc);
+        }
+
+        [TestMethod]
+        public void LastLoginPropertyOk()
+        {
+            clsUser aUser = new clsUser();
+            DateTime lastLogin = DateTime.Now.AddDays(-3);
+            aUser.LastLogin = lastLogin;
+            Assert.AreEqual(aUser.LastLogin, lastLogin);
         }
     }
 }

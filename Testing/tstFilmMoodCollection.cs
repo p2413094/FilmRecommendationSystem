@@ -53,6 +53,18 @@ namespace Testing
         }
 
         [TestMethod]
+        public void ThisFilmMoodPropertyOk()
+        {
+            clsFilmMoodCollection AllFilmMoods = new clsFilmMoodCollection();
+            clsFilmMood aFilmMood = new clsFilmMood();
+            aFilmMood.FilmId = 1;
+            aFilmMood.UserId = 1;
+            aFilmMood.MoodId = 1;
+            AllFilmMoods.ThisFilmMood = aFilmMood;
+            Assert.AreEqual(AllFilmMoods.ThisFilmMood, aFilmMood);
+        }
+
+        [TestMethod]
         public void AddMethodOk()
         {
             clsFilmMoodCollection AllFilmMoods = new clsFilmMoodCollection();
@@ -80,18 +92,6 @@ namespace Testing
             AllFilmMoods.Delete();
             Boolean found = AllFilmMoods.ThisFilmMood.Find(TestItem.FilmId, TestItem.UserId, TestItem.MoodId);
             Assert.IsFalse(found);
-        }
-
-        [TestMethod]
-        public void FindMethodOk()
-        {
-            clsFilmMood AFilmMood = new clsFilmMood();
-            Boolean found = false;
-            Int32 filmId = 1;
-            Int32 userId = 1;
-            Int32 moodId = 1;
-            found = AFilmMood.Find(filmId, userId, moodId);
-            Assert.IsTrue(found);
         }
     }
 }

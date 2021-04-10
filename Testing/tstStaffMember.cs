@@ -273,5 +273,16 @@ namespace Testing
             errorCount = aStaffMember.Valid(firstName, lastName).Count;
             Assert.AreEqual(errorCount, 0);
         }
+
+        [TestMethod]
+        public void FindMethodOk()
+        {
+            clsStaffMember AStaffMember = new clsStaffMember();
+            Boolean found;
+            Int32 staffMemberId = 1;
+            found = AStaffMember.Find(staffMemberId);
+            Assert.IsTrue(found);
+        }
+
     }
 }

@@ -15,21 +15,21 @@ namespace Testing
         }
 
         [TestMethod]
-        public void PlotPropertyOk()
+        public void TitlePropertyOk()
         {
             clsIMDBApi newReturnedFilm = new clsIMDBApi();
-            string plot = "The plot of The Texas Chainsaw Massacre (1974)";
-            newReturnedFilm.Plot = plot;
-            Assert.AreEqual(newReturnedFilm.Plot, plot);
+            string title = "Aliens";
+            newReturnedFilm.Title = title;
+            Assert.AreEqual(newReturnedFilm.Title, title);
         }
 
         [TestMethod]
-        public void GenrePropertyOk()
+        public void YearPropertyOk()
         {
             clsIMDBApi newReturnedFilm = new clsIMDBApi();
-            string genre = "Horror";
-            newReturnedFilm.Genre = genre;
-            Assert.AreEqual(newReturnedFilm.Genre, genre);
+            string year = "1986";
+            newReturnedFilm.Year = year;
+            Assert.AreEqual(newReturnedFilm.Year, year);
         }
 
         [TestMethod]
@@ -42,10 +42,37 @@ namespace Testing
         }
 
         [TestMethod]
+        public void ReleasedPropertyOk()
+        {
+            clsIMDBApi newReturnedFilm = new clsIMDBApi();
+            string released = "18 July 1986";
+            newReturnedFilm.Released = released;
+            Assert.AreEqual(newReturnedFilm.Released, released);
+        }
+
+        [TestMethod]
+        public void PlotPropertyOk()
+        {
+            clsIMDBApi newReturnedFilm = new clsIMDBApi();
+            string plot = "Fifty-seven years after surviving an apocalyptic attack ...";
+            newReturnedFilm.Plot = plot;
+            Assert.AreEqual(newReturnedFilm.Plot, plot);
+        }
+
+        [TestMethod]
+        public void GenrePropertyOk()
+        {
+            clsIMDBApi newReturnedFilm = new clsIMDBApi();
+            string genre = "Action";
+            newReturnedFilm.Genre = genre;
+            Assert.AreEqual(newReturnedFilm.Genre, genre);
+        }
+
+        [TestMethod]
         public void DirectorPropertyOk()
         {
             clsIMDBApi newReturnedFilm = new clsIMDBApi();
-            string director = "Tobe Hoooper";
+            string director = "James Cameron";
             newReturnedFilm.Director = director;
             Assert.AreEqual(newReturnedFilm.Director, director);
         }
@@ -54,7 +81,7 @@ namespace Testing
         public void RuntimePropertyOk()
         {
             clsIMDBApi newReturnedFilm = new clsIMDBApi();
-            string runtime = "83 min";
+            string runtime = "137 min";
             newReturnedFilm.Runtime = runtime;
             Assert.AreEqual(newReturnedFilm.Runtime, runtime);
         }
@@ -63,7 +90,8 @@ namespace Testing
         public void PosterUrlPropertyOk()
         {
             clsIMDBApi newReturnedFilm = new clsIMDBApi();
-            string posterUrl = "https://m.media-amazon.com/images/M/MV5BZDI3OWE0ZWMtNGJjOS00N2E4LWFiOTAtZjQ4OTNiNzIwN2NkXkEyXkFqcGdeQXVyMTQxNzMzNDI@._V1_SX300.jpg";
+            string posterUrl = "https://m.media-amazon.com/images/M/MV5BZGU2OGY5ZTYtMWNhYy00NjZiLWI0NjUtZmNhY2JhNDRmODU3XkEyXkFqcGdeQXVyNzkwMjQ5NzM@._" +
+                "V1_SX300.jpg";
             newReturnedFilm.Poster = posterUrl;
             Assert.AreEqual(newReturnedFilm.Poster, posterUrl);
         }
@@ -72,9 +100,18 @@ namespace Testing
         public void IMDBIdPropertyOk()
         {
             clsIMDBApi newReturnedFilm = new clsIMDBApi();
-            string imdbId = "tt0072271";
+            string imdbId = "tt0090605";
             newReturnedFilm.ImdbId = imdbId;
             Assert.AreEqual(newReturnedFilm.ImdbId, imdbId);
+        }
+
+        [TestMethod]
+        public void ResponsePropertyOk()
+        {
+            clsIMDBApi newReturnedFilm = new clsIMDBApi();
+            bool response = true;;
+            newReturnedFilm.Response = response;
+            Assert.AreEqual(newReturnedFilm.Response, response);
         }
     }
 }

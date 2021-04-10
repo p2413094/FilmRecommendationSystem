@@ -6,6 +6,7 @@ using Microsoft.ML.Trainers;
 using Microsoft.ML.Data;
 using System.Configuration;
 using System.Data.SqlClient;
+using System.Web;
 
 namespace Classes
 {
@@ -23,7 +24,10 @@ namespace Classes
         {            
             DatabaseLoader loader = mlContext.Data.CreateDatabaseLoader<clsFilmRating>();
 
-            string connectionString = ConfigurationManager.ConnectionStrings["newConnection"].ConnectionString;
+            string connectionString = null;
+            System.Net.WebClient client = new System.Net.WebClient();
+            connectionString = client.DownloadString("http://localhost:5000/");
+
             string sqlCommand = "SELECT CAST(UserId as REAL) AS UserId, CAST(FilmId as REAL) AS FilmId, CAST(Rating as REAL) AS Rating FROM tblFilmRatings";
 
             DatabaseSource dbSource = new DatabaseSource(SqlClientFactory.Instance, connectionString, sqlCommand);
