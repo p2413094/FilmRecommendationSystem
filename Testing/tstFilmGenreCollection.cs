@@ -19,7 +19,7 @@ namespace Testing
         public void CountPropertyOk()
         {
             clsFilmGenreCollection AllFilmGenres = new clsFilmGenreCollection();
-            Int32 count = 9742;
+            Int32 count = 9744;
             AllFilmGenres.Count = count;
             Assert.AreEqual(AllFilmGenres.Count, count);
         }
@@ -80,7 +80,7 @@ namespace Testing
             clsFilmGenreCollection AllFilmGenres = new clsFilmGenreCollection();
             clsFilmGenre TestItem = new clsFilmGenre();
             TestItem.FilmId = 1;
-            TestItem.GenreId = 4;
+            TestItem.GenreId = 5;
             AllFilmGenres.ThisFilmGenre = TestItem;
             AllFilmGenres.Add();
             AllFilmGenres.ThisFilmGenre.Find(TestItem.FilmId, TestItem.GenreId);

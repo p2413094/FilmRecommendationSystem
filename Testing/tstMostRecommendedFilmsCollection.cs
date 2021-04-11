@@ -11,15 +11,17 @@ namespace Testing
         [TestMethod]
         public void InstanceOk()
         {
-            clsMostRecommendedFilmsCollection AllMostRecommendedFilms = new clsMostRecommendedFilmsCollection();
+            clsMostRecommendedFilmsCollection AllMostRecommendedFilms = new 
+                clsMostRecommendedFilmsCollection();
             Assert.IsNotNull(AllMostRecommendedFilms);
         }
 
         [TestMethod]
         public void CountPropertyOk()
         {
-            clsMostRecommendedFilmsCollection AllMostRecommendedFilms = new clsMostRecommendedFilmsCollection();
-            Int32 count = 2;
+            clsMostRecommendedFilmsCollection AllMostRecommendedFilms = new 
+                clsMostRecommendedFilmsCollection();
+            Int32 count = 10;
             AllMostRecommendedFilms.Count = count;
             Assert.AreEqual(AllMostRecommendedFilms.Count, count);
         }
@@ -27,7 +29,8 @@ namespace Testing
         [TestMethod]
         public void AllMostRecommendedFilmsOk()
         {
-            clsMostRecommendedFilmsCollection AllMostRecommendedFilms = new clsMostRecommendedFilmsCollection();
+            clsMostRecommendedFilmsCollection AllMostRecommendedFilms = new 
+                clsMostRecommendedFilmsCollection();
             List<clsMostRecommendedFilms> TestList = new List<clsMostRecommendedFilms>();
             clsMostRecommendedFilms TestItem = new clsMostRecommendedFilms();
             TestItem.FilmId = 1200;
@@ -40,7 +43,8 @@ namespace Testing
         [TestMethod]
         public void ThisMostRecommendedFilmOk()
         {
-            clsMostRecommendedFilmsCollection AllMostRecommendedFilms = new clsMostRecommendedFilmsCollection();
+            clsMostRecommendedFilmsCollection AllMostRecommendedFilms = new 
+                clsMostRecommendedFilmsCollection();
             clsMostRecommendedFilms TestItem = new clsMostRecommendedFilms();
             TestItem.FilmId = 41569;
             TestItem.TimesRecommended = 2005;
@@ -51,7 +55,8 @@ namespace Testing
         [TestMethod]
         public void AddMethodOk()
         {
-            clsMostRecommendedFilmsCollection AllMostRecommendedFilms = new clsMostRecommendedFilmsCollection();
+            clsMostRecommendedFilmsCollection AllMostRecommendedFilms = new 
+                clsMostRecommendedFilmsCollection();
             clsMostRecommendedFilms TestItem = new clsMostRecommendedFilms();
             TestItem.FilmId = 174055;
             TestItem.TimesRecommended = 2017;
@@ -64,13 +69,14 @@ namespace Testing
         [TestMethod]
         public void IncreaseTimesRecommendedOk()
         {
-            clsMostRecommendedFilmsCollection AllMostRecommendedFilms = new clsMostRecommendedFilmsCollection();
+            clsMostRecommendedFilmsCollection AllMostRecommendedFilms = new 
+                clsMostRecommendedFilmsCollection();
             clsMostRecommendedFilms TestItem = new clsMostRecommendedFilms();
             TestItem.FilmId = 41569;
             AllMostRecommendedFilms.ThisMostRecommendedFilm = TestItem;
             AllMostRecommendedFilms.IncreaseTimesRecommended();
             AllMostRecommendedFilms.ThisMostRecommendedFilm.Find(TestItem.FilmId);
-            Int32 count = 2;
+            Int32 count = 0;
             Assert.AreEqual(AllMostRecommendedFilms.ThisMostRecommendedFilm.TimesRecommended, count);
         }
         

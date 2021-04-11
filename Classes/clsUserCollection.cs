@@ -39,7 +39,6 @@ namespace Classes
             }
         }
 
-        //this needs to include favourite films, ratings, moods, recommendations, watch later and ASP.NET User table 
         public void RemoveUserFromSystem(Int32 userId)
         {
             clsDataConnection DB = new clsDataConnection();

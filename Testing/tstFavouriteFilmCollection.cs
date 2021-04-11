@@ -19,7 +19,7 @@ namespace Testing
         public void CountPropertyOk()
         {
             clsFavouriteFilmCollection allFavouriteFilms = new clsFavouriteFilmCollection();
-            Int32 count = 12;
+            Int32 count = 13;
             allFavouriteFilms.Count = count;
             Assert.AreEqual(allFavouriteFilms.Count, count);
         }
@@ -79,7 +79,7 @@ namespace Testing
             clsFavouriteFilmCollection AllFavouriteFilms = new clsFavouriteFilmCollection();
             clsFavouriteFilm testItem = new clsFavouriteFilm();
             testItem.UserId = 1;
-            testItem.FilmId = 13;
+            testItem.FilmId = 14;
             AllFavouriteFilms.ThisFavouriteFilm = testItem;
             AllFavouriteFilms.Add();
             AllFavouriteFilms.ThisFavouriteFilm.Find(testItem.UserId, testItem.FilmId);

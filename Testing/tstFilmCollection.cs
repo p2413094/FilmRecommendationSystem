@@ -19,7 +19,7 @@ namespace Testing
         public void CountPropertyOk()
         {
             clsFilmCollection AllFilms = new clsFilmCollection();
-            Int32 count = 9742;
+            Int32 count = 9755;
             AllFilms.Count = count;
             Assert.AreEqual(AllFilms.Count, count);
         }

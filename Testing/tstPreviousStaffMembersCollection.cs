@@ -19,7 +19,7 @@ namespace Testing
         public void CountPropertyOk()
         {
             clsPreviousStaffMembersCollection AllPreviousStaffMembers = new clsPreviousStaffMembersCollection();
-            Int32 count = 0;
+            Int32 count = 14;
             AllPreviousStaffMembers.Count = count;
             Assert.AreEqual(AllPreviousStaffMembers.Count, count);
         }
@@ -41,19 +41,6 @@ namespace Testing
         }
 
         [TestMethod]
-        public void ThisPreviousStaffMemberPropertyOk()
-        {
-            clsPreviousStaffMembersCollection AllPreviousStaffMembers = new clsPreviousStaffMembersCollection();
-            clsPreviousStaffMembers aPreviousStaffMember = new clsPreviousStaffMembers();
-            aPreviousStaffMember.PreviousStaffMemberId = 1;
-            aPreviousStaffMember.FirstName = "Jimi";
-            aPreviousStaffMember.LastName = "Hendrix";
-            aPreviousStaffMember.PrivilegeLevelId = 1;
-            AllPreviousStaffMembers.ThisPreviousStaffMember = aPreviousStaffMember;
-            Assert.AreEqual(AllPreviousStaffMembers.ThisPreviousStaffMember, aPreviousStaffMember);
-        }
-
-        [TestMethod]
         public void CountMatchesList()
         {
             clsPreviousStaffMembersCollection PreviousStaffMembers = new clsPreviousStaffMembersCollection();
@@ -67,6 +54,19 @@ namespace Testing
             TestList.Add(TestItem);
             PreviousStaffMembers.AllPreviousStaffMembers = TestList;
             Assert.AreEqual(PreviousStaffMembers.Count, TestList.Count);
+        }
+
+        [TestMethod]
+        public void ThisPreviousStaffMemberPropertyOk()
+        {
+            clsPreviousStaffMembersCollection AllPreviousStaffMembers = new clsPreviousStaffMembersCollection();
+            clsPreviousStaffMembers aPreviousStaffMember = new clsPreviousStaffMembers();
+            aPreviousStaffMember.PreviousStaffMemberId = 1;
+            aPreviousStaffMember.FirstName = "Jimi";
+            aPreviousStaffMember.LastName = "Hendrix";
+            aPreviousStaffMember.PrivilegeLevelId = 1;
+            AllPreviousStaffMembers.ThisPreviousStaffMember = aPreviousStaffMember;
+            Assert.AreEqual(AllPreviousStaffMembers.ThisPreviousStaffMember, aPreviousStaffMember);
         }
 
         [TestMethod]
@@ -86,3 +86,5 @@ namespace Testing
         }
     }
 }
+
+

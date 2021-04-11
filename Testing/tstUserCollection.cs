@@ -19,7 +19,7 @@ namespace Testing
         public void CountPropertyOk()
         {
             clsUserCollection AllUsers = new clsUserCollection();
-            Int32 count = 5;
+            Int32 count = 12;
             AllUsers.Count = count;
             Assert.AreEqual(AllUsers.Count, count);
         }
@@ -34,7 +34,6 @@ namespace Testing
             TestItem.Email = "t800@cyberdynesystems.co.uk";
             TestItem.EmailConfirmed = "true";
             TestItem.UserName = "T-800";
-            //TestItem.DateTimeCreated = DateTime.Now.AddDays(-1);
             TestItem.LockoutEnabled = "False";
             TestList.Add(TestItem);
             Users.AllUsers = TestList;
@@ -51,7 +50,6 @@ namespace Testing
             TestItem.Email = "t800@cyberdynesystems.co.uk";
             TestItem.EmailConfirmed = "true";
             TestItem.UserName = "T-800";
-            //TestItem.DateTimeCreated = DateTime.Now.AddDays(-1);
             TestItem.LockoutEnabled = "False";
             TestList.Add(TestItem);
             Users.AllUsers = TestList;

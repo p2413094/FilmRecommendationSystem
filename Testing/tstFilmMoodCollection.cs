@@ -19,7 +19,7 @@ namespace Testing
         public void CountPropertyOk()
         {
             clsFilmMoodCollection allFilmMoods = new clsFilmMoodCollection();
-            Int32 count = 3683;
+            Int32 count = 3685;
             allFilmMoods.Count = count;
             Assert.AreEqual(allFilmMoods.Count, count);
         }
@@ -69,7 +69,7 @@ namespace Testing
         {
             clsFilmMoodCollection AllFilmMoods = new clsFilmMoodCollection();
             clsFilmMood TestItem = new clsFilmMood();
-            TestItem.FilmId = 1;
+            TestItem.FilmId = 2;
             TestItem.UserId = 1;
             TestItem.MoodId = 2;
             AllFilmMoods.ThisFilmMood = TestItem;

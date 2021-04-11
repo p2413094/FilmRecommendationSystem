@@ -19,7 +19,7 @@ namespace Testing
         public void CountPropertyOk()
         {
             clsLinkCollection AllLinks = new clsLinkCollection();
-            Int32 someCount = 9742;
+            Int32 someCount = 9753;
             AllLinks.Count = someCount;
             Assert.AreEqual(AllLinks.Count, someCount);
         }
@@ -77,10 +77,8 @@ namespace Testing
         [TestMethod]
         public void UpdateMethodOk()
         {
-            //193615
             clsLinkCollection AllLinks = new clsLinkCollection();
             clsLink TestItem = new clsLink();
-            Int32 primaryKey = 0;
             TestItem.FilmId = 193615;
             TestItem.ImdbId = 1111111;
             AllLinks.ThisLink = TestItem;
@@ -91,21 +89,6 @@ namespace Testing
             AllLinks.Update();
             AllLinks.ThisLink.Find(TestItem.FilmId);
             Assert.AreEqual(AllLinks.ThisLink, TestItem);
-        }
-
-        [TestMethod]
-        public void DeleteMethodOk()
-        {
-            clsLinkCollection AllLinks = new clsLinkCollection();
-            clsLink TestItem = new clsLink();
-            TestItem.FilmId = 193614;
-            TestItem.ImdbId = 1630029;
-            AllLinks.ThisLink = TestItem;
-            AllLinks.Add();
-            AllLinks.ThisLink.Find(TestItem.FilmId);
-            AllLinks.Delete();
-            Boolean found = AllLinks.ThisLink.Find(TestItem.FilmId);
-            Assert.IsFalse(found);
         }
 
         [TestMethod]
@@ -137,3 +120,4 @@ namespace Testing
         }
     }
 }
+

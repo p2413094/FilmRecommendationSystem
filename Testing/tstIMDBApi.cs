@@ -90,7 +90,8 @@ namespace Testing
         public void PosterUrlPropertyOk()
         {
             clsIMDBApi newReturnedFilm = new clsIMDBApi();
-            string posterUrl = "https://m.media-amazon.com/images/M/MV5BZGU2OGY5ZTYtMWNhYy00NjZiLWI0NjUtZmNhY2JhNDRmODU3XkEyXkFqcGdeQXVyNzkwMjQ5NzM@._" +
+            string posterUrl = "https://m.media-amazon.com/images/M/MV5BZGU2OGY5ZTYtMWNhYy0" +
+                "0NjZiLWI0NjUtZmNhY2JhNDRmODU3XkEyXkFqcGdeQXVyNzkwMjQ5NzM@._" +
                 "V1_SX300.jpg";
             newReturnedFilm.Poster = posterUrl;
             Assert.AreEqual(newReturnedFilm.Poster, posterUrl);

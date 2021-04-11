@@ -46,6 +46,7 @@ namespace Testing
             Assert.AreEqual(result, 1);
         }
 
+        [TestMethod]
         public void CompareToMethodNewScoreLowerOk()
         {
             clsFilmPrediction aFilmPrediction = new clsFilmPrediction();
@@ -55,8 +56,7 @@ namespace Testing
             float newScore = 2f;
             aSecondFilmPrediction.Score = newScore;
             Int32 result = aFilmPrediction.CompareTo(aSecondFilmPrediction);
-            Assert.AreEqual(result, -11);
-
+            Assert.AreEqual(result, -1);
         }
     }
 }

@@ -19,7 +19,7 @@ namespace Testing
         public void CountPropertyOk()
         {
             clsStaffMemberCollection AllStaffMembers = new clsStaffMemberCollection();
-            Int32 count = 0;
+            Int32 count = 14;
             AllStaffMembers.Count = count;
             Assert.AreEqual(AllStaffMembers.Count, count);
         }
@@ -33,8 +33,8 @@ namespace Testing
             TestItem.StaffMemberId = 1;
             TestItem.UserId = 1;
             TestItem.PrivilegeLevelId = 1;
-            TestItem.FirstName = "James";
-            TestItem.LastName = "Cameron";
+            TestItem.FirstName = "Pink";
+            TestItem.LastName = "Floyd";
             TestItem.Confirmed = true;
             TestItem.Allowed = true;
             TestList.Add(TestItem);

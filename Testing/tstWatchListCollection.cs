@@ -19,7 +19,7 @@ namespace Testing
         public void CountPropertyOk()
         {
             clsWatchListCollection allFilmsInWatchList = new clsWatchListCollection();
-            Int32 count = 1;
+            Int32 count = 8;
             allFilmsInWatchList.Count = count;
             Assert.AreEqual(allFilmsInWatchList.Count, count);
         }
@@ -36,6 +36,18 @@ namespace Testing
             testList.Add(testItem);
             allFilmsInWatchList.AllFilmsInWatchList = testList;
             Assert.AreEqual(allFilmsInWatchList.AllFilmsInWatchList, testList);
+        }
+
+        [TestMethod]
+        public void ThisWatchListFilmPropertyOk()
+        {
+            clsWatchListCollection AllFilmsInWatchList = new clsWatchListCollection();
+            clsWatchList aWatchList = new clsWatchList();
+            aWatchList.UserId = 1;
+            aWatchList.FilmId = 1;
+            aWatchList.DateAdded = DateTime.Now;
+            AllFilmsInWatchList.ThisWatchListFilm = aWatchList;
+            Assert.AreEqual(AllFilmsInWatchList.ThisWatchListFilm, aWatchList);
         }
 
         [TestMethod]
@@ -58,7 +70,7 @@ namespace Testing
             clsWatchListCollection AllWatchListFilms = new clsWatchListCollection();
             clsWatchList TestItem = new clsWatchList();
             TestItem.UserId = 1;
-            TestItem.FilmId = 5;
+            TestItem.FilmId = 6;
             AllWatchListFilms.ThisWatchListFilm = TestItem;
             AllWatchListFilms.Add();
             AllWatchListFilms.ThisWatchListFilm.Find(TestItem.UserId, TestItem.FilmId);
@@ -71,24 +83,13 @@ namespace Testing
             clsWatchListCollection AllWatchListFilms = new clsWatchListCollection();
             clsWatchList TestItem = new clsWatchList();
             TestItem.UserId = 1;
-            TestItem.FilmId = 5;
+            TestItem.FilmId = 7;
             AllWatchListFilms.ThisWatchListFilm = TestItem;
             AllWatchListFilms.Add();
             AllWatchListFilms.ThisWatchListFilm.Find(TestItem.UserId, TestItem.FilmId);
             AllWatchListFilms.Delete();
             Boolean found = AllWatchListFilms.ThisWatchListFilm.Find(TestItem.UserId, TestItem.FilmId);
             Assert.IsFalse(found);
-        }
-
-        [TestMethod]
-        public void FindMethodOk()
-        {
-            clsWatchList aWatchList = new clsWatchList();
-            Boolean found = false;
-            Int32 userId = 1;
-            Int32 filmId = 1;
-            found = aWatchList.Find(userId, filmId);
-            Assert.IsTrue(found);
         }
     }
 }

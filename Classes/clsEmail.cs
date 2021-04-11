@@ -20,7 +20,7 @@ namespace Classes
         } 
         public Task SendAccountVerifiedEmail()
         {
-            var client = new SendGridClient(sendGridKey);
+            var client = new SendGridClient(ConfigurationManager.AppSettings["SendGridApiKey"].ToString());
             var msg = new SendGridMessage()
             {
                 From = new EmailAddress("no-reply@filmrecommender.co.uk"),

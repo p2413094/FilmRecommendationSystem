@@ -166,7 +166,7 @@ namespace Testing
             firstName = firstName.PadRight(51, 'J');
             string lastName = "Cameron";
             errorCount = aStaffMember.Valid(firstName, lastName).Count;
-            Assert.AreEqual(errorCount, 0);
+            Assert.AreEqual(errorCount, 1);
         }
 
         [TestMethod]
@@ -178,7 +178,7 @@ namespace Testing
             firstName = firstName.PadRight(500, 'J');
             string lastName = "Cameron";
             errorCount = aStaffMember.Valid(firstName, lastName).Count;
-            Assert.AreEqual(errorCount, 0);
+            Assert.AreEqual(errorCount, 1);
         }
 
         [TestMethod]
@@ -189,7 +189,7 @@ namespace Testing
             string firstName = "James";
             string lastName = "";
             errorCount = aStaffMember.Valid(firstName, lastName).Count;
-            Assert.AreEqual(errorCount, 0);
+            Assert.AreEqual(errorCount, 1);
         }
 
         [TestMethod]
@@ -259,7 +259,7 @@ namespace Testing
             string lastName = "";
             lastName = lastName.PadRight(51, 'C');
             errorCount = aStaffMember.Valid(firstName, lastName).Count;
-            Assert.AreEqual(errorCount, 0);
+            Assert.AreEqual(errorCount, 1);
         }
 
         [TestMethod]
@@ -271,7 +271,7 @@ namespace Testing
             string lastName = "";
             lastName = lastName.PadRight(500, 'C');
             errorCount = aStaffMember.Valid(firstName, lastName).Count;
-            Assert.AreEqual(errorCount, 0);
+            Assert.AreEqual(errorCount, 1);
         }
 
         [TestMethod]
@@ -283,6 +283,5 @@ namespace Testing
             found = AStaffMember.Find(staffMemberId);
             Assert.IsTrue(found);
         }
-
     }
 }

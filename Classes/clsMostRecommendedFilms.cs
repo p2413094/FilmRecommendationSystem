@@ -6,11 +6,18 @@ namespace Classes
     {
         public int CompareTo (clsMostRecommendedFilms other)
         {
-            if (this.TimesRecommended == other.TimesRecommended)
+            if (this.TimesRecommended < other.TimesRecommended)
             {
-                return this.TimesRecommended.CompareTo(other.TimesRecommended);
+                return 1;
             }
-            return this.TimesRecommended.CompareTo(other.TimesRecommended);
+            else if (this.TimesRecommended > other.TimesRecommended)
+            {
+                return -1;
+            }
+            else
+            {
+                return 0;
+            }
         }
 
         private Int32 mFilmId;

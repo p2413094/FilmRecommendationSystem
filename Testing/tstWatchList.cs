@@ -40,5 +40,16 @@ namespace Testing
             AllFilmsInWatchList.DateAdded = dateAdded;
             Assert.AreEqual(AllFilmsInWatchList.DateAdded, dateAdded);
         }
+
+        [TestMethod]
+        public void FindMethodOk()
+        {
+            clsWatchList aWatchList = new clsWatchList();
+            Boolean found;
+            Int32 userId = 1;
+            Int32 filmId = 2;
+            found = aWatchList.Find(userId, filmId);
+            Assert.IsTrue(found);
+        }
     }
 }

@@ -19,7 +19,7 @@ namespace Testing
         public void CountPropertyOk()
         {
             clsFilmRatingCollection AllFilmRatings = new clsFilmRatingCollection();
-            Int32 count = 100836;
+            Int32 count = 100840;
             AllFilmRatings.Count = count;
             Assert.AreEqual(AllFilmRatings.Count, count);
         }
@@ -70,7 +70,7 @@ namespace Testing
             clsFilmRatingCollection AllFilmRatings = new clsFilmRatingCollection();
             clsFilmRating TestItem = new clsFilmRating();
             TestItem.FilmId = 5;
-            TestItem.UserId = 1;
+            TestItem.UserId = 2;
             TestItem.Rating = 4.5F;
             AllFilmRatings.ThisFilmRating = TestItem;
             AllFilmRatings.Add();
@@ -83,7 +83,7 @@ namespace Testing
         {
             clsFilmRatingCollection AllFilmRatings = new clsFilmRatingCollection();
             clsFilmRating testItem = new clsFilmRating();
-            Single filmId = 1;
+            Single filmId = 2;
             Single userId = 2;
             testItem.FilmId = filmId;
             testItem.UserId = userId;
@@ -107,7 +107,7 @@ namespace Testing
             clsFilmRatingCollection AllFilmRatings = new clsFilmRatingCollection();
             clsFilmRating TestItem = new clsFilmRating();
             TestItem.FilmId = 2459;
-            TestItem.UserId = 1;
+            TestItem.UserId = 2;
             TestItem.Rating = 5;
             AllFilmRatings.ThisFilmRating = TestItem;
             AllFilmRatings.Add();

@@ -49,7 +49,7 @@ namespace Testing
             Int32 errorCount = 0;
             string newFilmTitle = "";
             errorCount = aFilm.Valid(newFilmTitle).Count;
-            Assert.AreEqual(errorCount, 0);
+            Assert.AreEqual(errorCount, 1);
         }
 
         [TestMethod]
@@ -113,7 +113,7 @@ namespace Testing
             string newFilmTitle = "";
             newFilmTitle = newFilmTitle.PadRight(181, 'a');
             errorCount = aFilm.Valid(newFilmTitle).Count;
-            Assert.AreEqual(errorCount, 0);
+            Assert.AreEqual(errorCount, 1);
         }
 
         [TestMethod]
@@ -124,7 +124,7 @@ namespace Testing
             string newFilmTitle = "";
             newFilmTitle = newFilmTitle.PadRight(700, 'a');
             errorCount = aFilm.Valid(newFilmTitle).Count;
-            Assert.AreEqual(errorCount, 0);
+            Assert.AreEqual(errorCount, 1);
         }
 
         [TestMethod]
@@ -138,3 +138,5 @@ namespace Testing
         }
     }
 }
+
+

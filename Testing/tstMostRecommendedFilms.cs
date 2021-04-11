@@ -36,13 +36,26 @@ namespace Testing
         public void CompareToMethodNewTimesRecommendedHigherOk()
         {
             clsMostRecommendedFilms aMostRecommendedFilm = new clsMostRecommendedFilms();
-            aMostRecommendedFilm.TimesRecommended = 1974;
+            aMostRecommendedFilm.TimesRecommended = 1994;
             
             clsMostRecommendedFilms aSecondMostRecommendedFilm = new clsMostRecommendedFilms();
-            aSecondMostRecommendedFilm.TimesRecommended = 1986;
+            aSecondMostRecommendedFilm.TimesRecommended = 2012;
 
             Int32 result = aMostRecommendedFilm.CompareTo(aSecondMostRecommendedFilm);
             Assert.AreEqual(result, 1);
+        }
+
+        [TestMethod]
+        public void CompareToMethodNewTimesRecommendedLowerOk()
+        {
+            clsMostRecommendedFilms aMostRecommendedFilm = new clsMostRecommendedFilms();
+            aMostRecommendedFilm.TimesRecommended = 2012;
+            
+            clsMostRecommendedFilms aSecondMostRecommendedFilm = new clsMostRecommendedFilms();
+            aSecondMostRecommendedFilm.TimesRecommended = 1994;
+
+            Int32 result = aMostRecommendedFilm.CompareTo(aSecondMostRecommendedFilm);
+            Assert.AreEqual(result, -1);
         }
 
         [TestMethod]

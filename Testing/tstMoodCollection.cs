@@ -19,7 +19,7 @@ namespace Testing
         public void CountPropertyOk()
         {
             clsMoodCollection allMoods = new clsMoodCollection();
-            Int32 count = 3683;
+            Int32 count = 3690;
             allMoods.Count = count;
             Assert.AreEqual(allMoods.Count, count);
         }
