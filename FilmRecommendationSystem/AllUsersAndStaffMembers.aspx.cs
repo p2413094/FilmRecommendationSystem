@@ -13,7 +13,6 @@ namespace FilmRecommendationSystem
 {
     public partial class AllUsersAndStaffMembers : System.Web.UI.Page
     {
-        bool editStaffMember = true;
         Int32 originalPrivilegeLevel;
         protected void Page_Load(object sender, EventArgs e)
         {
@@ -58,7 +57,7 @@ namespace FilmRecommendationSystem
 
         protected void grdAllStaffMembers_RowEditing(object sender, GridViewEditEventArgs e)
         {
-            editStaffMember = true;
+            Session["editStaffMember"] = true;
             int rowIndex = e.NewEditIndex;
 
             lblActionStaffMember.Text = "Edit staff member";
@@ -85,6 +84,7 @@ namespace FilmRecommendationSystem
 
         protected void btnRegisterStaffMember_Click(object sender, EventArgs e)
         {
+            bool editStaffMember = Convert.ToBoolean(Session["editStaffMember"]);
             string firstName = txtNewStaffMemberFirstName.Text;
             string lastName = txtNewStaffMemberLastName.Text;
             Int32 userId = Convert.ToInt32(ddlUserId.SelectedItem.Value);
@@ -126,7 +126,7 @@ namespace FilmRecommendationSystem
             }
             else
             {
-                AllStaffMembers.Add();            
+                AllStaffMembers.Add();        
                 AnEmail.SendNewStaffMemberStandardNoticeEmail();
             }
             

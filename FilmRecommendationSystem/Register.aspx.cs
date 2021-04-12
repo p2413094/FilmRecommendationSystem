@@ -15,7 +15,7 @@ namespace FilmRecommendationSystem
     {
         protected void Page_Load(object sender, EventArgs e)
         {
-            //pnlErrorContainer.Visible = false;
+            pnlErrorContainer.Visible = false;
         }
 
         public static List<string> SearchFilms(string prefixTest, int count)

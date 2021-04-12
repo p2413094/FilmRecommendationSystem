@@ -6,6 +6,7 @@ using System.Collections.Generic;
 using System.Text;
 using System.Threading.Tasks;
 using System.Configuration;
+using System.Net.Mail;
 
 namespace Classes
 {
@@ -98,7 +99,6 @@ namespace Classes
             };
 
             msg.AddTo(new EmailAddress(destination));
-            msg.SetClickTracking(false, false);
             return client.SendEmailAsync(msg);
         }
 
