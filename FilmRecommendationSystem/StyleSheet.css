@@ -1093,9 +1093,11 @@ a {
     border-color: red;
     margin-top: 21%;
     margin-bottom: 2%;
+    width: 61.5%;
 }
-.errorPanelContainer .errors {
-    margin-top: 1%;
-    margin-bottom: 1%;
-    width: 30%;
-}
+    .errorPanelContainer .errors {
+        margin-top: 1%;
+        margin-bottom: 1%;
+        width: 99%;
+        font-size: 13px;
+    }

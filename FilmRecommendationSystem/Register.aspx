@@ -45,6 +45,11 @@
                 </div>
             </div>
 
+            <br />
+            <br />
+            <br />
+            <br />
+            <br />
             <asp:Panel ID="pnlErrorContainer" CssClass="errorPanelContainer" runat="server">
                 <label class="page-subheader italicised">Fix errors before continuing</label>
                 <asp:Panel ID="pnlErrors" CssClass="errors" runat="server"></asp:Panel>

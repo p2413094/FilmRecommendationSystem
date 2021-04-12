@@ -1,4 +1,4 @@
-﻿<%@ Page Language="C#" AutoEventWireup="true" CodeFile="Register_ConfirmEmail.aspx.cs" Inherits="Register_ConfirmEmail" %>
+﻿<%@ Page Language="C#" AutoEventWireup="true" Inherits="FilmRecommendationSystem.Register_ConfirmEmail" %>
 
 <!DOCTYPE html>
 
