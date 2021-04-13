@@ -21,6 +21,8 @@ namespace FilmRecommendationSystem
 {
     public partial class Homepage : System.Web.UI.Page
     {
+        bool favourite = false;
+        bool displayOverlay = false;
         clsImdbAPI anImdbApi = new clsImdbAPI();
 
         protected void Page_Load(object sender, EventArgs e)
@@ -47,52 +49,6 @@ namespace FilmRecommendationSystem
             {
                 pnlError.Visible = true;
             }
-        }
-
-        public static (IDataView training, IDataView test) LoadData(MLContext mlContext)
-        {            
-            DatabaseLoader loader = mlContext.Data.CreateDatabaseLoader<clsFilmRating>();
-
-            string connectionString = null;
-            System.Net.WebClient client = new System.Net.WebClient();
-            connectionString = client.DownloadString("http://localhost:5000/");
-
-            string sqlCommand = "SELECT CAST(UserId as REAL) AS UserId, CAST(FilmId as REAL) AS FilmId, CAST(Rating as REAL) AS Rating FROM tblFilmRatings";
-
-            DatabaseSource dbSource = new DatabaseSource(SqlClientFactory.Instance, connectionString, sqlCommand);
-
-            IDataView data = loader.Load(dbSource);
-
-            var set = mlContext.Data.TrainTestSplit(data, testFraction: 0.2);
-            IDataView trainingDataView = set.TrainSet;
-            IDataView testDataView = set.TestSet;
-
-            return (trainingDataView, testDataView);
-        }
-        
-        public ITransformer BuildAndTrainModel(MLContext mlContext, IDataView trainingDataView)
-        {
-            IEstimator<ITransformer> estimator = mlContext.Transforms.Conversion.MapValueToKey(outputColumnName: "userIdEncoded", inputColumnName: "UserId")
-            .Append(mlContext.Transforms.Conversion.MapValueToKey(outputColumnName: "movieIdEncoded", inputColumnName: "FilmId"));
-        
-            var options = new MatrixFactorizationTrainer.Options
-            {
-                MatrixColumnIndexColumnName = "userIdEncoded",
-                MatrixRowIndexColumnName = "movieIdEncoded",
-                LabelColumnName = "Rating",
-                NumberOfIterations = 20,
-                ApproximationRank = 100
-            };
-
-            var trainerEstimator = estimator.Append(mlContext.Recommendation().Trainers.MatrixFactorization(options));
-        
-            ITransformer model = trainerEstimator.Fit(trainingDataView);
-
-            var path = Server.MapPath(@"~/Model.zip");
-
-            mlContext.Model.Save(model, trainingDataView.Schema, path);
-
-            return model;
         }
 
         void CheckIfUserIsLoggedIn()
@@ -145,10 +101,10 @@ namespace FilmRecommendationSystem
 
         void GetMostRecommendedFilms()
         {
-            clsMostRecommendedFilmsCollection AllMostRecommendedFilms = new clsMostRecommendedFilmsCollection();            
+            clsMostRecommendedFilmsCollection AllMostRecommendedFilms = new clsMostRecommendedFilmsCollection();       
             foreach (clsMostRecommendedFilms aMostRecommendedFilm in AllMostRecommendedFilms.AllMostRecommendedFilms)
             {
-                pnlMostRecommendedFilms.Controls.Add(anImdbApi.GetImdbInformation(aMostRecommendedFilm.FilmId));
+                pnlMostRecommendedFilms.Controls.Add(anImdbApi.GetImdbInformationWithOptions(aMostRecommendedFilm.FilmId, "", 0, favourite, displayOverlay));
             }
             pnlMostRecommendedFilms.Visible = true;
         }
@@ -159,9 +115,55 @@ namespace FilmRecommendationSystem
             AllFavouriteFilms.GetTopFavourites();
             foreach (clsFavouriteFilm aFavouriteFilm in AllFavouriteFilms.TopFavourites)
             {
-                pnlUserFavouriteFilms.Controls.Add(anImdbApi.GetImdbInformation(aFavouriteFilm.FilmId));
+                pnlUserFavouriteFilms.Controls.Add(anImdbApi.GetImdbInformationWithOptions(aFavouriteFilm.FilmId, "", 0, favourite, displayOverlay));
             }
             pnlUserFavouriteFilms.Visible = true;
+        }
+
+        public static (IDataView training, IDataView test) LoadData(MLContext mlContext)
+        {            
+            DatabaseLoader loader = mlContext.Data.CreateDatabaseLoader<clsFilmRating>();
+
+            string connectionString = null;
+            System.Net.WebClient client = new System.Net.WebClient();
+            connectionString = client.DownloadString("http://localhost:5000/");
+
+            string sqlCommand = "SELECT CAST(UserId as REAL) AS UserId, CAST(FilmId as REAL) AS FilmId, CAST(Rating as REAL) AS Rating FROM tblFilmRatings";
+
+            DatabaseSource dbSource = new DatabaseSource(SqlClientFactory.Instance, connectionString, sqlCommand);
+
+            IDataView data = loader.Load(dbSource);
+
+            var set = mlContext.Data.TrainTestSplit(data, testFraction: 0.2);
+            IDataView trainingDataView = set.TrainSet;
+            IDataView testDataView = set.TestSet;
+
+            return (trainingDataView, testDataView);
+        }
+        
+        public ITransformer BuildAndTrainModel(MLContext mlContext, IDataView trainingDataView)
+        {
+            IEstimator<ITransformer> estimator = mlContext.Transforms.Conversion.MapValueToKey(outputColumnName: "userIdEncoded", inputColumnName: "UserId")
+            .Append(mlContext.Transforms.Conversion.MapValueToKey(outputColumnName: "movieIdEncoded", inputColumnName: "FilmId"));
+        
+            var options = new MatrixFactorizationTrainer.Options
+            {
+                MatrixColumnIndexColumnName = "userIdEncoded",
+                MatrixRowIndexColumnName = "movieIdEncoded",
+                LabelColumnName = "Rating",
+                NumberOfIterations = 20,
+                ApproximationRank = 100
+            };
+
+            var trainerEstimator = estimator.Append(mlContext.Recommendation().Trainers.MatrixFactorization(options));
+        
+            ITransformer model = trainerEstimator.Fit(trainingDataView);
+
+            var path = Server.MapPath(@"~/Model.zip");
+
+            mlContext.Model.Save(model, trainingDataView.Schema, path);
+
+            return model;
         }
 
         void GenerateRecommendations(int genreId)

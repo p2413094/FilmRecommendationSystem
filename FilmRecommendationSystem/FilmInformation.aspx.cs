@@ -66,9 +66,9 @@ namespace FilmRecommendationSystem
             request.AddHeader("x-rapidapi-key", ConfigurationManager.AppSettings["RapidApiKey"]);
             request.AddHeader("x-rapidapi-host", "movie-database-imdb-alternative.p.rapidapi.com");
             IRestResponse response = client.Execute(request);
-            clsIMDBApi filmInfoReturned = new clsIMDBApi();
-            filmInfoReturned = new clsIMDBApi();
-            filmInfoReturned = Newtonsoft.Json.JsonConvert.DeserializeObject<clsIMDBApi>(response.Content);
+            clsImdbAPI filmInfoReturned = new clsImdbAPI();
+            filmInfoReturned = new clsImdbAPI();
+            filmInfoReturned = Newtonsoft.Json.JsonConvert.DeserializeObject<clsImdbAPI>(response.Content);
             var imdbIdOk = filmInfoReturned.Response;
             Int32 count = 0;
             string numberOfZeroes = "0";
@@ -80,8 +80,8 @@ namespace FilmRecommendationSystem
                 newImdbId = newImdbId.Replace(" ", string.Empty);
                 client = new RestClient("https://movie-database-imdb-alternative.p.rapidapi.com/?i=" + newImdbId);
                 response = client.Execute(request);
-                filmInfoReturned = new clsIMDBApi();
-                filmInfoReturned = Newtonsoft.Json.JsonConvert.DeserializeObject<clsIMDBApi>(response.Content);
+                filmInfoReturned = new clsImdbAPI();
+                filmInfoReturned = Newtonsoft.Json.JsonConvert.DeserializeObject<clsImdbAPI>(response.Content);
                 imdbIdOk = filmInfoReturned.Response;
                 count++;
             }

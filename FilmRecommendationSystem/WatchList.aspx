@@ -35,7 +35,6 @@
         
         <asp:Panel ID="pnlWatchList" runat="server" CssClass="mainContent">
             <div class="header">My watchlist</div>
-            <asp:Button ID="btnSort" CssClass="sortButton" OnClick="btnSort_Click" ToolTip="Sort films by title" runat="server" Text="sort" />
         </asp:Panel>   
        
         <asp:Panel ID="pnlError" CssClass="mainContent" runat="server">
