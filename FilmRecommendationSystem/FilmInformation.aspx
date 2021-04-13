@@ -64,7 +64,6 @@
                     <asp:DropDownList ID="ddlFilmMoods" CssClass="allTagsDropdown" runat="server"></asp:DropDownList>
                     <asp:Button ID="btnAssignTag" OnClientClick="return btnAssignTag_Clicked()" OnClick="btnAssignTag_Click" runat="server" CssClass="proceedButton" Text="Add tag to film" />
                 </div>
-
             </div>
             <asp:Panel ID="pnlContentContainer" CssClass="contentContainer" runat="server">
                 <label class="filmInformationheaderContainer">Description</label>

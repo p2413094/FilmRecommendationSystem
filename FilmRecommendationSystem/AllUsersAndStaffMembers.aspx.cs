@@ -16,7 +16,7 @@ namespace FilmRecommendationSystem
         Int32 originalPrivilegeLevel;
         protected void Page_Load(object sender, EventArgs e)
         {
-            bool administrator = Convert.ToBoolean(Session["Standard"]);
+            bool administrator = true; //Convert.ToBoolean(Session["Standard"]);
             
             if (!IsPostBack)
             {

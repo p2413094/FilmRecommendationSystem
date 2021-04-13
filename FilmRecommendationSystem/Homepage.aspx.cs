@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Configuration;
+using System.Data.SqlClient;
 using System.IO;
 using System.Linq;
 using System.Web;
@@ -11,6 +12,8 @@ using FilmRecommendationSystem.Models;
 using Microsoft.AspNet.Identity;
 using Microsoft.AspNet.Identity.Owin;
 using Microsoft.ML;
+using Microsoft.ML.Data;
+using Microsoft.ML.Trainers;
 using Newtonsoft.Json;
 using RestSharp;
 
@@ -44,6 +47,52 @@ namespace FilmRecommendationSystem
             {
                 pnlError.Visible = true;
             }
+        }
+
+        public static (IDataView training, IDataView test) LoadData(MLContext mlContext)
+        {            
+            DatabaseLoader loader = mlContext.Data.CreateDatabaseLoader<clsFilmRating>();
+
+            string connectionString = null;
+            System.Net.WebClient client = new System.Net.WebClient();
+            connectionString = client.DownloadString("http://localhost:5000/");
+
+            string sqlCommand = "SELECT CAST(UserId as REAL) AS UserId, CAST(FilmId as REAL) AS FilmId, CAST(Rating as REAL) AS Rating FROM tblFilmRatings";
+
+            DatabaseSource dbSource = new DatabaseSource(SqlClientFactory.Instance, connectionString, sqlCommand);
+
+            IDataView data = loader.Load(dbSource);
+
+            var set = mlContext.Data.TrainTestSplit(data, testFraction: 0.2);
+            IDataView trainingDataView = set.TrainSet;
+            IDataView testDataView = set.TestSet;
+
+            return (trainingDataView, testDataView);
+        }
+        
+        public ITransformer BuildAndTrainModel(MLContext mlContext, IDataView trainingDataView)
+        {
+            IEstimator<ITransformer> estimator = mlContext.Transforms.Conversion.MapValueToKey(outputColumnName: "userIdEncoded", inputColumnName: "UserId")
+            .Append(mlContext.Transforms.Conversion.MapValueToKey(outputColumnName: "movieIdEncoded", inputColumnName: "FilmId"));
+        
+            var options = new MatrixFactorizationTrainer.Options
+            {
+                MatrixColumnIndexColumnName = "userIdEncoded",
+                MatrixRowIndexColumnName = "movieIdEncoded",
+                LabelColumnName = "Rating",
+                NumberOfIterations = 20,
+                ApproximationRank = 100
+            };
+
+            var trainerEstimator = estimator.Append(mlContext.Recommendation().Trainers.MatrixFactorization(options));
+        
+            ITransformer model = trainerEstimator.Fit(trainingDataView);
+
+            var path = Server.MapPath(@"~/Model.zip");
+
+            mlContext.Model.Save(model, trainingDataView.Schema, path);
+
+            return model;
         }
 
         void CheckIfUserIsLoggedIn()
@@ -117,11 +166,14 @@ namespace FilmRecommendationSystem
 
         void GenerateRecommendations(int genreId)
         {
-            //create an instance of the class which represents the IDataView/ DataViewRow schema  
-            DataViewSchema modelSchema;
-
             //create a new instance of the MLContext class
             MLContext mlContext = new MLContext();
+
+            (IDataView trainingDataView, IDataView testDataView) = LoadData(mlContext);
+            ITransformer model = BuildAndTrainModel(mlContext, trainingDataView);
+
+            //create an instance of the class which represents the IDataView/ DataViewRow schema  
+            DataViewSchema modelSchema;
 
             //find the saved model 
             var path = Server.MapPath(@"~/Model.zip");

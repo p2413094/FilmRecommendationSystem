@@ -15,7 +15,7 @@ namespace FilmRecommendationSystem
     {
         protected void Page_Load(object sender, EventArgs e)
         {
-
+            pnlLoginError.Visible = false;
         }
 
         public static List<string> SearchFilms(string prefixTest, int count)
@@ -62,10 +62,9 @@ namespace FilmRecommendationSystem
                                                         RememberMe.Checked), true);
                         break;
                     case SignInStatus.Failure:
-                    default:
+                        default:                     
+                        lblError.Text = "- Invalid login attempt";
                         pnlLoginError.Visible = true;
-                        lblError.Text = "Invalid login attempt";
-                        lblError.Visible = true;
                         break;
                 }
             }

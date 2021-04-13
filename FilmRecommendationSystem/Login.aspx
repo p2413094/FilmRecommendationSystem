@@ -7,7 +7,7 @@
     <title>FILM RECOMMENDER | LOGIN</title>
     <link rel="stylesheet" href="StyleSheet.css" />
 </head>
-<body class="body" onload="onLoad()">
+<body class="body">
     <form runat="server">
         <p class="logo"><a href="Homepage.aspx">FILM RECOMMENDER</a></p>
         <br />
@@ -75,10 +75,6 @@
 
     </form>
         <script>
-            function onLoad() {
-                document.getElementById("pnlLoginError").style.display = "none";
-            }
-
             function hyplnkSearch_Clicked() {
                 var searchText = document.getElementById("myInput").value;
 

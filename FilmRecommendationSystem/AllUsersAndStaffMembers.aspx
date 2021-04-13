@@ -217,7 +217,8 @@
                                     <asp:Label ID="lblSuspendedEndDate" Text='<%#Eval("LockoutEndDateUtc")%>' runat="server"></asp:Label>
                                 </ItemTemplate>
                             </asp:TemplateField>
-                            <asp:TemplateField ItemStyle-CssClass="tablecell-actions" HeaderStyle-CssClass="tablecell-actions">
+
+                            <asp:TemplateField HeaderText="Actions" HeaderStyle-Font-Italic="true" ItemStyle-CssClass="tablecell-actions">
                                 <ItemTemplate>
                                     <asp:ImageButton ID="imgbtnEdit" ImageUrl="~/Images/Edit_icon.png" CssClass="action_icon" commandname="Edit" ToolTip="Edit this record" runat="server" />
                                 </ItemTemplate>

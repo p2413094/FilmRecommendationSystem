@@ -17,11 +17,19 @@ namespace FilmRecommendationSystem
         protected void Page_Load(object sender, EventArgs e)
         {
             pnlError.Visible = false;
-            pnlFavouriteFilms.Visible = true;
-            userId = Convert.ToInt32(Session["UserId"]);
-            DisplayFavouriteFilms();
-        }
-        
+            try
+            {
+                userId = Convert.ToInt32(Session["UserId"]);
+                DisplayFavouriteFilms();
+                pnlFavouriteFilms.Visible = true;
+
+            }
+            catch
+            {
+                pnlError.Visible = true;
+            }
+        }    
+           
         public static List<string> SearchFilms(string prefixTest, int count)
         {
             clsFilmCollection AllFilms = new clsFilmCollection();
@@ -62,41 +70,32 @@ namespace FilmRecommendationSystem
         void DisplayFavouriteFilms()
         {
             pnlFavouriteFilms.Controls.Clear();
-            try
+            clsDataConnection DB = new clsDataConnection();
+            DB.AddParameter("@UserId", userId);
+            DB.Execute("sproc_tblFavouriteFilms_FilterByUserId");
+            Int32 recordCount = DB.Count;
+            Int32 index = 0;
+            Int32 filmId = 0;
+            string title;
+            if (recordCount == 0)
             {
-                clsDataConnection DB = new clsDataConnection();
-                DB.AddParameter("@UserId", userId);
-                DB.Execute("sproc_tblFavouriteFilms_FilterByUserId");
-                Int32 recordCount = DB.Count;
-                Int32 index = 0;
-                Int32 filmId = 0;
-                string title;
-                if (recordCount == 0)
-                {
-                    clsDynamicPanel aDynamicPanel = new clsDynamicPanel();
-                    pnlFavouriteFilms.Controls.Add(aDynamicPanel.GenerateEmptyListPanel("favourite films"));
-                }
-                else
-                {
-                    while (index < recordCount)
-                    {
-                        filmId = Convert.ToInt32(DB.DataTable.Rows[index]["FilmId"]);
-                        title = DB.DataTable.Rows[index]["Title"].ToString();
-                        pnlFavouriteFilms.Controls.Add(anImdbApi.GetImdbInformation(filmId));
-                        index++;
-                    }
-                }
-                pnlFavouriteFilms.Visible = true;
+                clsDynamicPanel aDynamicPanel = new clsDynamicPanel();
+                pnlFavouriteFilms.Controls.Add(aDynamicPanel.GenerateEmptyListPanel("favourite films"));
             }
-            catch
+            else
             {
-                pnlError.Visible = true;
+                while (index < recordCount)
+                {
+                    filmId = Convert.ToInt32(DB.DataTable.Rows[index]["FilmId"]);
+                    title = DB.DataTable.Rows[index]["Title"].ToString();
+                    pnlFavouriteFilms.Controls.Add(GetImdbInformation(filmId, title));
+                    index++;
+                }
             }
+            pnlFavouriteFilms.Visible = true;
         }
 
-
-        //the vast majority of this could be added to clsIMDB as a function and have it return a clsIMDB with the returned film information 
-        void GetImdbInformation(Int32 filmId, string title)
+        Panel GetImdbInformation(Int32 filmId, string title)
         {
             clsDataConnection DB = new clsDataConnection();
             DB.AddParameter("@FilmId", filmId);
@@ -121,9 +120,6 @@ namespace FilmRecommendationSystem
                 newImdbId = "tt" + numberOfZeroes.PadRight(count, '0') + imdbId;
                 newImdbId = newImdbId.Replace(" ", string.Empty);
                 client = new RestClient("https://movie-database-imdb-alternative.p.rapidapi.com/?i=" + newImdbId);
-                //request = new RestRequest(Method.GET);
-                //request.AddHeader("x-rapidapi-key", ConfigurationManager.AppSettings["RapidApiKey"]);
-                //request.AddHeader("x-rapidapi-host", "movie-database-imdb-alternative.p.rapidapi.com");
                 response = client.Execute(request);
                 filmInfoReturned = new clsIMDBApi();
                 filmInfoReturned = Newtonsoft.Json.JsonConvert.DeserializeObject<clsIMDBApi>(response.Content);
@@ -141,66 +137,37 @@ namespace FilmRecommendationSystem
 
             pnlFilm.Controls.Add(imgbtnFilmPoster);
 
-            Panel pnlFilmTitle = new Panel();
-            pnlFilmTitle.CssClass = "textContainer";
-            Label lblFilmTitle = new Label();
-            lblFilmTitle.Text = title;
-            pnlFilmTitle.Controls.Add(lblFilmTitle);
-            pnlFilm.Controls.Add(pnlFilmTitle);
-
             Panel pnlOverlay = new Panel();
             pnlOverlay.CssClass = "overlay";
 
             ImageButton imgbtnRemove = new ImageButton();
             imgbtnRemove.ImageUrl = "Images/Remove.png";
-            imgbtnRemove.CssClass = "overlay-itemLeft";
+            imgbtnRemove.CssClass = "overlay-itemRight";
             imgbtnRemove.CommandArgument = filmId.ToString();
             imgbtnRemove.Command += ImgbtnRemove_Command;
             
-            ImageButton imgbtnWatchList = new ImageButton();
-            imgbtnWatchList.CssClass = "overlay-itemRight";
-            imgbtnWatchList.CommandArgument = filmId.ToString();
+            Panel pnlFilmTitle = new Panel();
+            pnlFilmTitle.CssClass = "titleContainer"; 
+            Label lblFilmTitle = new Label();
+            lblFilmTitle.Text = title;
+            lblFilmTitle.ToolTip = title;
+            pnlFilmTitle.Controls.Add(lblFilmTitle);
+            pnlFilm.Controls.Add(pnlFilmTitle);
 
-            clsDataConnection DB_2 = new clsDataConnection();
-            DB_2.AddParameter("@UserId", userId);
-            DB_2.AddParameter("@FilmId", filmId);
-            DB_2.Execute("sproc_tblWatchList_SelectByUserAndFilmId");
-            
-            if (DB_2.Count == 1)
-            {
-                imgbtnWatchList.ImageUrl = "Images/WatchLaterAdded.png";
-                imgbtnWatchList.Command += imgbtnWatchList_RemoveFromWatchList;
-            }
-            else
-            {
-                imgbtnWatchList.ImageUrl = "Images/NotInWatchLater.png";
-                imgbtnWatchList.Command += imgbtnWatchList_AddToWatchList;
-            }
-
-            pnlOverlay.Controls.Add(imgbtnWatchList);
             pnlOverlay.Controls.Add(imgbtnRemove);
             pnlFilm.Controls.Add(pnlOverlay);
-            pnlFavouriteFilms.Controls.Add(pnlFilm);
 
-
-            pnlFavouriteFilms.Visible = true;
+            return pnlFilm;
         }
 
         private void ImgbtnRemove_Command(object sender, CommandEventArgs e)
         {
-            //could pass in multiple values here, i.e. the filmId and the container for 
-            //later deletion 
-                //see https://stackoverflow.com/questions/2389258/passing-multiple-argument-through-commandargument-of-button-in-asp-net
-
             string filmId = e.CommandArgument.ToString();
             clsDataConnection DB = new clsDataConnection();
             DB.AddParameter("@UserId", userId);
             DB.AddParameter("@FilmId", filmId);
             DB.Execute("sproc_tblFavouriteFilms_Delete");
 
-
-            //you could just try and get the sender's image container and then remove it from view
-            //rather than re-querying the IMDB api 
             DisplayFavouriteFilms();
         }
 

@@ -59,7 +59,6 @@ namespace FilmRecommendationSystem
             }
         }
 
-
         void DisplayFilm(string imdbId)
         {
             var client = new RestClient("https://movie-database-imdb-alternative.p.rapidapi.com/?i=" + imdbId);
@@ -95,8 +94,7 @@ namespace FilmRecommendationSystem
             lblDirector.Text = filmInfoReturned.Director;
             lblRuntime.Text = filmInfoReturned.Runtime;
             lblReleased.Text = filmInfoReturned.Released;
-            //hyplnkMoreInformation.NavigateUrl = "https://www.imdb.com/title/" + newImdbId + "/";
-            hyplnkMoreInformation.NavigateUrl = "https://www.imdb.com/title/tt0114709/";
+            hyplnkMoreInformation.NavigateUrl = "https://www.imdb.com/title/" + filmInfoReturned.ImdbId + "/";
             hyplnkMoreInformation.Text = "Click here";
 
 
@@ -139,7 +137,7 @@ namespace FilmRecommendationSystem
         }
         void DisplayUserAssignedMoods()
         {
-            //pnlMyTags.Controls.Clear();
+            pnlMyTags.Controls.Clear();
             clsDataConnection DB = new clsDataConnection();
             DB.AddParameter("@UserId", userId);
             DB.AddParameter("@FilmId", filmId);

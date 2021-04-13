@@ -171,7 +171,6 @@
     <Compile Include="tstIMDBApi.cs" />
     <Compile Include="tstLink.cs" />
     <Compile Include="tstLinkCollection.cs" />
-    <Compile Include="tstMLPrediction.cs" />
     <Compile Include="tstMood.cs" />
     <Compile Include="tstMoodCollection.cs" />
     <Compile Include="tstMostRecommendedFilms.cs" />
