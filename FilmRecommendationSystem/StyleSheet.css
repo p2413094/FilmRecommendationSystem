@@ -150,6 +150,7 @@ a {
         font-weight: lighter;
         margin-bottom: 1%;
         height: 70px;
+        
     }
 
     .mainContent .helpContainer .helpQuestionHeader {
@@ -157,6 +158,16 @@ a {
         font-weight: bold;
         margin-top: 2%;
         margin-bottom: 1%;
+    }
+
+    .mainContent .searchHeader {
+        float: left;
+        width: 30%;
+        font-size: 40px;
+        font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
+        font-weight: lighter;
+        margin-bottom: 1%;
+        height: 70px;
     }
 
 
@@ -1075,7 +1086,8 @@ a {
     font-style: italic;
     margin-left: 14px;
     margin-right: 4%;
-    display: inline-block;
+    display: block;
+    clear: left;
 }
 
 .textAlignCentre {
@@ -1096,3 +1108,14 @@ a {
         width: 99%;
         font-size: 13px;
     }
+
+
+.slctGenre {
+    border-style: solid;
+    border-color: red;
+    float: right;
+    background-color: black;
+    color: white;
+    width: 20%;
+    border-radius: 4px;
+}

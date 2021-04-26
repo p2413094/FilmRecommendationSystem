@@ -82,6 +82,31 @@ namespace FilmRecommendationSystem
             return pnlEmptyList;
         }
 
+        public Panel GenerateSearchResultsPanel(string title, string ImdbId)
+        {
+            Panel pnlSearchResult = new Panel();
+            pnlSearchResult.CssClass = "searchResultsContainer";
+            HyperLink hyplnkSearchResultTitle = new HyperLink();
+
+            hyplnkSearchResultTitle.Text = title;
+            hyplnkSearchResultTitle.NavigateUrl = "FilmInformation.aspx?ImdbId=" + ImdbId;
+                                        
+            pnlSearchResult.Controls.Add(hyplnkSearchResultTitle);
+            return pnlSearchResult;
+        }
+
+        public Panel GenerateEmptySearchResultsPanel()
+        {
+            Panel pnlSearchResult = new Panel();
+            pnlSearchResult.CssClass = "searchResultsContainer";
+            Label hyplnkSearchResultTitle = new Label();
+            hyplnkSearchResultTitle.Text = "No titles to display";
+            pnlSearchResult.Controls.Add(hyplnkSearchResultTitle);
+
+            return pnlSearchResult;
+        }
+
+
         private void LnkbtnLogOut_Click(object sender, EventArgs e)
         {            
             HttpContext.Current.GetOwinContext().Authentication.SignOut();

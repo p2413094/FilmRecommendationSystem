@@ -23,12 +23,37 @@
         <div class="search">
             <a onclick="hyplnkSearch_Clicked()" class="label">SEARCH</a>
             <div class="textentry-container">
-                <input autocomplete="off" class="textentry-field" type="text" id="myInput" onkeyup="filterSearchFunction()" />
+                <input autocomplete="off" class="textentry-field" type="text" id="myInput" />
             </div>
         </div>
-
+        <br />
+        <br />
         <asp:Panel ID="pnlAllSearchResults" CssClass="mainContent" runat="server">
-            <div class="header">Search results</div>
+            <div class="searchHeader">Search results</div>
+                <asp:DropDownList AutoPostBack="true" CssClass="slctGenre" ID="ddlMoods" OnSelectedIndexChanged="ddlMood_SelectedIndexChanged" runat="server"></asp:DropDownList>
+                <asp:DropDownList AutoPostBack="true" CssClass="slctGenre" ID="ddlGenre" OnSelectedIndexChanged="ddlGenre_SelectedIndexChanged" runat="server">
+                    <asp:ListItem Text="genre" Selected="True"></asp:ListItem>
+                    <asp:ListItem Value="1">Action</asp:ListItem>
+                    <asp:ListItem Value="2">Adventure</asp:ListItem>
+                    <asp:ListItem Value="3">Animation</asp:ListItem>
+                    <asp:ListItem Value="4">Children</asp:ListItem>
+                    <asp:ListItem Value="5">Comedy</asp:ListItem>
+                    <asp:ListItem Value="12">Crime</asp:ListItem>
+                    <asp:ListItem Value="18">Documentary</asp:ListItem>
+                    <asp:ListItem Value="13">Drama</asp:ListItem>
+                    <asp:ListItem Value="6">Fantasy</asp:ListItem>
+                    <asp:ListItem Value="16">Film-Noir</asp:ListItem>
+                    <asp:ListItem Value="14">Horror</asp:ListItem>
+                    <asp:ListItem Value="7">IMAX</asp:ListItem>
+                    <asp:ListItem Value="19">Musical</asp:ListItem>
+                    <asp:ListItem Value="11">Mystery</asp:ListItem>
+                    <asp:ListItem Value="8">Romance</asp:ListItem>
+                    <asp:ListItem Value="9">Sci-Fi</asp:ListItem>
+                    <asp:ListItem Value="15">Thriller</asp:ListItem>
+                    <asp:ListItem Value="17">War</asp:ListItem>
+                    <asp:ListItem Value="10">Western</asp:ListItem>
+                </asp:DropDownList>
+            <asp:Panel runat="server" ID="pnlActualSearchResults"></asp:Panel>
         </asp:Panel>
 
         <asp:Panel ID="pnlError" CssClass="mainContent" runat="server">
